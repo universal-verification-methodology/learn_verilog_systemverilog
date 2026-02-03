@@ -1,0 +1,36 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x563ad5d32cb0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x563ad5d0acf0 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x563ad5d0acf0;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "=== Module 8: Migration steps quick reference ===" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  1364-1995 -> 1364-2001:" {0 0 0};
+    %vpi_call/w 3 10 "$display", "    1. Ports -> ANSI  2. Comb -> always @*  3. generate/signed/localparam if needed  4. Test" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  1364-2001/2005 -> 1800 (design subset):" {0 0 0};
+    %vpi_call/w 3 12 "$display", "    1. wire/reg -> logic  2. always @* -> always_comb  3. posedge clk -> always_ff" {0 0 0};
+    %vpi_call/w 3 13 "$display", "    4. Optional: interfaces, packages, unique/priority case  5. Remove defparam  6. Test" {0 0 0};
+    %vpi_call/w 3 14 "$display", "  1800-2005 -> 1800-2009/2012/2017:" {0 0 0};
+    %vpi_call/w 3 15 "$display", "    1. Run regression (usually compatible)  2. Adopt new features if supported  3. Set project standard" {0 0 0};
+    %vpi_call/w 3 16 "$display", "  Rules: one block/feature at a time; keep external interface unchanged; one standard, document subset" {0 0 0};
+    %vpi_call/w 3 17 "$display", "  Full checklists: docs/MODULE7.md" {0 0 0};
+    %vpi_call/w 3 18 "$display", "=== End migration steps ===" {0 0 0};
+    %vpi_call/w 3 19 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "migration_steps.sv";

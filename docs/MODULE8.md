@@ -2,6 +2,24 @@
 
 **Goal**: Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017).
 
+**Prerequisites**: Modules 1–7 (or use this module as a standalone reference after skimming the course). Best used after completing the version-centric path.
+
+**Estimated time**: 1–2 hours (read tables and cheat sheet; run reference examples if desired). No new language features.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module is a **reference and summary** for the version-centric Verilog/SystemVerilog course (Modules 1–7). It does not introduce new language features. It consolidates the version timeline, construct-by-standard tables, design-subset quick reference, migration quick reference, tool-support summary, and course map in one place. Use this module when you need to look up which standard introduced a construct, which subset to use for a project, or how to migrate between versions without re-reading the full module docs.
@@ -171,15 +189,34 @@ Use this table to see **when a construct was introduced** (or clarified). “Int
 
 ## Examples
 
+### Quick file reference
+
+| Topic / resource      | Path / key files |
+|-----------------------|------------------|
+| Version table         | `module8/docs/version_table.md` |
+| Migration cheat sheet | `module8/docs/migration_cheat_sheet.md` |
+| Course map            | `module8/docs/course_map.md` |
+| One-page cheat sheet  | `module8/examples/quick_ref.sv` |
+| Version timeline      | `module8/examples/version_timeline/version_timeline.sv` |
+| Design subset         | `module8/examples/design_subset/design_subset.sv` |
+| Tool support          | `module8/examples/tool_support/tool_support.sv` |
+| Construct lookup      | `module8/examples/construct_lookup/construct_lookup.sv` |
+| Course map (runnable) | `module8/examples/course_map/course_map.sv` |
+| Migration steps       | `module8/examples/migration_steps/migration_steps.sv` |
+| Synthesizable subset  | `module8/examples/synthesizable_subset/synthesizable_subset.sv` |
+| Version selection     | `module8/examples/version_selection/version_selection.sv` |
+| Learning path         | `module8/examples/learning_path/learning_path.sv` |
+| Pitfalls              | `module8/examples/pitfalls/pitfalls.sv` |
+
 ### Module 8 Examples (Reference Only)
 
-**Reference files** (module8/docs/):
+**Reference files** (`module8/docs/`):
 
 - **version_table.md**: The construct-by-standard table (Section 2) for search or script use.
 - **migration_cheat_sheet.md**: The migration quick reference (Section 4) and one-page cheat sheet (Section 8).
 - **course_map.md**: The course map (Section 6) with links to each module doc.
 
-**Runnable reference examples** (module8/examples/; each prints a slice of the quick reference):
+**Runnable reference examples** (`module8/examples/`; each prints a slice of the quick reference):
 
 1. **quick_ref** — One-page cheat sheet (version timeline, subsets, migration, version selection).
 2. **version_timeline** — Version timeline (standard, year, role, module).
@@ -187,6 +224,11 @@ Use this table to see **when a construct was introduced** (or clarified). “Int
 4. **tool_support** — Tool support summary (simulators, synthesis, lint, formal; Icarus, Verilator, commercial).
 5. **construct_lookup** — "Which standard has X?" for key constructs (logic, always_comb, interface, etc.).
 6. **course_map** — Course map (Modules 1–8 with title and content summary).
+7. **migration_steps** — Migration steps (1995→2001, 1364→1800, 1800→1800) and rules of thumb.
+8. **synthesizable_subset** — Synthesizable do/avoid (assign, always_comb/@*, single driver; avoid delays, defparam, latches).
+9. **version_selection** — Version selection (match tools/IP, state one revision and subset, document).
+10. **learning_path** — Learning path (1→…→6, then 7; use 8 as reference) and where to go next.
+11. **pitfalls** — Common pitfalls quick reference (construct table, subset rule, regression, tool support, Module 8 as reference).
 
 No new DUT or testbench is required; use examples from Modules 1–7 for design/tests.
 
@@ -259,7 +301,7 @@ You have completed the version-centric Verilog and SystemVerilog course (Modules
 
 ### Module Documentation
 
-- **Module 8 README**: [module8/README.md](../module8/README.md) (if present)
+- **Module 8 README**: [module8/README.md](../module8/README.md) — directory structure, quick start, and file map
 - **All modules**: [MODULE1.md](MODULE1.md) through [MODULE7.md](MODULE7.md)
 
 ### Reference Materials

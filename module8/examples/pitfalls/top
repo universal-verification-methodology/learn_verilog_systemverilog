@@ -1,0 +1,33 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x564d400c00a0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x564d40099cf0 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x564d40099cf0;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "=== Module 8: Common pitfalls (quick reference) ===" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  1. Assuming a construct is in an older standard -> Use construct-by-standard table (Section 2)" {0 0 0};
+    %vpi_call/w 3 10 "$display", "  2. Mixing subsets without a rule -> Define one project subset and revision; document in style guide" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  3. Skipping regression after migration -> Run sim/synth after every step; use Module 7 checklist" {0 0 0};
+    %vpi_call/w 3 12 "$display", "  4. Forgetting tool support -> Match project standard to tool-supported revision and synthesizable subset" {0 0 0};
+    %vpi_call/w 3 13 "$display", "  5. Treating Module 8 as replacement for 1-7 -> Use Module 8 for quick lookup; refer to Modules 1-7 for depth" {0 0 0};
+    %vpi_call/w 3 14 "$display", "  Full pitfalls: docs/MODULE8.md Common Pitfalls and How to Avoid Them" {0 0 0};
+    %vpi_call/w 3 15 "$display", "=== End pitfalls ===" {0 0 0};
+    %vpi_call/w 3 16 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "pitfalls.sv";

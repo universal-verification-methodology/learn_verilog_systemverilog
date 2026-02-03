@@ -2,6 +2,24 @@
 
 **Goal**: Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview.
 
+**Prerequisites**: Modules 1–5 (1364-1995 through 1800-2012) — you should be comfortable with the version timeline and SystemVerilog design subset (logic, always_comb/always_ff, interfaces, packages, assertions).
+
+**Estimated time**: 4–6 hours (examples + exercises + reading).
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module covers IEEE Std 1800-2017, the current SystemVerilog standard. In 1800-2017, the Verilog language (formerly IEEE 1364) is merged into the SystemVerilog LRM, so one document defines both the Verilog subset and SystemVerilog extensions. You'll learn what 2017 adds or clarifies over 2012: LRM structure, clarifications across design and verification, and how to treat 1800-2017 as the single reference for "current Verilog and SystemVerilog." This module also summarizes the full version path (1364-1995 → 1800-2017) and gives guidance on choosing a standard and migrating RTL.
@@ -68,7 +86,7 @@ In 1800-2017, "Verilog" is the subset of the language that corresponds to the fo
 - **Verilog-only (1364 subset)**: Maximum portability; use when tools or IP are Verilog-only.
 - **SystemVerilog design (1800 subset)**: Better expressiveness and checking; use when the flow supports 1800.
 
-**Example**: `module6/examples/subsets/verilog_vs_sv_design.v` (same design in both styles, or doc-only)
+**Example**: `module6/examples/subsets/verilog_vs_sv.sv` (same design in both styles: 1364 vs 1800)
 
 ### 3. Design Constructs in 1800-2017 (Recap and Clarifications)
 
@@ -188,6 +206,20 @@ A concise view of the standard evolution covered in Modules 1–6:
 
 ## Examples
 
+### Quick file reference
+
+| Topic                | Path                                  | Key files |
+|----------------------|---------------------------------------|-----------|
+| Verilog vs SV subset | `module6/examples/subsets/`            | `verilog_vs_sv.sv` |
+| Design recap         | `module6/examples/design_recap/`      | `design_recap.sv` |
+| Immediate assertion  | `module6/examples/assertions/`        | `immediate_in_rtl.sv` |
+| Version summary      | `module6/examples/version_summary/`   | `version_summary.sv` |
+| Migration 1364→1800  | `module6/examples/migration/`         | `migration.sv` |
+| Logic single driver  | `module6/examples/logic_single_driver/` | `logic_single_driver.sv` |
+| Priority case        | `module6/examples/priority_case/`     | `priority_case.sv` |
+| Package and import   | `module6/examples/package_import/`    | `package_import.sv` |
+| Unique case          | `module6/examples/unique_case/`       | `unique_case.sv` |
+
 ### Module 6 Examples (1800-2017)
 
 1. **Verilog vs SystemVerilog Subset** (`examples/subsets/`)
@@ -228,13 +260,13 @@ A concise view of the standard evolution covered in Modules 1–6:
 
 ## Design Under Test (DUT)
 
-### 1800-2017 Design Subset (`dut/`)
+### 1800-2017 Design Subset (`module6/dut/`)
 
 - **alu_2017.sv**: Small ALU with logic, always_comb, package type, optional immediate assertion
   - **Example**: Current standard design subset; no legacy 1364-only constructs
 
-- **bus_block_2017.sv**: Block using an interface (modport); optional checker bound separately
-  - **Example**: Interface-based connectivity; RTL + verification separation
+- **design_block_2017.sv**: Block using 1800-2017 design constructs (logic, always_comb/always_ff, package, etc.)
+  - **Example**: Interface-style or block-level connectivity; 2017 design subset
 
 - **fsm_2017.sv**: FSM with unique case and one immediate assertion (state encoding)
   - **Example**: 1800-2017 RTL; assertion for invariant
@@ -244,13 +276,9 @@ A concise view of the standard evolution covered in Modules 1–6:
 ### Module 6 Tests
 
 - **test_alu_2017.sv**: ALU testbench (1800-2017 compatible)
-  - **Key Features**: Exercises design; no use of deprecated or non-2017 constructs
+  - **Key Features**: Exercises `dut/alu_2017.sv`; no use of deprecated or non-2017 constructs
 
-- **test_bus_block_2017.sv**: Bus block test (interface connection)
-  - **Key Features**: Single interface instance; master/slave behavior
-
-- **test_fsm_2017.sv**: FSM test; optional assertion failure case
-  - **Key Features**: State coverage; assertion on/off
+*Additional tests for `design_block_2017` and `fsm_2017` may be added; run `make` in `module6/tests` to see current list.*
 
 ## Learning Outcomes
 
@@ -345,7 +373,7 @@ After completing this module, proceed to:
 
 ### Module Documentation
 
-- **Module 6 README**: [module6/README.md](../module6/README.md) (if present)
+- **Module 6 README**: [module6/README.md](../module6/README.md) — directory structure, quick start, and file map
 - **Module 5**: [docs/MODULE5.md](MODULE5.md) — IEEE 1800-2009/2012 (prerequisite)
 - **Module 7**: [docs/MODULE7.md](MODULE7.md) — Version comparison and migration (next)
 

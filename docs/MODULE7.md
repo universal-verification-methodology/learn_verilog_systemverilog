@@ -2,6 +2,24 @@
 
 **Goal**: Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools.
 
+**Prerequisites**: Modules 1–6 — you should have completed the version-centric path (1364-1995 through 1800-2017) and understand each revision’s design subset.
+
+**Estimated time**: 4–6 hours (examples + exercises + checklists). No new language features; focus on comparison and migration practice.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module ties together Modules 1–6 by comparing the same design across standards (1364-1995 through 1800-2017), outlining migration steps between versions, and providing checklists for choosing a standard and for migrating RTL. You'll learn how to read and write RTL that targets a specific IEEE revision, how to migrate legacy Verilog to SystemVerilog (or between revisions), and how tool support and project constraints influence version selection. This module has no new language features; it is about applying the version-centric knowledge from Modules 1–6 in practice.
@@ -77,7 +95,7 @@ endmodule
 
 - **Takeaway**: Same behavior; syntax and intent become clearer and tool-checked as you move to 2001 then 1800.
 
-**Example**: `module7/examples/side_by_side/mux2_versions/` (one file or directory per version)
+**Example**: `module7/examples/side_by_side/mux2_versions/` (mux2_1364.v vs mux2_1800.sv; repo uses 1364 vs 1800 as the two styles)
 
 ### 2. Comparison: Connectivity (Ports vs Interface)
 
@@ -136,7 +154,7 @@ endmodule
 
 - **Comparison**: Same signals; interface reduces repetition and enforces direction via modports. Use interfaces when the flow supports 1800 and the connection is reused.
 
-**Example**: `module7/examples/side_by_side/connectivity_versions/`
+**Example**: `module7/examples/side_by_side/connectivity_versions/` (bus_1364.v — many ports; 1800 interface style is in Topics code)
 
 ### 3. Migration Patterns
 
@@ -289,6 +307,28 @@ The version-centric course (one module per major revision) can be extended when 
 
 ## Examples
 
+### Quick file reference
+
+| Topic                | Path                                          | Key files |
+|----------------------|-----------------------------------------------|-----------|
+| Side-by-side mux     | `module7/examples/side_by_side/mux2_versions/` | `mux2_1364.v`, `mux2_1800.sv` |
+| Side-by-side counter | `module7/examples/side_by_side/counter_versions/` | `counter_1364.v`, `counter_1800.sv` |
+| Side-by-side decoder | `module7/examples/side_by_side/decoder_versions/` | `decoder_1364.v`, `decoder_1800.sv` |
+| Side-by-side adder   | `module7/examples/side_by_side/adder_versions/`   | `adder_1364.v`, `adder_1800.sv` |
+| Side-by-side parameter | `module7/examples/side_by_side/parameter_versions/` | `param_1364.v`, `param_1800.sv` |
+| Side-by-side register | `module7/examples/side_by_side/register_versions/` | `register_1364.v`, `register_1800.sv` |
+| Side-by-side FSM     | `module7/examples/side_by_side/fsm_versions/`    | `fsm_1364.v`, `fsm_1800.sv` |
+| Side-by-side connectivity | `module7/examples/side_by_side/connectivity_versions/` | `bus_1364.v` (many ports; 1800 interface in Topics) |
+| Migration 1364→1800  | `module7/examples/migration/`                  | `migration_steps.sv` |
+| Migration 1995→2001  | `module7/examples/migration_1995_to_2001/`     | `migration_1995_2001.v` |
+| Migration checklist  | `module7/examples/migration_checklist/`        | `migration_checklist.sv` |
+| Incremental migration| `module7/examples/incremental_migration/`      | `incremental_migration.sv` |
+| Port style compare   | `module7/examples/port_style_compare/`         | `port_style_compare.v` |
+| Case versions        | `module7/examples/case_versions/`              | `case_versions.sv` |
+| No defparam          | `module7/examples/no_defparam/`               | `no_defparam.v` |
+| Version table        | `module7/examples/version_table/`              | `version_table.sv` |
+| Version selection    | `module7/examples/version_selection/`         | `version_selection.sv` |
+
 ### Module 7 Examples
 
 1. **Side-by-Side: Mux** (`examples/side_by_side/mux2_versions/`)
@@ -361,29 +401,25 @@ The version-centric course (one module per major revision) can be extended when 
 
 ## Design Under Test (DUT)
 
-### Side-by-Side and Migration DUTs (`dut/`)
+### Side-by-Side and Migration DUTs (`module7/dut/`)
 
-- **mux2_1995.v, mux2_2001.v, mux2_2005.v, mux2_1800.sv**: Same mux in four styles
-  - **Example**: Compare ports, types, always @* vs always_comb
+- **mux2_1364.v, mux2_1800.sv**: Same 2:1 mux in 1364 style vs 1800 style
+  - **Example**: Compare ports (ANSI), types (wire/reg vs logic), always @* vs always_comb
 
-- **counter_1995.v, counter_2001.v, counter_1800.sv**: Same counter in three styles
-  - **Example**: Sequential block, reset, parameter/localparam
+- **counter_1364.v, counter_1800.sv**: Same counter in 1364 style vs 1800 style
+  - **Example**: Sequential block, reset, parameter/localparam; always @(posedge clk) vs always_ff
 
-- **bus_1364.v (top with many ports), bus_1800.sv (top with interface)**: Same connectivity, different style
-  - **Example**: Many ports vs one interface instance
+*Additional side-by-side DUTs (decoder, adder, register, FSM, parameter) live in `examples/side_by_side/*_versions/`. Connectivity (many ports vs interface) is in `examples/side_by_side/connectivity_versions/bus_1364.v`; 1800 interface version is shown in Topics.*
 
 ## Tests
 
 ### Module 7 Tests
 
-- **test_mux2_all_versions**: Single testbench (or one per version) that runs mux in 1995, 2001, 2005, 1800 form and compares outputs
-  - **Key Features**: Same stimulus; same expected behavior; version-agnostic or version-specific build
+- **test_mux2_all.sv**: Testbench that exercises mux in 1364 and 1800 form (uses `dut/mux2_1364.v`, `dut/mux2_1800.sv`) and compares outputs
+  - **Key Features**: Same stimulus; same expected behavior; version-agnostic build
 
-- **test_counter_all_versions**: Same for counter
+- **test_counter_all.sv**: Testbench that exercises counter in 1364 and 1800 form (uses `dut/counter_1364.v`, `dut/counter_1800.sv`)
   - **Key Features**: Reset, enable, wrap; compare across versions
-
-- **test_bus_1364**, **test_bus_1800**: Test many-ports top and interface top
-  - **Key Features**: Same protocol; different connection style
 
 ## Learning Outcomes
 
@@ -484,7 +520,7 @@ You have completed the version-centric Verilog and SystemVerilog course (Modules
 
 ### Module Documentation
 
-- **Module 7 README**: [module7/README.md](../module7/README.md) (if present)
+- **Module 7 README**: [module7/README.md](../module7/README.md) — directory structure, quick start, and file map
 - **Module 6**: [docs/MODULE6.md](MODULE6.md) — IEEE 1800-2017 (prerequisite)
 - **Modules 1–5**: [docs/MODULE1.md](MODULE1.md) through [docs/MODULE5.md](MODULE5.md) — 1364-1995 through 1800-2012
 

@@ -1,0 +1,35 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55f6bf2ec9c0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55f6bf2e9a60 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x55f6bf2e9a60;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "=== Module 8: Learning path and next steps ===" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  Learning path: 1 -> 2 -> 3 -> 4 -> 5 -> 6 (version order)" {0 0 0};
+    %vpi_call/w 3 10 "$display", "  Then: Module 7 (comparison and migration); use Module 8 as reference anytime" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  Where to go next:" {0 0 0};
+    %vpi_call/w 3 12 "$display", "    Project: Apply version selection and migration (Module 7); use Module 8 as quick reference" {0 0 0};
+    %vpi_call/w 3 13 "$display", "    LRM: IEEE 1800-2017 for authoritative syntax and semantics" {0 0 0};
+    %vpi_call/w 3 14 "$display", "    Tools: Simulator, synthesis, lint manuals for supported revision and synthesizable subset" {0 0 0};
+    %vpi_call/w 3 15 "$display", "    Related: RTL design patterns, UVM, SVA, tool-specific training" {0 0 0};
+    %vpi_call/w 3 16 "$display", "    New revisions: Add new module; update Module 7 and Module 8 tables" {0 0 0};
+    %vpi_call/w 3 17 "$display", "=== End learning path ===" {0 0 0};
+    %vpi_call/w 3 18 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "learning_path.sv";

@@ -1,0 +1,32 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55d0eebc2690 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55d0eeb99cf0 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x55d0eeb99cf0;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "=== Module 8: Synthesizable subset (both 1364 and 1800) ===" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  Do: assign, always_comb or always @*, always_ff or always @(posedge clk)" {0 0 0};
+    %vpi_call/w 3 10 "$display", "  Do: generate, parameter, localparam, single driver per net" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  Avoid: Delays (#), initial (except FPGA init per tool), fork/join" {0 0 0};
+    %vpi_call/w 3 12 "$display", "  Avoid: system tasks in RTL, defparam, multiple drivers (unless tri-state), unintended latches" {0 0 0};
+    %vpi_call/w 3 13 "$display", "  Check: Tool manual for exact synthesizable subset and revision" {0 0 0};
+    %vpi_call/w 3 14 "$display", "=== End synthesizable subset ===" {0 0 0};
+    %vpi_call/w 3 15 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "synthesizable_subset.sv";
