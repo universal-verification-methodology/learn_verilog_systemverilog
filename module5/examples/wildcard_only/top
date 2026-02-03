@@ -1,0 +1,63 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55a5819964c0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55a58196fcf0 .scope module, "top" "top" 3 16;
+ .timescale 0 0;
+v0x55a5819bc3f0_0 .var "a", 3 0;
+v0x55a5819bc4e0_0 .net "match", 0 0, v0x55a581971ba0_0;  1 drivers
+v0x55a5819bc5b0_0 .var "pattern", 3 0;
+S_0x55a58196fe80 .scope module, "u_dut" "wildcard_demo" 3 20, 3 6 0, S_0x55a58196fcf0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "pattern";
+    .port_info 2 /OUTPUT 1 "match";
+v0x55a5819717b0_0 .net "a", 3 0, v0x55a5819bc3f0_0;  1 drivers
+v0x55a581971ba0_0 .var "match", 0 0;
+v0x55a5819bc2b0_0 .net "pattern", 3 0, v0x55a5819bc5b0_0;  1 drivers
+E_0x55a5819a9dd0 .event edge, v0x55a5819717b0_0, v0x55a5819bc2b0_0;
+    .scope S_0x55a58196fe80;
+T_0 ;
+Ewait_0 .event/or E_0x55a5819a9dd0, E_0x0;
+    %wait Ewait_0;
+    %load/vec4 v0x55a5819717b0_0;
+    %load/vec4 v0x55a5819bc2b0_0;
+    %cmp/we;
+    %flag_get/vec4 4;
+    %store/vec4 v0x55a581971ba0_0, 0, 1;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x55a58196fcf0;
+T_1 ;
+    %vpi_call/w 3 23 "$display", "Wildcard ==? (1800-2009/2012): X/Z on RHS = don't care" {0 0 0};
+    %pushi/vec4 12, 5, 4;
+    %store/vec4 v0x55a5819bc5b0_0, 0, 4;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v0x55a5819bc3f0_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call/w 3 25 "$display", "  a=%b pattern=%b match=%b", v0x55a5819bc3f0_0, v0x55a5819bc5b0_0, v0x55a5819bc4e0_0 {0 0 0};
+    %pushi/vec4 13, 0, 4;
+    %store/vec4 v0x55a5819bc3f0_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call/w 3 26 "$display", "  a=%b pattern=%b match=%b", v0x55a5819bc3f0_0, v0x55a5819bc5b0_0, v0x55a5819bc4e0_0 {0 0 0};
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v0x55a5819bc3f0_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call/w 3 27 "$display", "  a=%b pattern=%b match=%b", v0x55a5819bc3f0_0, v0x55a5819bc5b0_0, v0x55a5819bc4e0_0 {0 0 0};
+    %vpi_call/w 3 28 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "wildcard_only.sv";

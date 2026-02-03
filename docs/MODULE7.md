@@ -295,21 +295,69 @@ The version-centric course (one module per major revision) can be extended when 
    - Same 2:1 mux in 1364-1995, 1364-2001, 1364-2005, 1800-2005 (and optionally 1800-2017)
    - **Key Concepts**: Port style, type, procedural block, one driver
 
-2. **Side-by-Side: Connectivity** (`examples/side_by_side/connectivity_versions/`)
-   - Same master/slave connection: many ports (1364) vs one interface (1800)
-   - **Key Concepts**: Port list size, direction, reuse
-
-3. **Side-by-Side: Counter** (`examples/side_by_side/counter_versions/`)
+2. **Side-by-Side: Counter** (`examples/side_by_side/counter_versions/`)
    - Same counter in 1995, 2001, 2005, 1800-2005
    - **Key Concepts**: Sequential block, reset, parameter/localparam
 
-4. **Migration Script or Notes** (`examples/migration/`)
-   - Step-by-step notes or scripts for 1995→2001 and 1364→1800 (design subset)
+3. **Side-by-Side: Decoder** (`examples/side_by_side/decoder_versions/`)
+   - Same 2:4 decoder in 1995, 2001, 2005, 1800; case vs unique case
+   - **Key Concepts**: Port style, always @(sel) vs @* vs always_comb, unique case
+
+4. **Side-by-Side: Adder** (`examples/side_by_side/adder_versions/`)
+   - Same 8-bit adder in 1995, 2001, 2005, 1800 (continuous assign)
+   - **Key Concepts**: wire vs logic; assign unchanged across versions
+
+5. **Side-by-Side: Parameter** (`examples/side_by_side/parameter_versions/`)
+   - Same parameterized shift in 1364 (parameter/localparam) vs 1800 (parameter int)
+   - **Key Concepts**: parameter int, localparam int; same behavior
+
+6. **Side-by-Side: Connectivity** (`examples/side_by_side/connectivity_versions/`)
+   - Same master/slave connection: many ports (1364)
+   - **Key Concepts**: Port list size, direction, reuse; interface (1800) optional per tool
+
+7. **Migration 1364→1800** (`examples/migration/`)
+   - Before/after: wire/reg, always @* vs logic, always_comb, unique case
    - **Key Concepts**: Order of steps, testing, regression
 
-5. **Version Table** (`examples/version_table/`)
-   - Single reference table: construct vs standard (1995–2017)
-   - **Key Concepts**: When each feature was introduced; minimum revision for a construct
+8. **Migration 1995→2001** (`examples/migration_1995_to_2001/`)
+   - Before: non-ANSI, @(a or b or sel). After: ANSI, always @*
+   - **Key Concepts**: ANSI ports, implicit sensitivity
+
+9. **Case Versions** (`examples/case_versions/`)
+   - Same 4:1 mux: 1364 case+default vs 1800 unique case
+   - **Key Concepts**: case semantics; unique case for tool checking
+
+10. **Version Table** (`examples/version_table/`)
+    - Single reference: construct vs standard (1995–2017)
+    - **Key Concepts**: When each feature was introduced; minimum revision
+
+11. **Version Selection** (`examples/version_selection/`)
+    - Runnable reminder of version-selection checklist (constraints, decision, document)
+    - **Key Concepts**: See MODULE7.md for full checklist
+
+12. **Side-by-Side: Register** (`examples/side_by_side/register_versions/`)
+    - Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block style)
+    - **Key Concepts**: always @(posedge clk) vs always_ff; wire/reg vs logic
+
+13. **Side-by-Side: FSM** (`examples/side_by_side/fsm_versions/`)
+    - Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff)
+    - **Key Concepts**: Sequential FSM; 1800 always_ff and unique case
+
+14. **Migration Checklist** (`examples/migration_checklist/`)
+    - Runnable reminder of 1364→1800 migration steps (pre, per-module, post)
+    - **Key Concepts**: See MODULE7.md for full migration checklist
+
+15. **Incremental Migration** (`examples/incremental_migration/`)
+    - Two steps: step1 1364 style, step2 1800 style; same mux, compare outputs
+    - **Key Concepts**: Migrate one construct at a time; test after each step
+
+16. **Port Style Compare** (`examples/port_style_compare/`)
+    - Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only
+    - **Key Concepts**: Port declaration style; no other change
+
+17. **No defparam** (`examples/no_defparam/`)
+    - 1364-2005: parameter override at instantiation #(.WIDTH(n)); avoid defparam
+    - **Key Concepts**: defparam deprecated; use instantiation override
 
 ## Design Under Test (DUT)
 

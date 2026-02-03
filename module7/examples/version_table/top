@@ -1,0 +1,33 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55c3532d3d90 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55c3532d3f40 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x55c3532d3f40;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "Module 7: Version table (construct vs standard)" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  Port style:  1995 non-ANSI | 2001+ ANSI" {0 0 0};
+    %vpi_call/w 3 10 "$display", "  Type:        1364 wire/reg | 1800 logic (single driver)" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  Combinational: 1995 @(a or b) | 2001 @* | 1800 always_comb" {0 0 0};
+    %vpi_call/w 3 12 "$display", "  Sequential:  1364 always @(posedge clk) | 1800 always_ff" {0 0 0};
+    %vpi_call/w 3 13 "$display", "  Connectivity: 1364 many ports | 1800 interface+modport" {0 0 0};
+    %vpi_call/w 3 14 "$display", "  Case:        1364 case | 1800 unique/priority case" {0 0 0};
+    %vpi_call/w 3 15 "$display", "  Reference:   1800-2017 single LRM (Verilog + SystemVerilog)" {0 0 0};
+    %vpi_call/w 3 16 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "version_table.sv";

@@ -2,6 +2,24 @@
 
 **Goal**: Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays.
 
+**Prerequisites**: Module 1 (IEEE 1364-1995) — you should be comfortable with modules, `wire`/`reg`, `assign`, `always`/`initial`, and 1995 port style.
+
+**Estimated time**: 6–10 hours (examples + exercises + reading).
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision of the Verilog standard. You'll learn what 2001 adds over 1995: ANSI-style port and task/function declarations, `always @*` for combinational logic, generate blocks for parameterized and conditional hierarchy, signed arithmetic, and multi-dimensional arrays. These features are the basis for most modern Verilog RTL and are required before moving to 1364-2005 and SystemVerilog (Module 4+).
@@ -259,7 +277,7 @@ endfunction
 #### Task (2001 ANSI)
 
 ```verilog
-task automatic apply_reset(output logic rst_n);
+task automatic apply_reset(output reg rst_n);
     rst_n = 0;
     #100;
     rst_n = 1;
@@ -269,10 +287,29 @@ endtask
 
 - **automatic**: Optional; gives automatic storage (re-entrant). Useful for recursive or concurrent calls.
 - **input/output in header**: Cleaner than 1995 style; avoids duplicate declarations.
+- **Note**: In 1364-2001 use `output reg` (not `output logic`; `logic` is SystemVerilog).
 
 **Example**: `module2/examples/tasks_functions/ansi_task_func.v`
 
 ## Examples
+
+### Quick file reference
+
+| Topic                | Path                                        | Key files |
+|----------------------|---------------------------------------------|-----------|
+| ANSI ports           | `module2/examples/ansi_ports/`              | `mux2.v` |
+| always @*            | `module2/examples/procedural/`              | `always_star.v` |
+| generate             | `module2/examples/generate/`                | `param_mux.v` |
+| generate if/else      | `module2/examples/generate_if/`             | `gen_if.v` |
+| Generate ripple adder| `module2/examples/generate_ripple_adder/`   | `ripple_adder.v` |
+| Signed               | `module2/examples/signed/`                  | `adder_signed.v` |
+| Signed vs unsigned   | `module2/examples/signed_compare/`          | `signed_compare.v` |
+| Decoder              | `module2/examples/decoder/`                 | `decoder.v` |
+| Multi-dim arrays     | `module2/examples/arrays/`                  | `ram_simple.v` |
+| Multi-dim style      | `module2/examples/multi_dim_arrays/`        | `multi_dim.v` |
+| Parameters/localparam| `module2/examples/parameters/`             | `counter_param.v` |
+| ANSI task/function   | `module2/examples/tasks_functions/`         | `ansi_task_func.v` |
+| ANSI task with output| `module2/examples/task_ansi/`               | `task_ansi.v` |
 
 ### Module 2 Examples (1364-2001)
 
@@ -285,37 +322,64 @@ endtask
    - **Key Concepts**: No manual sensitivity list; tool infers from RHS
 
 3. **Generate** (`examples/generate/`)
-   - generate for (replicated instances), generate if/else
+   - Parameterized mux; generate-style parameterization
    - **Key Concepts**: genvar, elaboration-time logic
 
-4. **Signed** (`examples/signed/`)
+4. **Generate if/else** (`examples/generate_if/`)
+   - Conditional implementation by parameter (e.g. USE_CLIP wrap vs saturate)
+   - **Key Concepts**: generate if/else at elaboration
+
+5. **Generate Ripple Adder** (`examples/generate_ripple_adder/`)
+   - N-bit ripple-carry adder using generate for (full_adder instances)
+   - **Key Concepts**: genvar loop, replicated hierarchy
+
+6. **Signed** (`examples/signed/`)
    - signed reg/wire, $signed/$unsigned
    - **Key Concepts**: Two's complement arithmetic in RTL
 
-5. **Multi-Dimensional Arrays** (`examples/arrays/`)
-   - Memory-style arrays, indexing
+7. **Signed vs Unsigned Comparison** (`examples/signed_compare/`)
+   - $signed() in expressions; a &lt; b unsigned vs signed
+   - **Key Concepts**: Cast in expressions without changing declaration
+
+8. **Decoder** (`examples/decoder/`)
+   - 2:4 decoder with ANSI ports and always @* (case)
+   - **Key Concepts**: Combinational case; one-hot output
+
+9. **Multi-Dimensional Arrays** (`examples/arrays/`)
+   - Memory-style arrays (reg [7:0] mem [0:255]), indexing
    - **Key Concepts**: Packed vs unpacked; array indexing rules in 2001
 
-6. **Parameters and localparam** (`examples/parameters/`)
-   - Parameter override, localparam for derived constants
-   - **Key Concepts**: When to use parameter vs localparam
+10. **Multi-Dim Style** (`examples/multi_dim_arrays/`)
+    - 2x4 buffer using 1D array indexed as row*4+col
+    - **Key Concepts**: Emulating 2D with 1D array; index expression
 
-7. **ANSI Task/Function** (`examples/tasks_functions/`)
-   - Input/output in header, automatic tasks/functions
-   - **Key Concepts**: 2001 style vs 1995 style
+11. **Parameters and localparam** (`examples/parameters/`)
+    - Parameter override, localparam for derived constants
+    - **Key Concepts**: When to use parameter vs localparam
+
+12. **ANSI Task/Function** (`examples/tasks_functions/`)
+    - Input/output in header, automatic functions
+    - **Key Concepts**: 2001 style vs 1995 style
+
+13. **ANSI Task with Output** (`examples/task_ansi/`)
+    - task automatic apply_reset(output reg rn); begin/end body
+    - **Key Concepts**: Task with output argument; testbench reset pattern
 
 ## Design Under Test (DUT)
 
-### Parameterized and Generate-Based (`dut/`)
+### Parameterized and Generate-Based (`module2/dut/`)
 
 - **mux_2to1_param.v**: Parameterized 2:1 mux (ANSI ports, parameter)
   - **Example**: ANSI ports + parameter; reusable width
 
+- **dff.v**: D flip-flop (used by shift_reg_gen)
+  - Single-bit register; instantiated inside generate in shift_reg_gen
+
 - **shift_reg_gen.v**: Shift register using generate for
   - **Example**: generate for with genvar; scalable hierarchy
 
-- **counter_signed.v**: Counter with signed comparison (localparam MAX)
-  - **Example**: signed, localparam, 2001 procedural style
+- **counter_param.v**: Counter with localparam (MAX derived from WIDTH)
+  - **Example**: parameter, localparam, 2001 procedural style; wrap at MAX
 
 ## Tests
 
@@ -327,8 +391,8 @@ endtask
 - **test_shift_reg_gen.v**: Generate-based shift register test
   - **Key Features**: Multiple lengths via parameter
 
-- **test_counter_signed.v**: Signed counter / localparam test
-  - **Key Features**: Reset, enable, wrap-around
+- **test_counter_param.v**: Counter with localparam test
+  - **Key Features**: Reset, enable, wrap-around; tests `dut/counter_param.v`
 
 ## Learning Outcomes
 
@@ -435,7 +499,7 @@ After completing this module, proceed to:
 
 ### Module Documentation
 
-- **Module 2 README**: [module2/README.md](../module2/README.md) (if present)
+- **Module 2 README**: [module2/README.md](../module2/README.md) — directory structure, quick start, and file map
 - **Module 1**: [docs/MODULE1.md](MODULE1.md) — IEEE 1364-1995 (prerequisite)
 - **Module 3**: [docs/MODULE3.md](MODULE3.md) — IEEE 1364-2005 (next)
 

@@ -1,0 +1,37 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55c70d27d9f0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55c70d254cf0 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x55c70d254cf0;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "=== Module 8: Course map (Modules 1-8) ===" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  1 | IEEE 1364-1995    | Verilog-95: wire/reg, assign, always/initial, explicit sensitivity" {0 0 0};
+    %vpi_call/w 3 10 "$display", "  2 | IEEE 1364-2001    | ANSI ports, always @*, generate, signed, arrays, localparam" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  3 | IEEE 1364-2005    | Clarifications, synthesizable subset, defparam deprecated" {0 0 0};
+    %vpi_call/w 3 12 "$display", "  4 | IEEE 1800-2005    | logic, always_comb/always_ff, interfaces, packages, unique/priority case" {0 0 0};
+    %vpi_call/w 3 13 "$display", "  5 | IEEE 1800-2009/12 | Interface refinements, checkers, array/string methods, assertions" {0 0 0};
+    %vpi_call/w 3 14 "$display", "  6 | IEEE 1800-2017    | Unified LRM, Verilog as subset of 1800, current standard" {0 0 0};
+    %vpi_call/w 3 15 "$display", "  7 | Version comparison| Side-by-side, migration patterns, tool support, checklists" {0 0 0};
+    %vpi_call/w 3 16 "$display", "  8 | Quick reference   | This module: tables, cheat sheet, course map" {0 0 0};
+    %vpi_call/w 3 17 "$display", "  Learning path: 1->2->3->4->5->6 (version order); then 7; use 8 as reference" {0 0 0};
+    %vpi_call/w 3 18 "$display", "  Links: module8/docs/course_map.md" {0 0 0};
+    %vpi_call/w 3 19 "$display", "=== End course map ===" {0 0 0};
+    %vpi_call/w 3 20 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "course_map.sv";

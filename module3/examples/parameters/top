@@ -1,0 +1,60 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x55a9edc5d840 .scope module, "top" "top" 2 14;
+ .timescale 0 0;
+v0x55a9edc84330_0 .var "a4", 3 0;
+v0x55a9edc84420_0 .var "a8", 7 0;
+v0x55a9edc844f0_0 .var "b4", 3 0;
+v0x55a9edc845f0_0 .var "b8", 7 0;
+v0x55a9edc846c0_0 .net "y4", 3 0, L_0x55a9edc84880;  1 drivers
+v0x55a9edc847b0_0 .net "y8", 7 0, L_0x55a9edc84a10;  1 drivers
+S_0x55a9edc6f560 .scope module, "u_add4" "adder" 2 21, 2 6 0, S_0x55a9edc5d840;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "y";
+P_0x55a9edc6f740 .param/l "WIDTH" 0 2 6, +C4<00000000000000000000000000000100>;
+v0x55a9edc6f830_0 .net "a", 3 0, v0x55a9edc84330_0;  1 drivers
+v0x55a9edc83a90_0 .net "b", 3 0, v0x55a9edc844f0_0;  1 drivers
+v0x55a9edc83b70_0 .net "y", 3 0, L_0x55a9edc84880;  alias, 1 drivers
+L_0x55a9edc84880 .arith/sum 4, v0x55a9edc84330_0, v0x55a9edc844f0_0;
+S_0x55a9edc83ce0 .scope module, "u_add8" "adder" 2 22, 2 6 0, S_0x55a9edc5d840;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /OUTPUT 8 "y";
+P_0x55a9edc83ec0 .param/l "WIDTH" 0 2 6, +C4<00000000000000000000000000001000>;
+v0x55a9edc83fe0_0 .net "a", 7 0, v0x55a9edc84420_0;  1 drivers
+v0x55a9edc840e0_0 .net "b", 7 0, v0x55a9edc845f0_0;  1 drivers
+v0x55a9edc841c0_0 .net "y", 7 0, L_0x55a9edc84a10;  alias, 1 drivers
+L_0x55a9edc84a10 .arith/sum 8, v0x55a9edc84420_0, v0x55a9edc845f0_0;
+    .scope S_0x55a9edc5d840;
+T_0 ;
+    %vpi_call 2 25 "$display", "Parameter override at instantiation (1364-2005): no defparam" {0 0 0};
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v0x55a9edc84330_0, 0, 4;
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v0x55a9edc844f0_0, 0, 4;
+    %pushi/vec4 10, 0, 8;
+    %store/vec4 v0x55a9edc84420_0, 0, 8;
+    %pushi/vec4 20, 0, 8;
+    %store/vec4 v0x55a9edc845f0_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call 2 27 "$display", "  4-bit: %d + %d = %d", v0x55a9edc84330_0, v0x55a9edc844f0_0, v0x55a9edc846c0_0 {0 0 0};
+    %delay 10, 0;
+    %vpi_call 2 28 "$display", "  8-bit: %d + %d = %d", v0x55a9edc84420_0, v0x55a9edc845f0_0, v0x55a9edc847b0_0 {0 0 0};
+    %vpi_call 2 29 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "param_override.v";

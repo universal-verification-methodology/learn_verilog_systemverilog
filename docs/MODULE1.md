@@ -2,6 +2,24 @@
 
 **Goal**: Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation.
 
+**Prerequisites**: None — this is the first module. Familiarity with digital logic (gates, flip-flops, RTL) is helpful.
+
+**Estimated time**: 4–8 hours (examples + exercises + reading).
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module establishes the foundation for the Verilog/SystemVerilog version-centric course. You'll learn the original Verilog language as defined by IEEE Std 1364-1995 (Verilog-95): modules, nets and variables, continuous assignments, procedural blocks, and basic testbench constructs. Understanding 1364-1995 is essential for reading legacy RTL and for appreciating what later IEEE versions add.
@@ -261,6 +279,20 @@ endmodule
 
 ## Examples
 
+### Quick file reference
+
+| Topic                    | Path                                      | Key files                          |
+|--------------------------|-------------------------------------------|------------------------------------|
+| Modules & ports          | `module1/examples/modules_ports/`         | `and_gate.v`                       |
+| Nets & variables         | `module1/examples/nets_variables/`        | `data_types.v`                     |
+| Continuous assignment   | `module1/examples/continuous_assign/`     | `mux2.v`                           |
+| Continuous assign gates | `module1/examples/continuous_assign_gates/`| `gates.v`                          |
+| Adder                    | `module1/examples/adder/`                 | `adder.v`                          |
+| Procedural blocks        | `module1/examples/procedural/`            | `always_initial.v`, `task_function_1995.v` |
+| Sequential DFF           | `module1/examples/sequential_dff/`        | `dff.v`                            |
+| Delays & timing          | `module1/examples/delays_timing/`         | `timing.v`                         |
+| Testbenches              | `module1/examples/testbenches/`           | `test_and_gate.v`                 |
+
 ### Module 1 Examples (1364-1995)
 
 1. **Modules and Ports** (`examples/modules_ports/`)
@@ -303,14 +335,22 @@ endmodule
 
 ## Design Under Test (DUT)
 
-### Simple Gates (`dut/simple_gates/`)
+### Simple Gates (`module1/dut/simple_gates/`)
 
 - **and_gate.v**: 2-input AND (1364-1995 style)
   - Non-ANSI ports, `always @(a or b)` for combinational output
   - **Example**: Reference for 1995 module and procedural style
 
-- **mux2.v**: 2:1 multiplexer
-  - `assign` for combinational logic; all ports `wire` except optional reg if using always
+- **or_gate.v**: 2-input OR (1364-1995 style)
+  - Same port and procedural style as `and_gate.v`
+
+- **not_gate.v**: 1-input NOT (1364-1995 style)
+  - Single-input combinational gate in 1995 style
+
+### 2:1 Multiplexer (for tests)
+
+- **mux2_1995**: Defined in `examples/continuous_assign/mux2.v` and copied as `tests/mux2_1995.v` for standalone test runs.
+  - `assign` for combinational logic; all ports `wire`
   - **Example**: Continuous assignment pattern
 
 ## Tests
@@ -425,7 +465,7 @@ After completing this module, proceed to:
 
 ### Module Documentation
 
-- **Module 1 README**: [module1/README.md](../module1/README.md) (if present)
+- **Module 1 README**: [module1/README.md](../module1/README.md) — directory structure, quick start, and file map
 - **Module 2**: [docs/MODULE2.md](MODULE2.md) — IEEE 1364-2001 (next)
 
 ### Reference Materials

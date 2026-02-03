@@ -2,6 +2,24 @@
 
 **Goal**: Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case.
 
+**Prerequisites**: Module 1–3 (1364-1995, 1364-2001, 1364-2005) — you should be comfortable with Verilog RTL, synthesizable subset, and blocking vs nonblocking.
+
+**Estimated time**: 8–12 hours (examples + exercises + reading). Interfaces and packages may require a simulator with full SystemVerilog support.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It extends Verilog (IEEE 1364-2005) with design and verification features. Here the focus is on the **design subset** used for RTL: the `logic` type, explicit procedural blocks (`always_comb`, `always_ff`, `always_latch`), interfaces and modports, packages, and `unique`/`priority` case. You'll learn how 1800-2005 improves clarity and tool checking over 1364-2005 and when to adopt these constructs in RTL. Verification features (classes, assertions, etc.) are introduced only in context; later modules can go deeper.
@@ -79,7 +97,7 @@ bit [7:0]   index;  // 2-state (e.g. for testbench)
 int         i;      // 32-bit signed integer (e.g. loop counter)
 ```
 
-**Example**: `module4/examples/data_types/logic_bit.v`
+**Example**: `module4/examples/data_types/logic_bit.sv`
 
 ### 3. always_comb, always_ff, always_latch (1800)
 
@@ -185,7 +203,7 @@ endmodule
 
 - **One interface instance**: Connects master and slave; no long port lists.
 
-**Example**: `module4/examples/interfaces/bus_if.sv`
+**Example**: `module4/examples/interfaces/bus_if_example.sv` (interface in `dut/bus_if.sv`)
 
 ### 5. Packages and import (1800)
 
@@ -290,44 +308,91 @@ endcase
 
 ## Examples
 
+### Quick file reference
+
+| Topic                | Path                                  | Key files |
+|----------------------|---------------------------------------|-----------|
+| logic and 2-state    | `module4/examples/data_types/`        | `logic_bit.sv` |
+| logic ports          | `module4/examples/logic_ports/`       | `logic_ports.sv` |
+| always_comb / always_ff | `module4/examples/procedural/`     | `always_comb_ff.sv` |
+| always_latch         | `module4/examples/always_latch/`      | `always_latch.sv` |
+| One driver per logic | `module4/examples/one_driver_logic/`  | `one_driver_logic.sv` |
+| typedef              | `module4/examples/typedef_sv/`        | `typedef_sv.sv` |
+| Interfaces           | `module4/examples/interfaces/`        | `bus_if_example.sv` (see also `dut/bus_if.sv`) |
+| Packages             | `module4/examples/packages/`          | `pkg_util.sv` |
+| Package + typedef    | `module4/examples/package_typedef/`   | `package_typedef.sv` |
+| unique / priority case | `module4/examples/case_unique_priority/` | `decoder.sv` |
+| priority case only   | `module4/examples/priority_case/`     | `priority_case.sv` |
+| Migration 1364→1800  | `module4/examples/migration/`          | `migration.sv` |
+
 ### Module 4 Examples (1800-2005 Design)
 
 1. **logic and 2-State Types** (`examples/data_types/`)
-   - logic for ports and internal single-driver signals; bit/int in simple cases
-   - **Key Concepts**: Single driver for logic; 4-state vs 2-state
+   - logic for ports and internal single-driver signals
+   - **Key Concepts**: Single driver for logic; 4-state
 
-2. **always_comb / always_ff** (`examples/procedural/`)
+2. **logic Ports** (`examples/logic_ports/`)
+   - All ports logic (mux, adder); no wire/reg choice
+   - **Key Concepts**: assign and always_comb can drive output logic
+
+3. **always_comb / always_ff** (`examples/procedural/`)
    - Combinational with always_comb; sequential with always_ff
    - **Key Concepts**: Explicit intent; tool checks; no latch in always_comb
 
-3. **Interfaces and Modports** (`examples/interfaces/`)
+4. **always_latch** (`examples/always_latch/`)
+   - Explicit latch when intended (e.g. transparent latch)
+   - **Key Concepts**: Use when latch is desired; prefer always_comb/always_ff otherwise
+
+5. **One Driver per logic** (`examples/one_driver_logic/`)
+   - Single assign to one output; single always_ff to another
+   - **Key Concepts**: logic must have exactly one driver
+
+6. **typedef** (`examples/typedef_sv/`)
+   - typedef in module (e.g. byte_t = logic [7:0])
+   - **Key Concepts**: User-defined types for clarity
+
+7. **Interfaces and Modports** (`examples/interfaces/`)
    - Interface definition, modports, connection in top
    - **Key Concepts**: One bundle per connection; direction per modport
 
-4. **Packages and import** (`examples/packages/`)
+8. **Packages and import** (`examples/packages/`)
    - Package with types/params/functions; import in modules
    - **Key Concepts**: Namespace; wildcard vs specific import
 
-5. **unique / priority case** (`examples/case_unique_priority/`)
-   - unique case (at most one match); priority case (first match)
-   - **Key Concepts**: Standard semantics; synthesis and simulation behavior
+9. **Package with typedef and function** (`examples/package_typedef/`)
+   - Package with typedef and min_word function; import in ALU
+   - **Key Concepts**: Shared types and helpers across modules
 
-6. **Migration from 1364** (`examples/migration/`)
-   - Same small design in 1364-2005 style vs 1800-2005 style
-   - **Key Concepts**: wire/reg→logic, always @*→always_comb, always @(posedge clk)→always_ff
+10. **unique / priority case** (`examples/case_unique_priority/`)
+    - unique case (at most one match); priority case (first match)
+    - **Key Concepts**: Standard semantics; synthesis and simulation behavior
+
+11. **priority case only** (`examples/priority_case/`)
+    - Arbiter with priority case (first req wins)
+    - **Key Concepts**: priority case for arbiter, interrupt mask
+
+12. **Migration from 1364** (`examples/migration/`)
+    - Same small design in 1364-2005 style vs 1800-2005 style
+    - **Key Concepts**: wire/reg→logic, always @*→always_comb, always @(posedge clk)→always_ff
 
 ## Design Under Test (DUT)
 
-### SystemVerilog Design Subset (`dut/`)
+### SystemVerilog Design Subset (`module4/dut/`)
 
-- **mux2_sv.v**: 2:1 mux with logic and always_comb
+- **mux2_sv.sv**: 2:1 mux with logic and always_comb
   - **Example**: logic ports; always_comb; no wire/reg
 
-- **counter_sv.v**: Counter with always_ff and optional package type
+- **counter_sv.sv**: Counter with always_ff and optional package type
   - **Example**: always_ff; nonblocking; reset
 
-- **bus_master_sv.sv**: Master using an interface (modport master)
+- **bus_if.sv**: Interface definition (used by bus_master and bus_slave)
+  - **Example**: interface declaration; modports master and slave
+
+- **bus_master.sv**: Master using an interface (modport master)
   - **Example**: interface port; modport; single connection object
+
+- **bus_slave.sv**: Slave using an interface (modport slave)
+  - **Example**: interface port; modport; same interface instance as master
 
 - **decoder_unique.sv**: Decoder with unique case
   - **Example**: unique case; default; no tool-specific attributes
@@ -454,7 +519,7 @@ After completing this module, proceed to:
 
 ### Module Documentation
 
-- **Module 4 README**: [module4/README.md](../module4/README.md) (if present)
+- **Module 4 README**: [module4/README.md](../module4/README.md) — directory structure, quick start, and file map
 - **Module 3**: [docs/MODULE3.md](MODULE3.md) — IEEE 1364-2005 (prerequisite)
 - **Module 5**: [docs/MODULE5.md](MODULE5.md) — IEEE 1800-2009/2012 (next)
 

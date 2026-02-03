@@ -2,6 +2,24 @@
 
 **Goal**: Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog.
 
+**Prerequisites**: Module 1 (1364-1995) and Module 2 (1364-2001) — you should be comfortable with ANSI ports, `always @*`, generate, signed types, and localparam.
+
+**Estimated time**: 4–6 hours (examples + exercises + reading).
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module covers IEEE Std 1364-2005 (Verilog-2005), the last standard that defines Verilog alone before it was merged with SystemVerilog (IEEE 1800). You'll learn what 2005 adds or clarifies over 2001: minor language clarifications, additional system tasks, and deprecation notes. The focus is on using 1364-2005 as a clear, tool-stable baseline for RTL and on the synthesizable subset and best practices. This sets the stage for Module 4 (IEEE 1800 — SystemVerilog design subset).
@@ -182,31 +200,66 @@ A concise view of what each Verilog-only standard contributes:
 
 ## Examples
 
+### Quick file reference
+
+| Topic                 | Path                                  | Key files |
+|-----------------------|---------------------------------------|-----------|
+| Parameter override   | `module3/examples/parameters/`        | `param_override.v` |
+| No defparam          | `module3/examples/no_defparam/`        | `no_defparam.v` |
+| Synthesizable style  | `module3/examples/synthesizable/`     | `comb_seq_style.v` |
+| One driver           | `module3/examples/one_driver/`         | `one_driver.v` |
+| Blocking vs nonblocking | `module3/examples/procedural/`      | `blocking_nonblocking.v` |
+| Pipeline             | `module3/examples/pipeline/`           | `pipeline.v` |
+| Case styles          | `module3/examples/case_styles/`        | `case_full_parallel.v` |
+| Avoid latch          | `module3/examples/avoid_latch/`        | `avoid_latch.v` |
+| Synthesizable function | `module3/examples/function_synth/`   | `function_synth.v` |
+| 1364-2005 summary    | `module3/examples/summary/`            | `summary_2005.v` |
+
 ### Module 3 Examples (1364-2005)
 
 1. **Parameter Override** (`examples/parameters/`)
    - No defparam; override at instantiation only
    - **Key Concepts**: defparam deprecated; use `#(.PARAM(value))` at instantiation
 
-2. **Synthesizable Style** (`examples/synthesizable/`)
+2. **No defparam** (`examples/no_defparam/`)
+   - Parameter passed through hierarchy (parent → child) at instantiation only
+   - **Key Concepts**: No defparam anywhere; override only at inst
+
+3. **Synthesizable Style** (`examples/synthesizable/`)
    - Combinational (always @*, blocking) and sequential (posedge clk, nonblocking)
    - **Key Concepts**: One driver per net; avoid latches; no delays in RTL
 
-3. **Blocking vs Nonblocking** (`examples/procedural/`)
+4. **One Driver** (`examples/one_driver/`)
+   - Single assign to wire; single always driving reg
+   - **Key Concepts**: No multiple drivers per net
+
+5. **Blocking vs Nonblocking** (`examples/procedural/`)
    - Side-by-side combinational vs sequential blocks with correct assignment style
    - **Key Concepts**: = in combinational; <= in sequential; do not mix for same variable
 
-4. **Case Styles** (`examples/case_styles/`)
+6. **Pipeline** (`examples/pipeline/`)
+   - Two-stage pipeline: q1 <= d; q2 <= q1 (nonblocking only)
+   - **Key Concepts**: q2 gets old q1 (previous cycle); sequential block only
+
+7. **Case Styles** (`examples/case_styles/`)
    - full_case / parallel_case attributes (or tool pragmas) where supported
    - **Key Concepts**: Synthesis hints only; 1364-2005 has no unique/priority case
 
-5. **1364-2005 Summary** (`examples/summary/`)
-   - Small design using only 1364-2005 features (no 1800)
-   - **Key Concepts**: Checklist for “pure Verilog” RTL
+8. **Avoid Latch** (`examples/avoid_latch/`)
+   - Default before case; all paths assign output
+   - **Key Concepts**: No latch from incomplete case/if
+
+9. **Synthesizable Function** (`examples/function_synth/`)
+   - Function without delays used in always @* (e.g. min)
+   - **Key Concepts**: Combinational helper; no delays in RTL
+
+10. **1364-2005 Summary** (`examples/summary/`)
+    - Small design using only 1364-2005 features (no 1800)
+    - **Key Concepts**: Checklist for “pure Verilog” RTL
 
 ## Design Under Test (DUT)
 
-### 1364-2005 Compliant RTL (`dut/`)
+### 1364-2005 Compliant RTL (`module3/dut/`)
 
 - **counter_2005.v**: Counter with parameter and localparam; no defparam
   - **Example**: Synthesizable subset; nonblocking in sequential block
@@ -328,7 +381,7 @@ After completing this module, proceed to:
 
 ### Module Documentation
 
-- **Module 3 README**: [module3/README.md](../module3/README.md) (if present)
+- **Module 3 README**: [module3/README.md](../module3/README.md) — directory structure, quick start, and file map
 - **Module 2**: [docs/MODULE2.md](MODULE2.md) — IEEE 1364-2001 (prerequisite)
 - **Module 4**: [docs/MODULE4.md](MODULE4.md) — IEEE 1800-2005 (next)
 

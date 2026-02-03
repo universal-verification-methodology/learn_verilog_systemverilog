@@ -1,0 +1,75 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x563424c44d90 .scope module, "mux_wide" "mux_wide" 2 6;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 8 "y";
+P_0x563424c44f20 .param/l "WIDTH" 0 2 6, +C4<00000000000000000000000000001000>;
+o0x7f03ce398018 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x563424c81db0_0 .net "a", 7 0, o0x7f03ce398018;  0 drivers
+o0x7f03ce398048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x563424c96280_0 .net "b", 7 0, o0x7f03ce398048;  0 drivers
+o0x7f03ce398078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x563424c96360_0 .net "sel", 0 0, o0x7f03ce398078;  0 drivers
+v0x563424c96400_0 .net "y", 7 0, L_0x563424c973d0;  1 drivers
+L_0x563424c973d0 .functor MUXZ 8, o0x7f03ce398018, o0x7f03ce398048, o0x7f03ce398078, C4<>;
+S_0x563424c81bd0 .scope generate, "genblk2" "genblk2" 2 13, 2 13 0, S_0x563424c44d90;
+ .timescale 0 0;
+S_0x563424c81a40 .scope module, "top" "top" 2 32;
+ .timescale 0 0;
+v0x563424c97050_0 .var "a", 3 0;
+v0x563424c97130_0 .var "b", 3 0;
+v0x563424c97200_0 .var "sel", 0 0;
+v0x563424c97300_0 .net "y", 3 0, L_0x563424c978c0;  1 drivers
+S_0x563424c96560 .scope module, "u_mux" "mux_nbit" 2 37, 2 21 0, S_0x563424c81a40;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 4 "y";
+P_0x563424c96760 .param/l "N" 0 2 21, +C4<00000000000000000000000000000100>;
+L_0x563424c97680 .functor NOT 4, L_0x563424c97530, C4<0000>, C4<0000>, C4<0000>;
+L_0x563424c976f0 .functor AND 4, v0x563424c97050_0, L_0x563424c97680, C4<1111>, C4<1111>;
+L_0x563424c97800 .functor AND 4, v0x563424c97130_0, L_0x563424c97530, C4<1111>, C4<1111>;
+L_0x563424c978c0 .functor OR 4, L_0x563424c976f0, L_0x563424c97800, C4<0000>, C4<0000>;
+v0x563424c96870_0 .net *"_ivl_2", 3 0, L_0x563424c97680;  1 drivers
+v0x563424c96970_0 .net *"_ivl_4", 3 0, L_0x563424c976f0;  1 drivers
+v0x563424c96a50_0 .net *"_ivl_6", 3 0, L_0x563424c97800;  1 drivers
+v0x563424c96b40_0 .net "a", 3 0, v0x563424c97050_0;  1 drivers
+v0x563424c96c20_0 .net "b", 3 0, v0x563424c97130_0;  1 drivers
+v0x563424c96d50_0 .net "sel", 0 0, v0x563424c97200_0;  1 drivers
+v0x563424c96e10_0 .net "sel_bus", 3 0, L_0x563424c97530;  1 drivers
+v0x563424c96ef0_0 .net "y", 3 0, L_0x563424c978c0;  alias, 1 drivers
+L_0x563424c97530 .concat [ 1 1 1 1], v0x563424c97200_0, v0x563424c97200_0, v0x563424c97200_0, v0x563424c97200_0;
+    .scope S_0x563424c81a40;
+T_0 ;
+    %vpi_call 2 40 "$display", "Generate (1364-2001): parameterized mux" {0 0 0};
+    %pushi/vec4 10, 0, 4;
+    %store/vec4 v0x563424c97050_0, 0, 4;
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v0x563424c97130_0, 0, 4;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563424c97200_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call 2 41 "$display", "  sel=%b a=%b b=%b y=%b", v0x563424c97200_0, v0x563424c97050_0, v0x563424c97130_0, v0x563424c97300_0 {0 0 0};
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x563424c97200_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call 2 42 "$display", "  sel=%b a=%b b=%b y=%b", v0x563424c97200_0, v0x563424c97050_0, v0x563424c97130_0, v0x563424c97300_0 {0 0 0};
+    %vpi_call 2 43 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "param_mux.v";

@@ -1,0 +1,43 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x555f63f79f30 .scope module, "top" "top" 2 22;
+ .timescale 0 0;
+v0x555f63f8c5a0_0 .var "a", 7 0;
+v0x555f63f8c6b0_0 .net "y", 7 0, L_0x555f63f66eb0;  1 drivers
+S_0x555f63f7a0c0 .scope module, "u_parent" "parent" 2 26, 2 14 0, S_0x555f63f79f30;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /OUTPUT 8 "y";
+P_0x555f63f7a2a0 .param/l "W" 0 2 14, +C4<00000000000000000000000000001000>;
+v0x555f63f8c3a0_0 .net "a", 7 0, v0x555f63f8c5a0_0;  1 drivers
+v0x555f63f8c490_0 .net "y", 7 0, L_0x555f63f66eb0;  alias, 1 drivers
+S_0x555f63f7b600 .scope module, "u_child" "child" 2 19, 2 7 0, S_0x555f63f7a0c0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /OUTPUT 8 "y";
+P_0x555f63f7b7e0 .param/l "W" 0 2 7, +C4<00000000000000000000000000001000>;
+L_0x555f63f66eb0 .functor BUFZ 8, v0x555f63f8c5a0_0, C4<00000000>, C4<00000000>, C4<00000000>;
+v0x555f63f7b8b0_0 .net "a", 7 0, v0x555f63f8c5a0_0;  alias, 1 drivers
+v0x555f63f8c260_0 .net "y", 7 0, L_0x555f63f66eb0;  alias, 1 drivers
+    .scope S_0x555f63f79f30;
+T_0 ;
+    %vpi_call 2 29 "$display", "No defparam (1364-2005): parameter only at instantiation" {0 0 0};
+    %pushi/vec4 171, 0, 8;
+    %store/vec4 v0x555f63f8c5a0_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call 2 30 "$display", "  a=%h y=%h", v0x555f63f8c5a0_0, v0x555f63f8c6b0_0 {0 0 0};
+    %vpi_call 2 31 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "no_defparam.v";

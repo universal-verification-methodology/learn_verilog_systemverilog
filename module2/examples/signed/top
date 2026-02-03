@@ -1,0 +1,68 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x55d4f356ca90 .scope module, "top" "top" 2 16;
+ .timescale 0 0;
+v0x55d4f35929d0_0 .var/s "a", 7 0;
+v0x55d4f3592ab0_0 .var/s "b", 7 0;
+v0x55d4f3592b80_0 .net/s "sum_s", 8 0, L_0x55d4f3592f10;  1 drivers
+v0x55d4f3592c80_0 .net "sum_u", 8 0, L_0x55d4f35932b0;  1 drivers
+S_0x55d4f357ca60 .scope module, "u_add" "adder_signed" 2 21, 2 6 0, S_0x55d4f356ca90;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /OUTPUT 9 "sum_signed";
+    .port_info 3 /OUTPUT 9 "sum_unsigned";
+v0x55d4f357cc40_0 .net/s *"_ivl_0", 8 0, L_0x55d4f3592d50;  1 drivers
+v0x55d4f3592140_0 .net *"_ivl_10", 8 0, L_0x55d4f35931c0;  1 drivers
+L_0x7f3877a13060 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x55d4f3592220_0 .net *"_ivl_13", 0 0, L_0x7f3877a13060;  1 drivers
+v0x55d4f35922e0_0 .net/s *"_ivl_2", 8 0, L_0x55d4f3592e20;  1 drivers
+v0x55d4f35923c0_0 .net *"_ivl_6", 8 0, L_0x55d4f35930a0;  1 drivers
+L_0x7f3877a13018 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x55d4f35924f0_0 .net *"_ivl_9", 0 0, L_0x7f3877a13018;  1 drivers
+v0x55d4f35925d0_0 .net/s "a", 7 0, v0x55d4f35929d0_0;  1 drivers
+v0x55d4f35926b0_0 .net/s "b", 7 0, v0x55d4f3592ab0_0;  1 drivers
+v0x55d4f3592790_0 .net/s "sum_signed", 8 0, L_0x55d4f3592f10;  alias, 1 drivers
+v0x55d4f3592870_0 .net "sum_unsigned", 8 0, L_0x55d4f35932b0;  alias, 1 drivers
+L_0x55d4f3592d50 .extend/s 9, v0x55d4f35929d0_0;
+L_0x55d4f3592e20 .extend/s 9, v0x55d4f3592ab0_0;
+L_0x55d4f3592f10 .arith/sum 9, L_0x55d4f3592d50, L_0x55d4f3592e20;
+L_0x55d4f35930a0 .concat [ 8 1 0 0], v0x55d4f35929d0_0, L_0x7f3877a13018;
+L_0x55d4f35931c0 .concat [ 8 1 0 0], v0x55d4f3592ab0_0, L_0x7f3877a13060;
+L_0x55d4f35932b0 .arith/sum 9, L_0x55d4f35930a0, L_0x55d4f35931c0;
+    .scope S_0x55d4f356ca90;
+T_0 ;
+    %vpi_call 2 24 "$display", "Signed (1364-2001): signed reg/wire, $signed/$unsigned" {0 0 0};
+    %pushi/vec4 50, 0, 8;
+    %store/vec4 v0x55d4f35929d0_0, 0, 8;
+    %pushi/vec4 30, 0, 8;
+    %store/vec4 v0x55d4f3592ab0_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call 2 25 "$display", "  a=%d b=%d sum_signed=%d sum_unsigned=%d", v0x55d4f35929d0_0, v0x55d4f3592ab0_0, v0x55d4f3592b80_0, v0x55d4f3592c80_0 {0 0 0};
+    %pushi/vec4 246, 0, 8;
+    %store/vec4 v0x55d4f35929d0_0, 0, 8;
+    %pushi/vec4 20, 0, 8;
+    %store/vec4 v0x55d4f3592ab0_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call 2 26 "$display", "  a=%d b=%d sum_signed=%d sum_unsigned=%d", v0x55d4f35929d0_0, v0x55d4f3592ab0_0, v0x55d4f3592b80_0, v0x55d4f3592c80_0 {0 0 0};
+    %pushi/vec4 156, 0, 8;
+    %store/vec4 v0x55d4f35929d0_0, 0, 8;
+    %pushi/vec4 226, 0, 8;
+    %store/vec4 v0x55d4f3592ab0_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call 2 27 "$display", "  a=%d b=%d sum_signed=%d sum_unsigned=%d", v0x55d4f35929d0_0, v0x55d4f3592ab0_0, v0x55d4f3592b80_0, v0x55d4f3592c80_0 {0 0 0};
+    %vpi_call 2 28 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "adder_signed.v";

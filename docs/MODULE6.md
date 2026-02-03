@@ -195,7 +195,7 @@ A concise view of the standard evolution covered in Modules 1–6:
    - **Key Concepts**: 1364 subset vs 1800 design subset within 1800-2017
 
 2. **Design Constructs Recap** (`examples/design_recap/`)
-   - One module using logic, always_comb, always_ff, interface, package, unique case (all 1800-2017 compliant)
+   - One module using logic, always_comb, always_ff, package, unique case (all 1800-2017 compliant)
    - **Key Concepts**: Current standard design subset in one place
 
 3. **Immediate Assertion in RTL** (`examples/assertions/`)
@@ -205,6 +205,26 @@ A concise view of the standard evolution covered in Modules 1–6:
 4. **Version Comparison** (`examples/version_summary/`)
    - Table or script that lists which construct belongs to which standard (1995–2017)
    - **Key Concepts**: Full version timeline; choosing a standard
+
+5. **Migration** (`examples/migration/`)
+   - Same 4:1 mux in 1364-2005 style vs 1800-2017 style (wire/reg→logic, always @*→always_comb, unique case)
+   - **Key Concepts**: Step-by-step migration from 1364 to 1800 design subset
+
+6. **Logic Single Driver** (`examples/logic_single_driver/`)
+   - Comb and seq blocks; each logic has exactly one driver (2017 clarified)
+   - **Key Concepts**: Single driver for logic; assign, always_comb, always_ff
+
+7. **Priority Case** (`examples/priority_case/`)
+   - Priority encoder using priority case (first match wins)
+   - **Key Concepts**: priority case; 2017 semantics for encoders/arbiters
+
+8. **Package and Import** (`examples/package_import/`)
+   - Shared types and parameters in package; import in module and top
+   - **Key Concepts**: Package and import; 2017 scope and search order clarifications
+
+9. **Unique Case** (`examples/unique_case/`)
+   - Decoder with unique case and default (no latch)
+   - **Key Concepts**: unique case; at most one match; 2017 clarified
 
 ## Design Under Test (DUT)
 

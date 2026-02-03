@@ -1,0 +1,33 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5568bd094130 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x5568bd06bcf0 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x5568bd06bcf0;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "=== Module 8: Quick Reference (one-page cheat sheet) ===" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  Version timeline: 1364-1995 -> 1364-2001 -> 1364-2005 -> 1800-2005 -> 1800-2009 -> 1800-2012 -> 1800-2017" {0 0 0};
+    %vpi_call/w 3 10 "$display", "  Verilog-only (1364): wire/reg, always @* or @(inputs), always @(posedge clk); no logic, no interfaces, no packages" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  SystemVerilog design (1800): logic, always_comb, always_ff, interface+modport, package+import, unique/priority case" {0 0 0};
+    %vpi_call/w 3 12 "$display", "  Migration 1364->1800: wire/reg->logic, @*->always_comb, posedge clk->always_ff, remove defparam, test" {0 0 0};
+    %vpi_call/w 3 13 "$display", "  Version selection: match tools/IP; state one revision (e.g. 1800-2017) and subset; document in style guide" {0 0 0};
+    %vpi_call/w 3 14 "$display", "  Full tables and course map: module8/docs/ and docs/MODULE8.md" {0 0 0};
+    %vpi_call/w 3 15 "$display", "=== End quick reference ===" {0 0 0};
+    %vpi_call/w 3 16 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "quick_ref.sv";

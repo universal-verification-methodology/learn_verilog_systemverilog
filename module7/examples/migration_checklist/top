@@ -1,0 +1,31 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x564fff907ec0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x564fff908fd0 .scope module, "top" "top" 3 6;
+ .timescale 0 0;
+    .scope S_0x564fff908fd0;
+T_0 ;
+    %vpi_call/w 3 8 "$display", "Module 7: Migration checklist (1364 -> 1800 design subset)" {0 0 0};
+    %vpi_call/w 3 9 "$display", "  Pre: target standard, baseline sim/synth, list files/hierarchy" {0 0 0};
+    %vpi_call/w 3 10 "$display", "  Per-module: ports wire/reg->logic, @*->always_comb, posedge clk->always_ff" {0 0 0};
+    %vpi_call/w 3 11 "$display", "  Per-module: case->unique/priority case, optional interface/package, no defparam" {0 0 0};
+    %vpi_call/w 3 12 "$display", "  Post: full regression, update style guide, document 1364-only blocks" {0 0 0};
+    %vpi_call/w 3 13 "$display", "  See MODULE7.md for full migration checklist." {0 0 0};
+    %vpi_call/w 3 14 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "migration_checklist.sv";

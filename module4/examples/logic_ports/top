@@ -1,0 +1,85 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55889deefa90 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55889deefc20 .scope module, "top" "top" 3 24;
+ .timescale 0 0;
+v0x55889df047f0_0 .var "a", 0 0;
+v0x55889df048b0_0 .var "av", 7 0;
+v0x55889df04980_0 .var "b", 0 0;
+v0x55889df04a80_0 .var "bv", 7 0;
+v0x55889df04b50_0 .var "sel", 0 0;
+v0x55889df04c40_0 .net "sum", 7 0, L_0x55889df04de0;  1 drivers
+v0x55889df04d10_0 .net "y", 0 0, v0x55889df04680_0;  1 drivers
+S_0x55889deee500 .scope module, "u_add" "adder" 3 29, 3 16 0, S_0x55889deefc20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /OUTPUT 8 "sum";
+v0x55889deb6ba0_0 .net "a", 7 0, v0x55889df048b0_0;  1 drivers
+v0x55889df03ff0_0 .net "b", 7 0, v0x55889df04a80_0;  1 drivers
+v0x55889df040d0_0 .net "sum", 7 0, L_0x55889df04de0;  alias, 1 drivers
+L_0x55889df04de0 .arith/sum 8, v0x55889df048b0_0, v0x55889df04a80_0;
+S_0x55889df04210 .scope module, "u_mux" "mux2" 3 28, 3 6 0, S_0x55889deefc20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 1 "y";
+v0x55889df04410_0 .net "a", 0 0, v0x55889df047f0_0;  1 drivers
+v0x55889df044f0_0 .net "b", 0 0, v0x55889df04980_0;  1 drivers
+v0x55889df045b0_0 .net "sel", 0 0, v0x55889df04b50_0;  1 drivers
+v0x55889df04680_0 .var "y", 0 0;
+E_0x55889deef6c0 .event edge, v0x55889df045b0_0, v0x55889df044f0_0, v0x55889df04410_0;
+    .scope S_0x55889df04210;
+T_0 ;
+Ewait_0 .event/or E_0x55889deef6c0, E_0x0;
+    %wait Ewait_0;
+    %load/vec4 v0x55889df045b0_0;
+    %flag_set/vec4 8;
+    %jmp/0 T_0.0, 8;
+    %load/vec4 v0x55889df044f0_0;
+    %jmp/1 T_0.1, 8;
+T_0.0 ; End of true expr.
+    %load/vec4 v0x55889df04410_0;
+    %jmp/0 T_0.1, 8;
+ ; End of false expr.
+    %blend;
+T_0.1;
+    %store/vec4 v0x55889df04680_0, 0, 1;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x55889deefc20;
+T_1 ;
+    %vpi_call/w 3 32 "$display", "logic ports (1800-2005): all ports logic; no wire/reg" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55889df047f0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55889df04980_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55889df04b50_0, 0, 1;
+    %pushi/vec4 10, 0, 8;
+    %store/vec4 v0x55889df048b0_0, 0, 8;
+    %pushi/vec4 20, 0, 8;
+    %store/vec4 v0x55889df04a80_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call/w 3 34 "$display", "  mux: sel=%b a=%b b=%b y=%b", v0x55889df04b50_0, v0x55889df047f0_0, v0x55889df04980_0, v0x55889df04d10_0 {0 0 0};
+    %delay 10, 0;
+    %vpi_call/w 3 35 "$display", "  adder: a=%d b=%d sum=%d", v0x55889df048b0_0, v0x55889df04a80_0, v0x55889df04c40_0 {0 0 0};
+    %vpi_call/w 3 36 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "logic_ports.sv";

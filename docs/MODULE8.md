@@ -173,11 +173,22 @@ Use this table to see **when a construct was introduced** (or clarified). “Int
 
 ### Module 8 Examples (Reference Only)
 
-- **version_table.md** (or .csv): The construct-by-standard table (Section 2) in a separate file for search or script use.
-- **migration_cheat_sheet.md**: The migration quick reference (Section 4) and one-page cheat sheet (Section 8) in a single file.
-- **course_map.md**: The course map (Section 6) with links to each module README or doc.
+**Reference files** (module8/docs/):
 
-No new DUT or testbench is required; use examples from Modules 1–7.
+- **version_table.md**: The construct-by-standard table (Section 2) for search or script use.
+- **migration_cheat_sheet.md**: The migration quick reference (Section 4) and one-page cheat sheet (Section 8).
+- **course_map.md**: The course map (Section 6) with links to each module doc.
+
+**Runnable reference examples** (module8/examples/; each prints a slice of the quick reference):
+
+1. **quick_ref** — One-page cheat sheet (version timeline, subsets, migration, version selection).
+2. **version_timeline** — Version timeline (standard, year, role, module).
+3. **design_subset** — Verilog-only vs SystemVerilog design subset (ports, types, comb/seq, when to use).
+4. **tool_support** — Tool support summary (simulators, synthesis, lint, formal; Icarus, Verilator, commercial).
+5. **construct_lookup** — "Which standard has X?" for key constructs (logic, always_comb, interface, etc.).
+6. **course_map** — Course map (Modules 1–8 with title and content summary).
+
+No new DUT or testbench is required; use examples from Modules 1–7 for design/tests.
 
 ## Design Under Test (DUT)
 

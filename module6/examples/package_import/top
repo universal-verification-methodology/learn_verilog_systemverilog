@@ -1,0 +1,49 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5561593551a0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x556159355330 .scope package, "pkg_2017" "pkg_2017" 3 6;
+ .timescale 0 0;
+P_0x556159352460 .param/l "W" 0 3 7, +C4<00000000000000000000000000001000>;
+P_0x5561593524a0 .param/l "ZERO" 0 3 9, C4<00000000>;
+S_0x556159367020 .scope module, "top" "top" 3 21;
+ .timescale 0 0;
+v0x5561593799e0_0 .var "a", 7 0;
+v0x556159379aa0_0 .var "b", 7 0;
+v0x556159379b70_0 .net "sum", 7 0, L_0x556159379c70;  1 drivers
+S_0x5561593671b0 .scope module, "u" "adder_2017" 3 26, 3 12 0, S_0x556159367020;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /OUTPUT 8 "sum";
+v0x5561593673e0_0 .net "a", 7 0, v0x5561593799e0_0;  1 drivers
+v0x5561593797c0_0 .net "b", 7 0, v0x556159379aa0_0;  1 drivers
+v0x5561593798a0_0 .net "sum", 7 0, L_0x556159379c70;  alias, 1 drivers
+L_0x556159379c70 .arith/sum 8, v0x5561593799e0_0, v0x556159379aa0_0;
+    .scope S_0x556159367020;
+T_0 ;
+    %vpi_call/w 3 29 "$display", "1800-2017: package and import (2017 clarified)" {0 0 0};
+    %pushi/vec4 40, 0, 8;
+    %store/vec4 v0x5561593799e0_0, 0, 8;
+    %pushi/vec4 60, 0, 8;
+    %store/vec4 v0x556159379aa0_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call/w 3 31 "$display", "  a=%d b=%d sum=%d", v0x5561593799e0_0, v0x556159379aa0_0, v0x556159379b70_0 {0 0 0};
+    %vpi_call/w 3 32 "$display", "  Shared types/params in package; import where needed." {0 0 0};
+    %vpi_call/w 3 33 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "package_import.sv";

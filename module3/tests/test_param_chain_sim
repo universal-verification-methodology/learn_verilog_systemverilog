@@ -1,0 +1,80 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x55a8040a70d0 .scope module, "test_param_chain" "test_param_chain" 2 8;
+ .timescale 0 0;
+v0x55a8040d0240_0 .var "a4", 3 0;
+v0x55a8040d0300_0 .var "a8", 7 0;
+v0x55a8040d03c0_0 .net "y4", 3 0, L_0x55a8040d0520;  1 drivers
+v0x55a8040d0460_0 .net "y8", 7 0, L_0x55a8040d05d0;  1 drivers
+S_0x55a8040b6f40 .scope module, "u_chain4" "param_chain" 2 14, 3 20 0, S_0x55a8040a70d0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /OUTPUT 4 "y";
+P_0x55a8040b70d0 .param/l "N" 0 3 20, +C4<00000000000000000000000000000100>;
+v0x55a8040cf0d0_0 .net "a", 3 0, v0x55a8040d0240_0;  1 drivers
+v0x55a8040cf1e0_0 .net "y", 3 0, L_0x55a8040d0520;  alias, 1 drivers
+S_0x55a8040b7170 .scope module, "u_mid" "mid" 3 24, 3 13 0, S_0x55a8040b6f40;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /OUTPUT 4 "y";
+P_0x55a8040b7350 .param/l "N" 0 3 13, +C4<00000000000000000000000000000100>;
+v0x55a8040ceed0_0 .net "a", 3 0, v0x55a8040d0240_0;  alias, 1 drivers
+v0x55a8040cefc0_0 .net "y", 3 0, L_0x55a8040d0520;  alias, 1 drivers
+S_0x55a8040b8640 .scope module, "u_leaf" "leaf" 3 17, 3 6 0, S_0x55a8040b7170;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /OUTPUT 4 "y";
+P_0x55a8040b8820 .param/l "N" 0 3 6, +C4<00000000000000000000000000000100>;
+L_0x55a8040d0520 .functor BUFZ 4, v0x55a8040d0240_0, C4<0000>, C4<0000>, C4<0000>;
+v0x55a8040b8000_0 .net "a", 3 0, v0x55a8040d0240_0;  alias, 1 drivers
+v0x55a8040ced90_0 .net "y", 3 0, L_0x55a8040d0520;  alias, 1 drivers
+S_0x55a8040cf350 .scope module, "u_chain8" "param_chain" 2 15, 3 20 0, S_0x55a8040a70d0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /OUTPUT 8 "y";
+P_0x55a8040cf530 .param/l "N" 0 3 20, +C4<00000000000000000000000000001000>;
+v0x55a8040cffc0_0 .net "a", 7 0, v0x55a8040d0300_0;  1 drivers
+v0x55a8040d00d0_0 .net "y", 7 0, L_0x55a8040d05d0;  alias, 1 drivers
+S_0x55a8040cf5d0 .scope module, "u_mid" "mid" 3 24, 3 13 0, S_0x55a8040cf350;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /OUTPUT 8 "y";
+P_0x55a8040cf7d0 .param/l "N" 0 3 13, +C4<00000000000000000000000000001000>;
+v0x55a8040cfdc0_0 .net "a", 7 0, v0x55a8040d0300_0;  alias, 1 drivers
+v0x55a8040cfeb0_0 .net "y", 7 0, L_0x55a8040d05d0;  alias, 1 drivers
+S_0x55a8040cf890 .scope module, "u_leaf" "leaf" 3 17, 3 6 0, S_0x55a8040cf5d0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /OUTPUT 8 "y";
+P_0x55a8040cfa90 .param/l "N" 0 3 6, +C4<00000000000000000000000000001000>;
+L_0x55a8040d05d0 .functor BUFZ 8, v0x55a8040d0300_0, C4<00000000>, C4<00000000>, C4<00000000>;
+v0x55a8040cfb80_0 .net "a", 7 0, v0x55a8040d0300_0;  alias, 1 drivers
+v0x55a8040cfc80_0 .net "y", 7 0, L_0x55a8040d05d0;  alias, 1 drivers
+    .scope S_0x55a8040a70d0;
+T_0 ;
+    %vpi_call 2 18 "$display", "Module 3 test: param_chain (1364-2005)" {0 0 0};
+    %pushi/vec4 10, 0, 4;
+    %store/vec4 v0x55a8040d0240_0, 0, 4;
+    %pushi/vec4 171, 0, 8;
+    %store/vec4 v0x55a8040d0300_0, 0, 8;
+    %delay 10, 0;
+    %vpi_call 2 20 "$display", "  N=4: a=%h y=%h", v0x55a8040d0240_0, v0x55a8040d03c0_0 {0 0 0};
+    %delay 10, 0;
+    %vpi_call 2 21 "$display", "  N=8: a=%h y=%h", v0x55a8040d0300_0, v0x55a8040d0460_0 {0 0 0};
+    %vpi_call 2 22 "$display", "PASS: param_chain test complete" {0 0 0};
+    %vpi_call 2 23 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "test_param_chain.v";
+    "./../dut/param_chain.v";

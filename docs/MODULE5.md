@@ -2,6 +2,24 @@
 
 **Goal**: Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context.
 
+**Prerequisites**: Module 4 (IEEE 1800-2005) — you should be comfortable with logic, always_comb/always_ff, interfaces, packages, and unique/priority case.
+
+**Estimated time**: 4–6 hours (examples + exercises + reading). Some features (e.g. checkers, virtual interface) are tool-dependent.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Topics Covered](#topics-covered)
+- [Examples](#examples)
+- [Design Under Test (DUT)](#design-under-test-dut)
+- [Tests](#tests)
+- [Learning Outcomes](#learning-outcomes)
+- [Key Concepts](#key-concepts)
+- [Exercises](#exercises)
+- [Common Pitfalls](#common-pitfalls-and-how-to-avoid-them)
+- [Next Steps](#next-steps)
+- [Additional Resources](#additional-resources)
+
 ## Overview
 
 This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two major revisions of SystemVerilog after 1800-2005. You'll learn what 2009 and 2012 add or clarify: interface refinements (e.g. modport expressions, virtual interfaces in verification), type and operator enhancements, array and string improvements, and a brief context for assertions and checkers. The focus remains on design-relevant constructs and on understanding the version timeline (2005 → 2009 → 2012) so you can read and write RTL that targets a specific standard or tool set.
@@ -88,7 +106,7 @@ endclass
 - **Design**: Rarely used in RTL; RTL typically connects to a concrete interface instance.
 - **Verification**: Common in UVM and other OOP testbenches; allows one driver class to work with any instance of the interface.
 
-**Example**: `module5/examples/interfaces/modport_virtual.sv` (or doc-only if tool support varies)
+**Example**: Interface refinements (modport expressions, virtual interface) are doc-only in this repo; see Topics and your tool’s 1800-2009 support.
 
 ### 3. Type and Operator Enhancements (2009/2012)
 
@@ -162,7 +180,7 @@ endchecker
 
 - **Synthesis**: Checkers are typically not synthesized; they are for simulation and formal tools.
 
-**Example**: `module5/examples/checkers/onehot_checker.sv` (optional)
+**Example**: `module5/examples/checkers/immediate_assert.sv` (one-hot immediate assertion)
 
 ### 6. Compilation Units and Scope (2012)
 
@@ -204,31 +222,65 @@ endchecker
 
 ## Examples
 
+### Quick file reference
+
+| Topic                | Path                                  | Key files |
+|----------------------|---------------------------------------|-----------|
+| inside and ==?       | `module5/examples/operators/`          | `inside_wildcard.sv` |
+| Wildcard only        | `module5/examples/wildcard_only/`      | `wildcard_only.sv` |
+| Range check          | `module5/examples/range_check/`        | `range_check.sv` |
+| Arrays               | `module5/examples/arrays/`             | `array_methods.sv` |
+| Array param          | `module5/examples/array_param/`        | `array_param.sv` |
+| Checkers / immediate assert | `module5/examples/checkers/`   | `immediate_assert.sv` |
+| Assert valid encoding| `module5/examples/assert_valid_encoding/` | `assert_valid_encoding.sv` |
+| Assert invariant     | `module5/examples/assert_invariant/`    | `assert_invariant.sv` |
+| Summary 2005 vs 2009/2012 | `module5/examples/summary/`       | `summary_2012.sv` |
+
+*Interface refinements (modport expressions, virtual interface) are documented in Topics; no example directory in repo (tool-dependent).*
+
 ### Module 5 Examples (1800-2009/2012)
 
-1. **Interface Refinements** (`examples/interfaces/`)
-   - Modport expressions or virtual interface (if supported)
-   - **Key Concepts**: 2009 interface extensions; virtual interface for testbench use
-
-2. **Operators** (`examples/operators/`)
-   - `inside` with ranges and sets; `==?` wildcard
+1. **Operators** (`examples/operators/`)
+   - `inside` with ranges and sets; `==?` wildcard (fallback for tools that lack `inside`)
    - **Key Concepts**: Set membership; don’t-care in comparison
 
-3. **Arrays** (`examples/arrays/`)
-   - Array methods; assignment (2012 clarifications)
-   - **Key Concepts**: .size(), .delete(); whole-array copy; synthesis vs testbench use
+2. **Wildcard Only** (`examples/wildcard_only/`)
+   - Dedicated `==?` wildcard equality (X/Z as don't care)
+   - **Key Concepts**: Wildcard match in RTL/testbench
 
-4. **Assertions and Checkers** (`examples/checkers/`)
-   - Simple immediate assertion in RTL; optional checker (2012)
-   - **Key Concepts**: assert in design; checker as reusable property block
+3. **Range Check** (`examples/range_check/`)
+   - Range membership (e.g. value inside `[0:127]`); fallback to explicit comparison if needed
+   - **Key Concepts**: `inside` with ranges; 2009/2012 operator use
 
-5. **Version Comparison** (`examples/summary/`)
-   - Same small design with 2005-only vs 2009/2012 features (e.g. inside, array method)
+4. **Arrays** (`examples/arrays/`)
+   - Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics
+   - **Key Concepts**: Array indexing; synthesis-safe subset
+
+5. **Array Param** (`examples/array_param/`)
+   - Parameterized memory using `$clog2(DEPTH)` for address width
+   - **Key Concepts**: Parameterized arrays; 2012 clarifications
+
+6. **Checkers** (`examples/checkers/`)
+   - Immediate assertion (e.g. one-hot) using `$countones` or similar
+   - **Key Concepts**: assert in design; immediate assertion in RTL
+
+7. **Assert Valid Encoding** (`examples/assert_valid_encoding/`)
+   - Immediate assertion for valid opcode/encoding
+   - **Key Concepts**: Invariant checking; assert for valid encodings
+
+8. **Assert Invariant** (`examples/assert_invariant/`)
+   - Immediate assertion for one-hot grant (e.g. arbiter)
+   - **Key Concepts**: One-hot invariant; assert in RTL
+
+9. **Summary** (`examples/summary/`)
+   - Comparison of 2005 vs 2009/2012 features in a small design
    - **Key Concepts**: Backward compatibility; when to adopt new features
+
+*Interface refinements (modport expressions, virtual interface) are documented in the main module text; examples are tool-dependent and may be doc-only.*
 
 ## Design Under Test (DUT)
 
-### 1800-2009/2012 Compatible RTL (`dut/`)
+### 1800-2009/2012 Compatible RTL (`module5/dut/`)
 
 - **decoder_inside.sv**: Decoder or FSM using `inside` for opcode/state check
   - **Example**: 2009/2012 operator; readable set membership
@@ -243,10 +295,10 @@ endchecker
 
 ### Module 5 Tests
 
-- **test_decoder_inside.v**: Decoder/FSM test
+- **test_decoder_inside.sv**: Decoder/FSM test
   - **Key Features**: Covers cases that use `inside`; no 2005-only assumptions
 
-- **test_fsm_assert.v**: FSM test with assertion on/off
+- **test_fsm_assert.sv**: FSM test with assertion on/off
   - **Key Features**: Exercises design; optional assertion failure injection
 
 - **test_mem_array.sv**: Memory array test
@@ -348,7 +400,7 @@ After completing this module, proceed to:
 
 ### Module Documentation
 
-- **Module 5 README**: [module5/README.md](../module5/README.md) (if present)
+- **Module 5 README**: [module5/README.md](../module5/README.md) — directory structure, quick start, and file map
 - **Module 4**: [docs/MODULE4.md](MODULE4.md) — IEEE 1800-2005 (prerequisite)
 - **Module 6**: [docs/MODULE6.md](MODULE6.md) — IEEE 1800-2017 (next)
 
