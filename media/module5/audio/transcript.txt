@@ -1,0 +1,63 @@
+[Slide 1] IEEE 1800-2009 and 1800-2012 Module 5
+
+[Slide 2] Learning objectives Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context.
+
+[Slide 3] Prerequisites See module README
+
+[Slide 4] Learning path Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context.
+
+[Slide 5] Overview This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two major revisions of SystemVerilog after 1800-2005. You'll learn what 2009 and 2012 add or clarify: interface refinements (e.g. modport expression
+
+[Slide 6] Syllabus topics
+
+[Slide 7] From MODULE5 Topics Covered.
+
+[Slide 8] From MODULE5 Topics Covered.
+
+[Slide 9] From MODULE5 Topics Covered.
+
+[Slide 10] From MODULE5 Topics Covered.
+
+[Slide 11] From MODULE5 Topics Covered.
+
+[Slide 12] From MODULE5 Topics Covered.
+
+[Slide 13] From MODULE5 Topics Covered.
+
+[Slide 14] From MODULE5 Topics Covered.
+
+[Slide 15] From MODULE5 Topics Covered.
+
+[Slide 16] From MODULE5 Topics Covered.
+
+[Slide 17] From MODULE5 Topics Covered.
+
+[Slide 18] Hands-on examples
+
+[Slide 19] Requires iverilog on PATH (apt install iverilog).
+
+[Slide 20] Hands-on: module5/examples/operators/
+
+[Slide 21] Hands-on: module5/examples/wildcard_only/
+
+[Slide 22] Hands-on: module5/examples/range_check/
+
+[Slide 23] Hands-on: module5/examples/arrays/
+
+[Slide 24] Hands-on: module5/examples/array_param/
+
+[Slide 25] Hands-on: module5/examples/checkers/
+
+[Slide 26] Hands-on: module5/examples/assert_valid_encoding/
+
+[Slide 27] Hands-on: module5/examples/assert_invariant/
+
+[Slide 28] Hands-on: module5/examples/summary/
+
+[Slide 29] Practice & assessment
+
+[Slide 30] Exercises inside and ==? Interface (2009) Immediate Assertion Checker (2012) Version Table
+
+[Slide 31] Exercises Assuming 2009/2012 Features in an 2005-Only Flow Virtual Interface in RTL Checker Synthesis Array Methods in RTL $unit vs Package
+
+[Slide 32] Summary & next steps Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context. Complete module5/CHECKLIST.md Run ./scripts/module5.sh --check Next: Next module in course

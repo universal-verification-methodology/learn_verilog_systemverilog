@@ -1,0 +1,63 @@
+[Slide 1] IEEE 1364-1995 (Verilog-95) Module 1
+
+[Slide 2] Learning objectives Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation.
+
+[Slide 3] Prerequisites See module README
+
+[Slide 4] Learning path Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation.
+
+[Slide 5] Overview This module establishes the foundation for the Verilog/SystemVerilog version-centric course. You'll learn the original Verilog language as defined by IEEE Std 1364-1995 (Verilog-95): modules, nets and variables, continuo
+
+[Slide 6] Syllabus topics
+
+[Slide 7] From MODULE1 Topics Covered.
+
+[Slide 8] From MODULE1 Topics Covered.
+
+[Slide 9] From MODULE1 Topics Covered.
+
+[Slide 10] From MODULE1 Topics Covered.
+
+[Slide 11] From MODULE1 Topics Covered.
+
+[Slide 12] From MODULE1 Topics Covered.
+
+[Slide 13] From MODULE1 Topics Covered.
+
+[Slide 14] From MODULE1 Topics Covered.
+
+[Slide 15] From MODULE1 Topics Covered.
+
+[Slide 16] From MODULE1 Topics Covered.
+
+[Slide 17] From MODULE1 Topics Covered.
+
+[Slide 18] Hands-on examples
+
+[Slide 19] Requires iverilog on PATH (apt install iverilog).
+
+[Slide 20] Hands-on: module1/examples/modules_ports/
+
+[Slide 21] Hands-on: module1/examples/nets_variables/
+
+[Slide 22] Hands-on: module1/examples/continuous_assign/
+
+[Slide 23] Hands-on: module1/examples/continuous_assign_gates/
+
+[Slide 24] Hands-on: module1/examples/adder/
+
+[Slide 25] Hands-on: module1/examples/procedural/
+
+[Slide 26] Hands-on: module1/examples/sequential_dff/
+
+[Slide 27] Hands-on: module1/examples/delays_timing/
+
+[Slide 28] Hands-on: module1/examples/testbenches/
+
+[Slide 29] Practice & assessment
+
+[Slide 30] Exercises Module and Ports (1995) wire vs reg Simple Testbench Limitations Incomplete Sensitivity List
+
+[Slide 31] Exercises Port Type Mismatch Simulation Never Ends Using 2001/SystemVerilog Constructs in 1995 Confusing reg with Registers
+
+[Slide 32] Summary & next steps Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Complete module1/CHECKLIST.md Run ./scripts/module1.sh --check Next: Next module in course

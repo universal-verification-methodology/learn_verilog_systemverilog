@@ -1,5 +1,5 @@
 #! /usr/bin/vvp
-:ivl_version "11.0 (stable)";
+:ivl_version "12.0 (stable)";
 :ivl_delay_selection "TYPICAL";
 :vpi_time_precision + 0;
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
@@ -8,53 +8,53 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x5556660e5210 .scope package, "$unit" "$unit" 2 1;
+S_0x56467f03e940 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x5556660e53a0 .scope module, "top" "top" 3 15;
+S_0x56467f03ead0 .scope module, "top" "top" 3 15;
  .timescale 0 0;
-v0x5556660f72e0_0 .net "in_range", 0 0, v0x5556660ad7b0_0;  1 drivers
-v0x5556660f7380_0 .var "val", 7 0;
-S_0x5556660e5530 .scope module, "u_dut" "range_demo" 3 19, 3 6 0, S_0x5556660e53a0;
+v0x56467f0509b0_0 .net "in_range", 0 0, v0x56467f005690_0;  1 drivers
+v0x56467f050a50_0 .var "val", 7 0;
+S_0x56467f005490 .scope module, "u_dut" "range_demo" 3 19, 3 6 0, S_0x56467f03ead0;
  .timescale 0 0;
     .port_info 0 /INPUT 8 "val";
     .port_info 1 /OUTPUT 1 "in_range";
-v0x5556660ad7b0_0 .var "in_range", 0 0;
-v0x5556660adba0_0 .net "val", 7 0, v0x5556660f7380_0;  1 drivers
-E_0x5556660cff30 .event edge, v0x5556660adba0_0;
-    .scope S_0x5556660e5530;
+v0x56467f005690_0 .var "in_range", 0 0;
+v0x56467f050870_0 .net "val", 7 0, v0x56467f050a50_0;  1 drivers
+E_0x56467f005a50 .event anyedge, v0x56467f050870_0;
+    .scope S_0x56467f005490;
 T_0 ;
-Ewait_0 .event/or E_0x5556660cff30, E_0x0;
+Ewait_0 .event/or E_0x56467f005a50, E_0x0;
     %wait Ewait_0;
-    %pushi/vec4 0, 0, 8;
-    %load/vec4 v0x5556660adba0_0;
-    %cmp/u;
-    %flag_get/vec4 4;
+    %load/vec4 v0x56467f050870_0;
+    %cmpi/u 0, 0, 8;
+    %flag_inv 5; GE is !LT
     %flag_get/vec4 5;
-    %or;
-    %load/vec4 v0x5556660adba0_0;
+    %jmp/0 T_0.0, 5;
+    %load/vec4 v0x56467f050870_0;
     %cmpi/u 127, 0, 8;
     %flag_get/vec4 4;
     %flag_get/vec4 5;
     %or;
     %and;
-    %store/vec4 v0x5556660ad7b0_0, 0, 1;
+T_0.0;
+    %store/vec4 v0x56467f005690_0, 0, 1;
     %jmp T_0;
     .thread T_0, $push;
-    .scope S_0x5556660e53a0;
+    .scope S_0x56467f03ead0;
 T_1 ;
     %vpi_call/w 3 22 "$display", "Range check (1800-2009/2012): val inside [0:127] style" {0 0 0};
     %pushi/vec4 50, 0, 8;
-    %store/vec4 v0x5556660f7380_0, 0, 8;
+    %store/vec4 v0x56467f050a50_0, 0, 8;
     %delay 10, 0;
-    %vpi_call/w 3 23 "$display", "  val=%d in_range=%b", v0x5556660f7380_0, v0x5556660f72e0_0 {0 0 0};
+    %vpi_call/w 3 23 "$display", "  val=%d in_range=%b", v0x56467f050a50_0, v0x56467f0509b0_0 {0 0 0};
     %pushi/vec4 127, 0, 8;
-    %store/vec4 v0x5556660f7380_0, 0, 8;
+    %store/vec4 v0x56467f050a50_0, 0, 8;
     %delay 10, 0;
-    %vpi_call/w 3 24 "$display", "  val=%d in_range=%b", v0x5556660f7380_0, v0x5556660f72e0_0 {0 0 0};
+    %vpi_call/w 3 24 "$display", "  val=%d in_range=%b", v0x56467f050a50_0, v0x56467f0509b0_0 {0 0 0};
     %pushi/vec4 200, 0, 8;
-    %store/vec4 v0x5556660f7380_0, 0, 8;
+    %store/vec4 v0x56467f050a50_0, 0, 8;
     %delay 10, 0;
-    %vpi_call/w 3 25 "$display", "  val=%d in_range=%b", v0x5556660f7380_0, v0x5556660f72e0_0 {0 0 0};
+    %vpi_call/w 3 25 "$display", "  val=%d in_range=%b", v0x56467f050a50_0, v0x56467f0509b0_0 {0 0 0};
     %vpi_call/w 3 26 "$finish" {0 0 0};
     %end;
     .thread T_1;

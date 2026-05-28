@@ -1,0 +1,207 @@
+title: Module 2 — IEEE 1364-2001 (Verilog-2001)
+course: learn_verilog_systemverilog
+module: 2
+subtitle: 'Master the major Verilog update (IEEE 1364-2001) and its additions over
+  1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
+  arrays.'
+footer: learn_verilog_systemverilog / Module 2
+slides:
+- type: title
+  title: Module 2
+  subtitle: IEEE 1364-2001 (Verilog-2001)
+- type: bullets
+  title: Learning objectives
+  bullets:
+  - 'Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995:
+    ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
+    arrays.'
+- type: bullets
+  title: Prerequisites
+  bullets:
+  - See module README
+- type: image
+  title: Learning path
+  image: assets/diagrams/learning_path.png
+  caption: 'Master the major Verilog update (IEEE 1364-2001) and its additions over
+    1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
+    arrays.'
+- type: bullets
+  title: Overview
+  bullets:
+  - 'This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision
+    of the Verilog standard. You''ll learn what 2001 adds over 1995: ANSI-style port
+    and task/function declarations, `always @*` for combinational'
+- type: section
+  title: Syllabus topics
+- type: bullets
+  title: 1. IEEE 1364-2001 Context (1/2)
+  bullets:
+  - 'ANSI-style port declarations: Direction and type (and size) in the port list'
+  - '**`always @*`**: Implicit sensitivity for combinational logic (no manual list)'
+  - 'generate: Conditional and loop-based instantiation and logic'
+  - 'signed: Signed arithmetic and signed nets/variables'
+  - 'Multi-dimensional arrays: e.g. `reg [7:0] mem [0:255]`'
+  - 'localparam: Named constants that cannot be overridden'
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: 1. IEEE 1364-2001 Context (2/2)
+  bullets:
+  - 'ANSI-style task/function: Input/output in the header'
+  - 'Other: File I/O improvements, `$signed`/`$unsigned`, attribute syntax, etc.'
+  - 'No SystemVerilog: no `logic`, `always_comb`/`always_ff`, interfaces, packages,
+    classes'
+  - No type parameters or interfaces (those are 1800)
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: 2. ANSI-Style Port Declarations (2001)
+  bullets:
+  - 'input wire: Default for input; can omit `wire` (e.g. `input [7:0] a`).'
+  - 'output reg: Required when the output is driven in `always`/`initial`.'
+  - 'output wire: When the output is driven only by `assign` or submodule.'
+  - Same behavior; 2001 is more concise and keeps port and type in one place.
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: '3. Implicit Sensitivity: always @* (2001)'
+  bullets:
+  - '**`@*` (or `@(*)`**): Sensitive to every signal read in the block (RHS and conditions).'
+  - Use for combinational logic only; do not use for sequential (use `always @(posedge
+    clk)`).
+  - '**Prefer `@*`**: For combinational blocks; fewer errors, easier to maintain.'
+  - 'Explicit list: When targeting strict 1995 compatibility or when a tool does not
+    support `@*`.'
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: 4. Generate (2001)
+  bullets:
+  - 'genvar: Loop variable for generate loops; not a runtime variable.'
+  - 'generate for: Replicates logic/instances; index must be constant at elaboration.'
+  - 'generate if / else: Choose one of several implementations at elaboration.'
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: 5. Signed Types (2001)
+  bullets:
+  - 'signed: Affects arithmetic and comparison in expressions involving that net/reg.'
+  - 'Unsigned (default): No sign extension; values 0 to 2^N-1.'
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: 6. Multi-Dimensional Arrays (2001)
+  bullets:
+  - 'Packed (left): `[7:0]` — contiguous bits, can be used as a single vector.'
+  - 'Unpacked (right): `[0:255]` — array of elements; select with one index at a time
+    in 2001.'
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: 7. localparam (2001)
+  bullets:
+  - 'parameter: Can be overridden: `#(.WIDTH(16))`.'
+  - 'localparam: Cannot be overridden; often derived from parameters or fixed.'
+  notes: From MODULE2 Topics Covered.
+- type: bullets
+  title: 8. ANSI-Style Tasks and Functions (2001)
+  bullets:
+  - 'automatic: Optional; gives automatic storage (re-entrant). Useful for recursive
+    or concurrent calls.'
+  - 'input/output in header: Cleaner than 1995 style; avoids duplicate declarations.'
+  - 'Note: In 1364-2001 use `output reg` (not `output logic`; `logic` is SystemVerilog).'
+  notes: From MODULE2 Topics Covered.
+- type: section
+  title: Hands-on examples
+- type: demo
+  title: Module 2 toolchain check
+  command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
+    2>&1 | head -1)"'
+  screenshot: assets/screenshots/module2_check.png
+  expect_stdout_contains: iverilog
+  notes: Requires iverilog on PATH (apt install iverilog).
+- type: demo
+  title: 'Demo: ANSI Ports'
+  command: cd module2/examples/ansi_ports && make clean && make run
+  screenshot: assets/screenshots/ex01_ansi_ports.png
+  notes: 'Hands-on: module2/examples/ansi_ports/'
+- type: demo
+  title: 'Demo: always @*'
+  command: cd module2/examples/procedural && make clean && make run
+  screenshot: assets/screenshots/ex02_procedural.png
+  notes: 'Hands-on: module2/examples/procedural/'
+- type: demo
+  title: 'Demo: Generate'
+  command: cd module2/examples/generate && make clean && make run
+  screenshot: assets/screenshots/ex03_generate.png
+  notes: 'Hands-on: module2/examples/generate/'
+- type: demo
+  title: 'Demo: Generate if/else'
+  command: cd module2/examples/generate_if && make clean && make run
+  screenshot: assets/screenshots/ex04_generate_if.png
+  notes: 'Hands-on: module2/examples/generate_if/'
+- type: demo
+  title: 'Demo: Generate Ripple Adder'
+  command: cd module2/examples/generate_ripple_adder && make clean && make run
+  screenshot: assets/screenshots/ex05_generate_ripple_adder.png
+  notes: 'Hands-on: module2/examples/generate_ripple_adder/'
+- type: demo
+  title: 'Demo: Signed'
+  command: cd module2/examples/signed && make clean && make run
+  screenshot: assets/screenshots/ex06_signed.png
+  notes: 'Hands-on: module2/examples/signed/'
+- type: demo
+  title: 'Demo: Signed vs Unsigned Comparison'
+  command: cd module2/examples/signed_compare && make clean && make run
+  screenshot: assets/screenshots/ex07_signed_compare.png
+  notes: 'Hands-on: module2/examples/signed_compare/'
+- type: demo
+  title: 'Demo: Decoder'
+  command: cd module2/examples/decoder && make clean && make run
+  screenshot: assets/screenshots/ex08_decoder.png
+  notes: 'Hands-on: module2/examples/decoder/'
+- type: demo
+  title: 'Demo: Multi-Dimensional Arrays'
+  command: cd module2/examples/arrays && make clean && make run
+  screenshot: assets/screenshots/ex09_arrays.png
+  notes: 'Hands-on: module2/examples/arrays/'
+- type: demo
+  title: 'Demo: Multi-Dim Style'
+  command: cd module2/examples/multi_dim_arrays && make clean && make run
+  screenshot: assets/screenshots/ex10_multi_dim_arrays.png
+  notes: 'Hands-on: module2/examples/multi_dim_arrays/'
+- type: demo
+  title: 'Demo: Parameters and localparam'
+  command: cd module2/examples/parameters && make clean && make run
+  screenshot: assets/screenshots/ex11_parameters.png
+  notes: 'Hands-on: module2/examples/parameters/'
+- type: demo
+  title: 'Demo: ANSI Task/Function'
+  command: cd module2/examples/tasks_functions && make clean && make run
+  screenshot: assets/screenshots/ex12_tasks_functions.png
+  notes: 'Hands-on: module2/examples/tasks_functions/'
+- type: demo
+  title: 'Demo: ANSI Task with Output'
+  command: cd module2/examples/task_ansi && make clean && make run
+  screenshot: assets/screenshots/ex13_task_ansi.png
+  notes: 'Hands-on: module2/examples/task_ansi/'
+- type: section
+  title: Practice & assessment
+- type: bullets
+  title: Exercises
+  bullets:
+  - ANSI Ports
+  - always @
+  - Generate
+  - Signed
+  - Arrays and localparam
+- type: bullets
+  title: Exercises
+  bullets:
+  - Using always @* for Sequential Logic
+  - genvar in Normal Code
+  - Overriding localparam
+  - Signed vs Unsigned Mix
+  - Generate Block Scope
+- type: bullets
+  title: Summary & next steps
+  bullets:
+  - 'Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995:
+    ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
+    arrays.'
+  - Complete module2/CHECKLIST.md
+  - Run ./scripts/module2.sh --check
+  - 'Next: Next module in course'

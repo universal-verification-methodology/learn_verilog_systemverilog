@@ -1,0 +1,196 @@
+title: Module 1 — IEEE 1364-1995 (Verilog-95)
+course: learn_verilog_systemverilog
+module: 1
+subtitle: Master the first standardized Verilog language (IEEE 1364-1995) and its
+  core syntax for RTL design and simulation.
+footer: learn_verilog_systemverilog / Module 1
+slides:
+- type: title
+  title: Module 1
+  subtitle: IEEE 1364-1995 (Verilog-95)
+- type: bullets
+  title: Learning objectives
+  bullets:
+  - Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax
+    for RTL design and simulation.
+- type: bullets
+  title: Prerequisites
+  bullets:
+  - See module README
+- type: image
+  title: Learning path
+  image: assets/diagrams/learning_path.png
+  caption: Master the first standardized Verilog language (IEEE 1364-1995) and its
+    core syntax for RTL design and simulation.
+- type: bullets
+  title: Overview
+  bullets:
+  - 'This module establishes the foundation for the Verilog/SystemVerilog version-centric
+    course. You''ll learn the original Verilog language as defined by IEEE Std 1364-1995
+    (Verilog-95): modules, nets and variables, continuo'
+- type: section
+  title: Syllabus topics
+- type: bullets
+  title: 1. IEEE 1364-1995 Context (1/3)
+  bullets:
+  - 'Modules and hierarchy: Module declaration, port list, instantiation'
+  - 'Nets: `wire` (and `wand`, `wor`, `tri`; rarely used in RTL)'
+  - 'Variables: `reg` for procedural assignment outputs'
+  - 'Continuous assignment: `assign` for combinational logic'
+  - 'Procedural blocks: `always`, `initial` with explicit sensitivity lists'
+  - 'Delays and timing: `#`, `@`, `wait`'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: 1. IEEE 1364-1995 Context (2/3)
+  bullets:
+  - 'Tasks and functions: Non-ANSI style (declarations separate from port list)'
+  - 'System tasks: `$display`, `$monitor`, `$finish`, `$stop`, `$time`'
+  - No ANSI-style port declarations (added in 1364-2001)
+  - No **`always @*`** (added in 1364-2001)
+  - No generate (added in 1364-2001)
+  - No signed keyword, no multi-dimensional arrays (1364-2001)
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: 1. IEEE 1364-1995 Context (3/3)
+  bullets:
+  - 'No SystemVerilog: no `logic`, `always_comb`, `always_ff`, interfaces, packages'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: 2. Modules, Ports, and Hierarchy (1364-1995)
+  bullets:
+  - 'Port list: Only port names: `(a, b, y)`.'
+  - 'Port direction: Declared inside the module: `input`, `output`.'
+  - 'Port type: Declared inside the module: `wire` or `reg` (default for `input` is
+    `wire`; for `output` can be `wire` or `reg`).'
+  - 'Named port connection: `.port_name(signal_name)` — recommended for readability.'
+  - 'Positional: Order must match port list.'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: '3. Nets and Variables: wire and reg (1/2)'
+  bullets:
+  - Represents a physical connection between components.
+  - Driven by continuous assignment (`assign`) or by module output.
+  - Cannot be assigned inside `always` or `initial` (use `reg` for that).
+  - Holds a value; can be assigned in `always` or `initial`.
+  - Does not imply a flip-flop; flip-flops come from `always @(posedge clk)` (or similar).
+  - Used for outputs that are driven procedurally.
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: '3. Nets and Variables: wire and reg (2/2)'
+  bullets:
+  - 'Both `wire` and `reg` are 4-state: `0`, `1`, `X` (unknown), `Z` (high-impedance).'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: 4. Continuous Assignment (assign)
+  bullets:
+  - 'Right-hand side: Any expression of `wire`/`reg` and operators.'
+  - 'Left-hand side: Must be a `wire` (or similar net).'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: '5. Procedural Blocks: always and initial (1364-1995)'
+  bullets:
+  - Repeated execution; sensitivity list defines when it runs.
+  - '1364-1995: Sensitivity list is mandatory and explicit — no `@*`.'
+  - Use blocking `=` for combinational, nonblocking `<=` for sequential (flip-flops).
+  - 'Example (D flip-flop): `module1/examples/sequential_dff/dff.v`'
+  - 'Runs once at time zero. Used for testbenches: stimulus, `$display`, `$finish`.'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: 6. Delays and Timing
+  bullets:
+  - '`#n`: Delay by `n` time units (e.g. `#10`).'
+  - '`@(event)`: Wait for event (e.g. `@(posedge clk)`).'
+  - '`wait(condition)`: Wait until condition is true.'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: 7. Tasks and Functions (1995 Style)
+  bullets:
+  - 'Function: Returns a single value; no delays (zero-time).'
+  - 'Task: Can have delays and multiple outputs (output/inout args).'
+  notes: From MODULE1 Topics Covered.
+- type: bullets
+  title: 8. Simple Testbench (1364-1995)
+  bullets:
+  - '`$display`: Print once.'
+  - '`$monitor`: Print whenever a listed signal changes (optional).'
+  - '`$finish`: End simulation.'
+  notes: From MODULE1 Topics Covered.
+- type: section
+  title: Hands-on examples
+- type: demo
+  title: Module 1 toolchain check
+  command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
+    2>&1 | head -1)"'
+  screenshot: assets/screenshots/module1_check.png
+  expect_stdout_contains: iverilog
+  notes: Requires iverilog on PATH (apt install iverilog).
+- type: demo
+  title: 'Demo: Modules and Ports'
+  command: cd module1/examples/modules_ports && make clean && make run
+  screenshot: assets/screenshots/ex01_modules_ports.png
+  notes: 'Hands-on: module1/examples/modules_ports/'
+- type: demo
+  title: 'Demo: Nets and Variables'
+  command: cd module1/examples/nets_variables && make clean && make run
+  screenshot: assets/screenshots/ex02_nets_variables.png
+  notes: 'Hands-on: module1/examples/nets_variables/'
+- type: demo
+  title: 'Demo: Continuous Assignment'
+  command: cd module1/examples/continuous_assign && make clean && make run
+  screenshot: assets/screenshots/ex03_continuous_assign.png
+  notes: 'Hands-on: module1/examples/continuous_assign/'
+- type: demo
+  title: 'Demo: Continuous Assignment Gates'
+  command: cd module1/examples/continuous_assign_gates && make clean && make run
+  screenshot: assets/screenshots/ex04_continuous_assign_gates.png
+  notes: 'Hands-on: module1/examples/continuous_assign_gates/'
+- type: demo
+  title: 'Demo: Adder'
+  command: cd module1/examples/adder && make clean && make run
+  screenshot: assets/screenshots/ex05_adder.png
+  notes: 'Hands-on: module1/examples/adder/'
+- type: demo
+  title: 'Demo: Procedural Blocks'
+  command: cd module1/examples/procedural && make clean && make run
+  screenshot: assets/screenshots/ex06_procedural.png
+  notes: 'Hands-on: module1/examples/procedural/'
+- type: demo
+  title: 'Demo: Sequential D Flip-Flop'
+  command: cd module1/examples/sequential_dff && make clean && make run
+  screenshot: assets/screenshots/ex07_sequential_dff.png
+  notes: 'Hands-on: module1/examples/sequential_dff/'
+- type: demo
+  title: 'Demo: Delays and Timing'
+  command: cd module1/examples/delays_timing && make clean && make run
+  screenshot: assets/screenshots/ex08_delays_timing.png
+  notes: 'Hands-on: module1/examples/delays_timing/'
+- type: demo
+  title: 'Demo: Testbenches'
+  command: cd module1/examples/testbenches && make clean && make run
+  screenshot: assets/screenshots/ex09_testbenches.png
+  notes: 'Hands-on: module1/examples/testbenches/'
+- type: section
+  title: Practice & assessment
+- type: bullets
+  title: Exercises
+  bullets:
+  - Module and Ports (1995)
+  - wire vs reg
+  - Simple Testbench
+  - Limitations
+  - Incomplete Sensitivity List
+- type: bullets
+  title: Exercises
+  bullets:
+  - Port Type Mismatch
+  - Simulation Never Ends
+  - Using 2001/SystemVerilog Constructs in 1995
+  - Confusing reg with Registers
+- type: bullets
+  title: Summary & next steps
+  bullets:
+  - Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax
+    for RTL design and simulation.
+  - Complete module1/CHECKLIST.md
+  - Run ./scripts/module1.sh --check
+  - 'Next: Next module in course'

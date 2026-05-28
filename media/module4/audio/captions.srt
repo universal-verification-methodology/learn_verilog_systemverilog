@@ -1,0 +1,135 @@
+1
+00:00:00,000 --> 00:00:06,600
+IEEE 1800-2005 (SystemVerilog Design Subset) Module 4
+
+2
+00:00:06,950 --> 00:00:23,222
+Learning objectives Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case.
+
+3
+00:00:23,572 --> 00:00:26,332
+Prerequisites See module README
+
+4
+00:00:26,682 --> 00:00:42,738
+Learning path Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case.
+
+5
+00:00:43,088 --> 00:01:04,064
+Overview This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It extends Verilog (IEEE 1364-2005) with design and verification features. Here the focus is on the **design subset** used for RTL: the `logic` typ
+
+6
+00:01:04,414 --> 00:01:06,670
+Syllabus topics
+
+7
+00:01:07,020 --> 00:01:09,828
+From MODULE4 Topics Covered.
+
+8
+00:01:10,178 --> 00:01:12,986
+From MODULE4 Topics Covered.
+
+9
+00:01:13,336 --> 00:01:16,144
+From MODULE4 Topics Covered.
+
+10
+00:01:16,494 --> 00:01:19,302
+From MODULE4 Topics Covered.
+
+11
+00:01:19,652 --> 00:01:22,460
+From MODULE4 Topics Covered.
+
+12
+00:01:22,810 --> 00:01:25,618
+From MODULE4 Topics Covered.
+
+13
+00:01:25,968 --> 00:01:28,776
+From MODULE4 Topics Covered.
+
+14
+00:01:29,126 --> 00:01:31,934
+From MODULE4 Topics Covered.
+
+15
+00:01:32,284 --> 00:01:35,092
+From MODULE4 Topics Covered.
+
+16
+00:01:35,442 --> 00:01:38,250
+From MODULE4 Topics Covered.
+
+17
+00:01:38,600 --> 00:01:40,832
+Hands-on examples
+
+18
+00:01:41,182 --> 00:01:45,502
+Requires iverilog on PATH (apt install iverilog).
+
+19
+00:01:45,852 --> 00:01:51,060
+Hands-on: module4/examples/data_types/
+
+20
+00:01:51,410 --> 00:01:56,810
+Hands-on: module4/examples/logic_ports/
+
+21
+00:01:57,160 --> 00:02:01,936
+Hands-on: module4/examples/procedural/
+
+22
+00:02:02,286 --> 00:02:07,638
+Hands-on: module4/examples/always_latch/
+
+23
+00:02:07,988 --> 00:02:14,012
+Hands-on: module4/examples/one_driver_logic/
+
+24
+00:02:14,362 --> 00:02:19,786
+Hands-on: module4/examples/typedef_sv/
+
+25
+00:02:20,136 --> 00:02:24,984
+Hands-on: module4/examples/interfaces/
+
+26
+00:02:25,334 --> 00:02:30,062
+Hands-on: module4/examples/packages/
+
+27
+00:02:30,412 --> 00:02:35,884
+Hands-on: module4/examples/package_typedef/
+
+28
+00:02:36,234 --> 00:02:42,426
+Hands-on: module4/examples/case_unique_priority/
+
+29
+00:02:42,776 --> 00:02:48,176
+Hands-on: module4/examples/priority_case/
+
+30
+00:02:48,526 --> 00:02:53,302
+Hands-on: module4/examples/migration/
+
+31
+00:02:53,652 --> 00:02:55,980
+Practice & assessment
+
+32
+00:02:56,330 --> 00:03:03,890
+Exercises logic and always_comb/always_ff Interface Package unique case Migration Summary
+
+33
+00:03:04,240 --> 00:03:14,728
+Exercises Multiple Drivers on logic Using always_comb with Latched Behavior Wrong Modport or Direction Forgetting to import Package unique case with Multiple Matches
+
+34
+00:03:15,078 --> 00:03:40,566
+Summary & next steps Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case. Complete module4/CHECKLIST.md Run ./scripts/module4.sh --check Next: Next module in course

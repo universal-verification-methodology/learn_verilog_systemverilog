@@ -1,0 +1,87 @@
+1
+00:00:00,000 --> 00:00:03,624
+Version Comparison and Migration Module 7
+
+2
+00:00:03,974 --> 00:00:15,182
+Learning objectives Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools.
+
+3
+00:00:15,532 --> 00:00:18,292
+Prerequisites See module README
+
+4
+00:00:18,642 --> 00:00:29,490
+Learning path Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools.
+
+5
+00:00:29,840 --> 00:00:47,672
+Overview This module ties together Modules 1–6 by comparing the same design across standards (1364-1995 through 1800-2017), outlining migration steps between versions, and providing checklists for choosing a standard and for migr
+
+6
+00:00:48,022 --> 00:00:50,278
+Syllabus topics
+
+7
+00:00:50,628 --> 00:00:53,508
+From MODULE7 Topics Covered.
+
+8
+00:00:53,858 --> 00:00:56,090
+Hands-on examples
+
+9
+00:00:56,440 --> 00:01:00,760
+Requires iverilog on PATH (apt install iverilog).
+
+10
+00:01:01,110 --> 00:01:05,982
+Hands-on: module7/examples/migration/
+
+11
+00:01:06,332 --> 00:01:15,044
+Hands-on: module7/examples/migration_1995_to_2001/
+
+12
+00:01:15,394 --> 00:01:20,890
+Hands-on: module7/examples/case_versions/
+
+13
+00:01:21,240 --> 00:01:26,616
+Hands-on: module7/examples/version_table/
+
+14
+00:01:26,966 --> 00:01:32,582
+Hands-on: module7/examples/version_selection/
+
+15
+00:01:32,932 --> 00:01:38,764
+Hands-on: module7/examples/migration_checklist/
+
+16
+00:01:39,114 --> 00:01:45,018
+Hands-on: module7/examples/incremental_migration/
+
+17
+00:01:45,368 --> 00:01:51,440
+Hands-on: module7/examples/port_style_compare/
+
+18
+00:01:51,790 --> 00:01:57,190
+Hands-on: module7/examples/no_defparam/
+
+19
+00:01:57,540 --> 00:01:59,868
+Practice & assessment
+
+20
+00:02:00,218 --> 00:02:07,082
+Exercises Side-by-Side Mux Side-by-Side Connectivity Migration One Block Version Selection Version Table
+
+21
+00:02:07,432 --> 00:02:17,488
+Exercises Migrating Everything at Once Ignoring Tool Support Breaking Interfaces During Migration Mixing Revisions in One File Forgetting to Test After Migration
+
+22
+00:02:17,838 --> 00:02:38,454
+Summary & next steps Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools. Complete module7/CHECKLIST.md Run ./scripts/module7.sh --check Next: Next module in course

@@ -6,6 +6,14 @@
 
 **Estimated time**: 4–6 hours (examples + exercises + reading).
 
+
+## Running Module 6
+
+From the repo root:
+
+- **Run all examples**: `./scripts/module6.sh`
+- **Slides & video**: [slides.pptx](../media/module6/slides.pptx) · [slides.pdf](../media/module6/slides.pdf) · [video.mp4](../media/module6/video.mp4) — regenerate: `./scripts/build_all_media.sh --module 6`
+
 ## Table of Contents
 
 - [Overview](#overview)

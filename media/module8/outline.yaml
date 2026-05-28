@@ -1,0 +1,122 @@
+title: Module 8 — Quick Reference and Course Summary
+course: learn_verilog_systemverilog
+module: 8
+subtitle: Provide a single quick reference and course summary for Verilog and SystemVerilog
+  across IEEE versions (1364-1995 through 1800-2017).
+footer: learn_verilog_systemverilog / Module 8
+slides:
+- type: title
+  title: Module 8
+  subtitle: Quick Reference and Course Summary
+- type: bullets
+  title: Learning objectives
+  bullets:
+  - Provide a single quick reference and course summary for Verilog and SystemVerilog
+    across IEEE versions (1364-1995 through 1800-2017).
+- type: bullets
+  title: Prerequisites
+  bullets:
+  - See module README
+- type: image
+  title: Learning path
+  image: assets/diagrams/learning_path.png
+  caption: Provide a single quick reference and course summary for Verilog and SystemVerilog
+    across IEEE versions (1364-1995 through 1800-2017).
+- type: bullets
+  title: Overview
+  bullets:
+  - This module is a **reference and summary** for the version-centric Verilog/SystemVerilog
+    course (Modules 1–7). It does not introduce new language features. It consolidates
+    the version timeline, construct-by-standard tabl
+- type: section
+  title: Syllabus topics
+- type: bullets
+  title: 1. Version Timeline (One Table)
+  bullets:
+  - See docs/MODULE8.md
+  notes: From MODULE8 Topics Covered.
+- type: section
+  title: Hands-on examples
+- type: demo
+  title: Module 8 toolchain check
+  command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
+    2>&1 | head -1)"'
+  screenshot: assets/screenshots/module8_check.png
+  expect_stdout_contains: iverilog
+  notes: Requires iverilog on PATH (apt install iverilog).
+- type: demo
+  title: 'Demo: Construct Lookup'
+  command: cd module8/examples/construct_lookup && make clean && make run
+  screenshot: assets/screenshots/ex01_construct_lookup.png
+  notes: 'Hands-on: module8/examples/construct_lookup/'
+- type: demo
+  title: 'Demo: Course Map'
+  command: cd module8/examples/course_map && make clean && make run
+  screenshot: assets/screenshots/ex02_course_map.png
+  notes: 'Hands-on: module8/examples/course_map/'
+- type: demo
+  title: 'Demo: Design Subset'
+  command: cd module8/examples/design_subset && make clean && make run
+  screenshot: assets/screenshots/ex03_design_subset.png
+  notes: 'Hands-on: module8/examples/design_subset/'
+- type: demo
+  title: 'Demo: Learning Path'
+  command: cd module8/examples/learning_path && make clean && make run
+  screenshot: assets/screenshots/ex04_learning_path.png
+  notes: 'Hands-on: module8/examples/learning_path/'
+- type: demo
+  title: 'Demo: Migration Steps'
+  command: cd module8/examples/migration_steps && make clean && make run
+  screenshot: assets/screenshots/ex05_migration_steps.png
+  notes: 'Hands-on: module8/examples/migration_steps/'
+- type: demo
+  title: 'Demo: Pitfalls'
+  command: cd module8/examples/pitfalls && make clean && make run
+  screenshot: assets/screenshots/ex06_pitfalls.png
+  notes: 'Hands-on: module8/examples/pitfalls/'
+- type: demo
+  title: 'Demo: Synthesizable Subset'
+  command: cd module8/examples/synthesizable_subset && make clean && make run
+  screenshot: assets/screenshots/ex07_synthesizable_subset.png
+  notes: 'Hands-on: module8/examples/synthesizable_subset/'
+- type: demo
+  title: 'Demo: Tool Support'
+  command: cd module8/examples/tool_support && make clean && make run
+  screenshot: assets/screenshots/ex08_tool_support.png
+  notes: 'Hands-on: module8/examples/tool_support/'
+- type: demo
+  title: 'Demo: Version Selection'
+  command: cd module8/examples/version_selection && make clean && make run
+  screenshot: assets/screenshots/ex09_version_selection.png
+  notes: 'Hands-on: module8/examples/version_selection/'
+- type: demo
+  title: 'Demo: Version Timeline'
+  command: cd module8/examples/version_timeline && make clean && make run
+  screenshot: assets/screenshots/ex10_version_timeline.png
+  notes: 'Hands-on: module8/examples/version_timeline/'
+- type: section
+  title: Practice & assessment
+- type: bullets
+  title: Exercises
+  bullets:
+  - Lookup
+  - Subset
+  - Migration
+  - Course map
+  - Cheat sheet
+- type: bullets
+  title: Exercises
+  bullets:
+  - Assuming a construct is in an older standard
+  - Mixing subsets without a rule
+  - Skipping regression after migration
+  - Forgetting tool support
+  - Treating this module as a replacement for Modules 1–7
+- type: bullets
+  title: Summary & next steps
+  bullets:
+  - Provide a single quick reference and course summary for Verilog and SystemVerilog
+    across IEEE versions (1364-1995 through 1800-2017).
+  - Complete module8/CHECKLIST.md
+  - Run ./scripts/module8.sh --check
+  - 'Next: Next module in course'

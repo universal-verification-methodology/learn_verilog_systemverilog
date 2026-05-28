@@ -1,0 +1,43 @@
+[Slide 1] Version Comparison and Migration Module 7
+
+[Slide 2] Learning objectives Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools.
+
+[Slide 3] Prerequisites See module README
+
+[Slide 4] Learning path Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools.
+
+[Slide 5] Overview This module ties together Modules 1–6 by comparing the same design across standards (1364-1995 through 1800-2017), outlining migration steps between versions, and providing checklists for choosing a standard and for migr
+
+[Slide 6] Syllabus topics
+
+[Slide 7] From MODULE7 Topics Covered.
+
+[Slide 8] Hands-on examples
+
+[Slide 9] Requires iverilog on PATH (apt install iverilog).
+
+[Slide 10] Hands-on: module7/examples/migration/
+
+[Slide 11] Hands-on: module7/examples/migration_1995_to_2001/
+
+[Slide 12] Hands-on: module7/examples/case_versions/
+
+[Slide 13] Hands-on: module7/examples/version_table/
+
+[Slide 14] Hands-on: module7/examples/version_selection/
+
+[Slide 15] Hands-on: module7/examples/migration_checklist/
+
+[Slide 16] Hands-on: module7/examples/incremental_migration/
+
+[Slide 17] Hands-on: module7/examples/port_style_compare/
+
+[Slide 18] Hands-on: module7/examples/no_defparam/
+
+[Slide 19] Practice & assessment
+
+[Slide 20] Exercises Side-by-Side Mux Side-by-Side Connectivity Migration One Block Version Selection Version Table
+
+[Slide 21] Exercises Migrating Everything at Once Ignoring Tool Support Breaking Interfaces During Migration Mixing Revisions in One File Forgetting to Test After Migration
+
+[Slide 22] Summary & next steps Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools. Complete module7/CHECKLIST.md Run ./scripts/module7.sh --check Next: Next module in course

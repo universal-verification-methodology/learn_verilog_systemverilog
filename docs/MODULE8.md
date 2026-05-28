@@ -6,6 +6,14 @@
 
 **Estimated time**: 1–2 hours (read tables and cheat sheet; run reference examples if desired). No new language features.
 
+
+## Running Module 8
+
+From the repo root:
+
+- **Run all examples**: `./scripts/module8.sh`
+- **Slides & video**: [slides.pptx](../media/module8/slides.pptx) · [slides.pdf](../media/module8/slides.pdf) · [video.mp4](../media/module8/video.mp4) — regenerate: `./scripts/build_all_media.sh --module 8`
+
 ## Table of Contents
 
 - [Overview](#overview)

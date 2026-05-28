@@ -1,0 +1,86 @@
+module: 7
+course: learn_verilog_systemverilog
+assets:
+- id: learning_path
+  type: diagram
+  file: assets/diagrams/learning_path.png
+  source: assets/diagrams/learning_path.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 4
+  license: learn_verilog_systemverilog course materials
+- id: module7_check
+  type: screenshot
+  file: assets/screenshots/module7_check.png
+  capture_command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog
+    -V 2>&1 | head -1)"'
+  cwd: .
+  slides:
+  - 9
+  expect_stdout_contains: Icarus Verilog
+  description: Verify iverilog is installed
+- id: ex07_migration
+  type: screenshot
+  file: assets/screenshots/ex07_migration.png
+  capture_command: cd module7/examples/migration && make clean && make run
+  cwd: .
+  slides:
+  - 10
+- id: ex08_migration_1995_to_2001
+  type: screenshot
+  file: assets/screenshots/ex08_migration_1995_to_2001.png
+  capture_command: cd module7/examples/migration_1995_to_2001 && make clean && make
+    run
+  cwd: .
+  slides:
+  - 11
+- id: ex09_case_versions
+  type: screenshot
+  file: assets/screenshots/ex09_case_versions.png
+  capture_command: cd module7/examples/case_versions && make clean && make run
+  cwd: .
+  slides:
+  - 12
+- id: ex10_version_table
+  type: screenshot
+  file: assets/screenshots/ex10_version_table.png
+  capture_command: cd module7/examples/version_table && make clean && make run
+  cwd: .
+  slides:
+  - 13
+- id: ex11_version_selection
+  type: screenshot
+  file: assets/screenshots/ex11_version_selection.png
+  capture_command: cd module7/examples/version_selection && make clean && make run
+  cwd: .
+  slides:
+  - 14
+- id: ex14_migration_checklist
+  type: screenshot
+  file: assets/screenshots/ex14_migration_checklist.png
+  capture_command: cd module7/examples/migration_checklist && make clean && make run
+  cwd: .
+  slides:
+  - 15
+- id: ex15_incremental_migration
+  type: screenshot
+  file: assets/screenshots/ex15_incremental_migration.png
+  capture_command: cd module7/examples/incremental_migration && make clean && make
+    run
+  cwd: .
+  slides:
+  - 16
+- id: ex16_port_style_compare
+  type: screenshot
+  file: assets/screenshots/ex16_port_style_compare.png
+  capture_command: cd module7/examples/port_style_compare && make clean && make run
+  cwd: .
+  slides:
+  - 17
+- id: ex17_no_defparam
+  type: screenshot
+  file: assets/screenshots/ex17_no_defparam.png
+  capture_command: cd module7/examples/no_defparam && make clean && make run
+  cwd: .
+  slides:
+  - 18

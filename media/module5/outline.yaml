@@ -1,0 +1,227 @@
+title: Module 5 — IEEE 1800-2009 and 1800-2012
+course: learn_verilog_systemverilog
+module: 5
+subtitle: 'Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface
+  and type refinements, operator and array enhancements, and assertion/checker concepts
+  in context.'
+footer: learn_verilog_systemverilog / Module 5
+slides:
+- type: title
+  title: Module 5
+  subtitle: IEEE 1800-2009 and 1800-2012
+- type: bullets
+  title: Learning objectives
+  bullets:
+  - 'Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and
+    type refinements, operator and array enhancements, and assertion/checker concepts
+    in context.'
+- type: bullets
+  title: Prerequisites
+  bullets:
+  - See module README
+- type: image
+  title: Learning path
+  image: assets/diagrams/learning_path.png
+  caption: 'Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface
+    and type refinements, operator and array enhancements, and assertion/checker concepts
+    in context.'
+- type: bullets
+  title: Overview
+  bullets:
+  - 'This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two major
+    revisions of SystemVerilog after 1800-2005. You''ll learn what 2009 and 2012 add
+    or clarify: interface refinements (e.g. modport expression'
+- type: section
+  title: Syllabus topics
+- type: bullets
+  title: 1. IEEE 1800-2009 and 1800-2012 Context (1/3)
+  bullets:
+  - 'Interfaces: Modport expressions, virtual interface type (for testbenches), interface
+    inheritance'
+  - 'Types and operators: Clarifications; additional operators and built-in methods'
+  - 'Assertions: SVA enhancements; checker concept (preview)'
+  - 'DPI: Refinements for C/C++ interop'
+  - 'Coverage: Coverage option and syntax clarifications'
+  - 'Clarifications: Scheduling, generate, and other 2005 semantics'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 1. IEEE 1800-2009 and 1800-2012 Context (2/3)
+  bullets:
+  - 'Checkers: Checker construct for reusable assertion/coverage logic'
+  - 'Arrays: Array manipulation methods; array assignment and ordering clarifications'
+  - 'Strings: String methods and behavior'
+  - 'Compilation units: Refined rules for $unit and compilation-unit scope'
+  - 'Assertions and coverage: Further SVA and coverage features'
+  - 'Clarifications: Numerous editorial and semantic clarifications across the LRM'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 1. IEEE 1800-2009 and 1800-2012 Context (3/3)
+  bullets:
+  - 1800-2005 RTL remains valid in 1800-2009 and 1800-2012.
+  - New features are additive; you adopt them when the tool and project support the
+    revision.
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 2. Interface Refinements (2009)
+  bullets:
+  - 'Use: When the same interface is used with different signal subsets or derived
+    signals; check tool support for exact syntax.'
+  - 'Benefit: Fewer duplicate interface definitions; clearer connection contract.'
+  - 'Design: Rarely used in RTL; RTL typically connects to a concrete interface instance.'
+  - 'Verification: Common in UVM and other OOP testbenches; allows one driver class
+    to work with any instance of the interface.'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 3. Type and Operator Enhancements (2009/2012) (1/2)
+  bullets:
+  - 'byte, shortint, int, longint: 8, 16, 32, 64 bits; signed by default.'
+  - 'byte unsigned, int unsigned: Unsigned variants.'
+  - 'Clarifications in 2012: Representation and conversion rules; use in RTL for constants
+    and parameters.'
+  - 'inside: Already in 2005; 2009/2012 clarify set membership and use with ranges.'
+  - 'Wildcard equality `==?`: X/Z in the right-hand side act as “don’t care” in comparisons.'
+  - 'Set membership and case (inside): Used in case statements and constraints; semantics
+    clarified in 2012.'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 3. Type and Operator Enhancements (2009/2012) (2/2)
+  bullets:
+  - 'Array methods: `.size()`, `.delete()`, `.sort()`, `.reverse()`, etc. (exact set
+    is revision-dependent).'
+  - 'Queues: `.push_back()`, `.pop_front()`, `.insert()`, etc.'
+  - 'Use in RTL: Limited (arrays in RTL are often fixed); methods are common in testbenches
+    and checkers.'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 4. Array and String Refinements (2012)
+  bullets:
+  - 'Packed vs unpacked: Assignment rules and ordering (row-major, etc.) are clarified.'
+  - 'Array copy: Whole-array assignment and copying; compatibility of dimensions.'
+  - 'Use in RTL: Multi-dimensional arrays (e.g. memories) and parameterized dimensions;
+    follow tool-supported subset for synthesis.'
+  - 'Strings: `string` type; methods such as `.len()`, `.substr()`, `.atoi()`, etc.
+    (as defined in 2012).'
+  - 'Use in RTL: Rare (strings are mainly for messages and file I/O in testbenches).'
+  - 'Use in testbenches: Logging, report generation, file names.'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 5. Assertions and Checkers in Context (2009/2012) (1/2)
+  bullets:
+  - 'immediate assertions: `assert (condition) else $error("...");` — checked when
+    executed (like an if-check).'
+  - 'concurrent assertions: `assert property (@(posedge clk) (a |-> b));` — checked
+    over time; typically in verification.'
+  - 'Use in RTL: Immediate assertions for invariants (e.g. one-hot, valid encodings);
+    concurrent assertions often in bind files or testbench.'
+  - 'checker: A reusable unit that can contain assertions, assumptions, coverage,
+    and helper logic; can be instantiated in design or testbench.'
+  - 'Use: Encapsulate a set of properties (e.g. protocol rules) and reuse across modules
+    or hierarchies.'
+  - 'Design: Checkers can be bound to RTL modules; they do not change RTL functionality,
+    only add checking.'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 5. Assertions and Checkers in Context (2009/2012) (2/2)
+  bullets:
+  - 'Synthesis: Checkers are typically not synthesized; they are for simulation and
+    formal tools.'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: 6. Compilation Units and Scope (2012)
+  bullets:
+  - 'Compilation unit: The scope of one or more source files compiled together (tool-defined).'
+  - '$unit: The compilation-unit scope; declarations in $unit are visible across the
+    unit without import.'
+  - 'Best practice: Prefer packages and explicit import over $unit to avoid hidden
+    dependencies and name clashes.'
+  - 'Import: `import pkg::*` or `import pkg::item`; 2012 clarifies visibility and
+    search order.'
+  - 'Use: Keep shared types and functions in packages; import where needed; avoid
+    relying on $unit for new code.'
+  notes: From MODULE5 Topics Covered.
+- type: bullets
+  title: '7. Summary: 1800-2005 vs 2009 vs 2012 (Design-Relevant)'
+  bullets:
+  - See docs/MODULE5.md
+  notes: From MODULE5 Topics Covered.
+- type: section
+  title: Hands-on examples
+- type: demo
+  title: Module 5 toolchain check
+  command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
+    2>&1 | head -1)"'
+  screenshot: assets/screenshots/module5_check.png
+  expect_stdout_contains: iverilog
+  notes: Requires iverilog on PATH (apt install iverilog).
+- type: demo
+  title: 'Demo: Operators'
+  command: cd module5/examples/operators && make clean && make run
+  screenshot: assets/screenshots/ex01_operators.png
+  notes: 'Hands-on: module5/examples/operators/'
+- type: demo
+  title: 'Demo: Wildcard Only'
+  command: cd module5/examples/wildcard_only && make clean && make run
+  screenshot: assets/screenshots/ex02_wildcard_only.png
+  notes: 'Hands-on: module5/examples/wildcard_only/'
+- type: demo
+  title: 'Demo: Range Check'
+  command: cd module5/examples/range_check && make clean && make run
+  screenshot: assets/screenshots/ex03_range_check.png
+  notes: 'Hands-on: module5/examples/range_check/'
+- type: demo
+  title: 'Demo: Arrays'
+  command: cd module5/examples/arrays && make clean && make run
+  screenshot: assets/screenshots/ex04_arrays.png
+  notes: 'Hands-on: module5/examples/arrays/'
+- type: demo
+  title: 'Demo: Array Param'
+  command: cd module5/examples/array_param && make clean && make run
+  screenshot: assets/screenshots/ex05_array_param.png
+  notes: 'Hands-on: module5/examples/array_param/'
+- type: demo
+  title: 'Demo: Checkers'
+  command: cd module5/examples/checkers && make clean && make run
+  screenshot: assets/screenshots/ex06_checkers.png
+  notes: 'Hands-on: module5/examples/checkers/'
+- type: demo
+  title: 'Demo: Assert Valid Encoding'
+  command: cd module5/examples/assert_valid_encoding && make clean && make run
+  screenshot: assets/screenshots/ex07_assert_valid_encoding.png
+  notes: 'Hands-on: module5/examples/assert_valid_encoding/'
+- type: demo
+  title: 'Demo: Assert Invariant'
+  command: cd module5/examples/assert_invariant && make clean && make run
+  screenshot: assets/screenshots/ex08_assert_invariant.png
+  notes: 'Hands-on: module5/examples/assert_invariant/'
+- type: demo
+  title: 'Demo: Summary'
+  command: cd module5/examples/summary && make clean && make run
+  screenshot: assets/screenshots/ex09_summary.png
+  notes: 'Hands-on: module5/examples/summary/'
+- type: section
+  title: Practice & assessment
+- type: bullets
+  title: Exercises
+  bullets:
+  - inside and ==?
+  - Interface (2009)
+  - Immediate Assertion
+  - Checker (2012)
+  - Version Table
+- type: bullets
+  title: Exercises
+  bullets:
+  - Assuming 2009/2012 Features in an 2005-Only Flow
+  - Virtual Interface in RTL
+  - Checker Synthesis
+  - Array Methods in RTL
+  - $unit vs Package
+- type: bullets
+  title: Summary & next steps
+  bullets:
+  - 'Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and
+    type refinements, operator and array enhancements, and assertion/checker concepts
+    in context.'
+  - Complete module5/CHECKLIST.md
+  - Run ./scripts/module5.sh --check
+  - 'Next: Next module in course'

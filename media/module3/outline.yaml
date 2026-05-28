@@ -1,0 +1,216 @@
+title: Module 3 — IEEE 1364-2005 (Verilog-2005)
+course: learn_verilog_systemverilog
+module: 3
+subtitle: Master the final Verilog-only standard (IEEE 1364-2005), its clarifications
+  over 2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+footer: learn_verilog_systemverilog / Module 3
+slides:
+- type: title
+  title: Module 3
+  subtitle: IEEE 1364-2005 (Verilog-2005)
+- type: bullets
+  title: Learning objectives
+  bullets:
+  - Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over
+    2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+- type: bullets
+  title: Prerequisites
+  bullets:
+  - See module README
+- type: image
+  title: Learning path
+  image: assets/diagrams/learning_path.png
+  caption: Master the final Verilog-only standard (IEEE 1364-2005), its clarifications
+    over 2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+- type: bullets
+  title: Overview
+  bullets:
+  - 'This module covers IEEE Std 1364-2005 (Verilog-2005), the last standard that
+    defines Verilog alone before it was merged with SystemVerilog (IEEE 1800). You''ll
+    learn what 2005 adds or clarifies over 2001: minor language c'
+- type: section
+  title: Syllabus topics
+- type: bullets
+  title: 1. IEEE 1364-2005 Context (1/2)
+  bullets:
+  - 'Final Verilog-only standard: No SystemVerilog (no `logic`, interfaces, packages,
+    classes).'
+  - 'Clarifications: Refined wording and examples for 2001 features (e.g. generate,
+    signed, scheduling).'
+  - 'Minor additions: Additional system tasks and small syntax clarifications.'
+  - 'Stable baseline: Many synthesis and style guides treat 1364-2005 as the Verilog
+    baseline.'
+  - 'Clarifications: Scheduling, blocking vs nonblocking semantics, and generate behavior.'
+  - 'System tasks: Additional or clarified tasks (e.g. `$realtime`, file I/O behavior).'
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 1. IEEE 1364-2005 Context (2/2)
+  bullets:
+  - 'Deprecations: e.g. defparam is deprecated (use instantiation parameter override
+    instead).'
+  - 'Attributes: Clarified syntax and usage for tool-specific attributes.'
+  - 'No major new language features: The big step to new features is 1800 (Module
+    4).'
+  - 'No SystemVerilog: no `logic`, `always_comb`/`always_ff`, interfaces, packages,
+    classes, assertions (SVA).'
+  - No interfaces or type parameters (those are 1800).
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 2. defparam Deprecation (2005)
+  bullets:
+  - 'Problem: Overrides a parameter deep in hierarchy from outside; hard to trace
+    and tool-dependent.'
+  - 'Preferred: Override at instantiation: `sub #(.WIDTH(16)) u_sub (...);`'
+  - 'Recommendation: Do not use defparam in new RTL; use named parameter override
+    in the instantiation.'
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 3. Synthesizable Subset (1364-2005) (1/4)
+  bullets:
+  - 'Modules: ANSI ports, parameter, localparam.'
+  - 'Nets and variables: wire, reg (with correct usage).'
+  - 'assign: Combinational logic; single driver per net.'
+  - 'always: Combinational with `always @*`; sequential with `always @(posedge clk)`
+    (or negedge) and nonblocking `<=`.'
+  - 'generate: generate for, generate if/else for structure.'
+  - 'Operators: Arithmetic, logical, bitwise, relational, shift, concatenation, conditional
+    (`? :`).'
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 3. Synthesizable Subset (1364-2005) (2/4)
+  bullets:
+  - 'case / casez / casex: With care (full case, parallel case, or tool directives).'
+  - 'Tasks and functions: Without delays; used for combinational or single-cycle helpers.'
+  - 'Signed: signed types and $signed/$unsigned as supported by the tool.'
+  - 'Delays: `#n` in RTL (used for testbenches only).'
+  - 'initial: Except for initialization of reg/mem in FPGAs (tool-dependent).'
+  - 'Event controls: `@(posedge clk)` is fine; complex event lists may not map.'
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 3. Synthesizable Subset (1364-2005) (3/4)
+  bullets:
+  - 'Fork/join: Usually testbench-only.'
+  - 'System tasks: e.g. `$display`, `$finish` — testbench/simulation only.'
+  - 'Pure latch inference: Unintended latches from incomplete case/if; use full case
+    or default.'
+  - 'Combinational: Use `always @*` and blocking `=`; assign all outputs in all branches
+    (or default) to avoid latches.'
+  - 'Sequential: Use `always @(posedge clk)` (and optionally `negedge rst_n`) and
+    nonblocking `<=`; do not mix blocking and nonblocking for the same variable.'
+  - 'One driver per net: No multiple assign to the same wire; no multiple always driving
+    the same reg in conflicting ways.'
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 3. Synthesizable Subset (1364-2005) (4/4)
+  bullets:
+  - 'Avoid latches: In combinational always, cover all cases or use a default assignment.'
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 4. Blocking vs Nonblocking (Clarified in 2005)
+  bullets:
+  - 'Combinational always (`always @*`): Use blocking `=`. Order of statements can
+    matter (same simulation time step).'
+  - 'Sequential always (`always @(posedge clk)`): Use nonblocking `<=`. Order does
+    not matter within the block; updates occur at the end of the time step.'
+  - Do not mix blocking and nonblocking for the same variable in the same always block.
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: 5. Full Case and Parallel Case (Synthesis Hints)
+  bullets:
+  - 'Intent: “Every possible case value is covered; no latch.”'
+  - 'Syntax: Often an attribute, e.g. `(* full_case *)` or tool-specific comment.'
+  - 'Use: When the designer guarantees all cases are covered (e.g. one-hot state encoding).'
+  - 'Intent: “At most one case arm matches; can be implemented as parallel mux.”'
+  - 'Syntax: Often an attribute, e.g. `(* parallel_case *)` or tool-specific.'
+  - 'Use: When at most one branch is true (e.g. one-hot); misuse can hide bugs.'
+  notes: From MODULE3 Topics Covered.
+- type: bullets
+  title: '6. Summary: 1364 Evolution (1995 → 2001 → 2005)'
+  bullets:
+  - See docs/MODULE3.md
+  notes: From MODULE3 Topics Covered.
+- type: section
+  title: Hands-on examples
+- type: demo
+  title: Module 3 toolchain check
+  command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
+    2>&1 | head -1)"'
+  screenshot: assets/screenshots/module3_check.png
+  expect_stdout_contains: iverilog
+  notes: Requires iverilog on PATH (apt install iverilog).
+- type: demo
+  title: 'Demo: Parameter Override'
+  command: cd module3/examples/parameters && make clean && make run
+  screenshot: assets/screenshots/ex01_parameters.png
+  notes: 'Hands-on: module3/examples/parameters/'
+- type: demo
+  title: 'Demo: No defparam'
+  command: cd module3/examples/no_defparam && make clean && make run
+  screenshot: assets/screenshots/ex02_no_defparam.png
+  notes: 'Hands-on: module3/examples/no_defparam/'
+- type: demo
+  title: 'Demo: Synthesizable Style'
+  command: cd module3/examples/synthesizable && make clean && make run
+  screenshot: assets/screenshots/ex03_synthesizable.png
+  notes: 'Hands-on: module3/examples/synthesizable/'
+- type: demo
+  title: 'Demo: One Driver'
+  command: cd module3/examples/one_driver && make clean && make run
+  screenshot: assets/screenshots/ex04_one_driver.png
+  notes: 'Hands-on: module3/examples/one_driver/'
+- type: demo
+  title: 'Demo: Blocking vs Nonblocking'
+  command: cd module3/examples/procedural && make clean && make run
+  screenshot: assets/screenshots/ex05_procedural.png
+  notes: 'Hands-on: module3/examples/procedural/'
+- type: demo
+  title: 'Demo: Pipeline'
+  command: cd module3/examples/pipeline && make clean && make run
+  screenshot: assets/screenshots/ex06_pipeline.png
+  notes: 'Hands-on: module3/examples/pipeline/'
+- type: demo
+  title: 'Demo: Case Styles'
+  command: cd module3/examples/case_styles && make clean && make run
+  screenshot: assets/screenshots/ex07_case_styles.png
+  notes: 'Hands-on: module3/examples/case_styles/'
+- type: demo
+  title: 'Demo: Avoid Latch'
+  command: cd module3/examples/avoid_latch && make clean && make run
+  screenshot: assets/screenshots/ex08_avoid_latch.png
+  notes: 'Hands-on: module3/examples/avoid_latch/'
+- type: demo
+  title: 'Demo: Synthesizable Function'
+  command: cd module3/examples/function_synth && make clean && make run
+  screenshot: assets/screenshots/ex09_function_synth.png
+  notes: 'Hands-on: module3/examples/function_synth/'
+- type: demo
+  title: 'Demo: 1364-2005 Summary'
+  command: cd module3/examples/summary && make clean && make run
+  screenshot: assets/screenshots/ex10_summary.png
+  notes: 'Hands-on: module3/examples/summary/'
+- type: section
+  title: Practice & assessment
+- type: bullets
+  title: Exercises
+  bullets:
+  - Remove defparam
+  - Synthesizable Checklist
+  - Blocking vs Nonblocking
+  - Case and Latches
+  - 1364-2005 Summary
+- type: bullets
+  title: Exercises
+  bullets:
+  - Using defparam in New Code
+  - Mixing Blocking and Nonblocking for Same Variable
+  - Assuming unique/priority case in 1364-2005
+  - Latches from Incomplete case/if
+  - Using SystemVerilog in “1364-2005” Project
+- type: bullets
+  title: Summary & next steps
+  bullets:
+  - Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over
+    2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+  - Complete module3/CHECKLIST.md
+  - Run ./scripts/module3.sh --check
+  - 'Next: Next module in course'

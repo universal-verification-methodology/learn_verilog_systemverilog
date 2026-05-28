@@ -53,6 +53,7 @@ This project is a complete educational resource for learning Verilog and SystemV
 - ✅ **Design subsets**: Verilog-only vs SystemVerilog design; synthesizable do/avoid
 - ✅ **Construct lookup**: “Which standard has X?” (logic, always_comb, interface, etc.)
 - ✅ **Orchestration scripts**: `./scripts/module1.sh` … `./scripts/module8.sh` to run all examples and tests
+- ✅ **Slides & video**: Per-module `slides.pptx`, `slides.pdf`, and `video.mp4` under `media/` (see `./scripts/build_all_media.sh`)
 - ✅ **Quick reference**: Module 8 runnable cheat sheet, version timeline, migration steps, pitfalls
 - ✅ **Icarus Verilog**: Examples target iverilog (Verilog and SystemVerilog `-g2012`)
 
@@ -107,6 +108,16 @@ cd module7/examples/side_by_side/mux2_versions
 make run
 ```
 
+### 5. Build slides and video (optional)
+
+```bash
+./scripts/build_all_media.sh
+# One module: ./scripts/build_all_media.sh --module 1
+# Decks only:  ./scripts/build_all_media.sh --pptx-only
+```
+
+See [media/README.md](media/README.md) and [media/INDEX.md](media/INDEX.md).
+
 ## 📁 Project Structure
 
 ```
@@ -135,8 +146,12 @@ learn/
 │   ├── docs/                  # version_table.md, migration_cheat_sheet.md, course_map.md
 │   └── examples/              # Runnable reference (quick_ref, version_timeline, etc.)
 │
+├── media/                     # Slides, PDF, video per module (see media/INDEX.md)
+│   └── module1/ … module8/
 ├── scripts/
 │   ├── module1.sh … module8.sh   # Run each module’s examples and tests
+│   ├── build_all_media.sh        # Build all module decks + PDF + video
+│   └── verify_all_media.sh       # Verify outlines and deliverables
 │
 ├── README.md
 └── LICENSE

@@ -1,0 +1,92 @@
+module: 8
+course: learn_verilog_systemverilog
+assets:
+- id: learning_path
+  type: diagram
+  file: assets/diagrams/learning_path.png
+  source: assets/diagrams/learning_path.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 4
+  license: learn_verilog_systemverilog course materials
+- id: module8_check
+  type: screenshot
+  file: assets/screenshots/module8_check.png
+  capture_command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog
+    -V 2>&1 | head -1)"'
+  cwd: .
+  slides:
+  - 9
+  expect_stdout_contains: Icarus Verilog
+  description: Verify iverilog is installed
+- id: ex01_construct_lookup
+  type: screenshot
+  file: assets/screenshots/ex01_construct_lookup.png
+  capture_command: cd module8/examples/construct_lookup && make clean && make run
+  cwd: .
+  slides:
+  - 10
+- id: ex02_course_map
+  type: screenshot
+  file: assets/screenshots/ex02_course_map.png
+  capture_command: cd module8/examples/course_map && make clean && make run
+  cwd: .
+  slides:
+  - 11
+- id: ex03_design_subset
+  type: screenshot
+  file: assets/screenshots/ex03_design_subset.png
+  capture_command: cd module8/examples/design_subset && make clean && make run
+  cwd: .
+  slides:
+  - 12
+- id: ex04_learning_path
+  type: screenshot
+  file: assets/screenshots/ex04_learning_path.png
+  capture_command: cd module8/examples/learning_path && make clean && make run
+  cwd: .
+  slides:
+  - 13
+- id: ex05_migration_steps
+  type: screenshot
+  file: assets/screenshots/ex05_migration_steps.png
+  capture_command: cd module8/examples/migration_steps && make clean && make run
+  cwd: .
+  slides:
+  - 14
+- id: ex06_pitfalls
+  type: screenshot
+  file: assets/screenshots/ex06_pitfalls.png
+  capture_command: cd module8/examples/pitfalls && make clean && make run
+  cwd: .
+  slides:
+  - 15
+- id: ex07_synthesizable_subset
+  type: screenshot
+  file: assets/screenshots/ex07_synthesizable_subset.png
+  capture_command: cd module8/examples/synthesizable_subset && make clean && make
+    run
+  cwd: .
+  slides:
+  - 16
+- id: ex08_tool_support
+  type: screenshot
+  file: assets/screenshots/ex08_tool_support.png
+  capture_command: cd module8/examples/tool_support && make clean && make run
+  cwd: .
+  slides:
+  - 17
+- id: ex09_version_selection
+  type: screenshot
+  file: assets/screenshots/ex09_version_selection.png
+  capture_command: cd module8/examples/version_selection && make clean && make run
+  cwd: .
+  slides:
+  - 18
+- id: ex10_version_timeline
+  type: screenshot
+  file: assets/screenshots/ex10_version_timeline.png
+  capture_command: cd module8/examples/version_timeline && make clean && make run
+  cwd: .
+  slides:
+  - 19

@@ -1,0 +1,233 @@
+title: Module 6 — IEEE 1800-2017 (Current SystemVerilog)
+course: learn_verilog_systemverilog
+module: 6
+subtitle: 'Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM,
+  merged Verilog and SystemVerilog, and design/verification overview.'
+footer: learn_verilog_systemverilog / Module 6
+slides:
+- type: title
+  title: Module 6
+  subtitle: IEEE 1800-2017 (Current SystemVerilog)
+- type: bullets
+  title: Learning objectives
+  bullets:
+  - 'Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged
+    Verilog and SystemVerilog, and design/verification overview.'
+- type: bullets
+  title: Prerequisites
+  bullets:
+  - See module README
+- type: image
+  title: Learning path
+  image: assets/diagrams/learning_path.png
+  caption: 'Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM,
+    merged Verilog and SystemVerilog, and design/verification overview.'
+- type: bullets
+  title: Overview
+  bullets:
+  - This module covers IEEE Std 1800-2017, the current SystemVerilog standard. In
+    1800-2017, the Verilog language (formerly IEEE 1364) is merged into the SystemVerilog
+    LRM, so one document defines both the Verilog subset and
+- type: section
+  title: Syllabus topics
+- type: bullets
+  title: 1. IEEE 1800-2017 Context (1/2)
+  bullets:
+  - 'Before 2017: IEEE 1364 defined Verilog; IEEE 1800 defined SystemVerilog (extending
+    1364). Two documents.'
+  - '1800-2017: One LRM (IEEE 1800-2017) defines both the Verilog subset and SystemVerilog.
+    IEEE 1364 is superseded by 1800 for new designs.'
+  - 'Implication: When you say "IEEE 1800-2017," you are referring to the full language
+    (Verilog + SystemVerilog). "Verilog" is now the subset of 1800 that corresponds
+    to former 1364.'
+  - 'Structure: Single LRM; consistent numbering and cross-references; Verilog and
+    SystemVerilog in one place.'
+  - 'Clarifications: Scheduling, generate, interfaces, assertions, coverage, DPI,
+    and many other areas refined.'
+  - 'Corrections: Errata and ambiguous cases addressed.'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 1. IEEE 1800-2017 Context (2/2)
+  bullets:
+  - 'Additions: Any new or clarified features in the 2017 edition (check LRM for specifics;
+    often incremental).'
+  - 'No separate 1364: For new work, use 1800-2017; legacy "1364-only" is the subset
+    of 1800 that omits SystemVerilog-only constructs.'
+  - RTL and testbenches written for 1364-1995 through 1800-2012 remain valid in 1800-2017
+    when they use only constructs that are still defined and unchanged.
+  - Adopt 2017 as the reference standard for new projects unless a project or tool
+    explicitly targets an older revision.
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 2. Verilog as a Subset of 1800-2017 (1/2)
+  bullets:
+  - 'Modules, ports: ANSI or non-ANSI (1364-1995 style); wire, reg.'
+  - 'Procedural blocks: always, initial; always @* (2001); explicit sensitivity (1995).'
+  - 'No SystemVerilog-only: No logic, always_comb/always_ff, interfaces, packages,
+    unique/priority case (use 1364 case + attributes if needed), classes, SVA (unless
+    added explicitly).'
+  - 'Use: When the flow or legacy code requires "Verilog only" (e.g. synthesis or
+    IP that does not accept SystemVerilog).'
+  - logic, always_comb, always_ff, always_latch.
+  - Interfaces and modports.
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 2. Verilog as a Subset of 1800-2017 (2/2)
+  bullets:
+  - Packages and import.
+  - unique case, priority case.
+  - 2-state types (bit, int, etc.) where useful.
+  - 'Use: When the flow supports SystemVerilog; preferred for new RTL for clarity
+    and tool checking.'
+  - 'Verilog-only (1364 subset): Maximum portability; use when tools or IP are Verilog-only.'
+  - 'SystemVerilog design (1800 subset): Better expressiveness and checking; use when
+    the flow supports 1800.'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 3. Design Constructs in 1800-2017 (Recap and Clarifications) (1/2)
+  bullets:
+  - 'Rule: logic must have exactly one driver (one assign, one always block, or one
+    port connection).'
+  - '2017: Semantics of multiple drivers, resolution, and connection rules are clarified
+    in the LRM.'
+  - 'Intent: Combinational, sequential (flip-flop), or latch; tools can check and
+    warn.'
+  - '2017: Execution order, sensitivity, and interaction with other processes are
+    clarified.'
+  - 'Use: Bundle signals; modports define direction per role.'
+  - '2017: Interface connection, parameterization, and modport rules are refined.'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 3. Design Constructs in 1800-2017 (Recap and Clarifications) (2/2)
+  bullets:
+  - 'Use: Shared types, constants, functions; explicit namespace.'
+  - '2017: Import scope, search order, and compilation-unit interaction are clarified.'
+  - 'Semantics: At most one match (unique) or first match wins (priority); runtime
+    checks possible.'
+  - '2017: Case statement semantics and synthesis mapping are clarified.'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 4. Assertions and Verification in 1800-2017 (Context) (1/2)
+  bullets:
+  - 'Immediate: `assert (condition);` — executed when reached; useful for invariants
+    in RTL.'
+  - 'Concurrent: `assert property (...);` — temporal; used in verification and bind
+    files.'
+  - '2017: Property syntax, scheduling, and binding are clarified.'
+  - 'Checker: Reusable block of assertions/assumptions/coverage (from 2012); instantiated
+    or bound.'
+  - '2017: Checker semantics and instantiation are clarified.'
+  - 'Covergroups, coverpoints: Defined in 1800; used in verification.'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 4. Assertions and Verification in 1800-2017 (Context) (2/2)
+  bullets:
+  - '2017: Coverage options and semantics are refined.'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 5. Synthesis and Tool Support (1800-2017) (1/2)
+  bullets:
+  - 'Generally supported: logic, always_comb, always_ff, interfaces, packages, generate,
+    parameter, localparam, unique/priority case, assign, operators, signed.'
+  - 'Often not supported or tool-specific: Classes, full SVA, dynamic arrays/queues
+    in RTL, virtual interface, DPI in RTL, delays, initial (except for FPGA init per
+    tool).'
+  - 'Check tool docs: Each vendor defines the exact synthesizable subset for 1800-2017.'
+  - '1800-2017: Most commercial and several open-source simulators support a large
+    subset of 1800-2017.'
+  - 'Revisions: Tools may support 2005, 2009, 2012, or 2017; choose project standard
+    to match tool and IP.'
+  - 'Lint: Many tools check 1800-2017 syntax and common RTL rules (e.g. single driver,
+    blocking/nonblocking).'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 5. Synthesis and Tool Support (1800-2017) (2/2)
+  bullets:
+  - 'Formal: Assertions and checkers are used with formal tools; 2017 clarifies semantics
+    for consistency.'
+  notes: From MODULE6 Topics Covered.
+- type: bullets
+  title: 6. Version Timeline Summary (1995 → 2017)
+  bullets:
+  - See docs/MODULE6.md
+  notes: From MODULE6 Topics Covered.
+- type: section
+  title: Hands-on examples
+- type: demo
+  title: Module 6 toolchain check
+  command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
+    2>&1 | head -1)"'
+  screenshot: assets/screenshots/module6_check.png
+  expect_stdout_contains: iverilog
+  notes: Requires iverilog on PATH (apt install iverilog).
+- type: demo
+  title: 'Demo: Verilog vs SystemVerilog Subset'
+  command: cd module6/examples/subsets && make clean && make run
+  screenshot: assets/screenshots/ex01_subsets.png
+  notes: 'Hands-on: module6/examples/subsets/'
+- type: demo
+  title: 'Demo: Design Constructs Recap'
+  command: cd module6/examples/design_recap && make clean && make run
+  screenshot: assets/screenshots/ex02_design_recap.png
+  notes: 'Hands-on: module6/examples/design_recap/'
+- type: demo
+  title: 'Demo: Immediate Assertion in RTL'
+  command: cd module6/examples/assertions && make clean && make run
+  screenshot: assets/screenshots/ex03_assertions.png
+  notes: 'Hands-on: module6/examples/assertions/'
+- type: demo
+  title: 'Demo: Version Comparison'
+  command: cd module6/examples/version_summary && make clean && make run
+  screenshot: assets/screenshots/ex04_version_summary.png
+  notes: 'Hands-on: module6/examples/version_summary/'
+- type: demo
+  title: 'Demo: Migration'
+  command: cd module6/examples/migration && make clean && make run
+  screenshot: assets/screenshots/ex05_migration.png
+  notes: 'Hands-on: module6/examples/migration/'
+- type: demo
+  title: 'Demo: Logic Single Driver'
+  command: cd module6/examples/logic_single_driver && make clean && make run
+  screenshot: assets/screenshots/ex06_logic_single_driver.png
+  notes: 'Hands-on: module6/examples/logic_single_driver/'
+- type: demo
+  title: 'Demo: Priority Case'
+  command: cd module6/examples/priority_case && make clean && make run
+  screenshot: assets/screenshots/ex07_priority_case.png
+  notes: 'Hands-on: module6/examples/priority_case/'
+- type: demo
+  title: 'Demo: Package and Import'
+  command: cd module6/examples/package_import && make clean && make run
+  screenshot: assets/screenshots/ex08_package_import.png
+  notes: 'Hands-on: module6/examples/package_import/'
+- type: demo
+  title: 'Demo: Unique Case'
+  command: cd module6/examples/unique_case && make clean && make run
+  screenshot: assets/screenshots/ex09_unique_case.png
+  notes: 'Hands-on: module6/examples/unique_case/'
+- type: section
+  title: Practice & assessment
+- type: bullets
+  title: Exercises
+  bullets:
+  - Subset Comparison
+  - 1800-2017 Design Checklist
+  - Immediate Assertion
+  - Version Table
+  - Migration Plan
+- type: bullets
+  title: Exercises
+  bullets:
+  - Assuming 1364 Is Still a Separate Standard
+  - Mixing Revisions in One Project
+  - Ignoring Tool Support
+  - Assertions in Synthesis
+  - Over-Migrating Legacy Code
+- type: bullets
+  title: Summary & next steps
+  bullets:
+  - 'Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged
+    Verilog and SystemVerilog, and design/verification overview.'
+  - Complete module6/CHECKLIST.md
+  - Run ./scripts/module6.sh --check
+  - 'Next: Next module in course'

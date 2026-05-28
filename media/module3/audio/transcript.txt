@@ -1,0 +1,63 @@
+[Slide 1] IEEE 1364-2005 (Verilog-2005) Module 3
+
+[Slide 2] Learning objectives Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+
+[Slide 3] Prerequisites See module README
+
+[Slide 4] Learning path Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+
+[Slide 5] Overview This module covers IEEE Std 1364-2005 (Verilog-2005), the last standard that defines Verilog alone before it was merged with SystemVerilog (IEEE 1800). You'll learn what 2005 adds or clarifies over 2001: minor language c
+
+[Slide 6] Syllabus topics
+
+[Slide 7] From MODULE3 Topics Covered.
+
+[Slide 8] From MODULE3 Topics Covered.
+
+[Slide 9] From MODULE3 Topics Covered.
+
+[Slide 10] From MODULE3 Topics Covered.
+
+[Slide 11] From MODULE3 Topics Covered.
+
+[Slide 12] From MODULE3 Topics Covered.
+
+[Slide 13] From MODULE3 Topics Covered.
+
+[Slide 14] From MODULE3 Topics Covered.
+
+[Slide 15] From MODULE3 Topics Covered.
+
+[Slide 16] From MODULE3 Topics Covered.
+
+[Slide 17] Hands-on examples
+
+[Slide 18] Requires iverilog on PATH (apt install iverilog).
+
+[Slide 19] Hands-on: module3/examples/parameters/
+
+[Slide 20] Hands-on: module3/examples/no_defparam/
+
+[Slide 21] Hands-on: module3/examples/synthesizable/
+
+[Slide 22] Hands-on: module3/examples/one_driver/
+
+[Slide 23] Hands-on: module3/examples/procedural/
+
+[Slide 24] Hands-on: module3/examples/pipeline/
+
+[Slide 25] Hands-on: module3/examples/case_styles/
+
+[Slide 26] Hands-on: module3/examples/avoid_latch/
+
+[Slide 27] Hands-on: module3/examples/function_synth/
+
+[Slide 28] Hands-on: module3/examples/summary/
+
+[Slide 29] Practice & assessment
+
+[Slide 30] Exercises Remove defparam Synthesizable Checklist Blocking vs Nonblocking Case and Latches 1364-2005 Summary
+
+[Slide 31] Exercises Using defparam in New Code Mixing Blocking and Nonblocking for Same Variable Assuming unique/priority case in 1364-2005 Latches from Incomplete case/if Using SystemVerilog in “1364-2005” Project
+
+[Slide 32] Summary & next steps Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog. Complete module3/CHECKLIST.md Run ./scripts/module3.sh --check Next: Next module in course

@@ -1,0 +1,106 @@
+module: 4
+course: learn_verilog_systemverilog
+assets:
+- id: learning_path
+  type: diagram
+  file: assets/diagrams/learning_path.png
+  source: assets/diagrams/learning_path.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 4
+  license: learn_verilog_systemverilog course materials
+- id: module4_check
+  type: screenshot
+  file: assets/screenshots/module4_check.png
+  capture_command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog
+    -V 2>&1 | head -1)"'
+  cwd: .
+  slides:
+  - 18
+  expect_stdout_contains: Icarus Verilog
+  description: Verify iverilog is installed
+- id: ex01_data_types
+  type: screenshot
+  file: assets/screenshots/ex01_data_types.png
+  capture_command: cd module4/examples/data_types && make clean && make run
+  cwd: .
+  slides:
+  - 20
+- id: ex02_logic_ports
+  type: screenshot
+  file: assets/screenshots/ex02_logic_ports.png
+  capture_command: cd module4/examples/logic_ports && make clean && make run
+  cwd: .
+  slides:
+  - 21
+- id: ex03_procedural
+  type: screenshot
+  file: assets/screenshots/ex03_procedural.png
+  capture_command: cd module4/examples/procedural && make clean && make run
+  cwd: .
+  slides:
+  - 22
+- id: ex04_always_latch
+  type: screenshot
+  file: assets/screenshots/ex04_always_latch.png
+  capture_command: cd module4/examples/always_latch && make clean && make run
+  cwd: .
+  slides:
+  - 23
+- id: ex05_one_driver_logic
+  type: screenshot
+  file: assets/screenshots/ex05_one_driver_logic.png
+  capture_command: cd module4/examples/one_driver_logic && make clean && make run
+  cwd: .
+  slides:
+  - 24
+- id: ex06_typedef_sv
+  type: screenshot
+  file: assets/screenshots/ex06_typedef_sv.png
+  capture_command: cd module4/examples/typedef_sv && make clean && make run
+  cwd: .
+  slides:
+  - 25
+- id: ex07_interfaces
+  type: screenshot
+  file: assets/screenshots/ex07_interfaces.png
+  capture_command: cd module4/examples/interfaces && make clean && make run
+  cwd: .
+  slides:
+  - 26
+- id: ex08_packages
+  type: screenshot
+  file: assets/screenshots/ex08_packages.png
+  capture_command: cd module4/examples/packages && make clean && make run
+  cwd: .
+  slides:
+  - 27
+- id: ex09_package_typedef
+  type: screenshot
+  file: assets/screenshots/ex09_package_typedef.png
+  capture_command: cd module4/examples/package_typedef && make clean && make run
+  cwd: .
+  slides:
+  - 28
+- id: ex10_case_unique_priority
+  type: screenshot
+  file: assets/screenshots/ex10_case_unique_priority.png
+  capture_command: cd module4/examples/case_unique_priority && make clean && make
+    run
+  cwd: .
+  slides:
+  - 29
+- id: ex11_priority_case
+  type: screenshot
+  file: assets/screenshots/ex11_priority_case.png
+  capture_command: cd module4/examples/priority_case && make clean && make run
+  cwd: .
+  slides:
+  - 30
+- id: ex12_migration
+  type: screenshot
+  file: assets/screenshots/ex12_migration.png
+  capture_command: cd module4/examples/migration && make clean && make run
+  cwd: .
+  slides:
+  - 31

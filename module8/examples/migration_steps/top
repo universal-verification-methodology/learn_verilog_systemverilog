@@ -1,5 +1,5 @@
 #! /usr/bin/vvp
-:ivl_version "11.0 (stable)";
+:ivl_version "12.0 (stable)";
 :ivl_delay_selection "TYPICAL";
 :vpi_time_precision + 0;
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
@@ -8,11 +8,11 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x563ad5d32cb0 .scope package, "$unit" "$unit" 2 1;
+S_0x5641ac41f490 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x563ad5d0acf0 .scope module, "top" "top" 3 6;
+S_0x5641ac41f640 .scope module, "top" "top" 3 6;
  .timescale 0 0;
-    .scope S_0x563ad5d0acf0;
+    .scope S_0x5641ac41f640;
 T_0 ;
     %vpi_call/w 3 8 "$display", "=== Module 8: Migration steps quick reference ===" {0 0 0};
     %vpi_call/w 3 9 "$display", "  1364-1995 -> 1364-2001:" {0 0 0};

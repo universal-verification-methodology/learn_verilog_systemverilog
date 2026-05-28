@@ -1,0 +1,127 @@
+1
+00:00:00,000 --> 00:00:06,312
+IEEE 1800-2017 (Current SystemVerilog) Module 6
+
+2
+00:00:06,662 --> 00:00:19,670
+Learning objectives Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview.
+
+3
+00:00:20,020 --> 00:00:22,780
+Prerequisites See module README
+
+4
+00:00:23,130 --> 00:00:35,922
+Learning path Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview.
+
+5
+00:00:36,272 --> 00:00:57,560
+Overview This module covers IEEE Std 1800-2017, the current SystemVerilog standard. In 1800-2017, the Verilog language (formerly IEEE 1364) is merged into the SystemVerilog LRM, so one document defines both the Verilog subset and
+
+6
+00:00:57,910 --> 00:01:00,166
+Syllabus topics
+
+7
+00:01:00,516 --> 00:01:03,372
+From MODULE6 Topics Covered.
+
+8
+00:01:03,722 --> 00:01:06,578
+From MODULE6 Topics Covered.
+
+9
+00:01:06,928 --> 00:01:09,784
+From MODULE6 Topics Covered.
+
+10
+00:01:10,134 --> 00:01:12,990
+From MODULE6 Topics Covered.
+
+11
+00:01:13,340 --> 00:01:16,196
+From MODULE6 Topics Covered.
+
+12
+00:01:16,546 --> 00:01:19,402
+From MODULE6 Topics Covered.
+
+13
+00:01:19,752 --> 00:01:22,608
+From MODULE6 Topics Covered.
+
+14
+00:01:22,958 --> 00:01:25,814
+From MODULE6 Topics Covered.
+
+15
+00:01:26,164 --> 00:01:29,020
+From MODULE6 Topics Covered.
+
+16
+00:01:29,370 --> 00:01:32,226
+From MODULE6 Topics Covered.
+
+17
+00:01:32,576 --> 00:01:35,432
+From MODULE6 Topics Covered.
+
+18
+00:01:35,782 --> 00:01:38,014
+Hands-on examples
+
+19
+00:01:38,364 --> 00:01:42,684
+Requires iverilog on PATH (apt install iverilog).
+
+20
+00:01:43,034 --> 00:01:47,738
+Hands-on: module6/examples/subsets/
+
+21
+00:01:48,088 --> 00:01:53,464
+Hands-on: module6/examples/design_recap/
+
+22
+00:01:53,814 --> 00:01:58,542
+Hands-on: module6/examples/assertions/
+
+23
+00:01:58,892 --> 00:02:04,292
+Hands-on: module6/examples/version_summary/
+
+24
+00:02:04,642 --> 00:02:09,442
+Hands-on: module6/examples/migration/
+
+25
+00:02:09,792 --> 00:02:16,080
+Hands-on: module6/examples/logic_single_driver/
+
+26
+00:02:16,430 --> 00:02:21,806
+Hands-on: module6/examples/priority_case/
+
+27
+00:02:22,156 --> 00:02:27,556
+Hands-on: module6/examples/package_import/
+
+28
+00:02:27,906 --> 00:02:33,114
+Hands-on: module6/examples/unique_case/
+
+29
+00:02:33,464 --> 00:02:35,792
+Practice & assessment
+
+30
+00:02:36,142 --> 00:02:44,494
+Exercises Subset Comparison 1800-2017 Design Checklist Immediate Assertion Version Table Migration Plan
+
+31
+00:02:44,844 --> 00:02:55,428
+Exercises Assuming 1364 Is Still a Separate Standard Mixing Revisions in One Project Ignoring Tool Support Assertions in Synthesis Over-Migrating Legacy Code
+
+32
+00:02:55,778 --> 00:03:18,122
+Summary & next steps Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview. Complete module6/CHECKLIST.md Run ./scripts/module6.sh --check Next: Next module in course

@@ -1,0 +1,91 @@
+1
+00:00:00,000 --> 00:00:03,312
+Quick Reference and Course Summary Module 8
+
+2
+00:00:03,662 --> 00:00:16,478
+Learning objectives Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017).
+
+3
+00:00:16,828 --> 00:00:19,588
+Prerequisites See module README
+
+4
+00:00:19,938 --> 00:00:32,466
+Learning path Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017).
+
+5
+00:00:32,816 --> 00:00:48,680
+Overview This module is a **reference and summary** for the version-centric Verilog/SystemVerilog course (Modules 1–7). It does not introduce new language features. It consolidates the version timeline, construct-by-standard tabl
+
+6
+00:00:49,030 --> 00:00:51,286
+Syllabus topics
+
+7
+00:00:51,636 --> 00:00:54,396
+From MODULE8 Topics Covered.
+
+8
+00:00:54,746 --> 00:00:56,978
+Hands-on examples
+
+9
+00:00:57,328 --> 00:01:01,648
+Requires iverilog on PATH (apt install iverilog).
+
+10
+00:01:01,998 --> 00:01:07,518
+Hands-on: module8/examples/construct_lookup/
+
+11
+00:01:07,868 --> 00:01:13,004
+Hands-on: module8/examples/course_map/
+
+12
+00:01:13,354 --> 00:01:18,802
+Hands-on: module8/examples/design_subset/
+
+13
+00:01:19,152 --> 00:01:24,432
+Hands-on: module8/examples/learning_path/
+
+14
+00:01:24,782 --> 00:01:30,278
+Hands-on: module8/examples/migration_steps/
+
+15
+00:01:30,628 --> 00:01:35,260
+Hands-on: module8/examples/pitfalls/
+
+16
+00:01:35,610 --> 00:01:41,466
+Hands-on: module8/examples/synthesizable_subset/
+
+17
+00:01:41,816 --> 00:01:47,072
+Hands-on: module8/examples/tool_support/
+
+18
+00:01:47,422 --> 00:01:52,942
+Hands-on: module8/examples/version_selection/
+
+19
+00:01:53,292 --> 00:01:58,716
+Hands-on: module8/examples/version_timeline/
+
+20
+00:01:59,066 --> 00:02:01,394
+Practice & assessment
+
+21
+00:02:01,744 --> 00:02:06,088
+Exercises Lookup Subset Migration Course map Cheat sheet
+
+22
+00:02:06,438 --> 00:02:18,606
+Exercises Assuming a construct is in an older standard Mixing subsets without a rule Skipping regression after migration Forgetting tool support Treating this module as a replacement for Modules 1–7
+
+23
+00:02:18,956 --> 00:02:40,772
+Summary & next steps Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017). Complete module8/CHECKLIST.md Run ./scripts/module8.sh --check Next: Next module in course

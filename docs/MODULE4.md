@@ -6,6 +6,14 @@
 
 **Estimated time**: 8–12 hours (examples + exercises + reading). Interfaces and packages may require a simulator with full SystemVerilog support.
 
+
+## Running Module 4
+
+From the repo root:
+
+- **Run all examples**: `./scripts/module4.sh`
+- **Slides & video**: [slides.pptx](../media/module4/slides.pptx) · [slides.pdf](../media/module4/slides.pdf) · [video.mp4](../media/module4/video.mp4) — regenerate: `./scripts/build_all_media.sh --module 4`
+
 ## Table of Contents
 
 - [Overview](#overview)

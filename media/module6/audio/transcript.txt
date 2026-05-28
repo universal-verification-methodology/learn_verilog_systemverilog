@@ -1,0 +1,63 @@
+[Slide 1] IEEE 1800-2017 (Current SystemVerilog) Module 6
+
+[Slide 2] Learning objectives Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview.
+
+[Slide 3] Prerequisites See module README
+
+[Slide 4] Learning path Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview.
+
+[Slide 5] Overview This module covers IEEE Std 1800-2017, the current SystemVerilog standard. In 1800-2017, the Verilog language (formerly IEEE 1364) is merged into the SystemVerilog LRM, so one document defines both the Verilog subset and
+
+[Slide 6] Syllabus topics
+
+[Slide 7] From MODULE6 Topics Covered.
+
+[Slide 8] From MODULE6 Topics Covered.
+
+[Slide 9] From MODULE6 Topics Covered.
+
+[Slide 10] From MODULE6 Topics Covered.
+
+[Slide 11] From MODULE6 Topics Covered.
+
+[Slide 12] From MODULE6 Topics Covered.
+
+[Slide 13] From MODULE6 Topics Covered.
+
+[Slide 14] From MODULE6 Topics Covered.
+
+[Slide 15] From MODULE6 Topics Covered.
+
+[Slide 16] From MODULE6 Topics Covered.
+
+[Slide 17] From MODULE6 Topics Covered.
+
+[Slide 18] Hands-on examples
+
+[Slide 19] Requires iverilog on PATH (apt install iverilog).
+
+[Slide 20] Hands-on: module6/examples/subsets/
+
+[Slide 21] Hands-on: module6/examples/design_recap/
+
+[Slide 22] Hands-on: module6/examples/assertions/
+
+[Slide 23] Hands-on: module6/examples/version_summary/
+
+[Slide 24] Hands-on: module6/examples/migration/
+
+[Slide 25] Hands-on: module6/examples/logic_single_driver/
+
+[Slide 26] Hands-on: module6/examples/priority_case/
+
+[Slide 27] Hands-on: module6/examples/package_import/
+
+[Slide 28] Hands-on: module6/examples/unique_case/
+
+[Slide 29] Practice & assessment
+
+[Slide 30] Exercises Subset Comparison 1800-2017 Design Checklist Immediate Assertion Version Table Migration Plan
+
+[Slide 31] Exercises Assuming 1364 Is Still a Separate Standard Mixing Revisions in One Project Ignoring Tool Support Assertions in Synthesis Over-Migrating Legacy Code
+
+[Slide 32] Summary & next steps Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview. Complete module6/CHECKLIST.md Run ./scripts/module6.sh --check Next: Next module in course

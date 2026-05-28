@@ -6,6 +6,14 @@
 
 **Estimated time**: 4–6 hours (examples + exercises + checklists). No new language features; focus on comparison and migration practice.
 
+
+## Running Module 7
+
+From the repo root:
+
+- **Run all examples**: `./scripts/module7.sh`
+- **Slides & video**: [slides.pptx](../media/module7/slides.pptx) · [slides.pdf](../media/module7/slides.pdf) · [video.mp4](../media/module7/video.mp4) — regenerate: `./scripts/build_all_media.sh --module 7`
+
 ## Table of Contents
 
 - [Overview](#overview)

@@ -1,5 +1,5 @@
 #! /usr/bin/vvp
-:ivl_version "11.0 (stable)";
+:ivl_version "12.0 (stable)";
 :ivl_delay_selection "TYPICAL";
 :vpi_time_precision + 0;
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
@@ -8,92 +8,92 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x564f62850640 .scope package, "$unit" "$unit" 2 1;
+S_0x5617aba2d8b0 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x564f628507d0 .scope module, "top" "top" 3 22;
+S_0x5617aba2da40 .scope module, "top" "top" 3 22;
  .timescale 0 0;
-v0x564f62866a20_0 .var "addr", 3 0;
-v0x564f62866b00_0 .var "clk", 0 0;
-v0x564f62866ba0_0 .var "din", 7 0;
-v0x564f62866ca0_0 .net "dout", 7 0, v0x564f6283ec70_0;  1 drivers
-v0x564f62866d70_0 .var "we", 0 0;
-S_0x564f6283f6d0 .scope module, "u_mem" "mem_simple" 3 27, 3 6 0, S_0x564f628507d0;
+v0x5617aba43d90_0 .var "addr", 3 0;
+v0x5617aba43e70_0 .var "clk", 0 0;
+v0x5617aba43f10_0 .var "din", 7 0;
+v0x5617aba44010_0 .net "dout", 7 0, v0x5617aba1c330_0;  1 drivers
+v0x5617aba440e0_0 .var "we", 0 0;
+S_0x5617ab9f2490 .scope module, "u_mem" "mem_simple" 3 27, 3 6 0, S_0x5617aba2da40;
  .timescale 0 0;
     .port_info 0 /INPUT 1 "clk";
     .port_info 1 /INPUT 1 "we";
     .port_info 2 /INPUT 4 "addr";
     .port_info 3 /INPUT 8 "din";
     .port_info 4 /OUTPUT 8 "dout";
-P_0x564f6283b710 .param/l "DEPTH" 0 3 6, +C4<00000000000000000000000000010000>;
-P_0x564f6283b750 .param/l "WIDTH" 0 3 6, +C4<00000000000000000000000000001000>;
-v0x564f6283d9d0_0 .net "addr", 3 0, v0x564f62866a20_0;  1 drivers
-v0x564f6283e610_0 .net "clk", 0 0, v0x564f62866b00_0;  1 drivers
-v0x564f6283ea60_0 .net "din", 7 0, v0x564f62866ba0_0;  1 drivers
-v0x564f6283ec70_0 .var "dout", 7 0;
-v0x564f628667b0 .array "mem", 15 0, 7 0;
-v0x564f628668c0_0 .net "we", 0 0, v0x564f62866d70_0;  1 drivers
-E_0x564f6284e130 .event posedge, v0x564f6283e610_0;
-    .scope S_0x564f6283f6d0;
+P_0x5617aba18d60 .param/l "DEPTH" 0 3 6, +C4<00000000000000000000000000010000>;
+P_0x5617aba18da0 .param/l "WIDTH" 0 3 6, +C4<00000000000000000000000000001000>;
+v0x5617aba1b030_0 .net "addr", 3 0, v0x5617aba43d90_0;  1 drivers
+v0x5617aba1bca0_0 .net "clk", 0 0, v0x5617aba43e70_0;  1 drivers
+v0x5617aba1c120_0 .net "din", 7 0, v0x5617aba43f10_0;  1 drivers
+v0x5617aba1c330_0 .var "dout", 7 0;
+v0x5617aba43b20 .array "mem", 15 0, 7 0;
+v0x5617aba43c30_0 .net "we", 0 0, v0x5617aba440e0_0;  1 drivers
+E_0x5617aba2cde0 .event posedge, v0x5617aba1bca0_0;
+    .scope S_0x5617ab9f2490;
 T_0 ;
-    %wait E_0x564f6284e130;
-    %load/vec4 v0x564f6283d9d0_0;
+    %wait E_0x5617aba2cde0;
+    %load/vec4 v0x5617aba1b030_0;
     %pad/u 6;
     %ix/vec4 4;
-    %load/vec4a v0x564f628667b0, 4;
-    %assign/vec4 v0x564f6283ec70_0, 0;
-    %load/vec4 v0x564f628668c0_0;
+    %load/vec4a v0x5617aba43b20, 4;
+    %assign/vec4 v0x5617aba1c330_0, 0;
+    %load/vec4 v0x5617aba43c30_0;
     %flag_set/vec4 8;
     %jmp/0xz  T_0.0, 8;
-    %load/vec4 v0x564f6283ea60_0;
-    %load/vec4 v0x564f6283d9d0_0;
+    %load/vec4 v0x5617aba1c120_0;
+    %load/vec4 v0x5617aba1b030_0;
     %pad/u 6;
     %ix/vec4 3;
     %ix/load 4, 0, 0; Constant delay
-    %assign/vec4/a/d v0x564f628667b0, 0, 4;
+    %assign/vec4/a/d v0x5617aba43b20, 0, 4;
 T_0.0 ;
     %jmp T_0;
     .thread T_0;
-    .scope S_0x564f628507d0;
+    .scope S_0x5617aba2da40;
 T_1 ;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x564f62866b00_0, 0, 1;
+    %store/vec4 v0x5617aba43e70_0, 0, 1;
     %end;
     .thread T_1;
-    .scope S_0x564f628507d0;
+    .scope S_0x5617aba2da40;
 T_2 ;
     %delay 5, 0;
-    %load/vec4 v0x564f62866b00_0;
+    %load/vec4 v0x5617aba43e70_0;
     %inv;
-    %store/vec4 v0x564f62866b00_0, 0, 1;
+    %store/vec4 v0x5617aba43e70_0, 0, 1;
     %jmp T_2;
     .thread T_2;
-    .scope S_0x564f628507d0;
+    .scope S_0x5617aba2da40;
 T_3 ;
     %vpi_call/w 3 33 "$display", "Array (1800-2012): fixed array; parameterized DEPTH/WIDTH" {0 0 0};
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x564f62866d70_0, 0, 1;
+    %store/vec4 v0x5617aba440e0_0, 0, 1;
     %pushi/vec4 0, 0, 4;
-    %store/vec4 v0x564f62866a20_0, 0, 4;
+    %store/vec4 v0x5617aba43d90_0, 0, 4;
     %pushi/vec4 0, 0, 8;
-    %store/vec4 v0x564f62866ba0_0, 0, 8;
-    %wait E_0x564f6284e130;
+    %store/vec4 v0x5617aba43f10_0, 0, 8;
+    %wait E_0x5617aba2cde0;
     %delay 2, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x564f62866d70_0, 0, 1;
+    %store/vec4 v0x5617aba440e0_0, 0, 1;
     %pushi/vec4 3, 0, 4;
-    %store/vec4 v0x564f62866a20_0, 0, 4;
+    %store/vec4 v0x5617aba43d90_0, 0, 4;
     %pushi/vec4 163, 0, 8;
-    %store/vec4 v0x564f62866ba0_0, 0, 8;
-    %wait E_0x564f6284e130;
+    %store/vec4 v0x5617aba43f10_0, 0, 8;
+    %wait E_0x5617aba2cde0;
     %delay 2, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x564f62866d70_0, 0, 1;
+    %store/vec4 v0x5617aba440e0_0, 0, 1;
     %pushi/vec4 3, 0, 4;
-    %store/vec4 v0x564f62866a20_0, 0, 4;
-    %wait E_0x564f6284e130;
-    %wait E_0x564f6284e130;
+    %store/vec4 v0x5617aba43d90_0, 0, 4;
+    %wait E_0x5617aba2cde0;
+    %wait E_0x5617aba2cde0;
     %delay 1, 0;
-    %vpi_call/w 3 41 "$display", "  addr=3 dout=%h", v0x564f62866ca0_0 {0 0 0};
+    %vpi_call/w 3 41 "$display", "  addr=3 dout=%h", v0x5617aba44010_0 {0 0 0};
     %delay 20, 0;
     %vpi_call/w 3 42 "$finish" {0 0 0};
     %end;
