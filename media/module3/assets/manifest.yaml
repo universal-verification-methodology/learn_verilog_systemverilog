@@ -8,6 +8,7 @@ assets:
   generator: render_diagrams.sh
   slides:
   - 4
+  - 4
   license: learn_verilog_systemverilog course materials
 - id: module3_check
   type: screenshot
@@ -16,7 +17,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 18
+  - 21
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_parameters
@@ -25,67 +26,67 @@ assets:
   capture_command: cd module3/examples/parameters && make clean && make run
   cwd: .
   slides:
-  - 20
+  - 24
 - id: ex02_no_defparam
   type: screenshot
   file: assets/screenshots/ex02_no_defparam.png
   capture_command: cd module3/examples/no_defparam && make clean && make run
   cwd: .
   slides:
-  - 21
+  - 26
 - id: ex03_synthesizable
   type: screenshot
   file: assets/screenshots/ex03_synthesizable.png
   capture_command: cd module3/examples/synthesizable && make clean && make run
   cwd: .
   slides:
-  - 22
+  - 28
 - id: ex04_one_driver
   type: screenshot
   file: assets/screenshots/ex04_one_driver.png
   capture_command: cd module3/examples/one_driver && make clean && make run
   cwd: .
   slides:
-  - 23
+  - 30
 - id: ex05_procedural
   type: screenshot
   file: assets/screenshots/ex05_procedural.png
   capture_command: cd module3/examples/procedural && make clean && make run
   cwd: .
   slides:
-  - 24
+  - 32
 - id: ex06_pipeline
   type: screenshot
   file: assets/screenshots/ex06_pipeline.png
   capture_command: cd module3/examples/pipeline && make clean && make run
   cwd: .
   slides:
-  - 25
+  - 34
 - id: ex07_case_styles
   type: screenshot
   file: assets/screenshots/ex07_case_styles.png
   capture_command: cd module3/examples/case_styles && make clean && make run
   cwd: .
   slides:
-  - 26
+  - 36
 - id: ex08_avoid_latch
   type: screenshot
   file: assets/screenshots/ex08_avoid_latch.png
   capture_command: cd module3/examples/avoid_latch && make clean && make run
   cwd: .
   slides:
-  - 27
+  - 38
 - id: ex09_function_synth
   type: screenshot
   file: assets/screenshots/ex09_function_synth.png
   capture_command: cd module3/examples/function_synth && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 40
 - id: ex10_summary
   type: screenshot
   file: assets/screenshots/ex10_summary.png
   capture_command: cd module3/examples/summary && make clean && make run
   cwd: .
   slides:
-  - 29
+  - 42

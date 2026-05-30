@@ -14,6 +14,20 @@ From the repo root:
 - **Run all examples**: `./scripts/module4.sh`
 - **Slides & video**: [slides.pptx](../media/module4/slides.pptx) · [slides.pdf](../media/module4/slides.pdf) · [video.mp4](../media/module4/video.mp4) — regenerate: `./scripts/build_all_media.sh --module 4`
 
+
+
+## How to Learn This Module
+
+Follow this path to learn **IEEE 1800-2005 (SystemVerilog Design Subset)** in order:
+
+1. **Skim this document** — Goal, Overview, and Topics Covered set the IEEE scope for Module 4.
+2. **Study design architecture** — See how DUTs, examples, and testbenches fit together under `module4/`.
+3. **Work through labs in order** — Open `module4/EXAMPLES.md` and run each `make clean && make run` from the repo root.
+4. **Run the full module script** — `./scripts/module4.sh` from the repo root to simulate all examples and tests.
+5. **Complete the exercises** — Try each exercise in this document before reading solutions or peeking at reference RTL.
+6. **Review Common Pitfalls** — Can you explain each mistake and the fix?
+7. **Self-check** — Use `module4/CHECKLIST.md` before starting the next module.
+
 ## Table of Contents
 
 - [Overview](#overview)

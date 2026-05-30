@@ -8,13 +8,13 @@
 
 [Slide 5] Overview This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It extends Verilog (IEEE 1364-2005) with design and verification features. Here the focus is on the **design subset** used for RTL: the `logic` typ
 
-[Slide 6] Syllabus topics
+[Slide 6] How to learn this module
 
-[Slide 7] From MODULE4 Topics Covered.
+[Slide 7] From docs/MODULE4.md — read guides before running demos.
 
-[Slide 8] From MODULE4 Topics Covered.
+[Slide 8] From docs/MODULE4.md — read guides before running demos.
 
-[Slide 9] From MODULE4 Topics Covered.
+[Slide 9] Syllabus topics
 
 [Slide 10] From MODULE4 Topics Covered.
 
@@ -30,38 +30,84 @@
 
 [Slide 16] From MODULE4 Topics Covered.
 
-[Slide 17] Hands-on examples
+[Slide 17] From MODULE4 Topics Covered.
 
-[Slide 18] Requires iverilog on PATH (apt install iverilog).
+[Slide 18] From MODULE4 Topics Covered.
 
-[Slide 19] Hands-on: module4/examples/data_types/
+[Slide 19] From MODULE4 Topics Covered.
 
-[Slide 20] Hands-on: module4/examples/logic_ports/
+[Slide 20] Hands-on examples
 
-[Slide 21] Hands-on: module4/examples/procedural/
+[Slide 21] Requires iverilog on PATH (apt install iverilog).
 
-[Slide 22] Hands-on: module4/examples/always_latch/
+[Slide 22] module4/examples/data_types/README.md
 
-[Slide 23] Hands-on: module4/examples/one_driver_logic/
+[Slide 23] Hands-on: module4/examples/data_types/
 
-[Slide 24] Hands-on: module4/examples/typedef_sv/
+[Slide 24] module4/examples/logic_ports/README.md
 
-[Slide 25] Hands-on: module4/examples/interfaces/
+[Slide 25] Hands-on: module4/examples/logic_ports/
 
-[Slide 26] Hands-on: module4/examples/packages/
+[Slide 26] module4/examples/procedural/README.md
 
-[Slide 27] Hands-on: module4/examples/package_typedef/
+[Slide 27] Hands-on: module4/examples/procedural/
 
-[Slide 28] Hands-on: module4/examples/case_unique_priority/
+[Slide 28] module4/examples/always_latch/README.md
 
-[Slide 29] Hands-on: module4/examples/priority_case/
+[Slide 29] Hands-on: module4/examples/always_latch/
 
-[Slide 30] Hands-on: module4/examples/migration/
+[Slide 30] module4/examples/one_driver_logic/README.md
 
-[Slide 31] Practice & assessment
+[Slide 31] Hands-on: module4/examples/one_driver_logic/
 
-[Slide 32] Exercises logic and always_comb/always_ff Interface Package unique case Migration Summary
+[Slide 32] module4/examples/typedef_sv/README.md
 
-[Slide 33] Exercises Multiple Drivers on logic Using always_comb with Latched Behavior Wrong Modport or Direction Forgetting to import Package unique case with Multiple Matches
+[Slide 33] Hands-on: module4/examples/typedef_sv/
 
-[Slide 34] Summary & next steps Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case. Complete module4/CHECKLIST.md Run ./scripts/module4.sh --check Next: Next module in course
+[Slide 34] module4/examples/interfaces/README.md
+
+[Slide 35] Hands-on: module4/examples/interfaces/
+
+[Slide 36] module4/examples/packages/README.md
+
+[Slide 37] Hands-on: module4/examples/packages/
+
+[Slide 38] module4/examples/package_typedef/README.md
+
+[Slide 39] Hands-on: module4/examples/package_typedef/
+
+[Slide 40] module4/examples/case_unique_priority/README.md
+
+[Slide 41] Hands-on: module4/examples/case_unique_priority/
+
+[Slide 42] module4/examples/priority_case/README.md
+
+[Slide 43] Hands-on: module4/examples/priority_case/
+
+[Slide 44] module4/examples/migration/README.md
+
+[Slide 45] Hands-on: module4/examples/migration/
+
+[Slide 46] Common pitfalls
+
+[Slide 47] From MODULE4 Common Pitfalls.
+
+[Slide 48] From MODULE4 Common Pitfalls.
+
+[Slide 49] From MODULE4 Common Pitfalls.
+
+[Slide 50] From MODULE4 Common Pitfalls.
+
+[Slide 51] From MODULE4 Common Pitfalls.
+
+[Slide 52] Practice & assessment
+
+[Slide 53] From MODULE4 Learning Outcomes.
+
+[Slide 54] From MODULE4 Learning Outcomes.
+
+[Slide 55] Exercises logic and always_comb/always_ff Interface Package unique case Migration Summary
+
+[Slide 56] Exercises Multiple Drivers on logic Using always_comb with Latched Behavior Wrong Modport or Direction Forgetting to import Package unique case with Multiple Matches
+
+[Slide 57] Summary & next steps Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case. Complete module4/CHECKLIST.md Review module4/EXAMPLES.md and run each lab Next: Next module in course

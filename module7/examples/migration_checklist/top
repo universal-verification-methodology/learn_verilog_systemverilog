@@ -8,11 +8,11 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x558df07c74e0 .scope package, "$unit" "$unit" 2 1;
+S_0x556bf7d524e0 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x558df07c6470 .scope module, "top" "top" 3 6;
+S_0x556bf7d51470 .scope module, "top" "top" 3 6;
  .timescale 0 0;
-    .scope S_0x558df07c6470;
+    .scope S_0x556bf7d51470;
 T_0 ;
     %vpi_call/w 3 8 "$display", "Module 7: Migration checklist (1364 -> 1800 design subset)" {0 0 0};
     %vpi_call/w 3 9 "$display", "  Pre: target standard, baseline sim/synth, list files/hierarchy" {0 0 0};

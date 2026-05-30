@@ -8,13 +8,13 @@
 
 [Slide 5] Overview This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision of the Verilog standard. You'll learn what 2001 adds over 1995: ANSI-style port and task/function declarations, `always @*` for combinational
 
-[Slide 6] Syllabus topics
+[Slide 6] How to learn this module
 
-[Slide 7] From MODULE2 Topics Covered.
+[Slide 7] From docs/MODULE2.md — read guides before running demos.
 
-[Slide 8] From MODULE2 Topics Covered.
+[Slide 8] From docs/MODULE2.md — read guides before running demos.
 
-[Slide 9] From MODULE2 Topics Covered.
+[Slide 9] Syllabus topics
 
 [Slide 10] From MODULE2 Topics Covered.
 
@@ -28,40 +28,88 @@
 
 [Slide 15] From MODULE2 Topics Covered.
 
-[Slide 16] Hands-on examples
+[Slide 16] From MODULE2 Topics Covered.
 
-[Slide 17] Requires iverilog on PATH (apt install iverilog).
+[Slide 17] From MODULE2 Topics Covered.
 
-[Slide 18] Hands-on: module2/examples/ansi_ports/
+[Slide 18] From MODULE2 Topics Covered.
 
-[Slide 19] Hands-on: module2/examples/procedural/
+[Slide 19] Hands-on examples
 
-[Slide 20] Hands-on: module2/examples/generate/
+[Slide 20] Requires iverilog on PATH (apt install iverilog).
 
-[Slide 21] Hands-on: module2/examples/generate_if/
+[Slide 21] module2/examples/ansi_ports/README.md
 
-[Slide 22] Hands-on: module2/examples/generate_ripple_adder/
+[Slide 22] Hands-on: module2/examples/ansi_ports/
 
-[Slide 23] Hands-on: module2/examples/signed/
+[Slide 23] module2/examples/procedural/README.md
 
-[Slide 24] Hands-on: module2/examples/signed_compare/
+[Slide 24] Hands-on: module2/examples/procedural/
 
-[Slide 25] Hands-on: module2/examples/decoder/
+[Slide 25] module2/examples/generate/README.md
 
-[Slide 26] Hands-on: module2/examples/arrays/
+[Slide 26] Hands-on: module2/examples/generate/
 
-[Slide 27] Hands-on: module2/examples/multi_dim_arrays/
+[Slide 27] module2/examples/generate_if/README.md
 
-[Slide 28] Hands-on: module2/examples/parameters/
+[Slide 28] Hands-on: module2/examples/generate_if/
 
-[Slide 29] Hands-on: module2/examples/tasks_functions/
+[Slide 29] module2/examples/generate_ripple_adder/README.md
 
-[Slide 30] Hands-on: module2/examples/task_ansi/
+[Slide 30] Hands-on: module2/examples/generate_ripple_adder/
 
-[Slide 31] Practice & assessment
+[Slide 31] module2/examples/signed/README.md
 
-[Slide 32] Exercises ANSI Ports always @ Generate Signed Arrays and localparam
+[Slide 32] Hands-on: module2/examples/signed/
 
-[Slide 33] Exercises Using always @* for Sequential Logic genvar in Normal Code Overriding localparam Signed vs Unsigned Mix Generate Block Scope
+[Slide 33] module2/examples/signed_compare/README.md
 
-[Slide 34] Summary & next steps Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays. Complete module2/CHECKLIST.md Run ./scripts/module2.sh --check Next: Next module in course
+[Slide 34] Hands-on: module2/examples/signed_compare/
+
+[Slide 35] module2/examples/decoder/README.md
+
+[Slide 36] Hands-on: module2/examples/decoder/
+
+[Slide 37] module2/examples/arrays/README.md
+
+[Slide 38] Hands-on: module2/examples/arrays/
+
+[Slide 39] module2/examples/multi_dim_arrays/README.md
+
+[Slide 40] Hands-on: module2/examples/multi_dim_arrays/
+
+[Slide 41] module2/examples/parameters/README.md
+
+[Slide 42] Hands-on: module2/examples/parameters/
+
+[Slide 43] module2/examples/tasks_functions/README.md
+
+[Slide 44] Hands-on: module2/examples/tasks_functions/
+
+[Slide 45] module2/examples/task_ansi/README.md
+
+[Slide 46] Hands-on: module2/examples/task_ansi/
+
+[Slide 47] Common pitfalls
+
+[Slide 48] From MODULE2 Common Pitfalls.
+
+[Slide 49] From MODULE2 Common Pitfalls.
+
+[Slide 50] From MODULE2 Common Pitfalls.
+
+[Slide 51] From MODULE2 Common Pitfalls.
+
+[Slide 52] From MODULE2 Common Pitfalls.
+
+[Slide 53] Practice & assessment
+
+[Slide 54] From MODULE2 Learning Outcomes.
+
+[Slide 55] From MODULE2 Learning Outcomes.
+
+[Slide 56] Exercises ANSI Ports always @ Generate Signed Arrays and localparam
+
+[Slide 57] Exercises Using always @* for Sequential Logic genvar in Normal Code Overriding localparam Signed vs Unsigned Mix Generate Block Scope
+
+[Slide 58] Summary & next steps Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays. Complete module2/CHECKLIST.md Review module2/EXAMPLES.md and run each lab Next: Next module in course

@@ -106,7 +106,8 @@ log "Setting up Python skill venv..."
 bash "$SKILL_SCRIPTS/setup.sh" | tail -3
 
 if [[ $REGENERATE_EXAMPLES -eq 1 ]]; then
-  log "Regenerating moduleN/EXAMPLES.md..."
+  log "Regenerating learning content + moduleN/EXAMPLES.md..."
+  python3 "$SCRIPT_DIR/generate_learning_content.py"
   python3 "$SCRIPT_DIR/generate_examples_md.py"
 fi
 

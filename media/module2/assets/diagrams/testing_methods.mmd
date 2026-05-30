@@ -1,0 +1,5 @@
+flowchart TB
+  M2["module2.sh"] --> T1["test_mux_param.v width sweep"]
+  M2 --> T2["test_shift_reg_gen.v depth"]
+  M2 --> T3["test_counter_param.v wrap"]
+  T1 --> OK["All PARAM scenarios pass"]

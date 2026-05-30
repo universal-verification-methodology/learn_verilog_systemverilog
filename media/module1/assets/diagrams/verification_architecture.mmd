@@ -1,0 +1,9 @@
+flowchart LR
+  subgraph Flow["Simulation loop"]
+    E["module1/examples/*/make run"]
+    S["scripts/module1.sh"]
+    T["module1/tests/"]
+  end
+  E --> S
+  S --> T
+  T --> PASS["Exhaustive vectors PASS"]

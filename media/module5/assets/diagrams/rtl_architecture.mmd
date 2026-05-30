@@ -1,0 +1,8 @@
+flowchart TB
+  subgraph DUT["module5/dut"]
+    DEC["decoder_inside"]
+    FSM["small_fsm_sv + assert"]
+    MEM["mem_array_sv"]
+  end
+  DEC --> INSIDE["inside operator"]
+  FSM --> AIMM["immediate assert"]

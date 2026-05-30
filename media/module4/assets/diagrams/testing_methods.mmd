@@ -1,0 +1,5 @@
+flowchart TB
+  M4["module4.sh"] --> T1["test_mux2_sv"]
+  M4 --> T2["test_bus_master_slave"]
+  M4 --> T3["test_decoder_unique"]
+  T2 --> IFCHK["interface loopback check"]

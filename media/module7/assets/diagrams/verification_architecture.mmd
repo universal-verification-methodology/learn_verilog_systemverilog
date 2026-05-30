@@ -1,0 +1,6 @@
+flowchart LR
+  TB["test_mux2_all.sv"] --> M14
+  TB --> M18
+  CMP["output compare"] --> PASS["equivalent"]
+  M14 --> CMP
+  M18 --> CMP

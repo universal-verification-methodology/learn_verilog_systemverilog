@@ -8,6 +8,7 @@ assets:
   generator: render_diagrams.sh
   slides:
   - 4
+  - 4
   license: learn_verilog_systemverilog course materials
 - id: module6_check
   type: screenshot
@@ -16,7 +17,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 19
+  - 22
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_subsets
@@ -25,60 +26,60 @@ assets:
   capture_command: cd module6/examples/subsets && make clean && make run
   cwd: .
   slides:
-  - 21
+  - 25
 - id: ex02_design_recap
   type: screenshot
   file: assets/screenshots/ex02_design_recap.png
   capture_command: cd module6/examples/design_recap && make clean && make run
   cwd: .
   slides:
-  - 22
+  - 27
 - id: ex03_assertions
   type: screenshot
   file: assets/screenshots/ex03_assertions.png
   capture_command: cd module6/examples/assertions && make clean && make run
   cwd: .
   slides:
-  - 23
+  - 29
 - id: ex04_version_summary
   type: screenshot
   file: assets/screenshots/ex04_version_summary.png
   capture_command: cd module6/examples/version_summary && make clean && make run
   cwd: .
   slides:
-  - 24
+  - 31
 - id: ex05_migration
   type: screenshot
   file: assets/screenshots/ex05_migration.png
   capture_command: cd module6/examples/migration && make clean && make run
   cwd: .
   slides:
-  - 25
+  - 33
 - id: ex06_logic_single_driver
   type: screenshot
   file: assets/screenshots/ex06_logic_single_driver.png
   capture_command: cd module6/examples/logic_single_driver && make clean && make run
   cwd: .
   slides:
-  - 26
+  - 35
 - id: ex07_priority_case
   type: screenshot
   file: assets/screenshots/ex07_priority_case.png
   capture_command: cd module6/examples/priority_case && make clean && make run
   cwd: .
   slides:
-  - 27
+  - 37
 - id: ex08_package_import
   type: screenshot
   file: assets/screenshots/ex08_package_import.png
   capture_command: cd module6/examples/package_import && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 39
 - id: ex09_unique_case
   type: screenshot
   file: assets/screenshots/ex09_unique_case.png
   capture_command: cd module6/examples/unique_case && make clean && make run
   cwd: .
   slides:
-  - 29
+  - 41

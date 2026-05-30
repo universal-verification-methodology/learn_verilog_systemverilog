@@ -1,135 +1,171 @@
-# Module 8 Examples
+# Module 8 — Hands-on labs
 
-Hands-on **Icarus Verilog** demos for Module 8. Run from the course repo root unless noted.
+Generated from `docs/MODULE8.md` for slides, PDF, and video.
+Run commands from the **course repository root** unless noted.
 
----
+**Before you start:** Read `docs/MODULE8.md` → **How to Learn This Module**, then work through each lab in order.
 
-## 1. Construct Lookup (`construct_lookup/`)
+## 1. quick_ref (`One-page/`)
 
-Build and simulate: `module8/examples/construct_lookup/`.
+**Folder:** `module8/examples/One-page/`
 
-**Try these** (from repo root):
+**Run:**
 
 ```bash
-cd module8/examples/construct_lookup
+cd module8/examples/One-page
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 2. Course Map (`course_map/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/One-page/`.
 
-Build and simulate: `module8/examples/course_map/`.
+## 2. version_timeline (`Version/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Version/`
+
+**Run:**
 
 ```bash
-cd module8/examples/course_map
+cd module8/examples/Version
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 3. Design Subset (`design_subset/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Version/`.
 
-Build and simulate: `module8/examples/design_subset/`.
+## 3. design_subset (`Verilog-only/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Verilog-only/`
+
+**Run:**
 
 ```bash
-cd module8/examples/design_subset
+cd module8/examples/Verilog-only
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 4. Learning Path (`learning_path/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Verilog-only/`.
 
-Build and simulate: `module8/examples/learning_path/`.
+## 4. tool_support (`Tool/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Tool/`
+
+**Run:**
 
 ```bash
-cd module8/examples/learning_path
+cd module8/examples/Tool
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 5. Migration Steps (`migration_steps/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Tool/`.
 
-Build and simulate: `module8/examples/migration_steps/`.
+## 5. construct_lookup (`"Which/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/"Which/`
+
+**Run:**
 
 ```bash
-cd module8/examples/migration_steps
+cd module8/examples/"Which
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 6. Pitfalls (`pitfalls/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/"Which/`.
 
-Build and simulate: `module8/examples/pitfalls/`.
+## 6. course_map (`Course/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Course/`
+
+**Run:**
 
 ```bash
-cd module8/examples/pitfalls
+cd module8/examples/Course
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 7. Synthesizable Subset (`synthesizable_subset/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Course/`.
 
-Build and simulate: `module8/examples/synthesizable_subset/`.
+## 7. migration_steps (`Migration/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Migration/`
+
+**Run:**
 
 ```bash
-cd module8/examples/synthesizable_subset
+cd module8/examples/Migration
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 8. Tool Support (`tool_support/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Migration/`.
 
-Build and simulate: `module8/examples/tool_support/`.
+## 8. synthesizable_subset (`Synthesizable/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Synthesizable/`
+
+**Run:**
 
 ```bash
-cd module8/examples/tool_support
+cd module8/examples/Synthesizable
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 9. Version Selection (`version_selection/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Synthesizable/`.
 
-Build and simulate: `module8/examples/version_selection/`.
+## 9. version_selection (`Version/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Version/`
+
+**Run:**
 
 ```bash
-cd module8/examples/version_selection
+cd module8/examples/Version
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
 
-## 10. Version Timeline (`version_timeline/`)
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Version/`.
 
-Build and simulate: `module8/examples/version_timeline/`.
+## 10. learning_path (`Learning/`)
 
-**Try these** (from repo root):
+**Folder:** `module8/examples/Learning/`
+
+**Run:**
 
 ```bash
-cd module8/examples/version_timeline
+cd module8/examples/Learning
 make clean && make run
 ```
 
----
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Learning/`.
+
+## 11. pitfalls (`Common/`)
+
+**Folder:** `module8/examples/Common/`
+
+**Run:**
+
+```bash
+cd module8/examples/Common
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE8.md` and RTL under `module8/examples/Common/`.

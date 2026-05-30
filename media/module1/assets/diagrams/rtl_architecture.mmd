@@ -1,0 +1,19 @@
+flowchart TB
+  subgraph TB["Testbench (1364-1995)"]
+    INIT["initial: stimulus #/@"]
+    CHK["$display / if checks"]
+  end
+  subgraph DUT["module1/dut/simple_gates"]
+    AND["and_gate"]
+    OR["or_gate"]
+    NOT["not_gate"]
+  end
+  subgraph EX["examples/"]
+    MUX["mux2 assign"]
+    DFF["sequential_dff"]
+  end
+  INIT --> AND
+  INIT --> OR
+  INIT --> MUX
+  MUX --> CHK
+  AND --> CHK

@@ -8,13 +8,13 @@
 
 [Slide 5] Overview This module covers IEEE Std 1364-2005 (Verilog-2005), the last standard that defines Verilog alone before it was merged with SystemVerilog (IEEE 1800). You'll learn what 2005 adds or clarifies over 2001: minor language c
 
-[Slide 6] Syllabus topics
+[Slide 6] How to learn this module
 
-[Slide 7] From MODULE3 Topics Covered.
+[Slide 7] From docs/MODULE3.md — read guides before running demos.
 
-[Slide 8] From MODULE3 Topics Covered.
+[Slide 8] From docs/MODULE3.md — read guides before running demos.
 
-[Slide 9] From MODULE3 Topics Covered.
+[Slide 9] Syllabus topics
 
 [Slide 10] From MODULE3 Topics Covered.
 
@@ -30,34 +30,74 @@
 
 [Slide 16] From MODULE3 Topics Covered.
 
-[Slide 17] Hands-on examples
+[Slide 17] From MODULE3 Topics Covered.
 
-[Slide 18] Requires iverilog on PATH (apt install iverilog).
+[Slide 18] From MODULE3 Topics Covered.
 
-[Slide 19] Hands-on: module3/examples/parameters/
+[Slide 19] From MODULE3 Topics Covered.
 
-[Slide 20] Hands-on: module3/examples/no_defparam/
+[Slide 20] Hands-on examples
 
-[Slide 21] Hands-on: module3/examples/synthesizable/
+[Slide 21] Requires iverilog on PATH (apt install iverilog).
 
-[Slide 22] Hands-on: module3/examples/one_driver/
+[Slide 22] module3/examples/parameters/README.md
 
-[Slide 23] Hands-on: module3/examples/procedural/
+[Slide 23] Hands-on: module3/examples/parameters/
 
-[Slide 24] Hands-on: module3/examples/pipeline/
+[Slide 24] module3/examples/no_defparam/README.md
 
-[Slide 25] Hands-on: module3/examples/case_styles/
+[Slide 25] Hands-on: module3/examples/no_defparam/
 
-[Slide 26] Hands-on: module3/examples/avoid_latch/
+[Slide 26] module3/examples/synthesizable/README.md
 
-[Slide 27] Hands-on: module3/examples/function_synth/
+[Slide 27] Hands-on: module3/examples/synthesizable/
 
-[Slide 28] Hands-on: module3/examples/summary/
+[Slide 28] module3/examples/one_driver/README.md
 
-[Slide 29] Practice & assessment
+[Slide 29] Hands-on: module3/examples/one_driver/
 
-[Slide 30] Exercises Remove defparam Synthesizable Checklist Blocking vs Nonblocking Case and Latches 1364-2005 Summary
+[Slide 30] module3/examples/procedural/README.md
 
-[Slide 31] Exercises Using defparam in New Code Mixing Blocking and Nonblocking for Same Variable Assuming unique/priority case in 1364-2005 Latches from Incomplete case/if Using SystemVerilog in “1364-2005” Project
+[Slide 31] Hands-on: module3/examples/procedural/
 
-[Slide 32] Summary & next steps Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog. Complete module3/CHECKLIST.md Run ./scripts/module3.sh --check Next: Next module in course
+[Slide 32] module3/examples/pipeline/README.md
+
+[Slide 33] Hands-on: module3/examples/pipeline/
+
+[Slide 34] module3/examples/case_styles/README.md
+
+[Slide 35] Hands-on: module3/examples/case_styles/
+
+[Slide 36] module3/examples/avoid_latch/README.md
+
+[Slide 37] Hands-on: module3/examples/avoid_latch/
+
+[Slide 38] module3/examples/function_synth/README.md
+
+[Slide 39] Hands-on: module3/examples/function_synth/
+
+[Slide 40] module3/examples/summary/README.md
+
+[Slide 41] Hands-on: module3/examples/summary/
+
+[Slide 42] Common pitfalls
+
+[Slide 43] From MODULE3 Common Pitfalls.
+
+[Slide 44] From MODULE3 Common Pitfalls.
+
+[Slide 45] From MODULE3 Common Pitfalls.
+
+[Slide 46] From MODULE3 Common Pitfalls.
+
+[Slide 47] From MODULE3 Common Pitfalls.
+
+[Slide 48] Practice & assessment
+
+[Slide 49] From MODULE3 Learning Outcomes.
+
+[Slide 50] Exercises Remove defparam Synthesizable Checklist Blocking vs Nonblocking Case and Latches 1364-2005 Summary
+
+[Slide 51] Exercises Using defparam in New Code Mixing Blocking and Nonblocking for Same Variable Assuming unique/priority case in 1364-2005 Latches from Incomplete case/if Using SystemVerilog in “1364-2005” Project
+
+[Slide 52] Summary & next steps Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog. Complete module3/CHECKLIST.md Review module3/EXAMPLES.md and run each lab Next: Next module in course

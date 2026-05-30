@@ -30,6 +30,28 @@ slides:
     Verilog (IEEE 1364-2005) with design and verification features. Here the focus
     is on the **design subset** used for RTL: the `logic` typ'
 - type: section
+  title: How to learn this module
+- type: bullets
+  title: Suggested learning path (1/2)
+  bullets:
+  - Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for
+    Module 4.
+  - Study design architecture — See how DUTs, examples, and testbenches fit together
+    under `module4/`.
+  - Work through labs in order — Open `module4/EXAMPLES.md` and run each `make clean
+    && make run` from the repo root.
+  - Run the full module script — `./scripts/module4.sh` from the repo root to simulate
+    all examples and tests.
+  - Complete the exercises — Try each exercise in this document before reading solutions
+    or peeking at reference RTL.
+  notes: From docs/MODULE4.md — read guides before running demos.
+- type: bullets
+  title: Suggested learning path (2/2)
+  bullets:
+  - Review Common Pitfalls — Can you explain each mistake and the fix?
+  - Self-check — Use `module4/CHECKLIST.md` before starting the next module.
+  notes: From docs/MODULE4.md — read guides before running demos.
+- type: section
   title: Syllabus topics
 - type: bullets
   title: 1. IEEE 1800-2005 Context (1/2)
@@ -146,70 +168,208 @@ slides:
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
     2>&1 | head -1)"'
   screenshot: assets/screenshots/module4_check.png
-  expect_stdout_contains: iverilog
+  expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+- type: bullets
+  title: 'Example 1: logic and 2-State Types'
+  bullets:
+  - logic for ports and internal single-driver signals
+  - Single driver for logic; 4-state
+  notes: module4/examples/data_types/README.md
 - type: demo
   title: 'Demo: logic and 2-State Types'
   command: cd module4/examples/data_types && make clean && make run
   screenshot: assets/screenshots/ex01_data_types.png
   notes: 'Hands-on: module4/examples/data_types/'
+- type: bullets
+  title: 'Example 2: logic Ports'
+  bullets:
+  - All ports logic (mux, adder); no wire/reg choice
+  - assign and always_comb can drive output logic
+  notes: module4/examples/logic_ports/README.md
 - type: demo
   title: 'Demo: logic Ports'
   command: cd module4/examples/logic_ports && make clean && make run
   screenshot: assets/screenshots/ex02_logic_ports.png
   notes: 'Hands-on: module4/examples/logic_ports/'
+- type: bullets
+  title: 'Example 3: always_comb / always_ff'
+  bullets:
+  - Combinational with always_comb; sequential with always_ff
+  - Explicit intent; tool checks; no latch in always_comb
+  notes: module4/examples/procedural/README.md
 - type: demo
   title: 'Demo: always_comb / always_ff'
   command: cd module4/examples/procedural && make clean && make run
   screenshot: assets/screenshots/ex03_procedural.png
   notes: 'Hands-on: module4/examples/procedural/'
+- type: bullets
+  title: 'Example 4: always_latch'
+  bullets:
+  - Explicit latch when intended (e.g. transparent latch)
+  - Use when latch is desired; prefer always_comb/always_ff otherwise
+  notes: module4/examples/always_latch/README.md
 - type: demo
   title: 'Demo: always_latch'
   command: cd module4/examples/always_latch && make clean && make run
   screenshot: assets/screenshots/ex04_always_latch.png
   notes: 'Hands-on: module4/examples/always_latch/'
+- type: bullets
+  title: 'Example 5: One Driver per logic'
+  bullets:
+  - Single assign to one output; single always_ff to another
+  - logic must have exactly one driver
+  notes: module4/examples/one_driver_logic/README.md
 - type: demo
   title: 'Demo: One Driver per logic'
   command: cd module4/examples/one_driver_logic && make clean && make run
   screenshot: assets/screenshots/ex05_one_driver_logic.png
   notes: 'Hands-on: module4/examples/one_driver_logic/'
+- type: bullets
+  title: 'Example 6: typedef'
+  bullets:
+  - typedef in module (e.g. byte_t = logic [7:0])
+  - User-defined types for clarity
+  notes: module4/examples/typedef_sv/README.md
 - type: demo
   title: 'Demo: typedef'
   command: cd module4/examples/typedef_sv && make clean && make run
   screenshot: assets/screenshots/ex06_typedef_sv.png
   notes: 'Hands-on: module4/examples/typedef_sv/'
+- type: bullets
+  title: 'Example 7: Interfaces and Modports'
+  bullets:
+  - Interface definition, modports, connection in top
+  - One bundle per connection; direction per modport
+  notes: module4/examples/interfaces/README.md
 - type: demo
   title: 'Demo: Interfaces and Modports'
   command: cd module4/examples/interfaces && make clean && make run
   screenshot: assets/screenshots/ex07_interfaces.png
   notes: 'Hands-on: module4/examples/interfaces/'
+- type: bullets
+  title: 'Example 8: Packages and import'
+  bullets:
+  - Package with types/params/functions; import in modules
+  - Namespace; wildcard vs specific import
+  notes: module4/examples/packages/README.md
 - type: demo
   title: 'Demo: Packages and import'
   command: cd module4/examples/packages && make clean && make run
   screenshot: assets/screenshots/ex08_packages.png
   notes: 'Hands-on: module4/examples/packages/'
+- type: bullets
+  title: 'Example 9: Package with typedef and function'
+  bullets:
+  - Package with typedef and min_word function; import in ALU
+  - Shared types and helpers across modules
+  notes: module4/examples/package_typedef/README.md
 - type: demo
   title: 'Demo: Package with typedef and function'
   command: cd module4/examples/package_typedef && make clean && make run
   screenshot: assets/screenshots/ex09_package_typedef.png
   notes: 'Hands-on: module4/examples/package_typedef/'
+- type: bullets
+  title: 'Example 10: unique / priority case'
+  bullets:
+  - unique case (at most one match); priority case (first match)
+  - Standard semantics; synthesis and simulation behavior
+  notes: module4/examples/case_unique_priority/README.md
 - type: demo
   title: 'Demo: unique / priority case'
   command: cd module4/examples/case_unique_priority && make clean && make run
   screenshot: assets/screenshots/ex10_case_unique_priority.png
   notes: 'Hands-on: module4/examples/case_unique_priority/'
+- type: bullets
+  title: 'Example 11: priority case only'
+  bullets:
+  - Arbiter with priority case (first req wins)
+  - priority case for arbiter, interrupt mask
+  notes: module4/examples/priority_case/README.md
 - type: demo
   title: 'Demo: priority case only'
   command: cd module4/examples/priority_case && make clean && make run
   screenshot: assets/screenshots/ex11_priority_case.png
   notes: 'Hands-on: module4/examples/priority_case/'
+- type: bullets
+  title: 'Example 12: Migration from 1364'
+  bullets:
+  - Same small design in 1364-2005 style vs 1800-2005 style
+  - wire/reg→logic, always @*→always_comb, always @(posedge clk)→always_ff
+  notes: module4/examples/migration/README.md
 - type: demo
   title: 'Demo: Migration from 1364'
   command: cd module4/examples/migration && make clean && make run
   screenshot: assets/screenshots/ex12_migration.png
   notes: 'Hands-on: module4/examples/migration/'
 - type: section
+  title: Common pitfalls
+- type: bullets
+  title: Multiple Drivers on logic
+  bullets:
+  - 'Mistake: Driving the same logic from two assign statements or two always blocks.'
+  - 'Reality: logic allows only one driver; multiple drivers are illegal or undefined.'
+  - 'Correct: Use one assign or one always per logic; for multiple drivers use wire
+    (e.g. tri-state).'
+  - 'Why: logic is for single-driver RTL; wire is for resolved (multi-driver) nets.'
+  notes: From MODULE4 Common Pitfalls.
+- type: bullets
+  title: Using always_comb with Latched Behavior
+  bullets:
+  - 'Mistake: Incomplete branches in always_comb (e.g. no default in case) and expecting
+    no latch.'
+  - 'Reality: Tools may infer a latch or report a warning.'
+  - 'Correct: Assign every output in every path, or provide default before case.'
+  - 'Why: always_comb is intended for pure combinational logic; latches require always_latch
+    if desired.'
+  notes: From MODULE4 Common Pitfalls.
+- type: bullets
+  title: Wrong Modport or Direction
+  bullets:
+  - 'Mistake: Driving an input in a modport or reading an output that is not in the
+    modport.'
+  - 'Reality: Compiler or elaboration error; or wrong connectivity.'
+  - 'Correct: Use the modport that matches the module role (master vs slave); check
+    direction in the interface.'
+  - 'Why: Modports enforce direction; using the wrong view breaks the contract.'
+  notes: From MODULE4 Common Pitfalls.
+- type: bullets
+  title: Forgetting to import Package
+  bullets:
+  - 'Mistake: Using a package type or function without importing.'
+  - 'Reality: Identifier not found; compile error.'
+  - 'Correct: Add `import pkg_name::*;` or `import pkg_name::item;` before use.'
+  - 'Why: Package names are in a separate namespace until imported.'
+  notes: From MODULE4 Common Pitfalls.
+- type: bullets
+  title: unique case with Multiple Matches
+  bullets:
+  - 'Mistake: Writing unique case when two items can match (e.g. overlapping or X
+    in select).'
+  - 'Reality: Runtime error or undefined behavior.'
+  - 'Correct: Use unique case only when at most one item can match; use default for
+    catch-all; or use priority case when priority is i'
+  - 'Why: unique case has well-defined semantics; violating them breaks verification
+    and synthesis.'
+  notes: From MODULE4 Common Pitfalls.
+- type: section
   title: Practice & assessment
+- type: bullets
+  title: What you should know (1/2)
+  bullets:
+  - ✓ Use logic for single-driver nets and variables in RTL
+  - ✓ Use always_comb for combinational logic and always_ff for sequential logic
+  - ✓ Define and use interfaces with modports for bundled connectivity
+  - ✓ Define packages and import them in modules
+  - ✓ Use unique case and priority case with correct semantics
+  - ✓ Compare 1364-2005 and 1800-2005 design constructs and migrate simple RTL from
+    Verilog to SystemVerilog design subset
+  notes: From MODULE4 Learning Outcomes.
+- type: bullets
+  title: What you should know (2/2)
+  bullets:
+  - ✓ Decide when to adopt 1800 design features vs stay with 1364
+  notes: From MODULE4 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -232,5 +392,5 @@ slides:
   - 'Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic
     types, always_comb/always_ff, interfaces, packages, and unique/priority case.'
   - Complete module4/CHECKLIST.md
-  - Run ./scripts/module4.sh --check
+  - Review module4/EXAMPLES.md and run each lab
   - 'Next: Next module in course'

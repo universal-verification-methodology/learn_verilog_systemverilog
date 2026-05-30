@@ -8,6 +8,7 @@ assets:
   generator: render_diagrams.sh
   slides:
   - 4
+  - 4
   license: learn_verilog_systemverilog course materials
 - id: module7_check
   type: screenshot
@@ -16,7 +17,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 9
+  - 12
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex07_migration
@@ -25,7 +26,7 @@ assets:
   capture_command: cd module7/examples/migration && make clean && make run
   cwd: .
   slides:
-  - 10
+  - 14
 - id: ex08_migration_1995_to_2001
   type: screenshot
   file: assets/screenshots/ex08_migration_1995_to_2001.png
@@ -33,35 +34,35 @@ assets:
     run
   cwd: .
   slides:
-  - 11
+  - 16
 - id: ex09_case_versions
   type: screenshot
   file: assets/screenshots/ex09_case_versions.png
   capture_command: cd module7/examples/case_versions && make clean && make run
   cwd: .
   slides:
-  - 12
+  - 18
 - id: ex10_version_table
   type: screenshot
   file: assets/screenshots/ex10_version_table.png
   capture_command: cd module7/examples/version_table && make clean && make run
   cwd: .
   slides:
-  - 13
+  - 20
 - id: ex11_version_selection
   type: screenshot
   file: assets/screenshots/ex11_version_selection.png
   capture_command: cd module7/examples/version_selection && make clean && make run
   cwd: .
   slides:
-  - 14
+  - 22
 - id: ex14_migration_checklist
   type: screenshot
   file: assets/screenshots/ex14_migration_checklist.png
   capture_command: cd module7/examples/migration_checklist && make clean && make run
   cwd: .
   slides:
-  - 15
+  - 24
 - id: ex15_incremental_migration
   type: screenshot
   file: assets/screenshots/ex15_incremental_migration.png
@@ -69,18 +70,18 @@ assets:
     run
   cwd: .
   slides:
-  - 16
+  - 26
 - id: ex16_port_style_compare
   type: screenshot
   file: assets/screenshots/ex16_port_style_compare.png
   capture_command: cd module7/examples/port_style_compare && make clean && make run
   cwd: .
   slides:
-  - 17
+  - 28
 - id: ex17_no_defparam
   type: screenshot
   file: assets/screenshots/ex17_no_defparam.png
   capture_command: cd module7/examples/no_defparam && make clean && make run
   cwd: .
   slides:
-  - 18
+  - 30

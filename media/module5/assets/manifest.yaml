@@ -8,6 +8,7 @@ assets:
   generator: render_diagrams.sh
   slides:
   - 4
+  - 4
   license: learn_verilog_systemverilog course materials
 - id: module5_check
   type: screenshot
@@ -16,7 +17,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 19
+  - 22
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_operators
@@ -25,42 +26,42 @@ assets:
   capture_command: cd module5/examples/operators && make clean && make run
   cwd: .
   slides:
-  - 21
+  - 25
 - id: ex02_wildcard_only
   type: screenshot
   file: assets/screenshots/ex02_wildcard_only.png
   capture_command: cd module5/examples/wildcard_only && make clean && make run
   cwd: .
   slides:
-  - 22
+  - 27
 - id: ex03_range_check
   type: screenshot
   file: assets/screenshots/ex03_range_check.png
   capture_command: cd module5/examples/range_check && make clean && make run
   cwd: .
   slides:
-  - 23
+  - 29
 - id: ex04_arrays
   type: screenshot
   file: assets/screenshots/ex04_arrays.png
   capture_command: cd module5/examples/arrays && make clean && make run
   cwd: .
   slides:
-  - 24
+  - 31
 - id: ex05_array_param
   type: screenshot
   file: assets/screenshots/ex05_array_param.png
   capture_command: cd module5/examples/array_param && make clean && make run
   cwd: .
   slides:
-  - 25
+  - 33
 - id: ex06_checkers
   type: screenshot
   file: assets/screenshots/ex06_checkers.png
   capture_command: cd module5/examples/checkers && make clean && make run
   cwd: .
   slides:
-  - 26
+  - 35
 - id: ex07_assert_valid_encoding
   type: screenshot
   file: assets/screenshots/ex07_assert_valid_encoding.png
@@ -68,18 +69,18 @@ assets:
     run
   cwd: .
   slides:
-  - 27
+  - 37
 - id: ex08_assert_invariant
   type: screenshot
   file: assets/screenshots/ex08_assert_invariant.png
   capture_command: cd module5/examples/assert_invariant && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 39
 - id: ex09_summary
   type: screenshot
   file: assets/screenshots/ex09_summary.png
   capture_command: cd module5/examples/summary && make clean && make run
   cwd: .
   slides:
-  - 29
+  - 41

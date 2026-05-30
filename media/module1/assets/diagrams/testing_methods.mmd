@@ -1,0 +1,7 @@
+flowchart TB
+  START["./scripts/module1.sh"] --> EX["Per-example Makefile"]
+  EX --> DISP["$display truth table"]
+  START --> CHK["--check file sanity"]
+  START --> REG["tests/test_and_gate.v"]
+  REG --> REG2["tests/test_mux2.v"]
+  REG2 --> DONE["Regression complete"]

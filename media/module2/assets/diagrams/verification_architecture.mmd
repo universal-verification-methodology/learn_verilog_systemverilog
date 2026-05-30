@@ -1,0 +1,7 @@
+flowchart LR
+  TB["testbench"] -->|"#(.WIDTH)"| MUX
+  TB --> SR
+  TB --> CTR
+  MUX --> CMP["compare expected"]
+  SR --> CMP
+  CTR --> CMP

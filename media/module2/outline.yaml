@@ -32,6 +32,28 @@ slides:
     of the Verilog standard. You''ll learn what 2001 adds over 1995: ANSI-style port
     and task/function declarations, `always @*` for combinational'
 - type: section
+  title: How to learn this module
+- type: bullets
+  title: Suggested learning path (1/2)
+  bullets:
+  - Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for
+    Module 2.
+  - Study design architecture — See how DUTs, examples, and testbenches fit together
+    under `module2/`.
+  - Work through labs in order — Open `module2/EXAMPLES.md` and run each `make clean
+    && make run` from the repo root.
+  - Run the full module script — `./scripts/module2.sh` from the repo root to simulate
+    all examples and tests.
+  - Complete the exercises — Try each exercise in this document before reading solutions
+    or peeking at reference RTL.
+  notes: From docs/MODULE2.md — read guides before running demos.
+- type: bullets
+  title: Suggested learning path (2/2)
+  bullets:
+  - Review Common Pitfalls — Can you explain each mistake and the fix?
+  - Self-check — Use `module2/CHECKLIST.md` before starting the next module.
+  notes: From docs/MODULE2.md — read guides before running demos.
+- type: section
   title: Syllabus topics
 - type: bullets
   title: 1. IEEE 1364-2001 Context (1/2)
@@ -111,75 +133,215 @@ slides:
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
     2>&1 | head -1)"'
   screenshot: assets/screenshots/module2_check.png
-  expect_stdout_contains: iverilog
+  expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+- type: bullets
+  title: 'Example 1: ANSI Ports'
+  bullets:
+  - Module and instantiation with ANSI-style ports
+  - Port direction and type in port list
+  notes: module2/examples/ansi_ports/README.md
 - type: demo
   title: 'Demo: ANSI Ports'
   command: cd module2/examples/ansi_ports && make clean && make run
   screenshot: assets/screenshots/ex01_ansi_ports.png
   notes: 'Hands-on: module2/examples/ansi_ports/'
+- type: bullets
+  title: 'Example 2: always @*'
+  bullets:
+  - Combinational blocks with implicit sensitivity
+  - No manual sensitivity list; tool infers from RHS
+  notes: module2/examples/procedural/README.md
 - type: demo
   title: 'Demo: always @*'
   command: cd module2/examples/procedural && make clean && make run
   screenshot: assets/screenshots/ex02_procedural.png
   notes: 'Hands-on: module2/examples/procedural/'
+- type: bullets
+  title: 'Example 3: Generate'
+  bullets:
+  - Parameterized mux; generate-style parameterization
+  - genvar, elaboration-time logic
+  notes: module2/examples/generate/README.md
 - type: demo
   title: 'Demo: Generate'
   command: cd module2/examples/generate && make clean && make run
   screenshot: assets/screenshots/ex03_generate.png
   notes: 'Hands-on: module2/examples/generate/'
+- type: bullets
+  title: 'Example 4: Generate if/else'
+  bullets:
+  - Conditional implementation by parameter (e.g. USE_CLIP wrap vs saturate)
+  - generate if/else at elaboration
+  notes: module2/examples/generate_if/README.md
 - type: demo
   title: 'Demo: Generate if/else'
   command: cd module2/examples/generate_if && make clean && make run
   screenshot: assets/screenshots/ex04_generate_if.png
   notes: 'Hands-on: module2/examples/generate_if/'
+- type: bullets
+  title: 'Example 5: Generate Ripple Adder'
+  bullets:
+  - N-bit ripple-carry adder using generate for (full_adder instances)
+  - genvar loop, replicated hierarchy
+  notes: module2/examples/generate_ripple_adder/README.md
 - type: demo
   title: 'Demo: Generate Ripple Adder'
   command: cd module2/examples/generate_ripple_adder && make clean && make run
   screenshot: assets/screenshots/ex05_generate_ripple_adder.png
   notes: 'Hands-on: module2/examples/generate_ripple_adder/'
+- type: bullets
+  title: 'Example 6: Signed'
+  bullets:
+  - signed reg/wire, $signed/$unsigned
+  - Two's complement arithmetic in RTL
+  notes: module2/examples/signed/README.md
 - type: demo
   title: 'Demo: Signed'
   command: cd module2/examples/signed && make clean && make run
   screenshot: assets/screenshots/ex06_signed.png
   notes: 'Hands-on: module2/examples/signed/'
+- type: bullets
+  title: 'Example 7: Signed vs Unsigned Comparison'
+  bullets:
+  - $signed() in expressions; a &lt; b unsigned vs signed
+  - Cast in expressions without changing declaration
+  notes: module2/examples/signed_compare/README.md
 - type: demo
   title: 'Demo: Signed vs Unsigned Comparison'
   command: cd module2/examples/signed_compare && make clean && make run
   screenshot: assets/screenshots/ex07_signed_compare.png
   notes: 'Hands-on: module2/examples/signed_compare/'
+- type: bullets
+  title: 'Example 8: Decoder'
+  bullets:
+  - 2:4 decoder with ANSI ports and always @* (case)
+  - Combinational case; one-hot output
+  notes: module2/examples/decoder/README.md
 - type: demo
   title: 'Demo: Decoder'
   command: cd module2/examples/decoder && make clean && make run
   screenshot: assets/screenshots/ex08_decoder.png
   notes: 'Hands-on: module2/examples/decoder/'
+- type: bullets
+  title: 'Example 9: Multi-Dimensional Arrays'
+  bullets:
+  - Memory-style arrays (reg [7:0] mem [0:255]), indexing
+  - Packed vs unpacked; array indexing rules in 2001
+  notes: module2/examples/arrays/README.md
 - type: demo
   title: 'Demo: Multi-Dimensional Arrays'
   command: cd module2/examples/arrays && make clean && make run
   screenshot: assets/screenshots/ex09_arrays.png
   notes: 'Hands-on: module2/examples/arrays/'
+- type: bullets
+  title: 'Example 10: Multi-Dim Style'
+  bullets:
+  - 2x4 buffer using 1D array indexed as row*4+col
+  - Emulating 2D with 1D array; index expression
+  notes: module2/examples/multi_dim_arrays/README.md
 - type: demo
   title: 'Demo: Multi-Dim Style'
   command: cd module2/examples/multi_dim_arrays && make clean && make run
   screenshot: assets/screenshots/ex10_multi_dim_arrays.png
   notes: 'Hands-on: module2/examples/multi_dim_arrays/'
+- type: bullets
+  title: 'Example 11: Parameters and localparam'
+  bullets:
+  - Parameter override, localparam for derived constants
+  - When to use parameter vs localparam
+  notes: module2/examples/parameters/README.md
 - type: demo
   title: 'Demo: Parameters and localparam'
   command: cd module2/examples/parameters && make clean && make run
   screenshot: assets/screenshots/ex11_parameters.png
   notes: 'Hands-on: module2/examples/parameters/'
+- type: bullets
+  title: 'Example 12: ANSI Task/Function'
+  bullets:
+  - Input/output in header, automatic functions
+  - 2001 style vs 1995 style
+  notes: module2/examples/tasks_functions/README.md
 - type: demo
   title: 'Demo: ANSI Task/Function'
   command: cd module2/examples/tasks_functions && make clean && make run
   screenshot: assets/screenshots/ex12_tasks_functions.png
   notes: 'Hands-on: module2/examples/tasks_functions/'
+- type: bullets
+  title: 'Example 13: ANSI Task with Output'
+  bullets:
+  - task automatic apply_reset(output reg rn); begin/end body
+  - Task with output argument; testbench reset pattern
+  notes: module2/examples/task_ansi/README.md
 - type: demo
   title: 'Demo: ANSI Task with Output'
   command: cd module2/examples/task_ansi && make clean && make run
   screenshot: assets/screenshots/ex13_task_ansi.png
   notes: 'Hands-on: module2/examples/task_ansi/'
 - type: section
+  title: Common pitfalls
+- type: bullets
+  title: Using always @* for Sequential Logic
+  bullets:
+  - 'Mistake: `always @* q <= d;` intending a flip-flop.'
+  - 'Reality: `@*` is for combinational logic; it does not create a clock edge.'
+  - 'Correct: Use `always @(posedge clk)` (and `<=`) for sequential logic.'
+  - 'Why: Mixing the two causes simulation/synthesis mismatches and unintended latches.'
+  notes: From MODULE2 Common Pitfalls.
+- type: bullets
+  title: genvar in Normal Code
+  bullets:
+  - 'Mistake: Using genvar in an always block or initial block.'
+  - 'Reality: genvar is only for generate loops; it does not exist at runtime.'
+  - 'Correct: Use integer or reg for runtime loops; use genvar only inside generate
+    for.'
+  - 'Why: genvar is elaborated away; it is not a simulation variable.'
+  notes: From MODULE2 Common Pitfalls.
+- type: bullets
+  title: Overriding localparam
+  bullets:
+  - 'Mistake: Trying to override localparam at instantiation (e.g. `#(.MAX(100))`).'
+  - 'Reality: localparam cannot be overridden.'
+  - 'Correct: Use parameter for values that must be overridden; use localparam for
+    fixed or derived constants.'
+  - 'Why: The standard does not allow localparam in the parameter list.'
+  notes: From MODULE2 Common Pitfalls.
+- type: bullets
+  title: Signed vs Unsigned Mix
+  bullets:
+  - 'Mistake: Mixing signed and unsigned in one expression without $signed/$unsigned
+    and expecting a particular sign behavior.'
+  - 'Reality: Rules for sign extension and comparison depend on operands.'
+  - 'Correct: Be explicit: use signed types or $signed/$unsigned and verify with testbenches.'
+  - 'Why: Implicit mixing leads to wrong arithmetic and comparison results.'
+  notes: From MODULE2 Common Pitfalls.
+- type: bullets
+  title: Generate Block Scope
+  bullets:
+  - 'Mistake: Referencing generate block names or genvar at runtime.'
+  - 'Reality: Generate blocks are elaborated at compile time; names are for hierarchy.'
+  - 'Correct: Use generate for structure; use normal variables and blocks for runtime
+    behavior.'
+  - 'Why: Generate is not “runtime”; it only affects what gets instantiated.'
+  notes: From MODULE2 Common Pitfalls.
+- type: section
   title: Practice & assessment
+- type: bullets
+  title: What you should know (1/2)
+  bullets:
+  - ✓ Write modules with ANSI-style port declarations (1364-2001)
+  - ✓ Use `always @*` for combinational logic and avoid sensitivity-list errors
+  - ✓ Use generate (for, if/else) for parameterized and conditional RTL
+  - ✓ Use signed types and $signed/$unsigned for signed arithmetic
+  - ✓ Declare and use multi-dimensional arrays (e.g. memories)
+  - ✓ Use localparam for constants that must not be overridden
+  notes: From MODULE2 Learning Outcomes.
+- type: bullets
+  title: What you should know (2/2)
+  bullets:
+  - ✓ Write ANSI-style tasks and functions
+  - ✓ Compare 1364-1995 and 1364-2001 and list what 2001 adds
+  notes: From MODULE2 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -203,5 +365,5 @@ slides:
     ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
     arrays.'
   - Complete module2/CHECKLIST.md
-  - Run ./scripts/module2.sh --check
+  - Review module2/EXAMPLES.md and run each lab
   - 'Next: Next module in course'

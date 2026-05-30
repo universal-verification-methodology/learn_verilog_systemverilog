@@ -8,6 +8,7 @@ assets:
   generator: render_diagrams.sh
   slides:
   - 4
+  - 4
   license: learn_verilog_systemverilog course materials
 - id: module1_check
   type: screenshot
@@ -16,7 +17,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 19
+  - 22
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_modules_ports
@@ -25,21 +26,21 @@ assets:
   capture_command: cd module1/examples/modules_ports && make clean && make run
   cwd: .
   slides:
-  - 21
+  - 25
 - id: ex02_nets_variables
   type: screenshot
   file: assets/screenshots/ex02_nets_variables.png
   capture_command: cd module1/examples/nets_variables && make clean && make run
   cwd: .
   slides:
-  - 22
+  - 27
 - id: ex03_continuous_assign
   type: screenshot
   file: assets/screenshots/ex03_continuous_assign.png
   capture_command: cd module1/examples/continuous_assign && make clean && make run
   cwd: .
   slides:
-  - 23
+  - 29
 - id: ex04_continuous_assign_gates
   type: screenshot
   file: assets/screenshots/ex04_continuous_assign_gates.png
@@ -47,39 +48,39 @@ assets:
     run
   cwd: .
   slides:
-  - 24
+  - 31
 - id: ex05_adder
   type: screenshot
   file: assets/screenshots/ex05_adder.png
   capture_command: cd module1/examples/adder && make clean && make run
   cwd: .
   slides:
-  - 25
+  - 33
 - id: ex06_procedural
   type: screenshot
   file: assets/screenshots/ex06_procedural.png
   capture_command: cd module1/examples/procedural && make clean && make run
   cwd: .
   slides:
-  - 26
+  - 35
 - id: ex07_sequential_dff
   type: screenshot
   file: assets/screenshots/ex07_sequential_dff.png
   capture_command: cd module1/examples/sequential_dff && make clean && make run
   cwd: .
   slides:
-  - 27
+  - 37
 - id: ex08_delays_timing
   type: screenshot
   file: assets/screenshots/ex08_delays_timing.png
   capture_command: cd module1/examples/delays_timing && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 39
 - id: ex09_testbenches
   type: screenshot
   file: assets/screenshots/ex09_testbenches.png
   capture_command: cd module1/examples/testbenches && make clean && make run
   cwd: .
   slides:
-  - 29
+  - 41

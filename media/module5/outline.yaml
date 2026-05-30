@@ -32,6 +32,28 @@ slides:
     revisions of SystemVerilog after 1800-2005. You''ll learn what 2009 and 2012 add
     or clarify: interface refinements (e.g. modport expression'
 - type: section
+  title: How to learn this module
+- type: bullets
+  title: Suggested learning path (1/2)
+  bullets:
+  - Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for
+    Module 5.
+  - Study design architecture — See how DUTs, examples, and testbenches fit together
+    under `module5/`.
+  - Work through labs in order — Open `module5/EXAMPLES.md` and run each `make clean
+    && make run` from the repo root.
+  - Run the full module script — `./scripts/module5.sh` from the repo root to simulate
+    all examples and tests.
+  - Complete the exercises — Try each exercise in this document before reading solutions
+    or peeking at reference RTL.
+  notes: From docs/MODULE5.md — read guides before running demos.
+- type: bullets
+  title: Suggested learning path (2/2)
+  bullets:
+  - Review Common Pitfalls — Can you explain each mistake and the fix?
+  - Self-check — Use `module5/CHECKLIST.md` before starting the next module.
+  notes: From docs/MODULE5.md — read guides before running demos.
+- type: section
   title: Syllabus topics
 - type: bullets
   title: 1. IEEE 1800-2009 and 1800-2012 Context (1/3)
@@ -151,55 +173,175 @@ slides:
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
     2>&1 | head -1)"'
   screenshot: assets/screenshots/module5_check.png
-  expect_stdout_contains: iverilog
+  expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+- type: bullets
+  title: 'Example 1: Operators'
+  bullets:
+  - inside with ranges and sets; ==? wildcard (fallback for tools that lack inside)
+  - Set membership; don’t-care in comparison
+  notes: module5/examples/operators/README.md
 - type: demo
   title: 'Demo: Operators'
   command: cd module5/examples/operators && make clean && make run
   screenshot: assets/screenshots/ex01_operators.png
   notes: 'Hands-on: module5/examples/operators/'
+- type: bullets
+  title: 'Example 2: Wildcard Only'
+  bullets:
+  - Dedicated ==? wildcard equality (X/Z as don't care)
+  - Wildcard match in RTL/testbench
+  notes: module5/examples/wildcard_only/README.md
 - type: demo
   title: 'Demo: Wildcard Only'
   command: cd module5/examples/wildcard_only && make clean && make run
   screenshot: assets/screenshots/ex02_wildcard_only.png
   notes: 'Hands-on: module5/examples/wildcard_only/'
+- type: bullets
+  title: 'Example 3: Range Check'
+  bullets:
+  - Range membership (e.g. value inside [0:127]); fallback to explicit comparison
+    if needed
+  - '`inside` with ranges; 2009/2012 operator use'
+  notes: module5/examples/range_check/README.md
 - type: demo
   title: 'Demo: Range Check'
   command: cd module5/examples/range_check && make clean && make run
   screenshot: assets/screenshots/ex03_range_check.png
   notes: 'Hands-on: module5/examples/range_check/'
+- type: bullets
+  title: 'Example 4: Arrays'
+  bullets:
+  - Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics
+  - Array indexing; synthesis-safe subset
+  notes: module5/examples/arrays/README.md
 - type: demo
   title: 'Demo: Arrays'
   command: cd module5/examples/arrays && make clean && make run
   screenshot: assets/screenshots/ex04_arrays.png
   notes: 'Hands-on: module5/examples/arrays/'
+- type: bullets
+  title: 'Example 5: Array Param'
+  bullets:
+  - Parameterized memory using $clog2(DEPTH) for address width
+  - Parameterized arrays; 2012 clarifications
+  notes: module5/examples/array_param/README.md
 - type: demo
   title: 'Demo: Array Param'
   command: cd module5/examples/array_param && make clean && make run
   screenshot: assets/screenshots/ex05_array_param.png
   notes: 'Hands-on: module5/examples/array_param/'
+- type: bullets
+  title: 'Example 6: Checkers'
+  bullets:
+  - Immediate assertion (e.g. one-hot) using $countones or similar
+  - assert in design; immediate assertion in RTL
+  notes: module5/examples/checkers/README.md
 - type: demo
   title: 'Demo: Checkers'
   command: cd module5/examples/checkers && make clean && make run
   screenshot: assets/screenshots/ex06_checkers.png
   notes: 'Hands-on: module5/examples/checkers/'
+- type: bullets
+  title: 'Example 7: Assert Valid Encoding'
+  bullets:
+  - Immediate assertion for valid opcode/encoding
+  - Invariant checking; assert for valid encodings
+  notes: module5/examples/assert_valid_encoding/README.md
 - type: demo
   title: 'Demo: Assert Valid Encoding'
   command: cd module5/examples/assert_valid_encoding && make clean && make run
   screenshot: assets/screenshots/ex07_assert_valid_encoding.png
   notes: 'Hands-on: module5/examples/assert_valid_encoding/'
+- type: bullets
+  title: 'Example 8: Assert Invariant'
+  bullets:
+  - Immediate assertion for one-hot grant (e.g. arbiter)
+  - One-hot invariant; assert in RTL
+  notes: module5/examples/assert_invariant/README.md
 - type: demo
   title: 'Demo: Assert Invariant'
   command: cd module5/examples/assert_invariant && make clean && make run
   screenshot: assets/screenshots/ex08_assert_invariant.png
   notes: 'Hands-on: module5/examples/assert_invariant/'
+- type: bullets
+  title: 'Example 9: Summary'
+  bullets:
+  - Comparison of 2005 vs 2009/2012 features in a small design
+  - Backward compatibility; when to adopt new features
+  notes: module5/examples/summary/README.md
 - type: demo
   title: 'Demo: Summary'
   command: cd module5/examples/summary && make clean && make run
   screenshot: assets/screenshots/ex09_summary.png
   notes: 'Hands-on: module5/examples/summary/'
 - type: section
+  title: Common pitfalls
+- type: bullets
+  title: Assuming 2009/2012 Features in an 2005-Only Flow
+  bullets:
+  - 'Mistake: Using virtual interface, checker, or 2012 array methods when the project
+    or tool is 1800-2005 only.'
+  - 'Reality: Compile or elaboration errors; or undefined behavior.'
+  - 'Correct: Confirm project standard and tool revision; use only features of that
+    revision.'
+  - 'Why: Backward compatibility is 2005→2009→2012; tools may not implement all newer
+    features.'
+  notes: From MODULE5 Common Pitfalls.
+- type: bullets
+  title: Virtual Interface in RTL
+  bullets:
+  - 'Mistake: Using a virtual interface in synthesizable RTL.'
+  - 'Reality: Virtual interfaces are for dynamic binding (testbench); not for hardware.'
+  - 'Correct: Use concrete interface instances in RTL; use virtual interface only
+    in testbench classes.'
+  - 'Why: Synthesis does not support virtual interface; it is a simulation construct.'
+  notes: From MODULE5 Common Pitfalls.
+- type: bullets
+  title: Checker Synthesis
+  bullets:
+  - 'Mistake: Expecting a checker to be synthesized like a module.'
+  - 'Reality: Checkers are for assertion/coverage; typically not synthesized.'
+  - 'Correct: Use checkers for verification; keep RTL in modules.'
+  - 'Why: Checker semantics are for checking, not for netlist generation.'
+  notes: From MODULE5 Common Pitfalls.
+- type: bullets
+  title: Array Methods in RTL
+  bullets:
+  - 'Mistake: Using dynamic array or queue methods (e.g. .push_back) in synthesizable
+    RTL.'
+  - 'Reality: Many such methods are not synthesizable or are tool-specific.'
+  - 'Correct: In RTL use fixed-size or parameterized arrays and indexing; use methods
+    in testbenches or checkers.'
+  - 'Why: Synthesis subset of SystemVerilog is smaller than the full language.'
+  notes: From MODULE5 Common Pitfalls.
+- type: bullets
+  title: $unit vs Package
+  bullets:
+  - 'Mistake: Putting shared types or functions in $unit and relying on compilation
+    order.'
+  - 'Reality: $unit visibility and order are tool-dependent; can cause subtle bugs.'
+  - 'Correct: Put shared items in packages; use explicit import.'
+  - 'Why: Packages give a clear namespace and import order; 2012 clarifies compilation
+    unit but packages remain best practice.'
+  notes: From MODULE5 Common Pitfalls.
+- type: section
   title: Practice & assessment
+- type: bullets
+  title: What you should know
+  bullets:
+  - ✓ Describe what 1800-2009 and 1800-2012 add or clarify over 1800-2005 (interfaces,
+    types, arrays, assertions, checkers)
+  - ✓ Use interface refinements (modport expressions, virtual interface) when the
+    project and tool support 2009+
+  - ✓ Use `inside` and `==?` appropriately in RTL or testbenches
+  - ✓ Apply array and string refinements (2012) in testbenches or checkers; know the
+    synthesizable subset for RTL
+  - ✓ Use immediate assertions in RTL for simple invariants; understand checker (2012)
+    as reusable property block
+  - ✓ Summarize 1800-2005 vs 2009 vs 2012 and choose a standard based on tool and
+    project
+  notes: From MODULE5 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -223,5 +365,5 @@ slides:
     type refinements, operator and array enhancements, and assertion/checker concepts
     in context.'
   - Complete module5/CHECKLIST.md
-  - Run ./scripts/module5.sh --check
+  - Review module5/EXAMPLES.md and run each lab
   - 'Next: Next module in course'

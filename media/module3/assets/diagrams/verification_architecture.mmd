@@ -1,0 +1,6 @@
+flowchart LR
+  SIM["Icarus sim"] --> CNT
+  SIM --> FSM
+  SIM --> PC
+  FSM --> COV["state transition vectors"]
+  CNT --> WRAP["wrap at MAX check"]

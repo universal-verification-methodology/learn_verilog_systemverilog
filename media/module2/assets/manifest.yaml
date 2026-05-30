@@ -8,6 +8,7 @@ assets:
   generator: render_diagrams.sh
   slides:
   - 4
+  - 4
   license: learn_verilog_systemverilog course materials
 - id: module2_check
   type: screenshot
@@ -16,7 +17,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 17
+  - 20
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_ansi_ports
@@ -25,28 +26,28 @@ assets:
   capture_command: cd module2/examples/ansi_ports && make clean && make run
   cwd: .
   slides:
-  - 19
+  - 23
 - id: ex02_procedural
   type: screenshot
   file: assets/screenshots/ex02_procedural.png
   capture_command: cd module2/examples/procedural && make clean && make run
   cwd: .
   slides:
-  - 20
+  - 25
 - id: ex03_generate
   type: screenshot
   file: assets/screenshots/ex03_generate.png
   capture_command: cd module2/examples/generate && make clean && make run
   cwd: .
   slides:
-  - 21
+  - 27
 - id: ex04_generate_if
   type: screenshot
   file: assets/screenshots/ex04_generate_if.png
   capture_command: cd module2/examples/generate_if && make clean && make run
   cwd: .
   slides:
-  - 22
+  - 29
 - id: ex05_generate_ripple_adder
   type: screenshot
   file: assets/screenshots/ex05_generate_ripple_adder.png
@@ -54,60 +55,60 @@ assets:
     run
   cwd: .
   slides:
-  - 23
+  - 31
 - id: ex06_signed
   type: screenshot
   file: assets/screenshots/ex06_signed.png
   capture_command: cd module2/examples/signed && make clean && make run
   cwd: .
   slides:
-  - 24
+  - 33
 - id: ex07_signed_compare
   type: screenshot
   file: assets/screenshots/ex07_signed_compare.png
   capture_command: cd module2/examples/signed_compare && make clean && make run
   cwd: .
   slides:
-  - 25
+  - 35
 - id: ex08_decoder
   type: screenshot
   file: assets/screenshots/ex08_decoder.png
   capture_command: cd module2/examples/decoder && make clean && make run
   cwd: .
   slides:
-  - 26
+  - 37
 - id: ex09_arrays
   type: screenshot
   file: assets/screenshots/ex09_arrays.png
   capture_command: cd module2/examples/arrays && make clean && make run
   cwd: .
   slides:
-  - 27
+  - 39
 - id: ex10_multi_dim_arrays
   type: screenshot
   file: assets/screenshots/ex10_multi_dim_arrays.png
   capture_command: cd module2/examples/multi_dim_arrays && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 41
 - id: ex11_parameters
   type: screenshot
   file: assets/screenshots/ex11_parameters.png
   capture_command: cd module2/examples/parameters && make clean && make run
   cwd: .
   slides:
-  - 29
+  - 43
 - id: ex12_tasks_functions
   type: screenshot
   file: assets/screenshots/ex12_tasks_functions.png
   capture_command: cd module2/examples/tasks_functions && make clean && make run
   cwd: .
   slides:
-  - 30
+  - 45
 - id: ex13_task_ansi
   type: screenshot
   file: assets/screenshots/ex13_task_ansi.png
   capture_command: cd module2/examples/task_ansi && make clean && make run
   cwd: .
   slides:
-  - 31
+  - 47

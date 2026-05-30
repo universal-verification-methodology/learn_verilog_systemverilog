@@ -1,0 +1,5 @@
+flowchart TB
+  LOOKUP["construct_lookup"] --> REV["pick IEEE revision"]
+  REV --> SUB["pick design subset"]
+  SUB --> CI["CI flags match subset"]
+  CI --> REG["regression module1-7.sh"]

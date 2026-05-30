@@ -29,6 +29,28 @@ slides:
     1800-2017, the Verilog language (formerly IEEE 1364) is merged into the SystemVerilog
     LRM, so one document defines both the Verilog subset and
 - type: section
+  title: How to learn this module
+- type: bullets
+  title: Suggested learning path (1/2)
+  bullets:
+  - Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for
+    Module 6.
+  - Study design architecture — See how DUTs, examples, and testbenches fit together
+    under `module6/`.
+  - Work through labs in order — Open `module6/EXAMPLES.md` and run each `make clean
+    && make run` from the repo root.
+  - Run the full module script — `./scripts/module6.sh` from the repo root to simulate
+    all examples and tests.
+  - Complete the exercises — Try each exercise in this document before reading solutions
+    or peeking at reference RTL.
+  notes: From docs/MODULE6.md — read guides before running demos.
+- type: bullets
+  title: Suggested learning path (2/2)
+  bullets:
+  - Review Common Pitfalls — Can you explain each mistake and the fix?
+  - Self-check — Use `module6/CHECKLIST.md` before starting the next module.
+  notes: From docs/MODULE6.md — read guides before running demos.
+- type: section
   title: Syllabus topics
 - type: bullets
   title: 1. IEEE 1800-2017 Context (1/2)
@@ -158,55 +180,178 @@ slides:
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
     2>&1 | head -1)"'
   screenshot: assets/screenshots/module6_check.png
-  expect_stdout_contains: iverilog
+  expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+- type: bullets
+  title: 'Example 1: Verilog vs SystemVerilog Subset'
+  bullets:
+  - 'Same small design: one file using only 1364-style (wire/reg, always @*), one
+    using 1800 design (logic, always_comb/always_ff)'
+  - 1364 subset vs 1800 design subset within 1800-2017
+  notes: module6/examples/subsets/README.md
 - type: demo
   title: 'Demo: Verilog vs SystemVerilog Subset'
   command: cd module6/examples/subsets && make clean && make run
   screenshot: assets/screenshots/ex01_subsets.png
   notes: 'Hands-on: module6/examples/subsets/'
+- type: bullets
+  title: 'Example 2: Design Constructs Recap'
+  bullets:
+  - One module using logic, always_comb, always_ff, package, unique case (all 1800-2017
+    compliant)
+  - Current standard design subset in one place
+  notes: module6/examples/design_recap/README.md
 - type: demo
   title: 'Demo: Design Constructs Recap'
   command: cd module6/examples/design_recap && make clean && make run
   screenshot: assets/screenshots/ex02_design_recap.png
   notes: 'Hands-on: module6/examples/design_recap/'
+- type: bullets
+  title: 'Example 3: Immediate Assertion in RTL'
+  bullets:
+  - Simple invariant (e.g. one-hot state) with assert in design
+  - Synthesizable RTL + assertion; 2017 semantics
+  notes: module6/examples/assertions/README.md
 - type: demo
   title: 'Demo: Immediate Assertion in RTL'
   command: cd module6/examples/assertions && make clean && make run
   screenshot: assets/screenshots/ex03_assertions.png
   notes: 'Hands-on: module6/examples/assertions/'
+- type: bullets
+  title: 'Example 4: Version Comparison'
+  bullets:
+  - Table or script that lists which construct belongs to which standard (1995–2017)
+  - Full version timeline; choosing a standard
+  notes: module6/examples/version_summary/README.md
 - type: demo
   title: 'Demo: Version Comparison'
   command: cd module6/examples/version_summary && make clean && make run
   screenshot: assets/screenshots/ex04_version_summary.png
   notes: 'Hands-on: module6/examples/version_summary/'
+- type: bullets
+  title: 'Example 5: Migration'
+  bullets:
+  - Same 4:1 mux in 1364-2005 style vs 1800-2017 style (wire/reg→logic, always @*→always_comb,
+    unique case)
+  - Step-by-step migration from 1364 to 1800 design subset
+  notes: module6/examples/migration/README.md
 - type: demo
   title: 'Demo: Migration'
   command: cd module6/examples/migration && make clean && make run
   screenshot: assets/screenshots/ex05_migration.png
   notes: 'Hands-on: module6/examples/migration/'
+- type: bullets
+  title: 'Example 6: Logic Single Driver'
+  bullets:
+  - Comb and seq blocks; each logic has exactly one driver (2017 clarified)
+  - Single driver for logic; assign, always_comb, always_ff
+  notes: module6/examples/logic_single_driver/README.md
 - type: demo
   title: 'Demo: Logic Single Driver'
   command: cd module6/examples/logic_single_driver && make clean && make run
   screenshot: assets/screenshots/ex06_logic_single_driver.png
   notes: 'Hands-on: module6/examples/logic_single_driver/'
+- type: bullets
+  title: 'Example 7: Priority Case'
+  bullets:
+  - Priority encoder using priority case (first match wins)
+  - priority case; 2017 semantics for encoders/arbiters
+  notes: module6/examples/priority_case/README.md
 - type: demo
   title: 'Demo: Priority Case'
   command: cd module6/examples/priority_case && make clean && make run
   screenshot: assets/screenshots/ex07_priority_case.png
   notes: 'Hands-on: module6/examples/priority_case/'
+- type: bullets
+  title: 'Example 8: Package and Import'
+  bullets:
+  - Shared types and parameters in package; import in module and top
+  - Package and import; 2017 scope and search order clarifications
+  notes: module6/examples/package_import/README.md
 - type: demo
   title: 'Demo: Package and Import'
   command: cd module6/examples/package_import && make clean && make run
   screenshot: assets/screenshots/ex08_package_import.png
   notes: 'Hands-on: module6/examples/package_import/'
+- type: bullets
+  title: 'Example 9: Unique Case'
+  bullets:
+  - Decoder with unique case and default (no latch)
+  - unique case; at most one match; 2017 clarified
+  notes: module6/examples/unique_case/README.md
 - type: demo
   title: 'Demo: Unique Case'
   command: cd module6/examples/unique_case && make clean && make run
   screenshot: assets/screenshots/ex09_unique_case.png
   notes: 'Hands-on: module6/examples/unique_case/'
 - type: section
+  title: Common pitfalls
+- type: bullets
+  title: Assuming 1364 Is Still a Separate Standard
+  bullets:
+  - 'Mistake: Citing "IEEE 1364-2005" as the current Verilog standard for new designs.'
+  - 'Reality: 1364 is merged into 1800-2017; new work should reference 1800-2017 (and
+    use a subset if Verilog-only is required).'
+  - 'Correct: Use "1800-2017" as the reference; say "Verilog subset of 1800-2017"
+    when restricting to non-SystemVerilog.'
+  - 'Why: Avoids confusion and ensures one LRM for all language questions.'
+  notes: From MODULE6 Common Pitfalls.
+- type: bullets
+  title: Mixing Revisions in One Project
+  bullets:
+  - 'Mistake: Using 1800-2017 in one file and 1800-2005-only in another without a
+    clear subset rule.'
+  - 'Reality: Can lead to tool-dependent behavior or subtle bugs.'
+  - 'Correct: Define one project standard (e.g. 1800-2017) and a subset (e.g. design
+    only, no SVA in RTL); apply consistently.'
+  - 'Why: Predictable tool behavior and easier maintenance.'
+  notes: From MODULE6 Common Pitfalls.
+- type: bullets
+  title: Ignoring Tool Support
+  bullets:
+  - 'Mistake: Writing 1800-2017 syntax that the synthesis or simulation tool does
+    not support.'
+  - 'Reality: Compile or elaboration errors; or tool-specific interpretation.'
+  - 'Correct: Check tool documentation for supported LRM revision and synthesizable
+    subset; restrict code to that.'
+  - 'Why: Ensures portability and correct results.'
+  notes: From MODULE6 Common Pitfalls.
+- type: bullets
+  title: Assertions in Synthesis
+  bullets:
+  - 'Mistake: Expecting concurrent assertions or complex checkers to be synthesized.'
+  - 'Reality: Most assertion/checker logic is for simulation and formal; not for netlist.'
+  - 'Correct: Use immediate assertions for simple invariants if the tool supports
+    them in RTL; keep heavy checking in testbench or bin'
+  - 'Why: Synthesis tools typically ignore or strip assertions; RTL should remain
+    synthesizable.'
+  notes: From MODULE6 Common Pitfalls.
+- type: bullets
+  title: Over-Migrating Legacy Code
+  bullets:
+  - 'Mistake: Converting all legacy 1364 RTL to 1800 (logic, interfaces, etc.) without
+    need.'
+  - 'Reality: Risk of introducing bugs; effort may not pay off if the block is stable
+    and Verilog-only is sufficient.'
+  - 'Correct: Migrate when adding features, fixing bugs, or when the project standard
+    moves to 1800; otherwise leave stable 1364 RTL a'
+  - 'Why: Balance benefit (readability, tool checking) with risk and effort.'
+  notes: From MODULE6 Common Pitfalls.
+- type: section
   title: Practice & assessment
+- type: bullets
+  title: What you should know
+  bullets:
+  - ✓ Describe IEEE 1800-2017 as the unified LRM (Verilog + SystemVerilog in one standard)
+  - ✓ Explain "Verilog" as a subset of 1800-2017 and when to use Verilog-only vs SystemVerilog
+    design
+  - ✓ Recap design constructs (logic, always_comb/always_ff, interfaces, packages,
+    unique/priority case) in 2017 context
+  - ✓ Use immediate assertions in RTL appropriately; understand SVA/checker context
+  - ✓ Summarize the version timeline (1364-1995 through 1800-2017) and choose a standard
+    for a project
+  - ✓ Plan simple migration from older Verilog or SystemVerilog to 1800-2017
+  notes: From MODULE6 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -229,5 +374,5 @@ slides:
   - 'Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged
     Verilog and SystemVerilog, and design/verification overview.'
   - Complete module6/CHECKLIST.md
-  - Run ./scripts/module6.sh --check
+  - Review module6/EXAMPLES.md and run each lab
   - 'Next: Next module in course'

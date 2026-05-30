@@ -1,0 +1,11 @@
+flowchart TB
+  subgraph DUT["module2/dut"]
+    MUX["mux_2to1_param #(.WIDTH)"]
+    SR["shift_reg_gen generate for"]
+    CTR["counter_param localparam MAX"]
+    DFF["dff leaf FF"]
+  end
+  SR --> DFF
+  PARAM["#(.WIDTH) at inst"] --> MUX
+  PARAM --> SR
+  PARAM --> CTR

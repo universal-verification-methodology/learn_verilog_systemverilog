@@ -1,0 +1,6 @@
+flowchart LR
+  TB["testbench"] --> MUX
+  TB --> CTR
+  TB --> IF
+  M <-->|"same bus_if()"| S
+  TB --> DEC

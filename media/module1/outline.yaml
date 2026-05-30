@@ -29,6 +29,28 @@ slides:
     course. You''ll learn the original Verilog language as defined by IEEE Std 1364-1995
     (Verilog-95): modules, nets and variables, continuo'
 - type: section
+  title: How to learn this module
+- type: bullets
+  title: Suggested learning path (1/2)
+  bullets:
+  - Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for
+    Module 1.
+  - Study design architecture — See how DUTs, examples, and testbenches fit together
+    under `module1/`.
+  - Work through labs in order — Open `module1/EXAMPLES.md` and run each `make clean
+    && make run` from the repo root.
+  - Run the full module script — `./scripts/module1.sh` from the repo root to simulate
+    all examples and tests.
+  - Complete the exercises — Try each exercise in this document before reading solutions
+    or peeking at reference RTL.
+  notes: From docs/MODULE1.md — read guides before running demos.
+- type: bullets
+  title: Suggested learning path (2/2)
+  bullets:
+  - Review Common Pitfalls — Can you explain each mistake and the fix?
+  - Self-check — Use `module1/CHECKLIST.md` before starting the next module.
+  notes: From docs/MODULE1.md — read guides before running demos.
+- type: section
   title: Syllabus topics
 - type: bullets
   title: 1. IEEE 1364-1995 Context (1/3)
@@ -122,55 +144,170 @@ slides:
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
     2>&1 | head -1)"'
   screenshot: assets/screenshots/module1_check.png
-  expect_stdout_contains: iverilog
+  expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+- type: bullets
+  title: 'Example 1: Modules and Ports'
+  bullets:
+  - 1995-style module declaration and port list
+  - Named and positional instantiation
+  - Non-ANSI ports, separate direction/type declarations
+  notes: module1/examples/modules_ports/README.md
 - type: demo
   title: 'Demo: Modules and Ports'
   command: cd module1/examples/modules_ports && make clean && make run
   screenshot: assets/screenshots/ex01_modules_ports.png
   notes: 'Hands-on: module1/examples/modules_ports/'
+- type: bullets
+  title: 'Example 2: Nets and Variables'
+  bullets:
+  - wire vs reg, vectors, 4-state values
+  - When to use wire vs reg, single driver per net
+  notes: module1/examples/nets_variables/README.md
 - type: demo
   title: 'Demo: Nets and Variables'
   command: cd module1/examples/nets_variables && make clean && make run
   screenshot: assets/screenshots/ex02_nets_variables.png
   notes: 'Hands-on: module1/examples/nets_variables/'
+- type: bullets
+  title: 'Example 3: Continuous Assignment'
+  bullets:
+  - assign for combinational logic (2:1 mux)
+  - Left-hand side must be net; expression on right
+  notes: module1/examples/continuous_assign/README.md
 - type: demo
   title: 'Demo: Continuous Assignment'
   command: cd module1/examples/continuous_assign && make clean && make run
   screenshot: assets/screenshots/ex03_continuous_assign.png
   notes: 'Hands-on: module1/examples/continuous_assign/'
+- type: bullets
+  title: 'Example 4: Continuous Assignment Gates'
+  bullets:
+  - XOR, NAND, NOR with assign
+  - Same as above; multiple gates in one example
+  notes: module1/examples/continuous_assign_gates/README.md
 - type: demo
   title: 'Demo: Continuous Assignment Gates'
   command: cd module1/examples/continuous_assign_gates && make clean && make run
   screenshot: assets/screenshots/ex04_continuous_assign_gates.png
   notes: 'Hands-on: module1/examples/continuous_assign_gates/'
+- type: bullets
+  title: 'Example 5: Adder'
+  bullets:
+  - Half adder and full adder with assign (sum and carry)
+  - Multi-output combinational logic; wire for all outputs
+  notes: module1/examples/adder/README.md
 - type: demo
   title: 'Demo: Adder'
   command: cd module1/examples/adder && make clean && make run
   screenshot: assets/screenshots/ex05_adder.png
   notes: 'Hands-on: module1/examples/adder/'
+- type: bullets
+  title: 'Example 6: Procedural Blocks'
+  bullets:
+  - always @(inputs) and always @(posedge clk) with explicit sensitivity
+  - initial for testbench; 1995-style task/function
+  - No `always @*`; blocking vs nonblocking
+  notes: module1/examples/procedural/README.md
 - type: demo
   title: 'Demo: Procedural Blocks'
   command: cd module1/examples/procedural && make clean && make run
   screenshot: assets/screenshots/ex06_procedural.png
   notes: 'Hands-on: module1/examples/procedural/'
+- type: bullets
+  title: 'Example 7: Sequential D Flip-Flop'
+  bullets:
+  - 'D flip-flop with async reset: always @(posedge clk or negedge rst_n) and <='
+  - Edge-sensitive always; nonblocking for sequential logic
+  notes: module1/examples/sequential_dff/README.md
 - type: demo
   title: 'Demo: Sequential D Flip-Flop'
   command: cd module1/examples/sequential_dff && make clean && make run
   screenshot: assets/screenshots/ex07_sequential_dff.png
   notes: 'Hands-on: module1/examples/sequential_dff/'
+- type: bullets
+  title: 'Example 8: Delays and Timing'
+  bullets:
+  - '#n, @(posedge clk), wait(condition); clock generation with forever'
+  - Delay-based and event-based timing in testbenches
+  notes: module1/examples/delays_timing/README.md
 - type: demo
   title: 'Demo: Delays and Timing'
   command: cd module1/examples/delays_timing && make clean && make run
   screenshot: assets/screenshots/ex08_delays_timing.png
   notes: 'Hands-on: module1/examples/delays_timing/'
+- type: bullets
+  title: 'Example 9: Testbenches'
+  bullets:
+  - 'Minimal testbench with initial, #, $display, $finish'
+  - Stimulus generation, termination with `$finish`
+  notes: module1/examples/testbenches/README.md
 - type: demo
   title: 'Demo: Testbenches'
   command: cd module1/examples/testbenches && make clean && make run
   screenshot: assets/screenshots/ex09_testbenches.png
   notes: 'Hands-on: module1/examples/testbenches/'
 - type: section
+  title: Common pitfalls
+- type: bullets
+  title: Incomplete Sensitivity List
+  bullets:
+  - 'Mistake: `always @(sel) y = sel ? b : a;` (missing `a` and `b`)'
+  - 'Reality: In 1364-1995 you must list every input that the block reads'
+  - 'Correct: `always @(a or b or sel) y = sel ? b : a;`'
+  - 'Why: Incomplete lists cause simulation/synthesis mismatches and inferred latches'
+  notes: From MODULE1 Common Pitfalls.
+- type: bullets
+  title: Port Type Mismatch
+  bullets:
+  - 'Mistake: Declaring as `wire` an output that is assigned in `always`'
+  - 'Reality: Outputs driven in procedural blocks must be `reg`'
+  - 'Correct: `output y; reg y;` when `y` is assigned in `always`'
+  - 'Why: `wire` cannot be the target of procedural assignment'
+  notes: From MODULE1 Common Pitfalls.
+- type: bullets
+  title: Simulation Never Ends
+  bullets:
+  - 'Mistake: Testbench without `$finish`'
+  - 'Correct: Always call `$finish` after stimulus (e.g. `#1000; $finish;`)'
+  - 'Why: Simulator runs until explicit termination or limit'
+  notes: From MODULE1 Common Pitfalls.
+- type: bullets
+  title: Using 2001/SystemVerilog Constructs in 1995
+  bullets:
+  - 'Mistake: Writing `always @*` or ANSI ports and assuming 1995'
+  - 'Reality: `always @*` and ANSI ports are 1364-2001; `logic`/`always_comb` are
+    SystemVerilog'
+  - 'Correct: For strict 1995, use explicit sensitivity and non-ANSI ports'
+  - 'Why: Keeps code portable to 1995-only tools and clarifies version scope'
+  notes: From MODULE1 Common Pitfalls.
+- type: bullets
+  title: Confusing reg with Registers
+  bullets:
+  - 'Mistake: Thinking `reg` creates a flip-flop'
+  - 'Reality: `reg` is a variable type; flip-flops come from `always @(posedge clk)`
+    with `<=`'
+  - 'Correct: Use `reg` for any procedural output; use clocked `always` for sequential
+    logic'
+  - 'Why: Clarifies design intent and avoids synthesis surprises'
+  notes: From MODULE1 Common Pitfalls.
+- type: section
   title: Practice & assessment
+- type: bullets
+  title: What you should know (1/2)
+  bullets:
+  - ✓ Write modules in IEEE 1364-1995 style (non-ANSI ports, explicit sensitivity)
+  - ✓ Use `wire` and `reg` correctly for nets and procedural outputs
+  - ✓ Describe combinational logic with `assign` and `always @(inputs)`
+  - ✓ Describe sequential logic with `always @(posedge clk)` and nonblocking assignment
+  - ✓ Use `initial`, `#`, `@`, and `wait` for testbenches
+  - ✓ Use 1364-1995 tasks and functions (non-ANSI form)
+  notes: From MODULE1 Learning Outcomes.
+- type: bullets
+  title: What you should know (2/2)
+  bullets:
+  - ✓ State what 1364-1995 does not include (ANSI, `@*`, generate, SystemVerilog)
+  notes: From MODULE1 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -192,5 +329,5 @@ slides:
   - Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax
     for RTL design and simulation.
   - Complete module1/CHECKLIST.md
-  - Run ./scripts/module1.sh --check
+  - Review module1/EXAMPLES.md and run each lab
   - 'Next: Next module in course'

@@ -29,6 +29,28 @@ slides:
     defines Verilog alone before it was merged with SystemVerilog (IEEE 1800). You''ll
     learn what 2005 adds or clarifies over 2001: minor language c'
 - type: section
+  title: How to learn this module
+- type: bullets
+  title: Suggested learning path (1/2)
+  bullets:
+  - Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for
+    Module 3.
+  - Study design architecture — See how DUTs, examples, and testbenches fit together
+    under `module3/`.
+  - Work through labs in order — Open `module3/EXAMPLES.md` and run each `make clean
+    && make run` from the repo root.
+  - Run the full module script — `./scripts/module3.sh` from the repo root to simulate
+    all examples and tests.
+  - Complete the exercises — Try each exercise in this document before reading solutions
+    or peeking at reference RTL.
+  notes: From docs/MODULE3.md — read guides before running demos.
+- type: bullets
+  title: Suggested learning path (2/2)
+  bullets:
+  - Review Common Pitfalls — Can you explain each mistake and the fix?
+  - Self-check — Use `module3/CHECKLIST.md` before starting the next module.
+  notes: From docs/MODULE3.md — read guides before running demos.
+- type: section
   title: Syllabus topics
 - type: bullets
   title: 1. IEEE 1364-2005 Context (1/2)
@@ -136,60 +158,180 @@ slides:
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
     2>&1 | head -1)"'
   screenshot: assets/screenshots/module3_check.png
-  expect_stdout_contains: iverilog
+  expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+- type: bullets
+  title: 'Example 1: Parameter Override'
+  bullets:
+  - No defparam; override at instantiation only
+  - defparam deprecated; use `#(.PARAM(value))` at instantiation
+  notes: module3/examples/parameters/README.md
 - type: demo
   title: 'Demo: Parameter Override'
   command: cd module3/examples/parameters && make clean && make run
   screenshot: assets/screenshots/ex01_parameters.png
   notes: 'Hands-on: module3/examples/parameters/'
+- type: bullets
+  title: 'Example 2: No defparam'
+  bullets:
+  - Parameter passed through hierarchy (parent → child) at instantiation only
+  - No defparam anywhere; override only at inst
+  notes: module3/examples/no_defparam/README.md
 - type: demo
   title: 'Demo: No defparam'
   command: cd module3/examples/no_defparam && make clean && make run
   screenshot: assets/screenshots/ex02_no_defparam.png
   notes: 'Hands-on: module3/examples/no_defparam/'
+- type: bullets
+  title: 'Example 3: Synthesizable Style'
+  bullets:
+  - Combinational (always @*, blocking) and sequential (posedge clk, nonblocking)
+  - One driver per net; avoid latches; no delays in RTL
+  notes: module3/examples/synthesizable/README.md
 - type: demo
   title: 'Demo: Synthesizable Style'
   command: cd module3/examples/synthesizable && make clean && make run
   screenshot: assets/screenshots/ex03_synthesizable.png
   notes: 'Hands-on: module3/examples/synthesizable/'
+- type: bullets
+  title: 'Example 4: One Driver'
+  bullets:
+  - Single assign to wire; single always driving reg
+  - No multiple drivers per net
+  notes: module3/examples/one_driver/README.md
 - type: demo
   title: 'Demo: One Driver'
   command: cd module3/examples/one_driver && make clean && make run
   screenshot: assets/screenshots/ex04_one_driver.png
   notes: 'Hands-on: module3/examples/one_driver/'
+- type: bullets
+  title: 'Example 5: Blocking vs Nonblocking'
+  bullets:
+  - Side-by-side combinational vs sequential blocks with correct assignment style
+  - = in combinational; <= in sequential; do not mix for same variable
+  notes: module3/examples/procedural/README.md
 - type: demo
   title: 'Demo: Blocking vs Nonblocking'
   command: cd module3/examples/procedural && make clean && make run
   screenshot: assets/screenshots/ex05_procedural.png
   notes: 'Hands-on: module3/examples/procedural/'
+- type: bullets
+  title: 'Example 6: Pipeline'
+  bullets:
+  - 'Two-stage pipeline: q1 <= d; q2 <= q1 (nonblocking only)'
+  - q2 gets old q1 (previous cycle); sequential block only
+  notes: module3/examples/pipeline/README.md
 - type: demo
   title: 'Demo: Pipeline'
   command: cd module3/examples/pipeline && make clean && make run
   screenshot: assets/screenshots/ex06_pipeline.png
   notes: 'Hands-on: module3/examples/pipeline/'
+- type: bullets
+  title: 'Example 7: Case Styles'
+  bullets:
+  - full_case / parallel_case attributes (or tool pragmas) where supported
+  - Synthesis hints only; 1364-2005 has no unique/priority case
+  notes: module3/examples/case_styles/README.md
 - type: demo
   title: 'Demo: Case Styles'
   command: cd module3/examples/case_styles && make clean && make run
   screenshot: assets/screenshots/ex07_case_styles.png
   notes: 'Hands-on: module3/examples/case_styles/'
+- type: bullets
+  title: 'Example 8: Avoid Latch'
+  bullets:
+  - Default before case; all paths assign output
+  - No latch from incomplete case/if
+  notes: module3/examples/avoid_latch/README.md
 - type: demo
   title: 'Demo: Avoid Latch'
   command: cd module3/examples/avoid_latch && make clean && make run
   screenshot: assets/screenshots/ex08_avoid_latch.png
   notes: 'Hands-on: module3/examples/avoid_latch/'
+- type: bullets
+  title: 'Example 9: Synthesizable Function'
+  bullets:
+  - Function without delays used in always @* (e.g. min)
+  - Combinational helper; no delays in RTL
+  notes: module3/examples/function_synth/README.md
 - type: demo
   title: 'Demo: Synthesizable Function'
   command: cd module3/examples/function_synth && make clean && make run
   screenshot: assets/screenshots/ex09_function_synth.png
   notes: 'Hands-on: module3/examples/function_synth/'
+- type: bullets
+  title: 'Example 10: 1364-2005 Summary'
+  bullets:
+  - Small design using only 1364-2005 features (no 1800)
+  - Checklist for “pure Verilog” RTL
+  notes: module3/examples/summary/README.md
 - type: demo
   title: 'Demo: 1364-2005 Summary'
   command: cd module3/examples/summary && make clean && make run
   screenshot: assets/screenshots/ex10_summary.png
   notes: 'Hands-on: module3/examples/summary/'
 - type: section
+  title: Common pitfalls
+- type: bullets
+  title: Using defparam in New Code
+  bullets:
+  - 'Mistake: Overriding parameters with defparam for convenience.'
+  - 'Reality: defparam is deprecated in 1364-2005; tools may warn or restrict.'
+  - 'Correct: Override at instantiation: `sub #(.WIDTH(16)) u_sub (...);`'
+  - 'Why: Clear, hierarchical parameter flow; better for synthesis and maintenance.'
+  notes: From MODULE3 Common Pitfalls.
+- type: bullets
+  title: Mixing Blocking and Nonblocking for Same Variable
+  bullets:
+  - 'Mistake: Using both `=` and `<=` for the same reg in one always block.'
+  - 'Reality: Leads to simulation/synthesis mismatch and race conditions.'
+  - 'Correct: Use only `=` in combinational always; only `<=` in sequential always
+    for that variable.'
+  - 'Why: 1364-2005 semantics assume consistent use; mixing is undefined in practice.'
+  notes: From MODULE3 Common Pitfalls.
+- type: bullets
+  title: Assuming unique/priority case in 1364-2005
+  bullets:
+  - 'Mistake: Writing `unique case` or `priority case` (SystemVerilog) and expecting
+    1364-2005 tools to support it.'
+  - 'Reality: Those keywords are in IEEE 1800, not 1364.'
+  - 'Correct: Use full_case/parallel_case attributes if the tool supports them; otherwise
+    ensure full coverage and document intent.'
+  - 'Why: Avoids tool errors and clarifies design intent.'
+  notes: From MODULE3 Common Pitfalls.
+- type: bullets
+  title: Latches from Incomplete case/if
+  bullets:
+  - 'Mistake: Combinational always with case or if that does not assign in all paths.'
+  - 'Reality: Synthesis infers a latch; simulation may hold previous value.'
+  - 'Correct: Assign default before case, or cover all cases; avoid incomplete if/else.'
+  - 'Why: Latches are rarely intended in synchronous RTL; explicit defaults avoid
+    them.'
+  notes: From MODULE3 Common Pitfalls.
+- type: bullets
+  title: Using SystemVerilog in “1364-2005” Project
+  bullets:
+  - 'Mistake: Using `logic`, `always_comb`, or interfaces while targeting “Verilog
+    only.”'
+  - 'Reality: Those are 1800 (SystemVerilog); 1364-2005 does not define them.'
+  - 'Correct: Use wire/reg and always @* / always @(posedge clk) for strict 1364-2005.'
+  - 'Why: Keeps tool and project consistently on one standard.'
+  notes: From MODULE3 Common Pitfalls.
+- type: section
   title: Practice & assessment
+- type: bullets
+  title: What you should know
+  bullets:
+  - ✓ Describe what 1364-2005 adds or clarifies over 1364-2001 (no major new constructs)
+  - ✓ Avoid defparam and use instantiation parameter override only
+  - ✓ Apply the synthesizable subset of 1364-2005 (combinational vs sequential, one
+    driver, no latches)
+  - ✓ Use blocking assignment in combinational always and nonblocking in sequential
+    always
+  - ✓ Use tool-supported full_case/parallel_case (or equivalent) where appropriate
+  - ✓ Summarize 1364 evolution (1995 → 2001 → 2005) and when to stay Verilog-only
+    vs adopt 1800
+  notes: From MODULE3 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -212,5 +354,5 @@ slides:
   - Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over
     2001, and the synthesizable subset as a stable baseline before SystemVerilog.
   - Complete module3/CHECKLIST.md
-  - Run ./scripts/module3.sh --check
+  - Review module3/EXAMPLES.md and run each lab
   - 'Next: Next module in course'

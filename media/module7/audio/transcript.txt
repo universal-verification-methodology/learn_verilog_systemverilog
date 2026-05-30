@@ -8,36 +8,74 @@
 
 [Slide 5] Overview This module ties together Modules 1–6 by comparing the same design across standards (1364-1995 through 1800-2017), outlining migration steps between versions, and providing checklists for choosing a standard and for migr
 
-[Slide 6] Syllabus topics
+[Slide 6] How to learn this module
 
-[Slide 7] From MODULE7 Topics Covered.
+[Slide 7] From docs/MODULE7.md — read guides before running demos.
 
-[Slide 8] Hands-on examples
+[Slide 8] From docs/MODULE7.md — read guides before running demos.
 
-[Slide 9] Requires iverilog on PATH (apt install iverilog).
+[Slide 9] Syllabus topics
 
-[Slide 10] Hands-on: module7/examples/migration/
+[Slide 10] From MODULE7 Topics Covered.
 
-[Slide 11] Hands-on: module7/examples/migration_1995_to_2001/
+[Slide 11] Hands-on examples
 
-[Slide 12] Hands-on: module7/examples/case_versions/
+[Slide 12] Requires iverilog on PATH (apt install iverilog).
 
-[Slide 13] Hands-on: module7/examples/version_table/
+[Slide 13] module7/examples/migration/README.md
 
-[Slide 14] Hands-on: module7/examples/version_selection/
+[Slide 14] Hands-on: module7/examples/migration/
 
-[Slide 15] Hands-on: module7/examples/migration_checklist/
+[Slide 15] module7/examples/migration_1995_to_2001/README.md
 
-[Slide 16] Hands-on: module7/examples/incremental_migration/
+[Slide 16] Hands-on: module7/examples/migration_1995_to_2001/
 
-[Slide 17] Hands-on: module7/examples/port_style_compare/
+[Slide 17] module7/examples/case_versions/README.md
 
-[Slide 18] Hands-on: module7/examples/no_defparam/
+[Slide 18] Hands-on: module7/examples/case_versions/
 
-[Slide 19] Practice & assessment
+[Slide 19] module7/examples/version_table/README.md
 
-[Slide 20] Exercises Side-by-Side Mux Side-by-Side Connectivity Migration One Block Version Selection Version Table
+[Slide 20] Hands-on: module7/examples/version_table/
 
-[Slide 21] Exercises Migrating Everything at Once Ignoring Tool Support Breaking Interfaces During Migration Mixing Revisions in One File Forgetting to Test After Migration
+[Slide 21] module7/examples/version_selection/README.md
 
-[Slide 22] Summary & next steps Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools. Complete module7/CHECKLIST.md Run ./scripts/module7.sh --check Next: Next module in course
+[Slide 22] Hands-on: module7/examples/version_selection/
+
+[Slide 23] module7/examples/migration_checklist/README.md
+
+[Slide 24] Hands-on: module7/examples/migration_checklist/
+
+[Slide 25] module7/examples/incremental_migration/README.md
+
+[Slide 26] Hands-on: module7/examples/incremental_migration/
+
+[Slide 27] module7/examples/port_style_compare/README.md
+
+[Slide 28] Hands-on: module7/examples/port_style_compare/
+
+[Slide 29] module7/examples/no_defparam/README.md
+
+[Slide 30] Hands-on: module7/examples/no_defparam/
+
+[Slide 31] Common pitfalls
+
+[Slide 32] From MODULE7 Common Pitfalls.
+
+[Slide 33] From MODULE7 Common Pitfalls.
+
+[Slide 34] From MODULE7 Common Pitfalls.
+
+[Slide 35] From MODULE7 Common Pitfalls.
+
+[Slide 36] From MODULE7 Common Pitfalls.
+
+[Slide 37] Practice & assessment
+
+[Slide 38] From MODULE7 Learning Outcomes.
+
+[Slide 39] Exercises Side-by-Side Mux Side-by-Side Connectivity Migration One Block Version Selection Version Table
+
+[Slide 40] Exercises Migrating Everything at Once Ignoring Tool Support Breaking Interfaces During Migration Mixing Revisions in One File Forgetting to Test After Migration
+
+[Slide 41] Summary & next steps Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration between standards, and choose the right version for your project and tools. Complete module7/CHECKLIST.md Review module7/EXAMPLES.md and run each lab Next: Next module in course

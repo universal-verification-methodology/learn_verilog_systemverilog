@@ -19,117 +19,213 @@ Learning path Master the major Verilog update (IEEE 1364-2001) and its additions
 Overview This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision of the Verilog standard. You'll learn what 2001 adds over 1995: ANSI-style port and task/function declarations, `always @*` for combinational
 
 6
-00:01:06,046 --> 00:01:08,302
-Syllabus topics
+00:01:06,046 --> 00:01:08,398
+How to learn this module
 
 7
-00:01:08,652 --> 00:01:11,436
-From MODULE2 Topics Covered.
+00:01:08,748 --> 00:01:14,028
+From docs/MODULE2.md — read guides before running demos.
 
 8
-00:01:11,786 --> 00:01:14,570
-From MODULE2 Topics Covered.
+00:01:14,378 --> 00:01:19,658
+From docs/MODULE2.md — read guides before running demos.
 
 9
-00:01:14,920 --> 00:01:17,704
-From MODULE2 Topics Covered.
+00:01:20,008 --> 00:01:22,264
+Syllabus topics
 
 10
-00:01:18,054 --> 00:01:20,838
+00:01:22,614 --> 00:01:25,398
 From MODULE2 Topics Covered.
 
 11
-00:01:21,188 --> 00:01:23,972
+00:01:25,748 --> 00:01:28,532
 From MODULE2 Topics Covered.
 
 12
-00:01:24,322 --> 00:01:27,106
+00:01:28,882 --> 00:01:31,666
 From MODULE2 Topics Covered.
 
 13
-00:01:27,456 --> 00:01:30,240
+00:01:32,016 --> 00:01:34,800
 From MODULE2 Topics Covered.
 
 14
-00:01:30,590 --> 00:01:33,374
+00:01:35,150 --> 00:01:37,934
 From MODULE2 Topics Covered.
 
 15
-00:01:33,724 --> 00:01:36,508
+00:01:38,284 --> 00:01:41,068
 From MODULE2 Topics Covered.
 
 16
-00:01:36,858 --> 00:01:39,090
-Hands-on examples
+00:01:41,418 --> 00:01:44,202
+From MODULE2 Topics Covered.
 
 17
-00:01:39,440 --> 00:01:43,760
-Requires iverilog on PATH (apt install iverilog).
+00:01:44,552 --> 00:01:47,336
+From MODULE2 Topics Covered.
 
 18
-00:01:44,110 --> 00:01:49,414
-Hands-on: module2/examples/ansi_ports/
+00:01:47,686 --> 00:01:50,470
+From MODULE2 Topics Covered.
 
 19
-00:01:49,764 --> 00:01:54,516
-Hands-on: module2/examples/procedural/
+00:01:50,820 --> 00:01:53,052
+Hands-on examples
 
 20
-00:01:54,866 --> 00:01:59,522
-Hands-on: module2/examples/generate/
+00:01:53,402 --> 00:01:57,722
+Requires iverilog on PATH (apt install iverilog).
 
 21
-00:01:59,872 --> 00:02:05,104
-Hands-on: module2/examples/generate_if/
+00:01:58,072 --> 00:02:03,544
+module2/examples/ansi_ports/README.md
 
 22
-00:02:05,454 --> 00:02:11,478
-Hands-on: module2/examples/generate_ripple_adder/
+00:02:03,894 --> 00:02:09,198
+Hands-on: module2/examples/ansi_ports/
 
 23
-00:02:11,828 --> 00:02:16,268
-Hands-on: module2/examples/signed/
+00:02:09,548 --> 00:02:14,420
+module2/examples/procedural/README.md
 
 24
-00:02:16,618 --> 00:02:21,922
-Hands-on: module2/examples/signed_compare/
+00:02:14,770 --> 00:02:19,522
+Hands-on: module2/examples/procedural/
 
 25
-00:02:22,272 --> 00:02:26,904
-Hands-on: module2/examples/decoder/
+00:02:19,872 --> 00:02:24,648
+module2/examples/generate/README.md
 
 26
-00:02:27,254 --> 00:02:31,694
-Hands-on: module2/examples/arrays/
+00:02:24,998 --> 00:02:29,654
+Hands-on: module2/examples/generate/
 
 27
-00:02:32,044 --> 00:02:37,924
-Hands-on: module2/examples/multi_dim_arrays/
+00:02:30,004 --> 00:02:35,380
+module2/examples/generate_if/README.md
 
 28
-00:02:38,274 --> 00:02:42,954
-Hands-on: module2/examples/parameters/
+00:02:35,730 --> 00:02:40,962
+Hands-on: module2/examples/generate_if/
 
 29
-00:02:43,304 --> 00:02:48,848
-Hands-on: module2/examples/tasks_functions/
+00:02:41,312 --> 00:02:47,576
+module2/examples/generate_ripple_adder/README.md
 
 30
-00:02:49,198 --> 00:02:54,454
-Hands-on: module2/examples/task_ansi/
+00:02:47,926 --> 00:02:53,950
+Hands-on: module2/examples/generate_ripple_adder/
 
 31
-00:02:54,804 --> 00:02:57,132
-Practice & assessment
+00:02:54,300 --> 00:02:58,956
+module2/examples/signed/README.md
 
 32
-00:02:57,482 --> 00:03:02,570
-Exercises ANSI Ports always @ Generate Signed Arrays and localparam
+00:02:59,306 --> 00:03:03,746
+Hands-on: module2/examples/signed/
 
 33
-00:03:02,920 --> 00:03:12,328
-Exercises Using always @* for Sequential Logic genvar in Normal Code Overriding localparam Signed vs Unsigned Mix Generate Block Scope
+00:03:04,096 --> 00:03:09,520
+module2/examples/signed_compare/README.md
 
 34
-00:03:12,678 --> 00:03:38,958
-Summary & next steps Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays. Complete module2/CHECKLIST.md Run ./scripts/module2.sh --check Next: Next module in course
+00:03:09,870 --> 00:03:15,174
+Hands-on: module2/examples/signed_compare/
+
+35
+00:03:15,524 --> 00:03:20,300
+module2/examples/decoder/README.md
+
+36
+00:03:20,650 --> 00:03:25,282
+Hands-on: module2/examples/decoder/
+
+37
+00:03:25,632 --> 00:03:30,240
+module2/examples/arrays/README.md
+
+38
+00:03:30,590 --> 00:03:35,030
+Hands-on: module2/examples/arrays/
+
+39
+00:03:35,380 --> 00:03:41,476
+module2/examples/multi_dim_arrays/README.md
+
+40
+00:03:41,826 --> 00:03:47,706
+Hands-on: module2/examples/multi_dim_arrays/
+
+41
+00:03:48,056 --> 00:03:52,952
+module2/examples/parameters/README.md
+
+42
+00:03:53,302 --> 00:03:57,982
+Hands-on: module2/examples/parameters/
+
+43
+00:03:58,332 --> 00:04:04,044
+module2/examples/tasks_functions/README.md
+
+44
+00:04:04,394 --> 00:04:09,938
+Hands-on: module2/examples/tasks_functions/
+
+45
+00:04:10,288 --> 00:04:15,712
+module2/examples/task_ansi/README.md
+
+46
+00:04:16,062 --> 00:04:21,318
+Hands-on: module2/examples/task_ansi/
+
+47
+00:04:21,668 --> 00:04:23,804
+Common pitfalls
+
+48
+00:04:24,154 --> 00:04:27,106
+From MODULE2 Common Pitfalls.
+
+49
+00:04:27,456 --> 00:04:30,408
+From MODULE2 Common Pitfalls.
+
+50
+00:04:30,758 --> 00:04:33,710
+From MODULE2 Common Pitfalls.
+
+51
+00:04:34,060 --> 00:04:37,012
+From MODULE2 Common Pitfalls.
+
+52
+00:04:37,362 --> 00:04:40,314
+From MODULE2 Common Pitfalls.
+
+53
+00:04:40,664 --> 00:04:42,992
+Practice & assessment
+
+54
+00:04:43,342 --> 00:04:46,222
+From MODULE2 Learning Outcomes.
+
+55
+00:04:46,572 --> 00:04:49,452
+From MODULE2 Learning Outcomes.
+
+56
+00:04:49,802 --> 00:04:54,890
+Exercises ANSI Ports always @ Generate Signed Arrays and localparam
+
+57
+00:04:55,240 --> 00:05:04,648
+Exercises Using always @* for Sequential Logic genvar in Normal Code Overriding localparam Signed vs Unsigned Mix Generate Block Scope
+
+58
+00:05:04,998 --> 00:05:31,614
+Summary & next steps Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays. Complete module2/CHECKLIST.md Review module2/EXAMPLES.md and run each lab Next: Next module in course

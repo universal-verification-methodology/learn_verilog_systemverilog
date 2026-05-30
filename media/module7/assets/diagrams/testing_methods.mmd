@@ -1,0 +1,5 @@
+flowchart TB
+  M7["module7.sh"] --> MUX["test_mux2_all cross-version"]
+  M7 --> CTR["test_counter_all"]
+  MUX --> MIG["migration checklist tick"]
+  CTR --> MIG

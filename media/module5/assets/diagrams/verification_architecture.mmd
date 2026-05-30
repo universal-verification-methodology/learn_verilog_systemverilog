@@ -1,0 +1,5 @@
+flowchart LR
+  SIM["sim + assertions on"] --> DEC
+  SIM --> FSM
+  SIM --> MEM
+  FSM -->|fail| ASSERT["assertion fire"]

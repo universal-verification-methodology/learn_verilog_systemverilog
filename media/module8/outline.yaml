@@ -29,6 +29,30 @@ slides:
     course (Modules 1–7). It does not introduce new language features. It consolidates
     the version timeline, construct-by-standard tabl
 - type: section
+  title: How to learn this module
+- type: bullets
+  title: Suggested learning path (1/2)
+  bullets:
+  - Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for
+    Module 8.
+  - Study design architecture — See how DUTs, examples, and testbenches fit together
+    under `module8/`.
+  - Work through labs in order — Open `module8/EXAMPLES.md` and run each `make clean
+    && make run` from the repo root.
+  - Run the full module script — `./scripts/module8.sh` from the repo root to simulate
+    all examples and tests.
+  - Complete the exercises — Try each exercise in this document before reading solutions
+    or peeking at reference RTL.
+  notes: From docs/MODULE8.md — read guides before running demos.
+- type: bullets
+  title: Suggested learning path (2/2)
+  bullets:
+  - Use as reference — Module 8 summarizes the full course; run examples to print
+    quick-reference slices, not to learn new RTL.
+  - Review Common Pitfalls — Can you explain each mistake and the fix?
+  - Self-check — Use `module8/CHECKLIST.md` before starting the next module.
+  notes: From docs/MODULE8.md — read guides before running demos.
+- type: section
   title: Syllabus topics
 - type: bullets
   title: 1. Version Timeline (One Table)
@@ -42,60 +66,77 @@ slides:
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
     2>&1 | head -1)"'
   screenshot: assets/screenshots/module8_check.png
-  expect_stdout_contains: iverilog
+  expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
 - type: demo
-  title: 'Demo: Construct Lookup'
-  command: cd module8/examples/construct_lookup && make clean && make run
-  screenshot: assets/screenshots/ex01_construct_lookup.png
-  notes: 'Hands-on: module8/examples/construct_lookup/'
+  title: 'Demo: quick_ref'
+  command: cd module8/examples/One-page && make clean && make run
+  screenshot: assets/screenshots/ex01_One-page.png
+  notes: 'Hands-on: module8/examples/One-page/'
 - type: demo
-  title: 'Demo: Course Map'
-  command: cd module8/examples/course_map && make clean && make run
-  screenshot: assets/screenshots/ex02_course_map.png
-  notes: 'Hands-on: module8/examples/course_map/'
+  title: 'Demo: version_timeline'
+  command: cd module8/examples/Version && make clean && make run
+  screenshot: assets/screenshots/ex02_Version.png
+  notes: 'Hands-on: module8/examples/Version/'
 - type: demo
-  title: 'Demo: Design Subset'
-  command: cd module8/examples/design_subset && make clean && make run
-  screenshot: assets/screenshots/ex03_design_subset.png
-  notes: 'Hands-on: module8/examples/design_subset/'
+  title: 'Demo: design_subset'
+  command: cd module8/examples/Verilog-only && make clean && make run
+  screenshot: assets/screenshots/ex03_Verilog-only.png
+  notes: 'Hands-on: module8/examples/Verilog-only/'
 - type: demo
-  title: 'Demo: Learning Path'
-  command: cd module8/examples/learning_path && make clean && make run
-  screenshot: assets/screenshots/ex04_learning_path.png
-  notes: 'Hands-on: module8/examples/learning_path/'
+  title: 'Demo: tool_support'
+  command: cd module8/examples/Tool && make clean && make run
+  screenshot: assets/screenshots/ex04_Tool.png
+  notes: 'Hands-on: module8/examples/Tool/'
 - type: demo
-  title: 'Demo: Migration Steps'
-  command: cd module8/examples/migration_steps && make clean && make run
-  screenshot: assets/screenshots/ex05_migration_steps.png
-  notes: 'Hands-on: module8/examples/migration_steps/'
+  title: 'Demo: construct_lookup'
+  command: cd module8/examples/"Which && make clean && make run
+  screenshot: assets/screenshots/ex05_"Which.png
+  notes: 'Hands-on: module8/examples/"Which/'
 - type: demo
-  title: 'Demo: Pitfalls'
-  command: cd module8/examples/pitfalls && make clean && make run
-  screenshot: assets/screenshots/ex06_pitfalls.png
-  notes: 'Hands-on: module8/examples/pitfalls/'
+  title: 'Demo: course_map'
+  command: cd module8/examples/Course && make clean && make run
+  screenshot: assets/screenshots/ex06_Course.png
+  notes: 'Hands-on: module8/examples/Course/'
 - type: demo
-  title: 'Demo: Synthesizable Subset'
-  command: cd module8/examples/synthesizable_subset && make clean && make run
-  screenshot: assets/screenshots/ex07_synthesizable_subset.png
-  notes: 'Hands-on: module8/examples/synthesizable_subset/'
+  title: 'Demo: migration_steps'
+  command: cd module8/examples/Migration && make clean && make run
+  screenshot: assets/screenshots/ex07_Migration.png
+  notes: 'Hands-on: module8/examples/Migration/'
 - type: demo
-  title: 'Demo: Tool Support'
-  command: cd module8/examples/tool_support && make clean && make run
-  screenshot: assets/screenshots/ex08_tool_support.png
-  notes: 'Hands-on: module8/examples/tool_support/'
+  title: 'Demo: synthesizable_subset'
+  command: cd module8/examples/Synthesizable && make clean && make run
+  screenshot: assets/screenshots/ex08_Synthesizable.png
+  notes: 'Hands-on: module8/examples/Synthesizable/'
 - type: demo
-  title: 'Demo: Version Selection'
-  command: cd module8/examples/version_selection && make clean && make run
-  screenshot: assets/screenshots/ex09_version_selection.png
-  notes: 'Hands-on: module8/examples/version_selection/'
+  title: 'Demo: version_selection'
+  command: cd module8/examples/Version && make clean && make run
+  screenshot: assets/screenshots/ex09_Version.png
+  notes: 'Hands-on: module8/examples/Version/'
 - type: demo
-  title: 'Demo: Version Timeline'
-  command: cd module8/examples/version_timeline && make clean && make run
-  screenshot: assets/screenshots/ex10_version_timeline.png
-  notes: 'Hands-on: module8/examples/version_timeline/'
+  title: 'Demo: learning_path'
+  command: cd module8/examples/Learning && make clean && make run
+  screenshot: assets/screenshots/ex10_Learning.png
+  notes: 'Hands-on: module8/examples/Learning/'
+- type: demo
+  title: 'Demo: pitfalls'
+  command: cd module8/examples/Common && make clean && make run
+  screenshot: assets/screenshots/ex11_Common.png
+  notes: 'Hands-on: module8/examples/Common/'
 - type: section
   title: Practice & assessment
+- type: bullets
+  title: What you should know
+  bullets:
+  - ✓ Use the version timeline and construct-by-standard table to look up “which standard
+    has X?”
+  - ✓ Use the design-subset quick reference to choose Verilog-only vs SystemVerilog
+    design
+  - ✓ Use the migration quick reference and Module 7 checklists for migration and
+    version selection
+  - ✓ Use the course map to find which module covers a given standard or topic
+  - ✓ Use this module as a single reference after completing the course
+  notes: From MODULE8 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -118,5 +159,5 @@ slides:
   - Provide a single quick reference and course summary for Verilog and SystemVerilog
     across IEEE versions (1364-1995 through 1800-2017).
   - Complete module8/CHECKLIST.md
-  - Run ./scripts/module8.sh --check
+  - Review module8/EXAMPLES.md and run each lab
   - 'Next: Next module in course'

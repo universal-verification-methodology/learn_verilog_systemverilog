@@ -8,13 +8,13 @@
 
 [Slide 5] Overview This module covers IEEE Std 1800-2017, the current SystemVerilog standard. In 1800-2017, the Verilog language (formerly IEEE 1364) is merged into the SystemVerilog LRM, so one document defines both the Verilog subset and
 
-[Slide 6] Syllabus topics
+[Slide 6] How to learn this module
 
-[Slide 7] From MODULE6 Topics Covered.
+[Slide 7] From docs/MODULE6.md — read guides before running demos.
 
-[Slide 8] From MODULE6 Topics Covered.
+[Slide 8] From docs/MODULE6.md — read guides before running demos.
 
-[Slide 9] From MODULE6 Topics Covered.
+[Slide 9] Syllabus topics
 
 [Slide 10] From MODULE6 Topics Covered.
 
@@ -32,32 +32,70 @@
 
 [Slide 17] From MODULE6 Topics Covered.
 
-[Slide 18] Hands-on examples
+[Slide 18] From MODULE6 Topics Covered.
 
-[Slide 19] Requires iverilog on PATH (apt install iverilog).
+[Slide 19] From MODULE6 Topics Covered.
 
-[Slide 20] Hands-on: module6/examples/subsets/
+[Slide 20] From MODULE6 Topics Covered.
 
-[Slide 21] Hands-on: module6/examples/design_recap/
+[Slide 21] Hands-on examples
 
-[Slide 22] Hands-on: module6/examples/assertions/
+[Slide 22] Requires iverilog on PATH (apt install iverilog).
 
-[Slide 23] Hands-on: module6/examples/version_summary/
+[Slide 23] module6/examples/subsets/README.md
 
-[Slide 24] Hands-on: module6/examples/migration/
+[Slide 24] Hands-on: module6/examples/subsets/
 
-[Slide 25] Hands-on: module6/examples/logic_single_driver/
+[Slide 25] module6/examples/design_recap/README.md
 
-[Slide 26] Hands-on: module6/examples/priority_case/
+[Slide 26] Hands-on: module6/examples/design_recap/
 
-[Slide 27] Hands-on: module6/examples/package_import/
+[Slide 27] module6/examples/assertions/README.md
 
-[Slide 28] Hands-on: module6/examples/unique_case/
+[Slide 28] Hands-on: module6/examples/assertions/
 
-[Slide 29] Practice & assessment
+[Slide 29] module6/examples/version_summary/README.md
 
-[Slide 30] Exercises Subset Comparison 1800-2017 Design Checklist Immediate Assertion Version Table Migration Plan
+[Slide 30] Hands-on: module6/examples/version_summary/
 
-[Slide 31] Exercises Assuming 1364 Is Still a Separate Standard Mixing Revisions in One Project Ignoring Tool Support Assertions in Synthesis Over-Migrating Legacy Code
+[Slide 31] module6/examples/migration/README.md
 
-[Slide 32] Summary & next steps Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview. Complete module6/CHECKLIST.md Run ./scripts/module6.sh --check Next: Next module in course
+[Slide 32] Hands-on: module6/examples/migration/
+
+[Slide 33] module6/examples/logic_single_driver/README.md
+
+[Slide 34] Hands-on: module6/examples/logic_single_driver/
+
+[Slide 35] module6/examples/priority_case/README.md
+
+[Slide 36] Hands-on: module6/examples/priority_case/
+
+[Slide 37] module6/examples/package_import/README.md
+
+[Slide 38] Hands-on: module6/examples/package_import/
+
+[Slide 39] module6/examples/unique_case/README.md
+
+[Slide 40] Hands-on: module6/examples/unique_case/
+
+[Slide 41] Common pitfalls
+
+[Slide 42] From MODULE6 Common Pitfalls.
+
+[Slide 43] From MODULE6 Common Pitfalls.
+
+[Slide 44] From MODULE6 Common Pitfalls.
+
+[Slide 45] From MODULE6 Common Pitfalls.
+
+[Slide 46] From MODULE6 Common Pitfalls.
+
+[Slide 47] Practice & assessment
+
+[Slide 48] From MODULE6 Learning Outcomes.
+
+[Slide 49] Exercises Subset Comparison 1800-2017 Design Checklist Immediate Assertion Version Table Migration Plan
+
+[Slide 50] Exercises Assuming 1364 Is Still a Separate Standard Mixing Revisions in One Project Ignoring Tool Support Assertions in Synthesis Over-Migrating Legacy Code
+
+[Slide 51] Summary & next steps Master the current SystemVerilog standard (IEEE 1800-2017): unified LRM, merged Verilog and SystemVerilog, and design/verification overview. Complete module6/CHECKLIST.md Review module6/EXAMPLES.md and run each lab Next: Next module in course

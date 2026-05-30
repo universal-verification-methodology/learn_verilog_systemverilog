@@ -1,0 +1,5 @@
+flowchart TB
+  M3["module3.sh"] --> TC["test_counter_2005"]
+  M3 --> TF["test_fsm_2005"]
+  M3 --> TP["test_param_chain"]
+  TC --> SYNTH["synthesizable subset OK"]

@@ -19,73 +19,93 @@ Learning path Provide a single quick reference and course summary for Verilog an
 Overview This module is a **reference and summary** for the version-centric Verilog/SystemVerilog course (Modules 1–7). It does not introduce new language features. It consolidates the version timeline, construct-by-standard tabl
 
 6
-00:00:49,030 --> 00:00:51,286
-Syllabus topics
+00:00:49,030 --> 00:00:51,382
+How to learn this module
 
 7
-00:00:51,636 --> 00:00:54,396
-From MODULE8 Topics Covered.
+00:00:51,732 --> 00:00:56,988
+From docs/MODULE8.md — read guides before running demos.
 
 8
-00:00:54,746 --> 00:00:56,978
-Hands-on examples
+00:00:57,338 --> 00:01:02,594
+From docs/MODULE8.md — read guides before running demos.
 
 9
-00:00:57,328 --> 00:01:01,648
-Requires iverilog on PATH (apt install iverilog).
+00:01:02,944 --> 00:01:05,200
+Syllabus topics
 
 10
-00:01:01,998 --> 00:01:07,518
-Hands-on: module8/examples/construct_lookup/
+00:01:05,550 --> 00:01:08,310
+From MODULE8 Topics Covered.
 
 11
-00:01:07,868 --> 00:01:13,004
-Hands-on: module8/examples/course_map/
+00:01:08,660 --> 00:01:10,892
+Hands-on examples
 
 12
-00:01:13,354 --> 00:01:18,802
-Hands-on: module8/examples/design_subset/
+00:01:11,242 --> 00:01:15,562
+Requires iverilog on PATH (apt install iverilog).
 
 13
-00:01:19,152 --> 00:01:24,432
-Hands-on: module8/examples/learning_path/
+00:01:15,912 --> 00:01:20,544
+Hands-on: module8/examples/One-page/
 
 14
-00:01:24,782 --> 00:01:30,278
-Hands-on: module8/examples/migration_steps/
+00:01:20,894 --> 00:01:25,454
+Hands-on: module8/examples/Version/
 
 15
-00:01:30,628 --> 00:01:35,260
-Hands-on: module8/examples/pitfalls/
+00:01:25,804 --> 00:01:30,748
+Hands-on: module8/examples/Verilog-only/
 
 16
-00:01:35,610 --> 00:01:41,466
-Hands-on: module8/examples/synthesizable_subset/
+00:01:31,098 --> 00:01:35,538
+Hands-on: module8/examples/Tool/
 
 17
-00:01:41,816 --> 00:01:47,072
-Hands-on: module8/examples/tool_support/
+00:01:35,888 --> 00:01:40,304
+Hands-on: module8/examples/"Which/
 
 18
-00:01:47,422 --> 00:01:52,942
-Hands-on: module8/examples/version_selection/
+00:01:40,654 --> 00:01:45,094
+Hands-on: module8/examples/Course/
 
 19
-00:01:53,292 --> 00:01:58,716
-Hands-on: module8/examples/version_timeline/
+00:01:45,444 --> 00:01:50,196
+Hands-on: module8/examples/Migration/
 
 20
-00:01:59,066 --> 00:02:01,394
-Practice & assessment
+00:01:50,546 --> 00:01:55,490
+Hands-on: module8/examples/Synthesizable/
 
 21
-00:02:01,744 --> 00:02:06,088
-Exercises Lookup Subset Migration Course map Cheat sheet
+00:01:55,840 --> 00:02:00,400
+Hands-on: module8/examples/Version/
 
 22
-00:02:06,438 --> 00:02:18,606
-Exercises Assuming a construct is in an older standard Mixing subsets without a rule Skipping regression after migration Forgetting tool support Treating this module as a replacement for Modules 1–7
+00:02:00,750 --> 00:02:05,238
+Hands-on: module8/examples/Learning/
 
 23
-00:02:18,956 --> 00:02:40,772
-Summary & next steps Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017). Complete module8/CHECKLIST.md Run ./scripts/module8.sh --check Next: Next module in course
+00:02:05,588 --> 00:02:10,100
+Hands-on: module8/examples/Common/
+
+24
+00:02:10,450 --> 00:02:12,778
+Practice & assessment
+
+25
+00:02:13,128 --> 00:02:16,008
+From MODULE8 Learning Outcomes.
+
+26
+00:02:16,358 --> 00:02:20,702
+Exercises Lookup Subset Migration Course map Cheat sheet
+
+27
+00:02:21,052 --> 00:02:33,220
+Exercises Assuming a construct is in an older standard Mixing subsets without a rule Skipping regression after migration Forgetting tool support Treating this module as a replacement for Modules 1–7
+
+28
+00:02:33,570 --> 00:02:55,770
+Summary & next steps Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017). Complete module8/CHECKLIST.md Review module8/EXAMPLES.md and run each lab Next: Next module in course

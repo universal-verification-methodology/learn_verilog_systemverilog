@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 """Generate moduleN/EXAMPLES.md from docs/MODULEN.md and examples/ directories.
 
-The module-to-slides-video outline generator expects EXAMPLES.md sections:
-
-  ## 1. Title (`folder/`)
-
-  ```bash
-  cd moduleN/examples/folder && make clean && make run
-  ```
+Produces learner-oriented lab sections with "What you'll learn", run commands,
+and expected outcomes for the module-to-slides-video pipeline.
 
 Usage (from repo root):
 
@@ -19,81 +14,135 @@ from __future__ import annotations
 
 import argparse
 import re
+from dataclasses import dataclass, field
 from pathlib import Path
 
-EXAMPLE_LINE = re.compile(
-    r"^\s*(\d+)\.\s+\*\*(.+?)\*\*\s+\(`(?:examples/)?([^`/]+)/?`\)",
+EXAMPLE_HEADER = re.compile(
+    r"^(\d+)\.\s+\*\*(.+?)\*\*\s+"
+    r"(?:\(`(?:examples/)?([^`/]+)/?`\)|—\s*(.+))\s*$",
     re.MULTILINE,
+)
+MODULE_EXAMPLES_BLOCK = re.compile(
+    r"### Module \d+ Examples[^\n]*\n(.*?)(?=\n## |\Z)",
+    re.DOTALL,
 )
 
 
-def parse_module_examples(doc_path: Path) -> list[tuple[int, str, str]]:
-    """Return (number, title, folder) from MODULE*.md numbered example list."""
+@dataclass
+class ParsedExample:
+    """One hands-on lab extracted from MODULE*.md."""
+
+    number: int
+    title: str
+    folder: str
+    learn_bullets: list[str] = field(default_factory=list)
+
+
+def _clean_bullet(text: str) -> str:
+    item = re.sub(r"\*\*([^*]+)\*\*", r"\1", text.strip())
+    item = re.sub(r"`([^`]+)`", r"\1", item)
+    return item
+
+
+def _parse_example_body(body: str) -> list[str]:
+    """Collect sub-bullets and Key Concepts lines under one example item."""
+    bullets: list[str] = []
+    for line in body.splitlines():
+        m = re.match(r"^\s+-\s+(.+)$", line)
+        if not m:
+            continue
+        raw = m.group(1).strip()
+        if raw.startswith("**Key Concepts**:"):
+            concept = raw.split(":", 1)[-1].strip()
+            if concept:
+                bullets.append(concept)
+            continue
+        if raw.startswith("**Example**:"):
+            continue
+        cleaned = _clean_bullet(raw)
+        if cleaned and len(cleaned) < 200:
+            bullets.append(cleaned)
+    return bullets[:6]
+
+
+def parse_module_examples(doc_path: Path) -> list[ParsedExample]:
+    """Return parsed examples from MODULE*.md numbered example list."""
     text = doc_path.read_text(encoding="utf-8")
-    block_m = re.search(
-        r"### Module \d+ Examples[^\n]*\n(.*?)(?=\n## |\Z)",
-        text,
-        re.DOTALL,
-    )
-    if not block_m:
-        block_m = re.search(
-            r"### Module \d+ Examples[^\n]*\n(.*?)(?=\n### |\n## |\Z)",
-            text,
-            re.DOTALL,
-        )
-    block = block_m.group(1) if block_m else text
-    items: list[tuple[int, str, str]] = []
-    for m in EXAMPLE_LINE.finditer(block):
-        items.append((int(m.group(1)), m.group(2).strip(), m.group(3).strip()))
-    return items
+    block_m = MODULE_EXAMPLES_BLOCK.search(text)
+    block = block_m.group(1) if block_m else ""
+    if not block.strip():
+        return []
+
+    examples: list[ParsedExample] = []
+    headers = list(EXAMPLE_HEADER.finditer(block))
+    for i, hm in enumerate(headers):
+        num = int(hm.group(1))
+        title = hm.group(2).strip()
+        folder = (hm.group(3) or hm.group(4) or title).strip()
+        folder = folder.split("/")[0].split()[0]
+        start = hm.end()
+        end = headers[i + 1].start() if i + 1 < len(headers) else len(block)
+        learn_bullets = _parse_example_body(block[start:end])
+        examples.append(ParsedExample(num, title, folder, learn_bullets))
+    return examples
 
 
-def discover_example_dirs(module_dir: Path) -> list[str]:
+def discover_example_dirs(module_dir: Path) -> list[ParsedExample]:
+    """Fallback: enumerate Makefile-backed example folders."""
     ex_root = module_dir / "examples"
     if not ex_root.is_dir():
         return []
-    dirs: list[str] = []
-    for child in sorted(ex_root.iterdir()):
+    items: list[ParsedExample] = []
+    for idx, child in enumerate(sorted(ex_root.iterdir()), start=1):
         if not child.is_dir():
             continue
-        if (child / "Makefile").is_file():
-            dirs.append(child.name)
-    return dirs
+        if not (child / "Makefile").is_file():
+            continue
+        title = child.name.replace("_", " ").strip().title()
+        items.append(ParsedExample(idx, title, child.name, []))
+    return items
 
 
-def folder_title(name: str) -> str:
-    return name.replace("_", " ").strip().title()
-
-
-def render_examples_md(
-    module: int,
-    items: list[tuple[int, str, str]],
-) -> str:
-    title = f"Module {module} Examples"
+def render_examples_md(module: int, examples: list[ParsedExample]) -> str:
+    """Render EXAMPLES.md with learner-facing sections."""
     lines = [
-        f"# {title}",
+        f"# Module {module} — Hands-on labs",
         "",
-        f"Hands-on **Icarus Verilog** demos for Module {module}. "
-        "Run from the course repo root unless noted.",
+        f"Generated from `docs/MODULE{module}.md` for slides, PDF, and video.",
+        "Run commands from the **course repository root** unless noted.",
         "",
-        "---",
+        f"**Before you start:** Read `docs/MODULE{module}.md` → "
+        f"**How to Learn This Module**, then work through each lab in order.",
         "",
     ]
-    for num, ex_title, folder in items:
+    for ex in examples:
         lines.extend(
             [
-                f"## {num}. {ex_title} (`{folder}/`)",
+                f"## {ex.number}. {ex.title} (`{ex.folder}/`)",
                 "",
-                f"Build and simulate: `module{module}/examples/{folder}/`.",
+                f"**Folder:** `module{module}/examples/{ex.folder}/`",
                 "",
-                "**Try these** (from repo root):",
+            ]
+        )
+        if ex.learn_bullets:
+            lines.append("**What you'll learn:**")
+            for bullet in ex.learn_bullets:
+                lines.append(f"- {bullet}")
+            lines.append("")
+        lines.extend(
+            [
+                "**Run:**",
                 "",
                 "```bash",
-                f"cd module{module}/examples/{folder}",
+                f"cd module{module}/examples/{ex.folder}",
                 "make clean && make run",
                 "```",
                 "",
-                "---",
+                "**You should see:** Simulation completes without errors; "
+                "check `$display` output or PASS messages in the log.",
+                "",
+                f"**Go deeper:** Full context in `docs/MODULE{module}.md` "
+                f"and RTL under `module{module}/examples/{ex.folder}/`.",
                 "",
             ]
         )
@@ -110,23 +159,20 @@ def write_module(course_root: Path, module: int, dry_run: bool) -> int:
         return 1
 
     parsed = parse_module_examples(doc_path)
-    if parsed:
-        items = parsed
-    else:
-        dirs = discover_example_dirs(module_dir)
-        items = [(i + 1, folder_title(d), d) for i, d in enumerate(dirs)]
+    if not parsed:
+        parsed = discover_example_dirs(module_dir)
 
-    if not items:
+    if not parsed:
         print(f"WARN: module {module}: no examples found")
         return 0
 
-    content = render_examples_md(module, items)
+    content = render_examples_md(module, parsed)
     if dry_run:
-        print(f"module {module}: {len(items)} examples -> {out_path}")
+        print(f"module {module}: {len(parsed)} examples -> {out_path}")
         return 0
 
     out_path.write_text(content, encoding="utf-8")
-    print(f"OK: {out_path} ({len(items)} examples)")
+    print(f"OK: {out_path} ({len(parsed)} examples)")
     return 0
 
 
@@ -152,6 +198,8 @@ def main() -> int:
     )
     rc = 0
     for mod in modules:
+        if not (course_root / f"module{mod}").is_dir():
+            continue
         if write_module(course_root, mod, args.dry_run) != 0:
             rc = 1
     return rc

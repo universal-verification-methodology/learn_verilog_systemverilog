@@ -1,0 +1,8 @@
+flowchart TB
+  subgraph DUT["module6/dut — 1800-2017"]
+    ALU["alu_2017 logic+always_comb"]
+    BLK["design_block_2017"]
+    FSM["fsm_2017 unique case"]
+  end
+  PKG["package types"] --> ALU
+  PKG --> BLK

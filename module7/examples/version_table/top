@@ -8,11 +8,11 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x55ec1c581540 .scope package, "$unit" "$unit" 2 1;
+S_0x55b7302da540 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x55ec1c5816d0 .scope module, "top" "top" 3 6;
+S_0x55b7302da6d0 .scope module, "top" "top" 3 6;
  .timescale 0 0;
-    .scope S_0x55ec1c5816d0;
+    .scope S_0x55b7302da6d0;
 T_0 ;
     %vpi_call/w 3 8 "$display", "Module 7: Version table (construct vs standard)" {0 0 0};
     %vpi_call/w 3 9 "$display", "  Port style:  1995 non-ANSI | 2001+ ANSI" {0 0 0};

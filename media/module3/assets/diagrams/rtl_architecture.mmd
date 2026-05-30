@@ -1,0 +1,9 @@
+flowchart TB
+  subgraph DUT["module3/dut"]
+    CNT["counter_2005"]
+    FSM["fsm_2005 case FSM"]
+    PC["param_chain hierarchy"]
+  end
+  CNT -->|"#(.MAX)"| PC
+  FSM --> NS["next-state comb"]
+  FSM --> ST["state reg seq"]

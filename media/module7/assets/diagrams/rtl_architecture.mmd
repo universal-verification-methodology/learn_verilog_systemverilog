@@ -1,0 +1,11 @@
+flowchart TB
+  subgraph PAIR["Same behavior — two syntaxes"]
+    M14["mux2_1364.v"]
+    M18["mux2_1800.sv"]
+    C14["counter_1364.v"]
+    C18["counter_1800.sv"]
+  end
+  STIM["shared stimulus"] --> M14
+  STIM --> M18
+  STIM --> C14
+  STIM --> C18

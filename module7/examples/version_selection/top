@@ -8,11 +8,11 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x55dd3e374a10 .scope package, "$unit" "$unit" 2 1;
+S_0x55a57da97a10 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x55dd3e372200 .scope module, "top" "top" 3 6;
+S_0x55a57da95200 .scope module, "top" "top" 3 6;
  .timescale 0 0;
-    .scope S_0x55dd3e372200;
+    .scope S_0x55a57da95200;
 T_0 ;
     %vpi_call/w 3 8 "$display", "Module 7: Version selection checklist (reminder)" {0 0 0};
     %vpi_call/w 3 9 "$display", "  Constraints: tools (sim/synth), IP/legacy, team, target (FPGA/ASIC)" {0 0 0};

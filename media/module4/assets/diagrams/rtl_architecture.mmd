@@ -1,0 +1,13 @@
+flowchart TB
+  subgraph DUT["module4/dut"]
+    MUX["mux2_sv always_comb"]
+    CTR["counter_sv always_ff"]
+    DEC["decoder_unique"]
+  end
+  subgraph BUS["interface bundle"]
+    IF["bus_if"]
+    M["bus_master modport"]
+    S["bus_slave modport"]
+  end
+  IF --> M
+  IF --> S

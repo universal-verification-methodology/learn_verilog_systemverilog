@@ -19,109 +19,189 @@ Learning path Master the first standardized Verilog language (IEEE 1364-1995) an
 Overview This module establishes the foundation for the Verilog/SystemVerilog version-centric course. You'll learn the original Verilog language as defined by IEEE Std 1364-1995 (Verilog-95): modules, nets and variables, continuo
 
 6
-00:00:51,814 --> 00:00:54,070
-Syllabus topics
+00:00:51,814 --> 00:00:54,166
+How to learn this module
 
 7
-00:00:54,420 --> 00:00:57,228
-From MODULE1 Topics Covered.
+00:00:54,516 --> 00:00:59,820
+From docs/MODULE1.md — read guides before running demos.
 
 8
-00:00:57,578 --> 00:01:00,386
-From MODULE1 Topics Covered.
+00:01:00,170 --> 00:01:05,474
+From docs/MODULE1.md — read guides before running demos.
 
 9
-00:01:00,736 --> 00:01:03,544
-From MODULE1 Topics Covered.
+00:01:05,824 --> 00:01:08,080
+Syllabus topics
 
 10
-00:01:03,894 --> 00:01:06,702
+00:01:08,430 --> 00:01:11,238
 From MODULE1 Topics Covered.
 
 11
-00:01:07,052 --> 00:01:09,860
+00:01:11,588 --> 00:01:14,396
 From MODULE1 Topics Covered.
 
 12
-00:01:10,210 --> 00:01:13,018
+00:01:14,746 --> 00:01:17,554
 From MODULE1 Topics Covered.
 
 13
-00:01:13,368 --> 00:01:16,176
+00:01:17,904 --> 00:01:20,712
 From MODULE1 Topics Covered.
 
 14
-00:01:16,526 --> 00:01:19,334
+00:01:21,062 --> 00:01:23,870
 From MODULE1 Topics Covered.
 
 15
-00:01:19,684 --> 00:01:22,492
+00:01:24,220 --> 00:01:27,028
 From MODULE1 Topics Covered.
 
 16
-00:01:22,842 --> 00:01:25,650
+00:01:27,378 --> 00:01:30,186
 From MODULE1 Topics Covered.
 
 17
-00:01:26,000 --> 00:01:28,808
+00:01:30,536 --> 00:01:33,344
 From MODULE1 Topics Covered.
 
 18
-00:01:29,158 --> 00:01:31,390
-Hands-on examples
+00:01:33,694 --> 00:01:36,502
+From MODULE1 Topics Covered.
 
 19
-00:01:31,740 --> 00:01:36,060
-Requires iverilog on PATH (apt install iverilog).
+00:01:36,852 --> 00:01:39,660
+From MODULE1 Topics Covered.
 
 20
-00:01:36,410 --> 00:01:41,834
-Hands-on: module1/examples/modules_ports/
+00:01:40,010 --> 00:01:42,818
+From MODULE1 Topics Covered.
 
 21
-00:01:42,184 --> 00:01:47,680
-Hands-on: module1/examples/nets_variables/
+00:01:43,168 --> 00:01:45,400
+Hands-on examples
 
 22
-00:01:48,030 --> 00:01:53,718
-Hands-on: module1/examples/continuous_assign/
+00:01:45,750 --> 00:01:50,070
+Requires iverilog on PATH (apt install iverilog).
 
 23
-00:01:54,068 --> 00:02:00,500
-Hands-on: module1/examples/continuous_assign_gates/
+00:01:50,420 --> 00:01:56,036
+module1/examples/modules_ports/README.md
 
 24
-00:02:00,850 --> 00:02:05,338
-Hands-on: module1/examples/adder/
+00:01:56,386 --> 00:02:01,810
+Hands-on: module1/examples/modules_ports/
 
 25
-00:02:05,688 --> 00:02:10,464
-Hands-on: module1/examples/procedural/
+00:02:02,160 --> 00:02:07,896
+module1/examples/nets_variables/README.md
 
 26
-00:02:10,814 --> 00:02:16,478
-Hands-on: module1/examples/sequential_dff/
+00:02:08,246 --> 00:02:13,742
+Hands-on: module1/examples/nets_variables/
 
 27
-00:02:16,828 --> 00:02:22,324
-Hands-on: module1/examples/delays_timing/
+00:02:14,092 --> 00:02:19,996
+module1/examples/continuous_assign/README.md
 
 28
-00:02:22,674 --> 00:02:27,594
-Hands-on: module1/examples/testbenches/
+00:02:20,346 --> 00:02:26,034
+Hands-on: module1/examples/continuous_assign/
 
 29
-00:02:27,944 --> 00:02:30,272
-Practice & assessment
+00:02:26,384 --> 00:02:32,984
+module1/examples/continuous_assign_gates/README.md
 
 30
-00:02:30,622 --> 00:02:39,334
-Exercises Module and Ports (1995) wire vs reg Simple Testbench Limitations Incomplete Sensitivity List
+00:02:33,334 --> 00:02:39,766
+Hands-on: module1/examples/continuous_assign_gates/
 
 31
-00:02:39,684 --> 00:02:50,004
-Exercises Port Type Mismatch Simulation Never Ends Using 2001/SystemVerilog Constructs in 1995 Confusing reg with Registers
+00:02:40,116 --> 00:02:44,820
+module1/examples/adder/README.md
 
 32
-00:02:50,354 --> 00:03:10,850
-Summary & next steps Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Complete module1/CHECKLIST.md Run ./scripts/module1.sh --check Next: Next module in course
+00:02:45,170 --> 00:02:49,658
+Hands-on: module1/examples/adder/
+
+33
+00:02:50,008 --> 00:02:55,000
+module1/examples/procedural/README.md
+
+34
+00:02:55,350 --> 00:03:00,126
+Hands-on: module1/examples/procedural/
+
+35
+00:03:00,476 --> 00:03:06,380
+module1/examples/sequential_dff/README.md
+
+36
+00:03:06,730 --> 00:03:12,394
+Hands-on: module1/examples/sequential_dff/
+
+37
+00:03:12,744 --> 00:03:18,408
+module1/examples/delays_timing/README.md
+
+38
+00:03:18,758 --> 00:03:24,254
+Hands-on: module1/examples/delays_timing/
+
+39
+00:03:24,604 --> 00:03:29,692
+module1/examples/testbenches/README.md
+
+40
+00:03:30,042 --> 00:03:34,962
+Hands-on: module1/examples/testbenches/
+
+41
+00:03:35,312 --> 00:03:37,448
+Common pitfalls
+
+42
+00:03:37,798 --> 00:03:40,774
+From MODULE1 Common Pitfalls.
+
+43
+00:03:41,124 --> 00:03:44,100
+From MODULE1 Common Pitfalls.
+
+44
+00:03:44,450 --> 00:03:47,426
+From MODULE1 Common Pitfalls.
+
+45
+00:03:47,776 --> 00:03:50,752
+From MODULE1 Common Pitfalls.
+
+46
+00:03:51,102 --> 00:03:54,078
+From MODULE1 Common Pitfalls.
+
+47
+00:03:54,428 --> 00:03:56,756
+Practice & assessment
+
+48
+00:03:57,106 --> 00:04:00,010
+From MODULE1 Learning Outcomes.
+
+49
+00:04:00,360 --> 00:04:03,264
+From MODULE1 Learning Outcomes.
+
+50
+00:04:03,614 --> 00:04:12,326
+Exercises Module and Ports (1995) wire vs reg Simple Testbench Limitations Incomplete Sensitivity List
+
+51
+00:04:12,676 --> 00:04:22,996
+Exercises Port Type Mismatch Simulation Never Ends Using 2001/SystemVerilog Constructs in 1995 Confusing reg with Registers
+
+52
+00:04:23,346 --> 00:04:44,154
+Summary & next steps Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Complete module1/CHECKLIST.md Review module1/EXAMPLES.md and run each lab Next: Next module in course

@@ -8,13 +8,13 @@
 
 [Slide 5] Overview This module establishes the foundation for the Verilog/SystemVerilog version-centric course. You'll learn the original Verilog language as defined by IEEE Std 1364-1995 (Verilog-95): modules, nets and variables, continuo
 
-[Slide 6] Syllabus topics
+[Slide 6] How to learn this module
 
-[Slide 7] From MODULE1 Topics Covered.
+[Slide 7] From docs/MODULE1.md — read guides before running demos.
 
-[Slide 8] From MODULE1 Topics Covered.
+[Slide 8] From docs/MODULE1.md — read guides before running demos.
 
-[Slide 9] From MODULE1 Topics Covered.
+[Slide 9] Syllabus topics
 
 [Slide 10] From MODULE1 Topics Covered.
 
@@ -32,32 +32,72 @@
 
 [Slide 17] From MODULE1 Topics Covered.
 
-[Slide 18] Hands-on examples
+[Slide 18] From MODULE1 Topics Covered.
 
-[Slide 19] Requires iverilog on PATH (apt install iverilog).
+[Slide 19] From MODULE1 Topics Covered.
 
-[Slide 20] Hands-on: module1/examples/modules_ports/
+[Slide 20] From MODULE1 Topics Covered.
 
-[Slide 21] Hands-on: module1/examples/nets_variables/
+[Slide 21] Hands-on examples
 
-[Slide 22] Hands-on: module1/examples/continuous_assign/
+[Slide 22] Requires iverilog on PATH (apt install iverilog).
 
-[Slide 23] Hands-on: module1/examples/continuous_assign_gates/
+[Slide 23] module1/examples/modules_ports/README.md
 
-[Slide 24] Hands-on: module1/examples/adder/
+[Slide 24] Hands-on: module1/examples/modules_ports/
 
-[Slide 25] Hands-on: module1/examples/procedural/
+[Slide 25] module1/examples/nets_variables/README.md
 
-[Slide 26] Hands-on: module1/examples/sequential_dff/
+[Slide 26] Hands-on: module1/examples/nets_variables/
 
-[Slide 27] Hands-on: module1/examples/delays_timing/
+[Slide 27] module1/examples/continuous_assign/README.md
 
-[Slide 28] Hands-on: module1/examples/testbenches/
+[Slide 28] Hands-on: module1/examples/continuous_assign/
 
-[Slide 29] Practice & assessment
+[Slide 29] module1/examples/continuous_assign_gates/README.md
 
-[Slide 30] Exercises Module and Ports (1995) wire vs reg Simple Testbench Limitations Incomplete Sensitivity List
+[Slide 30] Hands-on: module1/examples/continuous_assign_gates/
 
-[Slide 31] Exercises Port Type Mismatch Simulation Never Ends Using 2001/SystemVerilog Constructs in 1995 Confusing reg with Registers
+[Slide 31] module1/examples/adder/README.md
 
-[Slide 32] Summary & next steps Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Complete module1/CHECKLIST.md Run ./scripts/module1.sh --check Next: Next module in course
+[Slide 32] Hands-on: module1/examples/adder/
+
+[Slide 33] module1/examples/procedural/README.md
+
+[Slide 34] Hands-on: module1/examples/procedural/
+
+[Slide 35] module1/examples/sequential_dff/README.md
+
+[Slide 36] Hands-on: module1/examples/sequential_dff/
+
+[Slide 37] module1/examples/delays_timing/README.md
+
+[Slide 38] Hands-on: module1/examples/delays_timing/
+
+[Slide 39] module1/examples/testbenches/README.md
+
+[Slide 40] Hands-on: module1/examples/testbenches/
+
+[Slide 41] Common pitfalls
+
+[Slide 42] From MODULE1 Common Pitfalls.
+
+[Slide 43] From MODULE1 Common Pitfalls.
+
+[Slide 44] From MODULE1 Common Pitfalls.
+
+[Slide 45] From MODULE1 Common Pitfalls.
+
+[Slide 46] From MODULE1 Common Pitfalls.
+
+[Slide 47] Practice & assessment
+
+[Slide 48] From MODULE1 Learning Outcomes.
+
+[Slide 49] From MODULE1 Learning Outcomes.
+
+[Slide 50] Exercises Module and Ports (1995) wire vs reg Simple Testbench Limitations Incomplete Sensitivity List
+
+[Slide 51] Exercises Port Type Mismatch Simulation Never Ends Using 2001/SystemVerilog Constructs in 1995 Confusing reg with Registers
+
+[Slide 52] Summary & next steps Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Complete module1/CHECKLIST.md Review module1/EXAMPLES.md and run each lab Next: Next module in course
