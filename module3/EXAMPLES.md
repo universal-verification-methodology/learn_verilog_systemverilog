@@ -5,12 +5,11 @@ Run commands from the **course repository root** unless noted.
 
 **Before you start:** Read `docs/MODULE3.md` → **How to Learn This Module**, then work through each lab in order.
 
-## 1. Parameter Override (`parameters/`)
+## 1. No defparam; override at instantiation only (`parameters/`)
 
 **Folder:** `module3/examples/parameters/`
 
 **What you'll learn:**
-- No defparam; override at instantiation only
 - defparam deprecated; use `#(.PARAM(value))` at instantiation
 
 **Run:**
@@ -24,12 +23,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/parameters/`.
 
-## 2. No defparam (`no_defparam/`)
+## 2. Parameter passed through hierarchy (parent → child) at instantiation only (`no_defparam/`)
 
 **Folder:** `module3/examples/no_defparam/`
 
 **What you'll learn:**
-- Parameter passed through hierarchy (parent → child) at instantiation only
 - No defparam anywhere; override only at inst
 
 **Run:**
@@ -43,12 +41,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/no_defparam/`.
 
-## 3. Synthesizable Style (`synthesizable/`)
+## 3. Combinational (always @*, blocking) and sequential (posedge clk, nonblocking) (`synthesizable/`)
 
 **Folder:** `module3/examples/synthesizable/`
 
 **What you'll learn:**
-- Combinational (always @*, blocking) and sequential (posedge clk, nonblocking)
 - One driver per net; avoid latches; no delays in RTL
 
 **Run:**
@@ -62,12 +59,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/synthesizable/`.
 
-## 4. One Driver (`one_driver/`)
+## 4. Single assign to wire; single always driving reg (`one_driver/`)
 
 **Folder:** `module3/examples/one_driver/`
 
 **What you'll learn:**
-- Single assign to wire; single always driving reg
 - No multiple drivers per net
 
 **Run:**
@@ -81,12 +77,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/one_driver/`.
 
-## 5. Blocking vs Nonblocking (`procedural/`)
+## 5. Side-by-side combinational vs sequential blocks with correct assignment style (`procedural/`)
 
 **Folder:** `module3/examples/procedural/`
 
 **What you'll learn:**
-- Side-by-side combinational vs sequential blocks with correct assignment style
 - = in combinational; <= in sequential; do not mix for same variable
 
 **Run:**
@@ -100,12 +95,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/procedural/`.
 
-## 6. Pipeline (`pipeline/`)
+## 6. Two-stage pipeline: q1 <= d; q2 <= q1 (nonblocking only) (`pipeline/`)
 
 **Folder:** `module3/examples/pipeline/`
 
 **What you'll learn:**
-- Two-stage pipeline: q1 <= d; q2 <= q1 (nonblocking only)
 - q2 gets old q1 (previous cycle); sequential block only
 
 **Run:**
@@ -119,12 +113,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/pipeline/`.
 
-## 7. Case Styles (`case_styles/`)
+## 7. full_case / parallel_case attributes (or tool pragmas) where supported (`case_styles/`)
 
 **Folder:** `module3/examples/case_styles/`
 
 **What you'll learn:**
-- full_case / parallel_case attributes (or tool pragmas) where supported
 - Synthesis hints only; 1364-2005 has no unique/priority case
 
 **Run:**
@@ -138,12 +131,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/case_styles/`.
 
-## 8. Avoid Latch (`avoid_latch/`)
+## 8. Default before case; all paths assign output (`avoid_latch/`)
 
 **Folder:** `module3/examples/avoid_latch/`
 
 **What you'll learn:**
-- Default before case; all paths assign output
 - No latch from incomplete case/if
 
 **Run:**
@@ -157,12 +149,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/avoid_latch/`.
 
-## 9. Synthesizable Function (`function_synth/`)
+## 9. Function without delays used in always @* (e.g. min) (`function_synth/`)
 
 **Folder:** `module3/examples/function_synth/`
 
 **What you'll learn:**
-- Function without delays used in always @* (e.g. min)
 - Combinational helper; no delays in RTL
 
 **Run:**
@@ -176,12 +167,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE3.md` and RTL under `module3/examples/function_synth/`.
 
-## 10. 1364-2005 Summary (`summary/`)
+## 10. Small design using only 1364-2005 features (no 1800) (`summary/`)
 
 **Folder:** `module3/examples/summary/`
 
 **What you'll learn:**
-- Small design using only 1364-2005 features (no 1800)
 - Checklist for “pure Verilog” RTL
 
 **Run:**

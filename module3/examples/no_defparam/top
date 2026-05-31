@@ -7,32 +7,32 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
-S_0x558d1dc9c610 .scope module, "top" "top" 2 22;
+S_0x55f906c36610 .scope module, "top" "top" 2 22;
  .timescale 0 0;
-v0x558d1dcaecd0_0 .var "a", 7 0;
-v0x558d1dcaede0_0 .net "y", 7 0, L_0x558d1dcaeef0;  1 drivers
-S_0x558d1dc9c7a0 .scope module, "u_parent" "parent" 2 26, 2 14 0, S_0x558d1dc9c610;
- .timescale 0 0;
-    .port_info 0 /INPUT 8 "a";
-    .port_info 1 /OUTPUT 8 "y";
-P_0x558d1dc9c980 .param/l "W" 0 2 14, +C4<00000000000000000000000000001000>;
-v0x558d1dcaead0_0 .net "a", 7 0, v0x558d1dcaecd0_0;  1 drivers
-v0x558d1dcaebc0_0 .net "y", 7 0, L_0x558d1dcaeef0;  alias, 1 drivers
-S_0x558d1dc9dc80 .scope module, "u_child" "child" 2 19, 2 7 0, S_0x558d1dc9c7a0;
+v0x55f906c48cd0_0 .var "a", 7 0;
+v0x55f906c48de0_0 .net "y", 7 0, L_0x55f906c48ef0;  1 drivers
+S_0x55f906c367a0 .scope module, "u_parent" "parent" 2 26, 2 14 0, S_0x55f906c36610;
  .timescale 0 0;
     .port_info 0 /INPUT 8 "a";
     .port_info 1 /OUTPUT 8 "y";
-P_0x558d1dc9de60 .param/l "W" 0 2 7, +C4<00000000000000000000000000001000>;
-L_0x558d1dcaeef0 .functor BUFZ 8, v0x558d1dcaecd0_0, C4<00000000>, C4<00000000>, C4<00000000>;
-v0x558d1dc9df30_0 .net "a", 7 0, v0x558d1dcaecd0_0;  alias, 1 drivers
-v0x558d1dcae990_0 .net "y", 7 0, L_0x558d1dcaeef0;  alias, 1 drivers
-    .scope S_0x558d1dc9c610;
+P_0x55f906c36980 .param/l "W" 0 2 14, +C4<00000000000000000000000000001000>;
+v0x55f906c48ad0_0 .net "a", 7 0, v0x55f906c48cd0_0;  1 drivers
+v0x55f906c48bc0_0 .net "y", 7 0, L_0x55f906c48ef0;  alias, 1 drivers
+S_0x55f906c37c80 .scope module, "u_child" "child" 2 19, 2 7 0, S_0x55f906c367a0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /OUTPUT 8 "y";
+P_0x55f906c37e60 .param/l "W" 0 2 7, +C4<00000000000000000000000000001000>;
+L_0x55f906c48ef0 .functor BUFZ 8, v0x55f906c48cd0_0, C4<00000000>, C4<00000000>, C4<00000000>;
+v0x55f906c37f30_0 .net "a", 7 0, v0x55f906c48cd0_0;  alias, 1 drivers
+v0x55f906c48990_0 .net "y", 7 0, L_0x55f906c48ef0;  alias, 1 drivers
+    .scope S_0x55f906c36610;
 T_0 ;
     %vpi_call 2 29 "$display", "No defparam (1364-2005): parameter only at instantiation" {0 0 0};
     %pushi/vec4 171, 0, 8;
-    %store/vec4 v0x558d1dcaecd0_0, 0, 8;
+    %store/vec4 v0x55f906c48cd0_0, 0, 8;
     %delay 10, 0;
-    %vpi_call 2 30 "$display", "  a=%h y=%h", v0x558d1dcaecd0_0, v0x558d1dcaede0_0 {0 0 0};
+    %vpi_call 2 30 "$display", "  a=%h y=%h", v0x55f906c48cd0_0, v0x55f906c48de0_0 {0 0 0};
     %vpi_call 2 31 "$finish" {0 0 0};
     %end;
     .thread T_0;

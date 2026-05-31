@@ -63,6 +63,51 @@ This module ties together Modules 1–6 by comparing the same design across stan
 - When reading or maintaining code that targets a specific revision
 - When evaluating tool support for different standards
 
+## Design Architecture
+
+### 1. Repository layout (module7/)
+
+- Side-by-side 1364 vs 1800 versions of the same designs
+- module7/dut/ — mux2_1364.v and mux2_1800.sv for direct comparison
+- examples/side_by_side/ — decoder, counter, FSM migration pairs
+- examples/migration/ — step-by-step 1995 → 2017 patterns
+- scripts/module7.sh — runs comparison and migration labs
+
+### 2. Side-by-side comparison architecture
+
+- Same behavior, different syntax — ports, types, procedural blocks
+- 1364: wire/reg, always @(a or b), many scalar ports
+- 1800: logic, always_comb/ff, optional interface for bus bundles
+- Testbench can instantiate both versions and compare outputs
+
+### 3. Migration workflow
+
+- Inventory features used — match to target standard checklist
+- Migrate ports first (ANSI, logic), then procedural blocks, then connectivity
+- Simulate after each step — do not big-bang rewrite
+- Document project standard and tool support decision
+
+## Key files to study
+
+- module7/dut/mux2_1364.v and mux2_1800.sv
+- module7/examples/side_by_side/mux2_versions/
+- module7/examples/migration_checklist/
+- module7/examples/incremental_migration/
+- scripts/module7.sh
+
+## Verification & Testing Methods
+
+### 1. Comparison test execution
+
+- test_mux2_all.sv — same stimulus on 1364 and 1800 mux; compare y
+- test_counter_all.sv — reset/enable/wrap behavior must match
+- ./scripts/module7.sh runs all migration and comparison examples
+
+### 2. Migration validation
+
+- After each migration step: make run must pass with identical outputs
+- Use migration_checklist example as a template for real projects
+
 ## Topics Covered
 
 ### 1. Side-by-Side Comparison: Same Design Across Versions

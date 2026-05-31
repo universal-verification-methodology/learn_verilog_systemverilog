@@ -8,11 +8,11 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x560277848810 .scope package, "$unit" "$unit" 2 1;
+S_0x56211eccc810 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x560277849ea0 .scope module, "top" "top" 3 6;
+S_0x56211eccdea0 .scope module, "top" "top" 3 6;
  .timescale 0 0;
-    .scope S_0x560277849ea0;
+    .scope S_0x56211eccdea0;
 T_0 ;
     %vpi_call/w 3 8 "$display", "=== Module 8: Common pitfalls (quick reference) ===" {0 0 0};
     %vpi_call/w 3 9 "$display", "  1. Assuming a construct is in an older standard -> Use construct-by-standard table (Section 2)" {0 0 0};

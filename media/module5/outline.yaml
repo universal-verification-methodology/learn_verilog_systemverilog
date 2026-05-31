@@ -9,30 +9,42 @@ slides:
 - type: title
   title: Module 5
   subtitle: IEEE 1800-2009 and 1800-2012
+  narration: 'Welcome to module 5, IEEE 1800-2009 and 1800-2012. In this module you
+    will master the systemverilog revisions ieee 1800-2009 and 1800-2012: interface
+    and type refinements, operator and array enhancements, and assertion/checker concepts
+    in context..'
 - type: bullets
   title: Learning objectives
   bullets:
   - 'Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and
-    type refinements, operator and array enhancements, and assertion/checker concepts
-    in context.'
+    type refinements, operator and array enhancements, and...'
+  narration: 'Here is what you will learn in this module. Master the SystemVerilog
+    revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator
+    and array enhancements, and...'
 - type: bullets
   title: Prerequisites
   bullets:
   - See module README
+  narration: Before you start, make sure you have these prerequisites. See module
+    README
 - type: image
   title: Learning path
   image: assets/diagrams/learning_path.png
   caption: 'Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface
-    and type refinements, operator and array enhancements, and assertion/checker concepts
-    in context.'
+    and type refinements, operator and array enhancements, and...'
+  narration: 'Learning path. Master the SystemVerilog revisions IEEE 1800-2009 and
+    1800-2012: interface and type refinements, operator and array enhancements, and
+    assertion/checker concepts in context.'
 - type: bullets
   title: Overview
   bullets:
-  - 'This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two major
-    revisions of SystemVerilog after 1800-2005. You''ll learn what 2009 and 2012 add
-    or clarify: interface refinements (e.g. modport expression'
+  - This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two major
+    revisions of SystemVerilog after 1800-2005. You'll...
+  narration: Overview. This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012,
+    the first two major revisions of SystemVerilog after 1800-2005. You'll...
 - type: section
   title: How to learn this module
+  narration: 'Next section: How to learn this module.'
 - type: bullets
   title: Suggested learning path (1/2)
   bullets:
@@ -47,14 +59,371 @@ slides:
   - Complete the exercises — Try each exercise in this document before reading solutions
     or peeking at reference RTL.
   notes: From docs/MODULE5.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Skim
+    this document — Goal, Overview, and Topics Covered set the IEEE scope for Module
+    5. Study design architecture — See how DUTs, examples, and testbenches fit together
+    under module5/. Work through labs in order — Open module5/EXAMPLES.md and run
+    each make clean && make run from the repo root. Run the full module script —...
 - type: bullets
   title: Suggested learning path (2/2)
   bullets:
   - Review Common Pitfalls — Can you explain each mistake and the fix?
   - Self-check — Use `module5/CHECKLIST.md` before starting the next module.
   notes: From docs/MODULE5.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Review
+    Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module5/CHECKLIST.md
+    before starting the next module. From docs/MODULE5.md — read guides before running
+    demos.
+- type: section
+  title: Design architecture
+  narration: 'Next section: Design architecture.'
+- type: two_column
+  title: 1. Repository layout (module5/)
+  left:
+  - IEEE 1800-2009 and 1800-2012 refinements on the 2005 base
+  - Assertions, checkers, and type refinements in examples
+  - module5/dut/ — designs used by assertion and checker labs
+  - scripts/module5.sh — run assertion-focused examples
+  right: assets/diagrams/rtl_architecture.png
+  notes: From MODULE5 Design Architecture.
+  narration: 1. Repository layout (module5/). IEEE 1800-2009 and 1800-2012 refinements
+    on the 2005 base Assertions, checkers, and type refinements in examples module5/dut/
+    — designs used by assertion and checker labs scripts/module5.sh — run assertion-focused
+    examples Refer to the diagram on the right.
+- type: two_column
+  title: 2. Assertion and checker placement
+  left:
+  - immediate assertions in procedural code — zero-time checks
+  - concurrent assertions (SVA) — temporal properties on clocks
+  - checker encapsulation — reusable verification modules
+  - Assertions sit alongside RTL; failures stop simulation with message
+  right: assets/diagrams/verification_architecture.png
+  notes: From MODULE5 Design Architecture.
+  narration: 2. Assertion and checker placement. immediate assertions in procedural
+    code — zero-time checks concurrent assertions (SVA) — temporal properties on clocks
+    checker encapsulation — reusable verification modules Assertions sit alongside
+    RTL; failures stop simulation with message Refer to the diagram on the right.
+- type: two_column
+  title: 3. 2009/2012 vs 2005 delta
+  left:
+  - Interface and type clarifications — same patterns, clearer LRM
+  - 1800-2012 checker keyword — structured verification component
+  - Design RTL from Module 4 remains valid; add assertions incrementally
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE5 Design Architecture.
+  narration: 3. 2009/2012 vs 2005 delta. Interface and type clarifications — same
+    patterns, clearer LRM 1800-2012 checker keyword — structured verification component
+    Design RTL from Module 4 remains valid; add assertions incrementally Refer to
+    the diagram on the right.
+- type: image
+  title: RTL block diagram (reference)
+  image: assets/diagrams/rtl_architecture.png
+  caption: 'Module 5: DUT hierarchy and signal flow.'
+  narration: 'RTL block diagram (reference). Module 5: DUT hierarchy and signal flow.'
+- type: image
+  title: Verification / testbench diagram (reference)
+  image: assets/diagrams/verification_architecture.png
+  caption: 'Module 5: stimulus, observation, and checking.'
+  narration: 'Verification / testbench diagram (reference). Module 5: stimulus, observation,
+    and checking.'
+- type: code
+  title: Embedded assertion example
+  language: systemverilog
+  source_file: module5/examples/assert_valid_encoding/assert_valid_encoding.sv
+  code: "/*\n * Immediate assertion for valid encoding - IEEE 1800-2009/2012\n * assert\
+    \ (valid_op) else $error; use for opcode or state encoding.\n */\n\nmodule alu_op\
+    \ (\n    input  logic [2:0] op,\n    output logic [7:0] y\n);\n    /* Valid opcodes:\
+    \ 0=add, 1=sub, 2=and, 3=or; others invalid */\n    logic valid_op;\n    always_comb\
+    \ begin\n        valid_op = (op == 3'd0 || op == 3'd1 || op == 3'd2 || op == 3'd3);\n\
+    \        assert (valid_op) else $error(\"alu_op: invalid opcode %d\", op);\n \
+    \   end\n\n    always_comb begin\n        y = 8'b0;\n// ..."
+  narration: Embedded assertion example. Review the code on screen and match it to
+    files in the repository.
+- type: section
+  title: Execution & simulation flow
+  narration: 'Next section: Execution & simulation flow.'
+- type: bullets
+  title: How the example runs (toolchain)
+  bullets:
+  - 'Makefile: Verilator compiles RTL + SystemVerilog testbench into a C++ model'
+  - 'sim_main.cpp: generates clk/rst_n, calls eval() until $finish'
+  - 'Directed test (initial block or C++): drive stimulus, wait for DUT flags'
+  - 'Self-check: compare outputs; print PASS/FAIL (see terminal demo slide)'
+  - 'Repo path: module5/examples/<example>/ — run make run from that directory'
+  notes: From MODULE5 — execution and artifact layout.
+  narration: 'How the example runs (toolchain). Match each bullet to files in the
+    repository. Makefile: Verilator compiles RTL + SystemVerilog testbench into a
+    C++ model sim_main.cpp: generates clk/rst_n, calls eval() until $finish Directed
+    test (initial block or C++): drive stimulus, wait for DUT flags Self-check: compare
+    outputs; print PASS/FAIL (see terminal demo slide) Repo path...'
+- type: section
+  title: Key files to study
+  narration: 'Next section: Key files to study.'
+- type: bullets
+  title: Open these in the repo
+  bullets:
+  - module5/examples/assert_valid_encoding/
+  - module5/examples/checkers/
+  - module5/examples/assert_invariant/
+  - scripts/module5.sh
+  notes: Trace while running module5/EXAMPLES.md labs.
+  narration: Open these in the repo. module5/examples/assert_valid_encoding/ module5/examples/checkers/
+    module5/examples/assert_invariant/ scripts/module5.sh Trace while running module5/EXAMPLES.md
+    labs.
+- type: section
+  title: Verification & testing methods
+  narration: 'Next section: Verification & testing methods.'
+- type: two_column
+  title: 1. Running assertion labs
+  left:
+  - make run per example; failing assertion prints SVA message
+  - ./scripts/module5.sh runs designs with embedded checkers
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE5 Verification & Testing Methods.
+  narration: 1. Running assertion labs. make run per example; failing assertion prints
+    SVA message ./scripts/module5.sh runs designs with embedded checkers Refer to
+    the diagram on the right.
+- type: two_column
+  title: 2. Closure mindset
+  left:
+  - Pass = no assertion failures and expected $display output
+  - Use assert examples to learn what to monitor before UVM scoreboards
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE5 Verification & Testing Methods.
+  narration: 2. Closure mindset. Pass = no assertion failures and expected $display
+    output Use assert examples to learn what to monitor before UVM scoreboards Refer
+    to the diagram on the right.
+- type: code
+  title: Immediate assertion in procedural code
+  language: systemverilog
+  source_file: module5/examples/checkers/immediate_assert.sv
+  code: "/*\n * Immediate assertion - IEEE 1800-2009/2012\n * assert (condition) else\
+    \ $error(\"...\"); checked when executed.\n */\n\nmodule onehot_check (\n    input\
+    \  logic [3:0] sig,\n    output logic       valid\n);\n    /* Immediate assertion:\
+    \ at most one bit set (one-hot or zero) */\n    always_comb begin\n        valid\
+    \ = ($countones(sig) <= 1);\n        assert (valid) else $error(\"onehot_check:\
+    \ sig not one-hot or zero: %b\", sig);\n    end\nendmodule\n\nmodule top;\n  \
+    \  logic [3:0] sig;\n// ..."
+  narration: Immediate assertion in procedural code. Review the code on screen and
+    match it to files in the repository.
 - type: section
   title: Syllabus topics
+  narration: 'Next section: Syllabus topics.'
+- type: section
+  title: Protocol & design details
+  narration: 'Next section: Protocol & design details.'
+- type: bullets
+  title: 'Detail: What 1800-2009 Adds or Clarifies (1)'
+  bullets:
+  - 'Interfaces: Modport expressions, virtual interface type (for testbenches), interface
+    inheritance'
+  - 'Types and operators: Clarifications; additional operators and built-in methods'
+  - 'Assertions: SVA enhancements; checker concept (preview)'
+  - 'DPI: Refinements for C/C++ interop'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1800-2009 Adds or Clarifies (1). Interfaces:
+    Modport expressions, virtual interface type (for testbenches), interface inheritance
+    Types and operators: Clarifications; additional operators and built-in methods
+    Assertions: SVA enhancements; checker concept (preview) DPI: Refinements for C/C++
+    interop From MODULE5 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: What 1800-2009 Adds or Clarifies (2)'
+  bullets:
+  - 'Coverage: Coverage option and syntax clarifications'
+  - 'Clarifications: Scheduling, generate, and other 2005 semantics'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1800-2009 Adds or Clarifies (2). Coverage:
+    Coverage option and syntax clarifications Clarifications: Scheduling, generate,
+    and other 2005 semantics From MODULE5 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: What 1800-2012 Adds or Clarifies (1)'
+  bullets:
+  - 'Checkers: Checker construct for reusable assertion/coverage logic'
+  - 'Arrays: Array manipulation methods; array assignment and ordering clarifications'
+  - 'Strings: String methods and behavior'
+  - 'Compilation units: Refined rules for $unit and compilation-unit scope'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1800-2012 Adds or Clarifies (1). Checkers:
+    Checker construct for reusable assertion/coverage logic Arrays: Array manipulation
+    methods; array assignment and ordering clarifications Strings: String methods
+    and behavior Compilation units: Refined rules for $unit and compilation-unit scope
+    From MODULE5 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: What 1800-2012 Adds or Clarifies (2)'
+  bullets:
+  - 'Assertions and coverage: Further SVA and coverage features'
+  - 'Clarifications: Numerous editorial and semantic clarifications across the LRM'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1800-2012 Adds or Clarifies (2). Assertions
+    and coverage: Further SVA and coverage features Clarifications: Numerous editorial
+    and semantic clarifications across the LRM From MODULE5 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Relation to 1800-2005'
+  bullets:
+  - 1800-2005 RTL remains valid in 1800-2009 and 1800-2012.
+  - New features are additive; you adopt them when the tool and project support the
+    revision.
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Relation to 1800-2005. 1800-2005 RTL remains
+    valid in 1800-2009 and 1800-2012. New features are additive; you adopt them when
+    the tool and project support the revision. From MODULE5 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Modport Expressions (2009)'
+  bullets:
+  - 'Use: When the same interface is used with different signal subsets or derived
+    signals; check tool support for exact syntax.'
+  - 'Benefit: Fewer duplicate interface definitions; clearer connection contract.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Modport Expressions (2009). Use: When the
+    same interface is used with different signal subsets or derived signals; check
+    tool support for exact syntax. Benefit: Fewer duplicate interface definitions;
+    clearer connection contract. From MODULE5 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Virtual Interface (2009)'
+  bullets:
+  - 'Design: Rarely used in RTL; RTL typically connects to a concrete interface instance.'
+  - 'Verification: Common in UVM and other OOP testbenches; allows one driver class
+    to work with any instance of the interface.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Virtual Interface (2009). Design: Rarely
+    used in RTL; RTL typically connects to a concrete interface instance. Verification:
+    Common in UVM and other OOP testbenches; allows one driver class to work with
+    any instance of the interface. From MODULE5 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Integer Types and Sizes'
+  bullets:
+  - 'byte, shortint, int, longint: 8, 16, 32, 64 bits; signed by default.'
+  - 'byte unsigned, int unsigned: Unsigned variants.'
+  - 'Clarifications in 2012: Representation and conversion rules; use in RTL for constants
+    and parameters.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Integer Types and Sizes. byte, shortint,
+    int, longint: 8, 16, 32, 64 bits; signed by default. byte unsigned, int unsigned:
+    Unsigned variants. Clarifications in 2012: Representation and conversion rules;
+    use in RTL for constants and parameters. From MODULE5 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Operators Added or Clarified'
+  bullets:
+  - 'inside: Already in 2005; 2009/2012 clarify set membership and use with ranges.'
+  - 'Wildcard equality `==?`: X/Z in the right-hand side act as “don’t care” in comparisons.'
+  - 'Set membership and case (inside): Used in case statements and constraints; semantics
+    clarified in 2012.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Operators Added or Clarified. inside: Already
+    in 2005; 2009/2012 clarify set membership and use with ranges. Wildcard equality
+    ==?: X/Z in the right-hand side act as “don’t care” in comparisons. Set membership
+    and case (inside): Used in case statements and constraints; semantics clarified
+    in 2012. From MODULE5 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Array Methods (2012)'
+  bullets:
+  - 'Array methods: `.size()`, `.delete()`, `.sort()`, `.reverse()`, etc. (exact set
+    is revision-dependent).'
+  - 'Queues: `.push_back()`, `.pop_front()`, `.insert()`, etc.'
+  - 'Use in RTL: Limited (arrays in RTL are often fixed); methods are common in testbenches
+    and checkers.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Array Methods (2012). Array methods: .size(),
+    .delete(), .sort(), .reverse(), etc. (exact set is revision-dependent). Queues:
+    .push_back(), .pop_front(), .insert(), etc. Use in RTL: Limited (arrays in RTL
+    are often fixed); methods are common in testbenches and checkers. From MODULE5
+    Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Array Assignment and Ordering'
+  bullets:
+  - 'Packed vs unpacked: Assignment rules and ordering (row-major, etc.) are clarified.'
+  - 'Array copy: Whole-array assignment and copying; compatibility of dimensions.'
+  - 'Use in RTL: Multi-dimensional arrays (e.g. memories) and parameterized dimensions;
+    follow tool-supported subset for synthesis.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Array Assignment and Ordering. Packed vs
+    unpacked: Assignment rules and ordering (row-major, etc.) are clarified. Array
+    copy: Whole-array assignment and copying; compatibility of dimensions. Use in
+    RTL: Multi-dimensional arrays (e.g. memories) and parameterized dimensions; follow
+    tool-supported subset for synthesis. From MODULE5 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: String Methods'
+  bullets:
+  - 'Strings: `string` type; methods such as `.len()`, `.substr()`, `.atoi()`, etc.
+    (as defined in 2012).'
+  - 'Use in RTL: Rare (strings are mainly for messages and file I/O in testbenches).'
+  - 'Use in testbenches: Logging, report generation, file names.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: String Methods. Strings: string type; methods
+    such as .len(), .substr(), .atoi(), etc. (as defined in 2012). Use in RTL: Rare
+    (strings are mainly for messages and file I/O in testbenches). Use in testbenches:
+    Logging, report generation, file names. From MODULE5 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Assertions in Design (Brief)'
+  bullets:
+  - 'immediate assertions: `assert (condition) else $error("...");` — checked when
+    executed (like an if-check).'
+  - 'concurrent assertions: `assert property (@(posedge clk) (a |-> b));` — checked
+    over time; typically in verification.'
+  - 'Use in RTL: Immediate assertions for invariants (e.g. one-hot, valid encodings);
+    concurrent assertions often in bind files or testbench.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Assertions in Design (Brief). immediate
+    assertions: assert (condition) else $error("..."); — checked when executed (like
+    an if-check). concurrent assertions: assert property (@(posedge clk) (a — -> b));
+    — checked over time; typically in verification. Use in RTL: Immediate assertions
+    for invariants (e.g. one-hot, valid encodings); concurrent assertions often in
+    bind...'
+- type: bullets
+  title: 'Detail: Checker (2012)'
+  bullets:
+  - 'checker: A reusable unit that can contain assertions, assumptions, coverage,
+    and helper logic; can be instantiated in design or testbench.'
+  - 'Use: Encapsulate a set of properties (e.g. protocol rules) and reuse across modules
+    or hierarchies.'
+  - 'Design: Checkers can be bound to RTL modules; they do not change RTL functionality,
+    only add checking.'
+  - 'Synthesis: Checkers are typically not synthesized; they are for simulation and
+    formal tools.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Checker (2012). checker: A reusable unit
+    that can contain assertions, assumptions, coverage, and helper logic; can be instantiated
+    in design or testbench. Use: Encapsulate a set of properties (e.g. protocol rules)
+    and reuse across modules or hierarchies. Design: Checkers can be bound to RTL
+    modules; they do not change RTL functionality, only add checking. Synthesis...'
+- type: bullets
+  title: 'Detail: Compilation Unit'
+  bullets:
+  - 'Compilation unit: The scope of one or more source files compiled together (tool-defined).'
+  - '$unit: The compilation-unit scope; declarations in $unit are visible across the
+    unit without import.'
+  - 'Best practice: Prefer packages and explicit import over $unit to avoid hidden
+    dependencies and name clashes.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Compilation Unit. Compilation unit: The
+    scope of one or more source files compiled together (tool-defined). $unit: The
+    compilation-unit scope; declarations in $unit are visible across the unit without
+    import. Best practice: Prefer packages and explicit import over $unit to avoid
+    hidden dependencies and name clashes. From MODULE5 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Package and Import'
+  bullets:
+  - 'Import: `import pkg::*` or `import pkg::item`; 2012 clarifies visibility and
+    search order.'
+  - 'Use: Keep shared types and functions in packages; import where needed; avoid
+    relying on $unit for new code.'
+  notes: From MODULE5 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Package and Import. Import: import pkg::*
+    or import pkg::item; 2012 clarifies visibility and search order. Use: Keep shared
+    types and functions in packages; import where needed; avoid relying on $unit for
+    new code. From MODULE5 Topics Covered — protocol/design depth.'
+- type: image
+  title: Verification flow (reference)
+  image: assets/diagrams/testing_methods.png
+  caption: Stimulus, DUT response, and check points for this module.
+  narration: Verification flow (reference). Stimulus, DUT response, and check points
+    for this module.
 - type: bullets
   title: 1. IEEE 1800-2009 and 1800-2012 Context (1/3)
   bullets:
@@ -66,6 +435,11 @@ slides:
   - 'Coverage: Coverage option and syntax clarifications'
   - 'Clarifications: Scheduling, generate, and other 2005 semantics'
   notes: From MODULE5 Topics Covered.
+  narration: '1. IEEE 1800-2009 and 1800-2012 Context (1/3). Interfaces: Modport expressions,
+    virtual interface type (for testbenches), interface inheritance Types and operators:
+    Clarifications; additional operators and built-in methods Assertions: SVA enhancements;
+    checker concept (preview) DPI: Refinements for C/C++ interop Coverage: Coverage
+    option and syntax clarifications'
 - type: bullets
   title: 1. IEEE 1800-2009 and 1800-2012 Context (2/3)
   bullets:
@@ -76,6 +450,11 @@ slides:
   - 'Assertions and coverage: Further SVA and coverage features'
   - 'Clarifications: Numerous editorial and semantic clarifications across the LRM'
   notes: From MODULE5 Topics Covered.
+  narration: '1. IEEE 1800-2009 and 1800-2012 Context (2/3). Checkers: Checker construct
+    for reusable assertion/coverage logic Arrays: Array manipulation methods; array
+    assignment and ordering clarifications Strings: String methods and behavior Compilation
+    units: Refined rules for $unit and compilation-unit scope Assertions and coverage:
+    Further SVA and coverage features'
 - type: bullets
   title: 1. IEEE 1800-2009 and 1800-2012 Context (3/3)
   bullets:
@@ -83,6 +462,9 @@ slides:
   - New features are additive; you adopt them when the tool and project support the
     revision.
   notes: From MODULE5 Topics Covered.
+  narration: 1. IEEE 1800-2009 and 1800-2012 Context (3/3). 1800-2005 RTL remains
+    valid in 1800-2009 and 1800-2012. New features are additive; you adopt them when
+    the tool and project support the revision.
 - type: bullets
   title: 2. Interface Refinements (2009)
   bullets:
@@ -93,6 +475,11 @@ slides:
   - 'Verification: Common in UVM and other OOP testbenches; allows one driver class
     to work with any instance of the interface.'
   notes: From MODULE5 Topics Covered.
+  narration: '2. Interface Refinements (2009). Use: When the same interface is used
+    with different signal subsets or derived signals; check tool support for exact
+    syntax. Benefit: Fewer duplicate interface definitions; clearer connection contract.
+    Design: Rarely used in RTL; RTL typically connects to a concrete interface instance.
+    Verification: Common in UVM and other OOP testbenches; allows one driver...'
 - type: bullets
   title: 3. Type and Operator Enhancements (2009/2012) (1/2)
   bullets:
@@ -105,6 +492,11 @@ slides:
   - 'Set membership and case (inside): Used in case statements and constraints; semantics
     clarified in 2012.'
   notes: From MODULE5 Topics Covered.
+  narration: '3. Type and Operator Enhancements (2009/2012) (1/2). byte, shortint,
+    int, longint: 8, 16, 32, 64 bits; signed by default. byte unsigned, int unsigned:
+    Unsigned variants. Clarifications in 2012: Representation and conversion rules;
+    use in RTL for constants and parameters. inside: Already in 2005; 2009/2012 clarify
+    set membership and use with ranges. Wildcard equality ==?: X/Z in the right-hand...'
 - type: bullets
   title: 3. Type and Operator Enhancements (2009/2012) (2/2)
   bullets:
@@ -114,6 +506,10 @@ slides:
   - 'Use in RTL: Limited (arrays in RTL are often fixed); methods are common in testbenches
     and checkers.'
   notes: From MODULE5 Topics Covered.
+  narration: '3. Type and Operator Enhancements (2009/2012) (2/2). Array methods:
+    .size(), .delete(), .sort(), .reverse(), etc. (exact set is revision-dependent).
+    Queues: .push_back(), .pop_front(), .insert(), etc. Use in RTL: Limited (arrays
+    in RTL are often fixed); methods are common in testbenches and checkers.'
 - type: bullets
   title: 4. Array and String Refinements (2012)
   bullets:
@@ -126,6 +522,11 @@ slides:
   - 'Use in RTL: Rare (strings are mainly for messages and file I/O in testbenches).'
   - 'Use in testbenches: Logging, report generation, file names.'
   notes: From MODULE5 Topics Covered.
+  narration: '4. Array and String Refinements (2012). Packed vs unpacked: Assignment
+    rules and ordering (row-major, etc.) are clarified. Array copy: Whole-array assignment
+    and copying; compatibility of dimensions. Use in RTL: Multi-dimensional arrays
+    (e.g. memories) and parameterized dimensions; follow tool-supported subset for
+    synthesis. Strings: string type; methods such as .len(), .substr(), .atoi()...'
 - type: bullets
   title: 5. Assertions and Checkers in Context (2009/2012) (1/2)
   bullets:
@@ -142,12 +543,19 @@ slides:
   - 'Design: Checkers can be bound to RTL modules; they do not change RTL functionality,
     only add checking.'
   notes: From MODULE5 Topics Covered.
+  narration: '5. Assertions and Checkers in Context (2009/2012) (1/2). immediate assertions:
+    assert (condition) else $error("..."); — checked when executed (like an if-check).
+    concurrent assertions: assert property (@(posedge clk) (a — -> b)); — checked
+    over time; typically in verification. Use in RTL: Immediate assertions for invariants
+    (e.g. one-hot, valid encodings); concurrent assertions often in bind...'
 - type: bullets
   title: 5. Assertions and Checkers in Context (2009/2012) (2/2)
   bullets:
   - 'Synthesis: Checkers are typically not synthesized; they are for simulation and
     formal tools.'
   notes: From MODULE5 Topics Covered.
+  narration: '5. Assertions and Checkers in Context (2009/2012) (2/2). Synthesis:
+    Checkers are typically not synthesized; they are for simulation and formal tools.'
 - type: bullets
   title: 6. Compilation Units and Scope (2012)
   bullets:
@@ -161,13 +569,22 @@ slides:
   - 'Use: Keep shared types and functions in packages; import where needed; avoid
     relying on $unit for new code.'
   notes: From MODULE5 Topics Covered.
+  narration: '6. Compilation Units and Scope (2012). Compilation unit: The scope of
+    one or more source files compiled together (tool-defined). $unit: The compilation-unit
+    scope; declarations in $unit are visible across the unit without import. Best
+    practice: Prefer packages and explicit import over $unit to avoid hidden dependencies
+    and name clashes. Import: import pkg::* or import pkg::item; 2012 clarifies...'
 - type: bullets
   title: '7. Summary: 1800-2005 vs 2009 vs 2012 (Design-Relevant)'
   bullets:
   - See docs/MODULE5.md
   notes: From MODULE5 Topics Covered.
+  narration: 'In summary: Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012:
+    interface and type refinements, operator and array enhancements, and assertion/checker
+    concepts in context. Next up: Next module in course. See docs/MODULE5.md'
 - type: section
   title: Hands-on examples
+  narration: 'Next section: Hands-on examples.'
 - type: demo
   title: Module 5 toolchain check
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
@@ -175,108 +592,143 @@ slides:
   screenshot: assets/screenshots/module5_check.png
   expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+  narration: Module 5 self-check. Watch the terminal output and confirm you see the
+    expected pass message.
 - type: bullets
-  title: 'Example 1: Operators'
+  title: 'Example 1: `inside` with ranges and sets; `==?` wildcard (fallback for tools
+    that lack `inside`)'
   bullets:
-  - inside with ranges and sets; ==? wildcard (fallback for tools that lack inside)
   - Set membership; don’t-care in comparison
   notes: module5/examples/operators/README.md
+  narration: 'Example 1: inside with ranges and sets; ==? wildcard (fallback for tools
+    that lack inside). Set membership; don’t-care in comparison module5/examples/operators/README.md'
 - type: demo
-  title: 'Demo: Operators'
+  title: 'Demo: `inside` with ranges and sets; `==?` wildcard (fallback for tools
+    that lack `inside`)'
   command: cd module5/examples/operators && make clean && make run
   screenshot: assets/screenshots/ex01_operators.png
   notes: 'Hands-on: module5/examples/operators/'
+  narration: 'Demo: inside with ranges and sets; ==? wildcard (fallback for tools
+    that lack inside). Watch the terminal output and confirm you see the expected
+    pass message.'
 - type: bullets
-  title: 'Example 2: Wildcard Only'
+  title: 'Example 2: Dedicated `==?` wildcard equality (X/Z as don''t care)'
   bullets:
-  - Dedicated ==? wildcard equality (X/Z as don't care)
   - Wildcard match in RTL/testbench
   notes: module5/examples/wildcard_only/README.md
+  narration: 'Example 2: Dedicated ==? wildcard equality (X/Z as don''t care). Wildcard
+    match in RTL/testbench module5/examples/wildcard_only/README.md'
 - type: demo
-  title: 'Demo: Wildcard Only'
+  title: 'Demo: Dedicated `==?` wildcard equality (X/Z as don''t care)'
   command: cd module5/examples/wildcard_only && make clean && make run
   screenshot: assets/screenshots/ex02_wildcard_only.png
   notes: 'Hands-on: module5/examples/wildcard_only/'
+  narration: 'Demo: Dedicated ==? wildcard equality (X/Z as don''t care). Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 3: Range Check'
+  title: 'Example 3: Range membership (e.g. value inside `[0:127]`); fallback to explicit
+    comparison if needed'
   bullets:
-  - Range membership (e.g. value inside [0:127]); fallback to explicit comparison
-    if needed
   - '`inside` with ranges; 2009/2012 operator use'
   notes: module5/examples/range_check/README.md
+  narration: 'Example 3: Range membership (e.g. value inside [0:127]); fallback to
+    explicit comparison if needed. inside with ranges; 2009/2012 operator use module5/examples/range_check/README.md'
 - type: demo
-  title: 'Demo: Range Check'
+  title: 'Demo: Range membership (e.g. value inside `[0:127]`); fallback to explicit
+    comparison if needed'
   command: cd module5/examples/range_check && make clean && make run
   screenshot: assets/screenshots/ex03_range_check.png
   notes: 'Hands-on: module5/examples/range_check/'
+  narration: 'Demo: Range membership (e.g. value inside [0:127]); fallback to explicit
+    comparison if needed. Watch the terminal output and confirm you see the expected
+    pass message.'
 - type: bullets
-  title: 'Example 4: Arrays'
+  title: 'Example 4: Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics'
   bullets:
-  - Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics
   - Array indexing; synthesis-safe subset
   notes: module5/examples/arrays/README.md
+  narration: 'Example 4: Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics.
+    Array indexing; synthesis-safe subset module5/examples/arrays/README.md'
 - type: demo
-  title: 'Demo: Arrays'
+  title: 'Demo: Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics'
   command: cd module5/examples/arrays && make clean && make run
   screenshot: assets/screenshots/ex04_arrays.png
   notes: 'Hands-on: module5/examples/arrays/'
+  narration: 'Demo: Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics.
+    Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 5: Array Param'
+  title: 'Example 5: Parameterized memory using `$clog2(DEPTH)` for address width'
   bullets:
-  - Parameterized memory using $clog2(DEPTH) for address width
   - Parameterized arrays; 2012 clarifications
   notes: module5/examples/array_param/README.md
+  narration: 'Example 5: Parameterized memory using $clog2(DEPTH) for address width.
+    Parameterized arrays; 2012 clarifications module5/examples/array_param/README.md'
 - type: demo
-  title: 'Demo: Array Param'
+  title: 'Demo: Parameterized memory using `$clog2(DEPTH)` for address width'
   command: cd module5/examples/array_param && make clean && make run
   screenshot: assets/screenshots/ex05_array_param.png
   notes: 'Hands-on: module5/examples/array_param/'
+  narration: 'Demo: Parameterized memory using $clog2(DEPTH) for address width. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 6: Checkers'
+  title: 'Example 6: Immediate assertion (e.g. one-hot) using `$countones` or similar'
   bullets:
-  - Immediate assertion (e.g. one-hot) using $countones or similar
   - assert in design; immediate assertion in RTL
   notes: module5/examples/checkers/README.md
+  narration: 'Example 6: Immediate assertion (e.g. one-hot) using $countones or similar.
+    assert in design; immediate assertion in RTL module5/examples/checkers/README.md'
 - type: demo
-  title: 'Demo: Checkers'
+  title: 'Demo: Immediate assertion (e.g. one-hot) using `$countones` or similar'
   command: cd module5/examples/checkers && make clean && make run
   screenshot: assets/screenshots/ex06_checkers.png
   notes: 'Hands-on: module5/examples/checkers/'
+  narration: 'Demo: Immediate assertion (e.g. one-hot) using $countones or similar.
+    Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 7: Assert Valid Encoding'
+  title: 'Example 7: Immediate assertion for valid opcode/encoding'
   bullets:
-  - Immediate assertion for valid opcode/encoding
   - Invariant checking; assert for valid encodings
   notes: module5/examples/assert_valid_encoding/README.md
+  narration: 'Example 7: Immediate assertion for valid opcode/encoding. Invariant
+    checking; assert for valid encodings module5/examples/assert_valid_encoding/README.md'
 - type: demo
-  title: 'Demo: Assert Valid Encoding'
+  title: 'Demo: Immediate assertion for valid opcode/encoding'
   command: cd module5/examples/assert_valid_encoding && make clean && make run
   screenshot: assets/screenshots/ex07_assert_valid_encoding.png
   notes: 'Hands-on: module5/examples/assert_valid_encoding/'
+  narration: 'Demo: Immediate assertion for valid opcode/encoding. Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 8: Assert Invariant'
+  title: 'Example 8: Immediate assertion for one-hot grant (e.g. arbiter)'
   bullets:
-  - Immediate assertion for one-hot grant (e.g. arbiter)
   - One-hot invariant; assert in RTL
   notes: module5/examples/assert_invariant/README.md
+  narration: 'Example 8: Immediate assertion for one-hot grant (e.g. arbiter). One-hot
+    invariant; assert in RTL module5/examples/assert_invariant/README.md'
 - type: demo
-  title: 'Demo: Assert Invariant'
+  title: 'Demo: Immediate assertion for one-hot grant (e.g. arbiter)'
   command: cd module5/examples/assert_invariant && make clean && make run
   screenshot: assets/screenshots/ex08_assert_invariant.png
   notes: 'Hands-on: module5/examples/assert_invariant/'
+  narration: 'Demo: Immediate assertion for one-hot grant (e.g. arbiter). Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 9: Summary'
+  title: 'Example 9: Comparison of 2005 vs 2009/2012 features in a small design'
   bullets:
-  - Comparison of 2005 vs 2009/2012 features in a small design
   - Backward compatibility; when to adopt new features
   notes: module5/examples/summary/README.md
+  narration: 'Example 9: Comparison of 2005 vs 2009/2012 features in a small design.
+    Backward compatibility; when to adopt new features module5/examples/summary/README.md'
 - type: demo
-  title: 'Demo: Summary'
+  title: 'Demo: Comparison of 2005 vs 2009/2012 features in a small design'
   command: cd module5/examples/summary && make clean && make run
   screenshot: assets/screenshots/ex09_summary.png
   notes: 'Hands-on: module5/examples/summary/'
+  narration: 'Demo: Comparison of 2005 vs 2009/2012 features in a small design. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: section
   title: Common pitfalls
+  narration: 'Next section: Common pitfalls.'
 - type: bullets
   title: Assuming 2009/2012 Features in an 2005-Only Flow
   bullets:
@@ -288,6 +740,11 @@ slides:
   - 'Why: Backward compatibility is 2005→2009→2012; tools may not implement all newer
     features.'
   notes: From MODULE5 Common Pitfalls.
+  narration: 'Assuming 2009/2012 Features in an 2005-Only Flow. Mistake: Using virtual
+    interface, checker, or 2012 array methods when the project or tool is 1800-2005
+    only. Reality: Compile or elaboration errors; or undefined behavior. Correct:
+    Confirm project standard and tool revision; use only features of that revision.
+    Why: Backward compatibility is 2005→2009→2012; tools may not implement all newer...'
 - type: bullets
   title: Virtual Interface in RTL
   bullets:
@@ -297,6 +754,11 @@ slides:
     in testbench classes.'
   - 'Why: Synthesis does not support virtual interface; it is a simulation construct.'
   notes: From MODULE5 Common Pitfalls.
+  narration: 'Virtual Interface in RTL. Mistake: Using a virtual interface in synthesizable
+    RTL. Reality: Virtual interfaces are for dynamic binding (testbench); not for
+    hardware. Correct: Use concrete interface instances in RTL; use virtual interface
+    only in testbench classes. Why: Synthesis does not support virtual interface;
+    it is a simulation construct.'
 - type: bullets
   title: Checker Synthesis
   bullets:
@@ -305,6 +767,10 @@ slides:
   - 'Correct: Use checkers for verification; keep RTL in modules.'
   - 'Why: Checker semantics are for checking, not for netlist generation.'
   notes: From MODULE5 Common Pitfalls.
+  narration: 'Checker Synthesis. Mistake: Expecting a checker to be synthesized like
+    a module. Reality: Checkers are for assertion/coverage; typically not synthesized.
+    Correct: Use checkers for verification; keep RTL in modules. Why: Checker semantics
+    are for checking, not for netlist generation.'
 - type: bullets
   title: Array Methods in RTL
   bullets:
@@ -315,6 +781,11 @@ slides:
     in testbenches or checkers.'
   - 'Why: Synthesis subset of SystemVerilog is smaller than the full language.'
   notes: From MODULE5 Common Pitfalls.
+  narration: 'Array Methods in RTL. Mistake: Using dynamic array or queue methods
+    (e.g. .push_back) in synthesizable RTL. Reality: Many such methods are not synthesizable
+    or are tool-specific. Correct: In RTL use fixed-size or parameterized arrays and
+    indexing; use methods in testbenches or checkers. Why: Synthesis subset of SystemVerilog
+    is smaller than the full language.'
 - type: bullets
   title: $unit vs Package
   bullets:
@@ -325,8 +796,14 @@ slides:
   - 'Why: Packages give a clear namespace and import order; 2012 clarifies compilation
     unit but packages remain best practice.'
   notes: From MODULE5 Common Pitfalls.
+  narration: '$unit vs Package. Mistake: Putting shared types or functions in $unit
+    and relying on compilation order. Reality: $unit visibility and order are tool-dependent;
+    can cause subtle bugs. Correct: Put shared items in packages; use explicit import.
+    Why: Packages give a clear namespace and import order; 2012 clarifies compilation
+    unit but packages remain best practice.'
 - type: section
   title: Practice & assessment
+  narration: 'Next section: Practice & assessment.'
 - type: bullets
   title: What you should know
   bullets:
@@ -342,6 +819,11 @@ slides:
   - ✓ Summarize 1800-2005 vs 2009 vs 2012 and choose a standard based on tool and
     project
   notes: From MODULE5 Learning Outcomes.
+  narration: By now you should be able to explain the following. ✓ Describe what 1800-2009
+    and 1800-2012 add or clarify over 1800-2005 (interfaces, types, arrays, assertions,
+    checkers) ✓ Use interface refinements (modport expressions, virtual interface)
+    when the project and tool support 2009+ ✓ Use inside and ==? appropriately in
+    RTL or testbenches ✓ Apply array and string refinements (2012) in testbenches...
 - type: bullets
   title: Exercises
   bullets:
@@ -350,6 +832,8 @@ slides:
   - Immediate Assertion
   - Checker (2012)
   - Version Table
+  narration: Exercises. inside and ==? Interface (2009) Immediate Assertion Checker
+    (2012) Version Table
 - type: bullets
   title: Exercises
   bullets:
@@ -358,12 +842,18 @@ slides:
   - Checker Synthesis
   - Array Methods in RTL
   - $unit vs Package
+  narration: Exercises. Assuming 2009/2012 Features in an 2005-Only Flow Virtual Interface
+    in RTL Checker Synthesis Array Methods in RTL $unit vs Package
 - type: bullets
   title: Summary & next steps
   bullets:
   - 'Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and
-    type refinements, operator and array enhancements, and assertion/checker concepts
-    in context.'
+    type refinements, operator and array enhancements, and...'
   - Complete module5/CHECKLIST.md
   - Review module5/EXAMPLES.md and run each lab
   - 'Next: Next module in course'
+  narration: 'In summary: Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012:
+    interface and type refinements, operator and array enhancements, and assertion/checker
+    concepts in context. Next up: Next module in course. Master the SystemVerilog
+    revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator
+    and array enhancements, and... Complete module5/CHECKLIST.md Review...'

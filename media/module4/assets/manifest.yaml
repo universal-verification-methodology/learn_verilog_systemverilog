@@ -10,6 +10,35 @@ assets:
   - 4
   - 4
   license: learn_verilog_systemverilog course materials
+- id: rtl_architecture
+  type: diagram
+  file: assets/diagrams/rtl_architecture.png
+  source: assets/diagrams/rtl_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 10
+  - 14
+  license: learn_verilog_systemverilog course materials
+- id: verification_architecture
+  type: diagram
+  file: assets/diagrams/verification_architecture.png
+  source: assets/diagrams/verification_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 12
+  - 15
+  license: learn_verilog_systemverilog course materials
+- id: testing_methods
+  type: diagram
+  file: assets/diagrams/testing_methods.png
+  source: assets/diagrams/testing_methods.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 13
+  - 23
+  - 24
+  - 45
+  license: learn_verilog_systemverilog course materials
 - id: module4_check
   type: screenshot
   file: assets/screenshots/module4_check.png
@@ -17,7 +46,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 21
+  - 57
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_data_types
@@ -26,63 +55,63 @@ assets:
   capture_command: cd module4/examples/data_types && make clean && make run
   cwd: .
   slides:
-  - 24
+  - 60
 - id: ex02_logic_ports
   type: screenshot
   file: assets/screenshots/ex02_logic_ports.png
   capture_command: cd module4/examples/logic_ports && make clean && make run
   cwd: .
   slides:
-  - 26
+  - 62
 - id: ex03_procedural
   type: screenshot
   file: assets/screenshots/ex03_procedural.png
   capture_command: cd module4/examples/procedural && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 64
 - id: ex04_always_latch
   type: screenshot
   file: assets/screenshots/ex04_always_latch.png
   capture_command: cd module4/examples/always_latch && make clean && make run
   cwd: .
   slides:
-  - 30
+  - 66
 - id: ex05_one_driver_logic
   type: screenshot
   file: assets/screenshots/ex05_one_driver_logic.png
   capture_command: cd module4/examples/one_driver_logic && make clean && make run
   cwd: .
   slides:
-  - 32
+  - 68
 - id: ex06_typedef_sv
   type: screenshot
   file: assets/screenshots/ex06_typedef_sv.png
   capture_command: cd module4/examples/typedef_sv && make clean && make run
   cwd: .
   slides:
-  - 34
+  - 70
 - id: ex07_interfaces
   type: screenshot
   file: assets/screenshots/ex07_interfaces.png
   capture_command: cd module4/examples/interfaces && make clean && make run
   cwd: .
   slides:
-  - 36
+  - 72
 - id: ex08_packages
   type: screenshot
   file: assets/screenshots/ex08_packages.png
   capture_command: cd module4/examples/packages && make clean && make run
   cwd: .
   slides:
-  - 38
+  - 74
 - id: ex09_package_typedef
   type: screenshot
   file: assets/screenshots/ex09_package_typedef.png
   capture_command: cd module4/examples/package_typedef && make clean && make run
   cwd: .
   slides:
-  - 40
+  - 76
 - id: ex10_case_unique_priority
   type: screenshot
   file: assets/screenshots/ex10_case_unique_priority.png
@@ -90,18 +119,18 @@ assets:
     run
   cwd: .
   slides:
-  - 42
+  - 78
 - id: ex11_priority_case
   type: screenshot
   file: assets/screenshots/ex11_priority_case.png
   capture_command: cd module4/examples/priority_case && make clean && make run
   cwd: .
   slides:
-  - 44
+  - 80
 - id: ex12_migration
   type: screenshot
   file: assets/screenshots/ex12_migration.png
   capture_command: cd module4/examples/migration && make clean && make run
   cwd: .
   slides:
-  - 46
+  - 82

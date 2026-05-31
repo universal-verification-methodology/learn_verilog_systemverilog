@@ -24,6 +24,7 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 PPTX_ONLY=0
+SKIP_VIDEO=0
 REGENERATE=0
 REGENERATE_EXAMPLES=0
 INSTALL_DEPS=0
@@ -37,6 +38,7 @@ usage() {
   echo ""
   echo "Options:"
   echo "  --pptx-only              Skip PDF and video"
+  echo "  --skip-video             Build pptx/pdf + narration; skip video.mp4 encode"
   echo "  --module N               Only module N or list 1,2,3"
   echo "  --regenerate-outlines    Regenerate outline.yaml from MODULE*.md + EXAMPLES.md"
   echo "  --regenerate-examples    Regenerate moduleN/EXAMPLES.md from docs + examples/"
@@ -54,6 +56,7 @@ die() { echo -e "${RED}ERROR:${NC} $*" >&2; exit 1; }
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --pptx-only) PPTX_ONLY=1; shift ;;
+    --skip-video) SKIP_VIDEO=1; shift ;;
     --regenerate-outlines) REGENERATE=1; shift ;;
     --regenerate-examples) REGENERATE_EXAMPLES=1; shift ;;
     --install-deps) INSTALL_DEPS=1; shift ;;
@@ -130,6 +133,7 @@ fi
 BUILD_ARGS=("$COURSE_ROOT")
 [[ -n "$MODULES_FILTER" ]] && BUILD_ARGS+=(--module "$MODULES_FILTER")
 [[ $PPTX_ONLY -eq 1 ]] && BUILD_ARGS+=(--pptx-only)
+[[ $SKIP_VIDEO -eq 1 ]] && BUILD_ARGS+=(--skip-video)
 [[ $RUN_DEMOS -eq 1 ]] && BUILD_ARGS+=(--run-demos)
 BUILD_ARGS+=(--seconds-per-slide "$SECONDS_PER_SLIDE")
 BUILD_ARGS+=("${EXTRA_ARGS[@]}")
@@ -138,6 +142,24 @@ check_system_deps || true
 
 log "Building media for all modules..."
 bash "$SKILL_SCRIPTS/build_course_media.sh" "${BUILD_ARGS[@]}"
+
+# build_course_media.sh only runs TTS inside the video step; generate narration when
+# skipping video so transcripts/captions stay in sync with expanded slide decks.
+if [[ $PPTX_ONLY -eq 0 ]] && [[ $SKIP_VIDEO -eq 1 ]]; then
+  log "Generating narration (TTS) for slide decks..."
+  for media_dir in "$COURSE_ROOT"/media/module*; do
+    [[ -f "$media_dir/outline.yaml" ]] || continue
+    if [[ -n "$MODULES_FILTER" ]]; then
+      mod="${media_dir##*/module}"
+      case ",$MODULES_FILTER," in
+        *",$mod,"*) ;;
+        *) continue ;;
+      esac
+    fi
+    bash "$SKILL_SCRIPTS/generate_narration.sh" --media-dir "$media_dir" || \
+      warn "narration failed for ${media_dir##*/}"
+  done
+fi
 
 echo ""
 log "Outputs:"

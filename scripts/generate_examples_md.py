@@ -18,8 +18,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 EXAMPLE_HEADER = re.compile(
-    r"^(\d+)\.\s+\*\*(.+?)\*\*\s+"
-    r"(?:\(`(?:examples/)?([^`/]+)/?`\)|—\s*(.+))\s*$",
+    r"^(\d+)\.\s+\*\*(.+?)\*\*"
+    r"(?:\s+\(`(?:examples/)?([^`)]+)`\))?"
+    r"(?:\s+—|\s+-)\s*(.*)?$",
     re.MULTILINE,
 )
 MODULE_EXAMPLES_BLOCK = re.compile(
@@ -44,6 +45,39 @@ def _clean_bullet(text: str) -> str:
     return item
 
 
+def resolve_example_folder(
+    module_dir: Path,
+    slug: str,
+    backtick_folder: str | None,
+) -> str:
+    """Map MODULE*.md example entry to an existing examples/ directory name."""
+    ex_root = module_dir / "examples"
+    if backtick_folder:
+        cand = backtick_folder.strip().rstrip("/").strip('"').split("/")[0]
+        if cand in ("examples", ".") and (ex_root / "Makefile").is_file():
+            return "quick_ref"
+        if cand and (ex_root / cand).is_dir():
+            return cand
+
+    key = slug.strip().lower().replace(" ", "_").replace("-", "_")
+    if key == "quick_ref" and (ex_root / "Makefile").is_file():
+        return "quick_ref"
+    if key and (ex_root / key).is_dir():
+        return key
+
+    snake = re.sub(r"[^a-z0-9_]+", "_", key).strip("_")
+    if snake and (ex_root / snake).is_dir():
+        return snake
+    return key or slug
+
+
+def example_run_directory(module: int, folder: str) -> str:
+    """Return repo-relative path for ``cd`` in lab commands."""
+    if folder == "quick_ref":
+        return f"module{module}/examples"
+    return f"module{module}/examples/{folder}"
+
+
 def _parse_example_body(body: str) -> list[str]:
     """Collect sub-bullets and Key Concepts lines under one example item."""
     bullets: list[str] = []
@@ -65,7 +99,7 @@ def _parse_example_body(body: str) -> list[str]:
     return bullets[:6]
 
 
-def parse_module_examples(doc_path: Path) -> list[ParsedExample]:
+def parse_module_examples(doc_path: Path, module_dir: Path) -> list[ParsedExample]:
     """Return parsed examples from MODULE*.md numbered example list."""
     text = doc_path.read_text(encoding="utf-8")
     block_m = MODULE_EXAMPLES_BLOCK.search(text)
@@ -77,9 +111,11 @@ def parse_module_examples(doc_path: Path) -> list[ParsedExample]:
     headers = list(EXAMPLE_HEADER.finditer(block))
     for i, hm in enumerate(headers):
         num = int(hm.group(1))
-        title = hm.group(2).strip()
-        folder = (hm.group(3) or hm.group(4) or title).strip()
-        folder = folder.split("/")[0].split()[0]
+        slug = hm.group(2).strip()
+        backtick = hm.group(3).strip() if hm.group(3) else None
+        description = (hm.group(4) or "").strip()
+        folder = resolve_example_folder(module_dir, slug, backtick)
+        title = description.rstrip(".") if description else slug.replace("_", " ").title()
         start = hm.end()
         end = headers[i + 1].start() if i + 1 < len(headers) else len(block)
         learn_bullets = _parse_example_body(block[start:end])
@@ -134,7 +170,7 @@ def render_examples_md(module: int, examples: list[ParsedExample]) -> str:
                 "**Run:**",
                 "",
                 "```bash",
-                f"cd module{module}/examples/{ex.folder}",
+                f"cd {example_run_directory(module, ex.folder)}",
                 "make clean && make run",
                 "```",
                 "",
@@ -158,7 +194,7 @@ def write_module(course_root: Path, module: int, dry_run: bool) -> int:
         print(f"SKIP: missing {doc_path}")
         return 1
 
-    parsed = parse_module_examples(doc_path)
+    parsed = parse_module_examples(doc_path, module_dir)
     if not parsed:
         parsed = discover_example_dirs(module_dir)
 

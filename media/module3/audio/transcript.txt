@@ -1,103 +1,165 @@
-[Slide 1] IEEE 1364-2005 (Verilog-2005) Module 3
+[Slide 1] Welcome to module 3, IEEE 1364-2005 (Verilog-2005). In this module you will master the final verilog-only standard (ieee 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before systemverilog..
 
-[Slide 2] Learning objectives Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+[Slide 2] Here is what you will learn in this module. Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline...
 
-[Slide 3] Prerequisites See module README
+[Slide 3] Before you start, make sure you have these prerequisites. See module README
 
-[Slide 4] Learning path Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog.
+[Slide 4] Learning path. Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline...
 
-[Slide 5] Overview This module covers IEEE Std 1364-2005 (Verilog-2005), the last standard that defines Verilog alone before it was merged with SystemVerilog (IEEE 1800). You'll learn what 2005 adds or clarifies over 2001: minor language c
+[Slide 5] Overview. This module covers IEEE Std 1364-2005 (Verilog-2005), the last standard that defines Verilog alone before it was merged with...
 
-[Slide 6] How to learn this module
+[Slide 6] Next section: How to learn this module.
 
-[Slide 7] From docs/MODULE3.md — read guides before running demos.
+[Slide 7] Follow this learning path. Read the guides before running the labs. Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for Module 3. Study design architecture — See how DUTs, examples, and testbenches fit together under module3/. Work through labs in order — Open module3/EXAMPLES.md and run each make clean && make run from the repo root. Run the full module script —...
 
-[Slide 8] From docs/MODULE3.md — read guides before running demos.
+[Slide 8] Follow this learning path. Read the guides before running the labs. Review Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module3/CHECKLIST.md before starting the next module. From docs/MODULE3.md — read guides before running demos.
 
-[Slide 9] Syllabus topics
+[Slide 9] Next section: Design architecture.
 
-[Slide 10] From MODULE3 Topics Covered.
+[Slide 10] 1. Repository layout (module3/). 1364-2005 clarifications and deprecations over 2001 Focus: avoid defparam, use localparam, understand 2005 vs 2001 deltas module3/examples/ — migration and best-practice labs scripts/module3.sh — run all 2005-focused examples Refer to the diagram on the right.
 
-[Slide 11] From MODULE3 Topics Covered.
+[Slide 11] 2. Parameter and constant flow. localparam — named constants inside module, not overridable Parameter override at instantiation #(.WIDTH(n)) preferred over defparam 2005 standard marks defparam as deprecated Refer to the diagram on the right.
 
-[Slide 12] From MODULE3 Topics Covered.
+[Slide 12] 3. Design intent unchanged from 2001. Same ANSI, @*, generate, signed features as Module 2 2005 adds LRM clarifications — behavior you already use stays valid Migration labs show 2001 → 2005 style tweaks only Refer to the diagram on the right.
 
-[Slide 13] From MODULE3 Topics Covered.
+[Slide 13] RTL block diagram (reference). Module 3: DUT hierarchy and signal flow.
 
-[Slide 14] From MODULE3 Topics Covered.
+[Slide 14] Verification / testbench diagram (reference). Module 3: stimulus, observation, and checking.
 
-[Slide 15] From MODULE3 Topics Covered.
+[Slide 15] Parameter override at instantiation. Review the code on screen and match it to files in the repository.
 
-[Slide 16] From MODULE3 Topics Covered.
+[Slide 16] Next section: Execution & simulation flow.
 
-[Slide 17] From MODULE3 Topics Covered.
+[Slide 17] How the example runs (toolchain). Match each bullet to files in the repository. Makefile: Verilator compiles RTL + SystemVerilog testbench into a C++ model sim_main.cpp: generates clk/rst_n, calls eval() until $finish Directed test (initial block or C++): drive stimulus, wait for DUT flags Self-check: compare outputs; print PASS/FAIL (see terminal demo slide) Repo path...
 
-[Slide 18] From MODULE3 Topics Covered.
+[Slide 18] Next section: Key files to study.
 
-[Slide 19] From MODULE3 Topics Covered.
+[Slide 19] Open these in the repo. module3/examples/no_defparam/ — replace defparam with #() override module3/examples/parameters/ — parameter override at instantiation scripts/module3.sh Trace while running module3/EXAMPLES.md labs.
 
-[Slide 20] Hands-on examples
+[Slide 20] Next section: Verification & testing methods.
 
-[Slide 21] Requires iverilog on PATH (apt install iverilog).
+[Slide 21] 1. Execution and regression. make run per example; ./scripts/module3.sh for full sweep Watch for defparam warnings when running deprecated-style labs Refer to the diagram on the right.
 
-[Slide 22] module3/examples/parameters/README.md
+[Slide 22] 2. Migration checks. Replace defparam with #() override at instantiation Confirm localparam names match across parent and child Refer to the diagram on the right.
 
-[Slide 23] Hands-on: module3/examples/parameters/
+[Slide 23] Avoid defparam — use #() instead. Review the code on screen and match it to files in the repository.
 
-[Slide 24] module3/examples/no_defparam/README.md
+[Slide 24] Next section: Syllabus topics.
 
-[Slide 25] Hands-on: module3/examples/no_defparam/
+[Slide 25] Next section: Protocol & design details.
 
-[Slide 26] module3/examples/synthesizable/README.md
+[Slide 26] Protocol and design detail: What 1364-2005 Is. Final Verilog-only standard: No SystemVerilog (no logic, interfaces, packages, classes). Clarifications: Refined wording and examples for 2001 features (e.g. generate, signed, scheduling). Minor additions: Additional system tasks and small syntax clarifications. Stable baseline: Many synthesis and style guides treat 1364-2005 as the Verilog...
 
-[Slide 27] Hands-on: module3/examples/synthesizable/
+[Slide 27] Protocol and design detail: What 1364-2005 Adds or Clarifies Over 2001 (1). Clarifications: Scheduling, blocking vs nonblocking semantics, and generate behavior. System tasks: Additional or clarified tasks (e.g. $realtime, file I/O behavior). Deprecations: e.g. defparam is deprecated (use instantiation parameter override instead). Attributes: Clarified syntax and usage for tool-specific...
 
-[Slide 28] module3/examples/one_driver/README.md
+[Slide 28] Protocol and design detail: What 1364-2005 Adds or Clarifies Over 2001 (2). No major new language features: The big step to new features is 1800 (Module 4). From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 29] Hands-on: module3/examples/one_driver/
+[Slide 29] Protocol and design detail: What 1364-2005 Still Does Not Include. No SystemVerilog: no logic, always_comb/always_ff, interfaces, packages, classes, assertions (SVA). No interfaces or type parameters (those are 1800). From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 30] module3/examples/procedural/README.md
+[Slide 30] Protocol and design detail: Why defparam Is Deprecated. Problem: Overrides a parameter deep in hierarchy from outside; hard to trace and tool-dependent. Preferred: Override at instantiation: sub #(.WIDTH(16)) u_sub (...); From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 31] Hands-on: module3/examples/procedural/
+[Slide 31] Protocol and design detail: Correct Practice: Parameter Override at Instantiation. Recommendation: Do not use defparam in new RTL; use named parameter override in the instantiation. From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 32] module3/examples/pipeline/README.md
+[Slide 32] Protocol and design detail: Generally Synthesizable (RTL Subset) (1). Modules: ANSI ports, parameter, localparam. Nets and variables: wire, reg (with correct usage). assign: Combinational logic; single driver per net. always: Combinational with always @*; sequential with always @(posedge clk) (or negedge) and nonblocking <=. From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 33] Hands-on: module3/examples/pipeline/
+[Slide 33] Protocol and design detail: Generally Synthesizable (RTL Subset) (2). generate: generate for, generate if/else for structure. Operators: Arithmetic, logical, bitwise, relational, shift, concatenation, conditional (? :). case / casez / casex: With care (full case, parallel case, or tool directives). Tasks and functions: Without delays; used for combinational or single-cycle helpers. From...
 
-[Slide 34] module3/examples/case_styles/README.md
+[Slide 34] Protocol and design detail: Generally Not Synthesizable (or Tool-Specific) (1). Delays: #n in RTL (used for testbenches only). initial: Except for initialization of reg/mem in FPGAs (tool-dependent). Event controls: @(posedge clk) is fine; complex event lists may not map. Fork/join: Usually testbench-only. From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 35] Hands-on: module3/examples/case_styles/
+[Slide 35] Protocol and design detail: Generally Not Synthesizable (or Tool-Specific) (2). System tasks: e.g. $display, $finish — testbench/simulation only. Pure latch inference: Unintended latches from incomplete case/if; use full case or default. From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 36] module3/examples/avoid_latch/README.md
+[Slide 36] Protocol and design detail: Best Practices for Synthesis (1364-2005). Combinational: Use always @* and blocking =; assign all outputs in all branches (or default) to avoid latches. Sequential: Use always @(posedge clk) (and optionally negedge rst_n) and nonblocking <=; do not mix blocking and nonblocking for... One driver per net: No multiple assign to the same wire; no multiple always driving...
 
-[Slide 37] Hands-on: module3/examples/avoid_latch/
+[Slide 37] Protocol and design detail: Rules of Thumb. Combinational always (always @*): Use blocking =. Order of statements can matter (same simulation time step). Sequential always (always @(posedge clk)): Use nonblocking <=. Order does not matter within the block; updates occur at the end of... Do not mix blocking and nonblocking for the same variable in the same always block. From MODULE3 Topics...
 
-[Slide 38] module3/examples/function_synth/README.md
+[Slide 38] Protocol and design detail: full_case (Tool-Dependent). Intent: “Every possible case value is covered; no latch.” Syntax: Often an attribute, e.g. (* full_case *) or tool-specific comment. Use: When the designer guarantees all cases are covered (e.g. one-hot state encoding). From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 39] Hands-on: module3/examples/function_synth/
+[Slide 39] Protocol and design detail: parallel_case (Tool-Dependent). Intent: “At most one case arm matches; can be implemented as parallel mux.” Syntax: Often an attribute, e.g. (* parallel_case *) or tool-specific. Use: When at most one branch is true (e.g. one-hot); misuse can hide bugs. From MODULE3 Topics Covered — protocol/design depth.
 
-[Slide 40] module3/examples/summary/README.md
+[Slide 40] Verification flow (reference). Stimulus, DUT response, and check points for this module.
 
-[Slide 41] Hands-on: module3/examples/summary/
+[Slide 41] 1. IEEE 1364-2005 Context (1/2). Final Verilog-only standard: No SystemVerilog (no logic, interfaces, packages, classes). Clarifications: Refined wording and examples for 2001 features (e.g. generate, signed, scheduling). Minor additions: Additional system tasks and small syntax clarifications. Stable baseline: Many synthesis and style guides treat 1364-2005 as the Verilog baseline...
 
-[Slide 42] Common pitfalls
+[Slide 42] 1. IEEE 1364-2005 Context (2/2). Deprecations: e.g. defparam is deprecated (use instantiation parameter override instead). Attributes: Clarified syntax and usage for tool-specific attributes. No major new language features: The big step to new features is 1800 (Module 4). No SystemVerilog: no logic, always_comb/always_ff, interfaces, packages, classes, assertions (SVA). No interfaces or type...
 
-[Slide 43] From MODULE3 Common Pitfalls.
+[Slide 43] 2. defparam Deprecation (2005). Problem: Overrides a parameter deep in hierarchy from outside; hard to trace and tool-dependent. Preferred: Override at instantiation: sub #(.WIDTH(16)) u_sub (...); Recommendation: Do not use defparam in new RTL; use named parameter override in the instantiation. Why defparam Is Deprecated Correct Practice: Parameter Override at Instantiation
 
-[Slide 44] From MODULE3 Common Pitfalls.
+[Slide 44] 3. Synthesizable Subset (1364-2005) (1/4). Modules: ANSI ports, parameter, localparam. Nets and variables: wire, reg (with correct usage). assign: Combinational logic; single driver per net. always: Combinational with always @*; sequential with always @(posedge clk) (or negedge) and nonblocking <=. generate: generate for, generate if/else for structure.
 
-[Slide 45] From MODULE3 Common Pitfalls.
+[Slide 45] 3. Synthesizable Subset (1364-2005) (2/4). case / casez / casex: With care (full case, parallel case, or tool directives). Tasks and functions: Without delays; used for combinational or single-cycle helpers. Signed: signed types and $signed/$unsigned as supported by the tool. Delays: #n in RTL (used for testbenches only). initial: Except for initialization of reg/mem in FPGAs (tool-dependent).
 
-[Slide 46] From MODULE3 Common Pitfalls.
+[Slide 46] 3. Synthesizable Subset (1364-2005) (3/4). Fork/join: Usually testbench-only. System tasks: e.g. $display, $finish — testbench/simulation only. Pure latch inference: Unintended latches from incomplete case/if; use full case or default. Combinational: Use always @* and blocking =; assign all outputs in all branches (or default) to avoid latches. Sequential: Use always @(posedge clk) (and...
 
-[Slide 47] From MODULE3 Common Pitfalls.
+[Slide 47] 3. Synthesizable Subset (1364-2005) (4/4). Avoid latches: In combinational always, cover all cases or use a default assignment.
 
-[Slide 48] Practice & assessment
+[Slide 48] 4. Blocking vs Nonblocking (Clarified in 2005). Combinational always (always @*): Use blocking =. Order of statements can matter (same simulation time step). Sequential always (always @(posedge clk)): Use nonblocking <=. Order does not matter within the block; updates occur at the end of... Do not mix blocking and nonblocking for the same variable in the same always block. Rules of Thumb
 
-[Slide 49] From MODULE3 Learning Outcomes.
+[Slide 49] 5. Full Case and Parallel Case (Synthesis Hints). Intent: “Every possible case value is covered; no latch.” Syntax: Often an attribute, e.g. (* full_case *) or tool-specific comment. Use: When the designer guarantees all cases are covered (e.g. one-hot state encoding). Intent: “At most one case arm matches; can be implemented as parallel mux.” Syntax: Often an attribute, e.g. (* parallel_case...
 
-[Slide 50] Exercises Remove defparam Synthesizable Checklist Blocking vs Nonblocking Case and Latches 1364-2005 Summary
+[Slide 50] In summary: Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog. Next up: Next module in course. See docs/MODULE3.md
 
-[Slide 51] Exercises Using defparam in New Code Mixing Blocking and Nonblocking for Same Variable Assuming unique/priority case in 1364-2005 Latches from Incomplete case/if Using SystemVerilog in “1364-2005” Project
+[Slide 51] Next section: Hands-on examples.
 
-[Slide 52] Summary & next steps Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog. Complete module3/CHECKLIST.md Review module3/EXAMPLES.md and run each lab Next: Next module in course
+[Slide 52] Module 3 toolchain check. Watch the terminal output and confirm you see the expected pass message. Requires iverilog on PATH (apt install iverilog).
+
+[Slide 53] Example 1: No defparam; override at instantiation only. defparam deprecated; use #(.PARAM(value)) at instantiation module3/examples/parameters/README.md
+
+[Slide 54] Demo: No defparam; override at instantiation only. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 55] Example 2: Parameter passed through hierarchy (parent → child) at instantiation only. No defparam anywhere; override only at inst module3/examples/no_defparam/README.md
+
+[Slide 56] Demo: Parameter passed through hierarchy (parent → child) at instantiation only. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 57] Example 3: Combinational (always @*, blocking) and sequential (posedge clk, nonblocking). One driver per net; avoid latches; no delays in RTL module3/examples/synthesizable/README.md
+
+[Slide 58] Demo: Combinational (always @*, blocking) and sequential (posedge clk, nonblocking). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 59] Example 4: Single assign to wire; single always driving reg. No multiple drivers per net module3/examples/one_driver/README.md
+
+[Slide 60] Demo: Single assign to wire; single always driving reg. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 61] Example 5: Side-by-side combinational vs sequential blocks with correct assignment style. = in combinational; <= in sequential; do not mix for same variable module3/examples/procedural/README.md
+
+[Slide 62] Demo: Side-by-side combinational vs sequential blocks with correct assignment style. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 63] Example 6: Two-stage pipeline: q1 <= d; q2 <= q1 (nonblocking only). q2 gets old q1 (previous cycle); sequential block only module3/examples/pipeline/README.md
+
+[Slide 64] Demo: Two-stage pipeline: q1 <= d; q2 <= q1 (nonblocking only). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 65] Example 7: full_case / parallel_case attributes (or tool pragmas) where supported. Synthesis hints only; 1364-2005 has no unique/priority case module3/examples/case_styles/README.md
+
+[Slide 66] Demo: full_case / parallel_case attributes (or tool pragmas) where supported. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 67] Example 8: Default before case; all paths assign output. No latch from incomplete case/if module3/examples/avoid_latch/README.md
+
+[Slide 68] Demo: Default before case; all paths assign output. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 69] Example 9: Function without delays used in always @* (e.g. min). Combinational helper; no delays in RTL module3/examples/function_synth/README.md
+
+[Slide 70] Demo: Function without delays used in always @* (e.g. min). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 71] Example 10: Small design using only 1364-2005 features (no 1800). Checklist for “pure Verilog” RTL module3/examples/summary/README.md
+
+[Slide 72] Demo: Small design using only 1364-2005 features (no 1800). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 73] Next section: Common pitfalls.
+
+[Slide 74] Using defparam in New Code. Mistake: Overriding parameters with defparam for convenience. Reality: defparam is deprecated in 1364-2005; tools may warn or restrict. Correct: Override at instantiation: sub #(.WIDTH(16)) u_sub (...); Why: Clear, hierarchical parameter flow; better for synthesis and maintenance.
+
+[Slide 75] Mixing Blocking and Nonblocking for Same Variable. Mistake: Using both = and <= for the same reg in one always block. Reality: Leads to simulation/synthesis mismatch and race conditions. Correct: Use only = in combinational always; only <= in sequential always for that variable. Why: 1364-2005 semantics assume consistent use; mixing is undefined in practice.
+
+[Slide 76] Assuming unique/priority case in 1364-2005. Mistake: Writing unique case or priority case (SystemVerilog) and expecting 1364-2005 tools to support it. Reality: Those keywords are in IEEE 1800, not 1364. Correct: Use full_case/parallel_case attributes if the tool supports them; otherwise ensure full coverage and document intent. Why: Avoids tool errors and clarifies design intent.
+
+[Slide 77] Latches from Incomplete case/if. Mistake: Combinational always with case or if that does not assign in all paths. Reality: Synthesis infers a latch; simulation may hold previous value. Correct: Assign default before case, or cover all cases; avoid incomplete if/else. Why: Latches are rarely intended in synchronous RTL; explicit defaults avoid them.
+
+[Slide 78] Using SystemVerilog in “1364-2005” Project. Mistake: Using logic, always_comb, or interfaces while targeting “Verilog only.” Reality: Those are 1800 (SystemVerilog); 1364-2005 does not define them. Correct: Use wire/reg and always @* / always @(posedge clk) for strict 1364-2005. Why: Keeps tool and project consistently on one standard.
+
+[Slide 79] Next section: Practice & assessment.
+
+[Slide 80] By now you should be able to explain the following. ✓ Describe what 1364-2005 adds or clarifies over 1364-2001 (no major new constructs) ✓ Avoid defparam and use instantiation parameter override only ✓ Apply the synthesizable subset of 1364-2005 (combinational vs sequential, one driver, no latches) ✓ Use blocking assignment in combinational always and nonblocking in sequential always ✓ Use...
+
+[Slide 81] Exercises. Remove defparam Synthesizable Checklist Blocking vs Nonblocking Case and Latches 1364-2005 Summary
+
+[Slide 82] Exercises. Using defparam in New Code Mixing Blocking and Nonblocking for Same Variable Assuming unique/priority case in 1364-2005 Latches from Incomplete case/if Using SystemVerilog in “1364-2005” Project
+
+[Slide 83] In summary: Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline before SystemVerilog. Next up: Next module in course. Master the final Verilog-only standard (IEEE 1364-2005), its clarifications over 2001, and the synthesizable subset as a stable baseline... Complete module3/CHECKLIST.md Review...

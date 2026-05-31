@@ -1,101 +1,167 @@
-[Slide 1] IEEE 1800-2009 and 1800-2012 Module 5
+[Slide 1] Welcome to module 5, IEEE 1800-2009 and 1800-2012. In this module you will master the systemverilog revisions ieee 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context..
 
-[Slide 2] Learning objectives Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context.
+[Slide 2] Here is what you will learn in this module. Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and...
 
-[Slide 3] Prerequisites See module README
+[Slide 3] Before you start, make sure you have these prerequisites. See module README
 
-[Slide 4] Learning path Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context.
+[Slide 4] Learning path. Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and...
 
-[Slide 5] Overview This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two major revisions of SystemVerilog after 1800-2005. You'll learn what 2009 and 2012 add or clarify: interface refinements (e.g. modport expression
+[Slide 5] Overview. This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two major revisions of SystemVerilog after 1800-2005. You'll...
 
-[Slide 6] How to learn this module
+[Slide 6] Next section: How to learn this module.
 
-[Slide 7] From docs/MODULE5.md — read guides before running demos.
+[Slide 7] Follow this learning path. Read the guides before running the labs. Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for Module 5. Study design architecture — See how DUTs, examples, and testbenches fit together under module5/. Work through labs in order — Open module5/EXAMPLES.md and run each make clean && make run from the repo root. Run the full module script —...
 
-[Slide 8] From docs/MODULE5.md — read guides before running demos.
+[Slide 8] Follow this learning path. Read the guides before running the labs. Review Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module5/CHECKLIST.md before starting the next module. From docs/MODULE5.md — read guides before running demos.
 
-[Slide 9] Syllabus topics
+[Slide 9] Next section: Design architecture.
 
-[Slide 10] From MODULE5 Topics Covered.
+[Slide 10] 1. Repository layout (module5/). IEEE 1800-2009 and 1800-2012 refinements on the 2005 base Assertions, checkers, and type refinements in examples module5/dut/ — designs used by assertion and checker labs scripts/module5.sh — run assertion-focused examples Refer to the diagram on the right.
 
-[Slide 11] From MODULE5 Topics Covered.
+[Slide 11] 2. Assertion and checker placement. immediate assertions in procedural code — zero-time checks concurrent assertions (SVA) — temporal properties on clocks checker encapsulation — reusable verification modules Assertions sit alongside RTL; failures stop simulation with message Refer to the diagram on the right.
 
-[Slide 12] From MODULE5 Topics Covered.
+[Slide 12] 3. 2009/2012 vs 2005 delta. Interface and type clarifications — same patterns, clearer LRM 1800-2012 checker keyword — structured verification component Design RTL from Module 4 remains valid; add assertions incrementally Refer to the diagram on the right.
 
-[Slide 13] From MODULE5 Topics Covered.
+[Slide 13] RTL block diagram (reference). Module 5: DUT hierarchy and signal flow.
 
-[Slide 14] From MODULE5 Topics Covered.
+[Slide 14] Verification / testbench diagram (reference). Module 5: stimulus, observation, and checking.
 
-[Slide 15] From MODULE5 Topics Covered.
+[Slide 15] Embedded assertion example. Review the code on screen and match it to files in the repository.
 
-[Slide 16] From MODULE5 Topics Covered.
+[Slide 16] Next section: Execution & simulation flow.
 
-[Slide 17] From MODULE5 Topics Covered.
+[Slide 17] How the example runs (toolchain). Match each bullet to files in the repository. Makefile: Verilator compiles RTL + SystemVerilog testbench into a C++ model sim_main.cpp: generates clk/rst_n, calls eval() until $finish Directed test (initial block or C++): drive stimulus, wait for DUT flags Self-check: compare outputs; print PASS/FAIL (see terminal demo slide) Repo path...
 
-[Slide 18] From MODULE5 Topics Covered.
+[Slide 18] Next section: Key files to study.
 
-[Slide 19] From MODULE5 Topics Covered.
+[Slide 19] Open these in the repo. module5/examples/assert_valid_encoding/ module5/examples/checkers/ module5/examples/assert_invariant/ scripts/module5.sh Trace while running module5/EXAMPLES.md labs.
 
-[Slide 20] From MODULE5 Topics Covered.
+[Slide 20] Next section: Verification & testing methods.
 
-[Slide 21] Hands-on examples
+[Slide 21] 1. Running assertion labs. make run per example; failing assertion prints SVA message ./scripts/module5.sh runs designs with embedded checkers Refer to the diagram on the right.
 
-[Slide 22] Requires iverilog on PATH (apt install iverilog).
+[Slide 22] 2. Closure mindset. Pass = no assertion failures and expected $display output Use assert examples to learn what to monitor before UVM scoreboards Refer to the diagram on the right.
 
-[Slide 23] module5/examples/operators/README.md
+[Slide 23] Immediate assertion in procedural code. Review the code on screen and match it to files in the repository.
 
-[Slide 24] Hands-on: module5/examples/operators/
+[Slide 24] Next section: Syllabus topics.
 
-[Slide 25] module5/examples/wildcard_only/README.md
+[Slide 25] Next section: Protocol & design details.
 
-[Slide 26] Hands-on: module5/examples/wildcard_only/
+[Slide 26] Protocol and design detail: What 1800-2009 Adds or Clarifies (1). Interfaces: Modport expressions, virtual interface type (for testbenches), interface inheritance Types and operators: Clarifications; additional operators and built-in methods Assertions: SVA enhancements; checker concept (preview) DPI: Refinements for C/C++ interop From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 27] module5/examples/range_check/README.md
+[Slide 27] Protocol and design detail: What 1800-2009 Adds or Clarifies (2). Coverage: Coverage option and syntax clarifications Clarifications: Scheduling, generate, and other 2005 semantics From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 28] Hands-on: module5/examples/range_check/
+[Slide 28] Protocol and design detail: What 1800-2012 Adds or Clarifies (1). Checkers: Checker construct for reusable assertion/coverage logic Arrays: Array manipulation methods; array assignment and ordering clarifications Strings: String methods and behavior Compilation units: Refined rules for $unit and compilation-unit scope From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 29] module5/examples/arrays/README.md
+[Slide 29] Protocol and design detail: What 1800-2012 Adds or Clarifies (2). Assertions and coverage: Further SVA and coverage features Clarifications: Numerous editorial and semantic clarifications across the LRM From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 30] Hands-on: module5/examples/arrays/
+[Slide 30] Protocol and design detail: Relation to 1800-2005. 1800-2005 RTL remains valid in 1800-2009 and 1800-2012. New features are additive; you adopt them when the tool and project support the revision. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 31] module5/examples/array_param/README.md
+[Slide 31] Protocol and design detail: Modport Expressions (2009). Use: When the same interface is used with different signal subsets or derived signals; check tool support for exact syntax. Benefit: Fewer duplicate interface definitions; clearer connection contract. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 32] Hands-on: module5/examples/array_param/
+[Slide 32] Protocol and design detail: Virtual Interface (2009). Design: Rarely used in RTL; RTL typically connects to a concrete interface instance. Verification: Common in UVM and other OOP testbenches; allows one driver class to work with any instance of the interface. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 33] module5/examples/checkers/README.md
+[Slide 33] Protocol and design detail: Integer Types and Sizes. byte, shortint, int, longint: 8, 16, 32, 64 bits; signed by default. byte unsigned, int unsigned: Unsigned variants. Clarifications in 2012: Representation and conversion rules; use in RTL for constants and parameters. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 34] Hands-on: module5/examples/checkers/
+[Slide 34] Protocol and design detail: Operators Added or Clarified. inside: Already in 2005; 2009/2012 clarify set membership and use with ranges. Wildcard equality ==?: X/Z in the right-hand side act as “don’t care” in comparisons. Set membership and case (inside): Used in case statements and constraints; semantics clarified in 2012. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 35] module5/examples/assert_valid_encoding/README.md
+[Slide 35] Protocol and design detail: Array Methods (2012). Array methods: .size(), .delete(), .sort(), .reverse(), etc. (exact set is revision-dependent). Queues: .push_back(), .pop_front(), .insert(), etc. Use in RTL: Limited (arrays in RTL are often fixed); methods are common in testbenches and checkers. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 36] Hands-on: module5/examples/assert_valid_encoding/
+[Slide 36] Protocol and design detail: Array Assignment and Ordering. Packed vs unpacked: Assignment rules and ordering (row-major, etc.) are clarified. Array copy: Whole-array assignment and copying; compatibility of dimensions. Use in RTL: Multi-dimensional arrays (e.g. memories) and parameterized dimensions; follow tool-supported subset for synthesis. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 37] module5/examples/assert_invariant/README.md
+[Slide 37] Protocol and design detail: String Methods. Strings: string type; methods such as .len(), .substr(), .atoi(), etc. (as defined in 2012). Use in RTL: Rare (strings are mainly for messages and file I/O in testbenches). Use in testbenches: Logging, report generation, file names. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 38] Hands-on: module5/examples/assert_invariant/
+[Slide 38] Protocol and design detail: Assertions in Design (Brief). immediate assertions: assert (condition) else $error("..."); — checked when executed (like an if-check). concurrent assertions: assert property (@(posedge clk) (a — -> b)); — checked over time; typically in verification. Use in RTL: Immediate assertions for invariants (e.g. one-hot, valid encodings); concurrent assertions often in bind...
 
-[Slide 39] module5/examples/summary/README.md
+[Slide 39] Protocol and design detail: Checker (2012). checker: A reusable unit that can contain assertions, assumptions, coverage, and helper logic; can be instantiated in design or testbench. Use: Encapsulate a set of properties (e.g. protocol rules) and reuse across modules or hierarchies. Design: Checkers can be bound to RTL modules; they do not change RTL functionality, only add checking. Synthesis...
 
-[Slide 40] Hands-on: module5/examples/summary/
+[Slide 40] Protocol and design detail: Compilation Unit. Compilation unit: The scope of one or more source files compiled together (tool-defined). $unit: The compilation-unit scope; declarations in $unit are visible across the unit without import. Best practice: Prefer packages and explicit import over $unit to avoid hidden dependencies and name clashes. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 41] Common pitfalls
+[Slide 41] Protocol and design detail: Package and Import. Import: import pkg::* or import pkg::item; 2012 clarifies visibility and search order. Use: Keep shared types and functions in packages; import where needed; avoid relying on $unit for new code. From MODULE5 Topics Covered — protocol/design depth.
 
-[Slide 42] From MODULE5 Common Pitfalls.
+[Slide 42] Verification flow (reference). Stimulus, DUT response, and check points for this module.
 
-[Slide 43] From MODULE5 Common Pitfalls.
+[Slide 43] 1. IEEE 1800-2009 and 1800-2012 Context (1/3). Interfaces: Modport expressions, virtual interface type (for testbenches), interface inheritance Types and operators: Clarifications; additional operators and built-in methods Assertions: SVA enhancements; checker concept (preview) DPI: Refinements for C/C++ interop Coverage: Coverage option and syntax clarifications
 
-[Slide 44] From MODULE5 Common Pitfalls.
+[Slide 44] 1. IEEE 1800-2009 and 1800-2012 Context (2/3). Checkers: Checker construct for reusable assertion/coverage logic Arrays: Array manipulation methods; array assignment and ordering clarifications Strings: String methods and behavior Compilation units: Refined rules for $unit and compilation-unit scope Assertions and coverage: Further SVA and coverage features
 
-[Slide 45] From MODULE5 Common Pitfalls.
+[Slide 45] 1. IEEE 1800-2009 and 1800-2012 Context (3/3). 1800-2005 RTL remains valid in 1800-2009 and 1800-2012. New features are additive; you adopt them when the tool and project support the revision.
 
-[Slide 46] From MODULE5 Common Pitfalls.
+[Slide 46] 2. Interface Refinements (2009). Use: When the same interface is used with different signal subsets or derived signals; check tool support for exact syntax. Benefit: Fewer duplicate interface definitions; clearer connection contract. Design: Rarely used in RTL; RTL typically connects to a concrete interface instance. Verification: Common in UVM and other OOP testbenches; allows one driver...
 
-[Slide 47] Practice & assessment
+[Slide 47] 3. Type and Operator Enhancements (2009/2012) (1/2). byte, shortint, int, longint: 8, 16, 32, 64 bits; signed by default. byte unsigned, int unsigned: Unsigned variants. Clarifications in 2012: Representation and conversion rules; use in RTL for constants and parameters. inside: Already in 2005; 2009/2012 clarify set membership and use with ranges. Wildcard equality ==?: X/Z in the right-hand...
 
-[Slide 48] From MODULE5 Learning Outcomes.
+[Slide 48] 3. Type and Operator Enhancements (2009/2012) (2/2). Array methods: .size(), .delete(), .sort(), .reverse(), etc. (exact set is revision-dependent). Queues: .push_back(), .pop_front(), .insert(), etc. Use in RTL: Limited (arrays in RTL are often fixed); methods are common in testbenches and checkers.
 
-[Slide 49] Exercises inside and ==? Interface (2009) Immediate Assertion Checker (2012) Version Table
+[Slide 49] 4. Array and String Refinements (2012). Packed vs unpacked: Assignment rules and ordering (row-major, etc.) are clarified. Array copy: Whole-array assignment and copying; compatibility of dimensions. Use in RTL: Multi-dimensional arrays (e.g. memories) and parameterized dimensions; follow tool-supported subset for synthesis. Strings: string type; methods such as .len(), .substr(), .atoi()...
 
-[Slide 50] Exercises Assuming 2009/2012 Features in an 2005-Only Flow Virtual Interface in RTL Checker Synthesis Array Methods in RTL $unit vs Package
+[Slide 50] 5. Assertions and Checkers in Context (2009/2012) (1/2). immediate assertions: assert (condition) else $error("..."); — checked when executed (like an if-check). concurrent assertions: assert property (@(posedge clk) (a — -> b)); — checked over time; typically in verification. Use in RTL: Immediate assertions for invariants (e.g. one-hot, valid encodings); concurrent assertions often in bind...
 
-[Slide 51] Summary & next steps Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context. Complete module5/CHECKLIST.md Review module5/EXAMPLES.md and run each lab Next: Next module in course
+[Slide 51] 5. Assertions and Checkers in Context (2009/2012) (2/2). Synthesis: Checkers are typically not synthesized; they are for simulation and formal tools.
+
+[Slide 52] 6. Compilation Units and Scope (2012). Compilation unit: The scope of one or more source files compiled together (tool-defined). $unit: The compilation-unit scope; declarations in $unit are visible across the unit without import. Best practice: Prefer packages and explicit import over $unit to avoid hidden dependencies and name clashes. Import: import pkg::* or import pkg::item; 2012 clarifies...
+
+[Slide 53] In summary: Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context. Next up: Next module in course. See docs/MODULE5.md
+
+[Slide 54] Next section: Hands-on examples.
+
+[Slide 55] Module 5 toolchain check. Watch the terminal output and confirm you see the expected pass message. Requires iverilog on PATH (apt install iverilog).
+
+[Slide 56] Example 1: inside with ranges and sets; ==? wildcard (fallback for tools that lack inside). Set membership; don’t-care in comparison module5/examples/operators/README.md
+
+[Slide 57] Demo: inside with ranges and sets; ==? wildcard (fallback for tools that lack inside). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 58] Example 2: Dedicated ==? wildcard equality (X/Z as don't care). Wildcard match in RTL/testbench module5/examples/wildcard_only/README.md
+
+[Slide 59] Demo: Dedicated ==? wildcard equality (X/Z as don't care). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 60] Example 3: Range membership (e.g. value inside [0:127]); fallback to explicit comparison if needed. inside with ranges; 2009/2012 operator use module5/examples/range_check/README.md
+
+[Slide 61] Demo: Range membership (e.g. value inside [0:127]); fallback to explicit comparison if needed. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 62] Example 4: Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics. Array indexing; synthesis-safe subset module5/examples/arrays/README.md
+
+[Slide 63] Demo: Fixed memory with parameterized DEPTH/WIDTH; 2012 array semantics. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 64] Example 5: Parameterized memory using $clog2(DEPTH) for address width. Parameterized arrays; 2012 clarifications module5/examples/array_param/README.md
+
+[Slide 65] Demo: Parameterized memory using $clog2(DEPTH) for address width. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 66] Example 6: Immediate assertion (e.g. one-hot) using $countones or similar. assert in design; immediate assertion in RTL module5/examples/checkers/README.md
+
+[Slide 67] Demo: Immediate assertion (e.g. one-hot) using $countones or similar. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 68] Example 7: Immediate assertion for valid opcode/encoding. Invariant checking; assert for valid encodings module5/examples/assert_valid_encoding/README.md
+
+[Slide 69] Demo: Immediate assertion for valid opcode/encoding. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 70] Example 8: Immediate assertion for one-hot grant (e.g. arbiter). One-hot invariant; assert in RTL module5/examples/assert_invariant/README.md
+
+[Slide 71] Demo: Immediate assertion for one-hot grant (e.g. arbiter). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 72] Example 9: Comparison of 2005 vs 2009/2012 features in a small design. Backward compatibility; when to adopt new features module5/examples/summary/README.md
+
+[Slide 73] Demo: Comparison of 2005 vs 2009/2012 features in a small design. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 74] Next section: Common pitfalls.
+
+[Slide 75] Assuming 2009/2012 Features in an 2005-Only Flow. Mistake: Using virtual interface, checker, or 2012 array methods when the project or tool is 1800-2005 only. Reality: Compile or elaboration errors; or undefined behavior. Correct: Confirm project standard and tool revision; use only features of that revision. Why: Backward compatibility is 2005→2009→2012; tools may not implement all newer...
+
+[Slide 76] Virtual Interface in RTL. Mistake: Using a virtual interface in synthesizable RTL. Reality: Virtual interfaces are for dynamic binding (testbench); not for hardware. Correct: Use concrete interface instances in RTL; use virtual interface only in testbench classes. Why: Synthesis does not support virtual interface; it is a simulation construct.
+
+[Slide 77] Checker Synthesis. Mistake: Expecting a checker to be synthesized like a module. Reality: Checkers are for assertion/coverage; typically not synthesized. Correct: Use checkers for verification; keep RTL in modules. Why: Checker semantics are for checking, not for netlist generation.
+
+[Slide 78] Array Methods in RTL. Mistake: Using dynamic array or queue methods (e.g. .push_back) in synthesizable RTL. Reality: Many such methods are not synthesizable or are tool-specific. Correct: In RTL use fixed-size or parameterized arrays and indexing; use methods in testbenches or checkers. Why: Synthesis subset of SystemVerilog is smaller than the full language.
+
+[Slide 79] $unit vs Package. Mistake: Putting shared types or functions in $unit and relying on compilation order. Reality: $unit visibility and order are tool-dependent; can cause subtle bugs. Correct: Put shared items in packages; use explicit import. Why: Packages give a clear namespace and import order; 2012 clarifies compilation unit but packages remain best practice.
+
+[Slide 80] Next section: Practice & assessment.
+
+[Slide 81] By now you should be able to explain the following. ✓ Describe what 1800-2009 and 1800-2012 add or clarify over 1800-2005 (interfaces, types, arrays, assertions, checkers) ✓ Use interface refinements (modport expressions, virtual interface) when the project and tool support 2009+ ✓ Use inside and ==? appropriately in RTL or testbenches ✓ Apply array and string refinements (2012) in testbenches...
+
+[Slide 82] Exercises. inside and ==? Interface (2009) Immediate Assertion Checker (2012) Version Table
+
+[Slide 83] Exercises. Assuming 2009/2012 Features in an 2005-Only Flow Virtual Interface in RTL Checker Synthesis Array Methods in RTL $unit vs Package
+
+[Slide 84] In summary: Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and assertion/checker concepts in context. Next up: Next module in course. Master the SystemVerilog revisions IEEE 1800-2009 and 1800-2012: interface and type refinements, operator and array enhancements, and... Complete module5/CHECKLIST.md Review...

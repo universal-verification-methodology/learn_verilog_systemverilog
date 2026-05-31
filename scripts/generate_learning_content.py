@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Add learner guides to MODULE*.md and generate moduleN/CHECKLIST.md.
 
-Inserts ``## How to Learn This Module`` when missing and builds a self-assessment
-checklist from Learning Outcomes, Exercises, and Assessment sections.
+Inserts ``## How to Learn This Module`` when missing, adds **Design Architecture**,
+**Key files to study**, and **Verification & Testing Methods** from
+``module_slide_enrichment.yaml``, writes ``media/outline_overrides.yaml``, and builds
+a self-assessment checklist from Learning Outcomes, Exercises, and Assessment.
 
 Usage (from repo root):
 
@@ -15,9 +17,21 @@ from __future__ import annotations
 import argparse
 import re
 from pathlib import Path
+from typing import Any
+
+import yaml
 
 HOW_TO_LEARN_HEADING = "## How to Learn This Module"
+DESIGN_ARCH_HEADING = "## Design Architecture"
+KEY_FILES_HEADING = "## Key files to study"
+VERIFICATION_HEADING = "## Verification & Testing Methods"
+SLIDE_SECTIONS = (
+    DESIGN_ARCH_HEADING,
+    KEY_FILES_HEADING,
+    VERIFICATION_HEADING,
+)
 RUNNING_HEADING_RE = re.compile(r"^## Running Module \d+\s*$", re.MULTILINE)
+ENRICHMENT_PATH = Path(__file__).resolve().parent / "module_slide_enrichment.yaml"
 
 
 def _section(text: str, start: str, stops: tuple[str, ...]) -> str:
@@ -131,6 +145,119 @@ def insert_how_to_learn(text: str, module: int, title_hint: str) -> tuple[str, b
     return text[:insert_at] + "\n\n" + block + text[insert_at:], True
 
 
+def load_slide_enrichment(course_root: Path) -> dict[str, Any]:
+    """Load per-module slide enrichment YAML."""
+    path = course_root / "scripts" / "module_slide_enrichment.yaml"
+    if not path.is_file():
+        path = ENRICHMENT_PATH
+    if not path.is_file():
+        return {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return data if isinstance(data, dict) else {}
+
+
+def _remove_section(text: str, heading: str) -> str:
+    """Remove one ## section (heading through next ## or end)."""
+    start = text.find(heading)
+    if start < 0:
+        return text
+    rest = text[start + len(heading) :]
+    nxt = re.search(r"\n## ", rest)
+    end = start + len(heading) + (nxt.start() if nxt else len(rest))
+    return text[:start] + text[end:].lstrip("\n")
+
+
+def _subsection_block(number: int, title: str, bullets: list[str]) -> str:
+    """Format a ### subsection with bullet list."""
+    lines = [f"### {number}. {title}", ""]
+    for bullet in bullets:
+        lines.append(f"- {bullet}")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def build_slide_sections(module: int, enrichment: dict[str, Any]) -> str:
+    """Build Design Architecture, Key files, and Verification markdown."""
+    key = f"module{module}"
+    mod_data = enrichment.get(key) or {}
+    if not mod_data:
+        return ""
+
+    parts: list[str] = []
+    arch = mod_data.get("design_architecture") or []
+    if arch:
+        parts.append(f"{DESIGN_ARCH_HEADING}\n")
+        for i, section in enumerate(arch, start=1):
+            parts.append(
+                _subsection_block(
+                    i,
+                    str(section.get("title", f"Topic {i}")),
+                    list(section.get("bullets") or []),
+                ),
+            )
+
+    key_files = mod_data.get("key_files") or []
+    if key_files:
+        parts.append(f"{KEY_FILES_HEADING}\n")
+        for item in key_files:
+            parts.append(f"- {item}")
+        parts.append("")
+
+    testing = mod_data.get("verification_testing") or []
+    if testing:
+        parts.append(f"{VERIFICATION_HEADING}\n")
+        for i, section in enumerate(testing, start=1):
+            parts.append(
+                _subsection_block(
+                    i,
+                    str(section.get("title", f"Topic {i}")),
+                    list(section.get("bullets") or []),
+                ),
+            )
+
+    return "\n".join(parts).strip() + "\n\n"
+
+
+def insert_slide_sections(text: str, block: str) -> tuple[str, bool]:
+    """Insert or replace slide-oriented sections before Topics Covered."""
+    if not block.strip():
+        return text, False
+    updated = text
+    for heading in SLIDE_SECTIONS:
+        updated = _remove_section(updated, heading)
+    anchor = "## Topics Covered"
+    pos = updated.find(anchor)
+    if pos < 0:
+        pos = updated.find("## Overview")
+        if pos < 0:
+            return updated + "\n\n" + block, True
+        rest = updated[pos:]
+        end = updated.find("\n## ", pos + 1)
+        insert_at = end if end >= 0 else len(updated)
+    else:
+        insert_at = pos
+    new_text = updated[:insert_at].rstrip() + "\n\n" + block + updated[insert_at:]
+    return new_text, new_text != text
+
+
+def write_outline_overrides(course_root: Path, enrichment: dict[str, Any]) -> None:
+    """Write media/outline_overrides.yaml from enrichment architecture_overrides."""
+    out: dict[str, Any] = {}
+    for key, mod_data in sorted(enrichment.items()):
+        if not key.startswith("module") or not isinstance(mod_data, dict):
+            continue
+        arch = mod_data.get("architecture_overrides")
+        if arch:
+            out[key] = {"architecture": arch}
+    path = course_root / "media" / "outline_overrides.yaml"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        yaml.dump(out, sort_keys=False, allow_unicode=True),
+        encoding="utf-8",
+    )
+    print(f"OK: {path} ({len(out)} module(s))")
+
+
 def build_checklist(module: int, doc_text: str, title: str) -> str:
     """Build CHECKLIST.md from MODULE doc sections."""
     outcomes = _clean_bullets(
@@ -189,7 +316,12 @@ def build_checklist(module: int, doc_text: str, title: str) -> str:
     return "\n".join(lines)
 
 
-def process_module(course_root: Path, module: int, dry_run: bool) -> int:
+def process_module(
+    course_root: Path,
+    module: int,
+    dry_run: bool,
+    enrichment: dict[str, Any],
+) -> int:
     doc_path = course_root / "docs" / f"MODULE{module}.md"
     module_dir = course_root / f"module{module}"
     checklist_path = module_dir / "CHECKLIST.md"
@@ -207,11 +339,15 @@ def process_module(course_root: Path, module: int, dry_run: bool) -> int:
     if repaired != new_text:
         new_text = repaired
         doc_changed = True
+    slide_block = build_slide_sections(module, enrichment)
+    new_text, slide_changed = insert_slide_sections(new_text, slide_block)
+    doc_changed = doc_changed or slide_changed
     checklist = build_checklist(module, new_text, title)
 
     if dry_run:
         print(
             f"module {module}: doc={'update' if doc_changed else 'ok'}, "
+            f"slide_sections={'yes' if slide_block.strip() else 'no'}, "
             f"checklist -> {checklist_path}",
         )
         return 0
@@ -239,6 +375,7 @@ def main() -> int:
     args = parser.parse_args()
 
     course_root = args.course_root.resolve()
+    enrichment = load_slide_enrichment(course_root)
     modules = (
         [args.module]
         if args.module
@@ -251,8 +388,10 @@ def main() -> int:
     for mod in modules:
         if not (course_root / f"module{mod}").is_dir():
             continue
-        if process_module(course_root, mod, args.dry_run) != 0:
+        if process_module(course_root, mod, args.dry_run, enrichment) != 0:
             rc = 1
+    if enrichment and not args.dry_run:
+        write_outline_overrides(course_root, enrichment)
     return rc
 
 

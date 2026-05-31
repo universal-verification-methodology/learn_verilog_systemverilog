@@ -7,69 +7,69 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
-S_0x561ef63a25e0 .scope module, "top" "top" 2 23;
+S_0x556794dde5e0 .scope module, "top" "top" 2 23;
  .timescale 0 0;
-v0x561ef63ba7e0_0 .var "a", 3 0;
-v0x561ef63ba8f0_0 .var "b", 3 0;
-v0x561ef63baa00_0 .net "y_clip", 3 0, L_0x561ef63bb170;  1 drivers
-v0x561ef63baaa0_0 .net "y_wrap", 3 0, L_0x561ef63bab70;  1 drivers
-S_0x561ef63a2770 .scope module, "u_clip" "adder_sel" 2 28, 2 6 0, S_0x561ef63a25e0;
- .timescale 0 0;
-    .port_info 0 /INPUT 4 "a";
-    .port_info 1 /INPUT 4 "b";
-    .port_info 2 /OUTPUT 4 "y";
-P_0x561ef6390050 .param/l "USE_CLIP" 0 2 6, +C4<00000000000000000000000000000001>;
-P_0x561ef6390090 .param/l "WIDTH" 0 2 6, +C4<00000000000000000000000000000100>;
-v0x561ef63b9c60_0 .net "a", 3 0, v0x561ef63ba7e0_0;  1 drivers
-v0x561ef63b9d60_0 .net "b", 3 0, v0x561ef63ba8f0_0;  1 drivers
-v0x561ef63b9e40_0 .net "y", 3 0, L_0x561ef63bb170;  alias, 1 drivers
-S_0x561ef6367490 .scope generate, "clip" "clip" 2 12, 2 12 0, S_0x561ef63a2770;
- .timescale 0 0;
-v0x561ef6367670_0 .net *"_ivl_0", 4 0, L_0x561ef63bac60;  1 drivers
-v0x561ef63b9610_0 .net *"_ivl_11", 0 0, L_0x561ef63baf80;  1 drivers
-L_0x7fc88217e0a8 .functor BUFT 1, C4<1111>, C4<0>, C4<0>, C4<0>;
-v0x561ef63b96f0_0 .net/2u *"_ivl_12", 3 0, L_0x7fc88217e0a8;  1 drivers
-v0x561ef63b97b0_0 .net *"_ivl_15", 3 0, L_0x561ef63bb0a0;  1 drivers
-L_0x7fc88217e018 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
-v0x561ef63b9890_0 .net *"_ivl_3", 0 0, L_0x7fc88217e018;  1 drivers
-v0x561ef63b99c0_0 .net *"_ivl_4", 4 0, L_0x561ef63bad50;  1 drivers
-L_0x7fc88217e060 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
-v0x561ef63b9aa0_0 .net *"_ivl_7", 0 0, L_0x7fc88217e060;  1 drivers
-v0x561ef63b9b80_0 .net "sum", 4 0, L_0x561ef63bae40;  1 drivers
-L_0x561ef63bac60 .concat [ 4 1 0 0], v0x561ef63ba7e0_0, L_0x7fc88217e018;
-L_0x561ef63bad50 .concat [ 4 1 0 0], v0x561ef63ba8f0_0, L_0x7fc88217e060;
-L_0x561ef63bae40 .arith/sum 5, L_0x561ef63bac60, L_0x561ef63bad50;
-L_0x561ef63baf80 .part L_0x561ef63bae40, 4, 1;
-L_0x561ef63bb0a0 .part L_0x561ef63bae40, 0, 4;
-L_0x561ef63bb170 .functor MUXZ 4, L_0x561ef63bb0a0, L_0x7fc88217e0a8, L_0x561ef63baf80, C4<>;
-S_0x561ef63b9f80 .scope module, "u_wrap" "adder_sel" 2 27, 2 6 0, S_0x561ef63a25e0;
+v0x556794df67e0_0 .var "a", 3 0;
+v0x556794df68f0_0 .var "b", 3 0;
+v0x556794df6a00_0 .net "y_clip", 3 0, L_0x556794df7170;  1 drivers
+v0x556794df6aa0_0 .net "y_wrap", 3 0, L_0x556794df6b70;  1 drivers
+S_0x556794dde770 .scope module, "u_clip" "adder_sel" 2 28, 2 6 0, S_0x556794dde5e0;
  .timescale 0 0;
     .port_info 0 /INPUT 4 "a";
     .port_info 1 /INPUT 4 "b";
     .port_info 2 /OUTPUT 4 "y";
-P_0x561ef638d6b0 .param/l "USE_CLIP" 0 2 6, +C4<00000000000000000000000000000000>;
-P_0x561ef638d6f0 .param/l "WIDTH" 0 2 6, +C4<00000000000000000000000000000100>;
-v0x561ef63ba4b0_0 .net "a", 3 0, v0x561ef63ba7e0_0;  alias, 1 drivers
-v0x561ef63ba5c0_0 .net "b", 3 0, v0x561ef63ba8f0_0;  alias, 1 drivers
-v0x561ef63ba690_0 .net "y", 3 0, L_0x561ef63bab70;  alias, 1 drivers
-L_0x561ef63bab70 .arith/sum 4, v0x561ef63ba7e0_0, v0x561ef63ba8f0_0;
-S_0x561ef63ba2b0 .scope generate, "wrap" "wrap" 2 12, 2 12 0, S_0x561ef63b9f80;
+P_0x556794dcc050 .param/l "USE_CLIP" 0 2 6, +C4<00000000000000000000000000000001>;
+P_0x556794dcc090 .param/l "WIDTH" 0 2 6, +C4<00000000000000000000000000000100>;
+v0x556794df5c60_0 .net "a", 3 0, v0x556794df67e0_0;  1 drivers
+v0x556794df5d60_0 .net "b", 3 0, v0x556794df68f0_0;  1 drivers
+v0x556794df5e40_0 .net "y", 3 0, L_0x556794df7170;  alias, 1 drivers
+S_0x556794da3490 .scope generate, "clip" "clip" 2 12, 2 12 0, S_0x556794dde770;
  .timescale 0 0;
-    .scope S_0x561ef63a25e0;
+v0x556794da3670_0 .net *"_ivl_0", 4 0, L_0x556794df6c60;  1 drivers
+v0x556794df5610_0 .net *"_ivl_11", 0 0, L_0x556794df6f80;  1 drivers
+L_0x7fb40a0870a8 .functor BUFT 1, C4<1111>, C4<0>, C4<0>, C4<0>;
+v0x556794df56f0_0 .net/2u *"_ivl_12", 3 0, L_0x7fb40a0870a8;  1 drivers
+v0x556794df57b0_0 .net *"_ivl_15", 3 0, L_0x556794df70a0;  1 drivers
+L_0x7fb40a087018 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x556794df5890_0 .net *"_ivl_3", 0 0, L_0x7fb40a087018;  1 drivers
+v0x556794df59c0_0 .net *"_ivl_4", 4 0, L_0x556794df6d50;  1 drivers
+L_0x7fb40a087060 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x556794df5aa0_0 .net *"_ivl_7", 0 0, L_0x7fb40a087060;  1 drivers
+v0x556794df5b80_0 .net "sum", 4 0, L_0x556794df6e40;  1 drivers
+L_0x556794df6c60 .concat [ 4 1 0 0], v0x556794df67e0_0, L_0x7fb40a087018;
+L_0x556794df6d50 .concat [ 4 1 0 0], v0x556794df68f0_0, L_0x7fb40a087060;
+L_0x556794df6e40 .arith/sum 5, L_0x556794df6c60, L_0x556794df6d50;
+L_0x556794df6f80 .part L_0x556794df6e40, 4, 1;
+L_0x556794df70a0 .part L_0x556794df6e40, 0, 4;
+L_0x556794df7170 .functor MUXZ 4, L_0x556794df70a0, L_0x7fb40a0870a8, L_0x556794df6f80, C4<>;
+S_0x556794df5f80 .scope module, "u_wrap" "adder_sel" 2 27, 2 6 0, S_0x556794dde5e0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "y";
+P_0x556794dc96b0 .param/l "USE_CLIP" 0 2 6, +C4<00000000000000000000000000000000>;
+P_0x556794dc96f0 .param/l "WIDTH" 0 2 6, +C4<00000000000000000000000000000100>;
+v0x556794df64b0_0 .net "a", 3 0, v0x556794df67e0_0;  alias, 1 drivers
+v0x556794df65c0_0 .net "b", 3 0, v0x556794df68f0_0;  alias, 1 drivers
+v0x556794df6690_0 .net "y", 3 0, L_0x556794df6b70;  alias, 1 drivers
+L_0x556794df6b70 .arith/sum 4, v0x556794df67e0_0, v0x556794df68f0_0;
+S_0x556794df62b0 .scope generate, "wrap" "wrap" 2 12, 2 12 0, S_0x556794df5f80;
+ .timescale 0 0;
+    .scope S_0x556794dde5e0;
 T_0 ;
     %vpi_call 2 31 "$display", "generate if/else (1364-2001): USE_CLIP selects implementation" {0 0 0};
     %pushi/vec4 10, 0, 4;
-    %store/vec4 v0x561ef63ba7e0_0, 0, 4;
+    %store/vec4 v0x556794df67e0_0, 0, 4;
     %pushi/vec4 5, 0, 4;
-    %store/vec4 v0x561ef63ba8f0_0, 0, 4;
+    %store/vec4 v0x556794df68f0_0, 0, 4;
     %delay 10, 0;
-    %vpi_call 2 32 "$display", "  a=%d b=%d wrap=%d clip=%d", v0x561ef63ba7e0_0, v0x561ef63ba8f0_0, v0x561ef63baaa0_0, v0x561ef63baa00_0 {0 0 0};
+    %vpi_call 2 32 "$display", "  a=%d b=%d wrap=%d clip=%d", v0x556794df67e0_0, v0x556794df68f0_0, v0x556794df6aa0_0, v0x556794df6a00_0 {0 0 0};
     %pushi/vec4 12, 0, 4;
-    %store/vec4 v0x561ef63ba7e0_0, 0, 4;
+    %store/vec4 v0x556794df67e0_0, 0, 4;
     %pushi/vec4 8, 0, 4;
-    %store/vec4 v0x561ef63ba8f0_0, 0, 4;
+    %store/vec4 v0x556794df68f0_0, 0, 4;
     %delay 10, 0;
-    %vpi_call 2 33 "$display", "  a=%d b=%d wrap=%d clip=%d", v0x561ef63ba7e0_0, v0x561ef63ba8f0_0, v0x561ef63baaa0_0, v0x561ef63baa00_0 {0 0 0};
+    %vpi_call 2 33 "$display", "  a=%d b=%d wrap=%d clip=%d", v0x556794df67e0_0, v0x556794df68f0_0, v0x556794df6aa0_0, v0x556794df6a00_0 {0 0 0};
     %vpi_call 2 34 "$finish" {0 0 0};
     %end;
     .thread T_0;

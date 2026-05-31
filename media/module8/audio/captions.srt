@@ -1,111 +1,163 @@
 1
-00:00:00,000 --> 00:00:03,312
-Quick Reference and Course Summary Module 8
+00:00:00,000 --> 00:00:16,848
+Welcome to module 8, Quick Reference and Course Summary. In this module you will provide a single quick reference and course summary for verilog and systemverilog across ieee versions (1364-1995 through 1800-2017)..
 
 2
-00:00:03,662 --> 00:00:16,478
-Learning objectives Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017).
+00:00:17,198 --> 00:00:31,790
+Here is what you will learn in this module. Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017).
 
 3
-00:00:16,828 --> 00:00:19,588
-Prerequisites See module README
+00:00:32,140 --> 00:00:38,188
+Before you start, make sure you have these prerequisites. See module README
 
 4
-00:00:19,938 --> 00:00:32,466
-Learning path Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017).
+00:00:38,538 --> 00:00:52,170
+Learning path. Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017).
 
 5
-00:00:32,816 --> 00:00:48,680
-Overview This module is a **reference and summary** for the version-centric Verilog/SystemVerilog course (Modules 1–7). It does not introduce new language features. It consolidates the version timeline, construct-by-standard tabl
+00:00:52,520 --> 00:01:03,968
+Overview. This module is a reference and summary for the version-centric Verilog/SystemVerilog course (Modules 1–7). It does not introduce new...
 
 6
-00:00:49,030 --> 00:00:51,382
-How to learn this module
+00:01:04,318 --> 00:01:07,654
+Next section: How to learn this module.
 
 7
-00:00:51,732 --> 00:00:56,988
-From docs/MODULE8.md — read guides before running demos.
+00:01:08,004 --> 00:01:38,412
+Follow this learning path. Read the guides before running the labs. Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for Module 8. Study design architecture — See how DUTs, examples, and testbenches fit together under module8/. Work through labs in order — Open module8/EXAMPLES.md and run each make clean && make run from the repo root. Run the full module script —...
 
 8
-00:00:57,338 --> 00:01:02,594
-From docs/MODULE8.md — read guides before running demos.
+00:01:38,762 --> 00:02:08,306
+Follow this learning path. Read the guides before running the labs. Use as reference — Module 8 summarizes the full course; run examples to print quick-reference slices, not to learn new RTL. Review Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module8/CHECKLIST.md before starting the next module. From docs/MODULE8.md — read guides before running demos.
 
 9
-00:01:02,944 --> 00:01:05,200
-Syllabus topics
+00:02:08,656 --> 00:02:11,896
+Next section: Design architecture.
 
 10
-00:01:05,550 --> 00:01:08,310
-From MODULE8 Topics Covered.
+00:02:12,246 --> 00:02:37,062
+1. Reference module layout (module8/). No new language — consolidates Modules 1–7 into quick-reference tables examples/ print version timelines, migration reminders, tool notes Use after completing the course or as a lookup during real projects scripts/module8.sh — runs reference printouts, not new RTL lessons Refer to the diagram on the right.
 
 11
-00:01:08,660 --> 00:01:10,892
-Hands-on examples
+00:02:37,412 --> 00:03:04,076
+2. Course map architecture. Module 1–3 — Verilog-only path (1995, 2001, 2005) Module 4–6 — SystemVerilog design path (2005, 2009/12, 2017) Module 7 — comparison and migration between standards Module 8 — this reference layer on top of the version stack Refer to the diagram on the right.
 
 12
-00:01:11,242 --> 00:01:15,562
-Requires iverilog on PATH (apt install iverilog).
+00:03:04,426 --> 00:03:21,034
+3. How reference examples execute. Most labs $display tables or cheat-sheet rows to stdout No new DUT hierarchy — output is documentation you can grep Pair with docs/MODULE8.md for full tables Refer to the diagram on the right.
 
 13
-00:01:15,912 --> 00:01:20,544
-Hands-on: module8/examples/One-page/
+00:03:21,384 --> 00:03:27,792
+One-page course map. Review the code on screen and match it to files in the repository.
 
 14
-00:01:20,894 --> 00:01:25,454
-Hands-on: module8/examples/Version/
+00:03:28,142 --> 00:03:31,862
+Next section: Installation & execution.
 
 15
-00:01:25,804 --> 00:01:30,748
-Hands-on: module8/examples/Verilog-only/
+00:03:32,212 --> 00:04:04,348
+How to run this module. From repo root: ./scripts/module8.sh --check — validate environment ./scripts/module8.sh --demo — print demo commands to run locally ./scripts/module8.sh --scaffold — create ~/unix_practice/ exercise files Open module8/EXAMPLES.md — run each numbered lab in your terminal Track progress with module8/CHECKLIST.md before moving on From MODULE8 — execution and artifact layout.
 
 16
-00:01:31,098 --> 00:01:35,538
-Hands-on: module8/examples/Tool/
+00:04:04,698 --> 00:04:07,890
+Next section: Key files to study.
 
 17
-00:01:35,888 --> 00:01:40,304
-Hands-on: module8/examples/"Which/
+00:04:08,240 --> 00:04:30,920
+Open these in the repo. docs/MODULE8.md — master reference tables module8/examples/version_timeline/ module8/examples/migration_steps/ module8/examples/course_map/ scripts/module8.sh Trace while running module8/EXAMPLES.md labs.
 
 18
-00:01:40,654 --> 00:01:45,094
-Hands-on: module8/examples/Course/
+00:04:31,270 --> 00:04:35,374
+Next section: Verification & testing methods.
 
 19
-00:01:45,444 --> 00:01:50,196
-Hands-on: module8/examples/Migration/
+00:04:35,724 --> 00:04:53,508
+1. Using Module 8 as closure. Run ./scripts/module8.sh once to print all reference slices Cross-check “which standard has X?” against printed tables Bookmark slides.pdf and MODULE8.md for day-to-day lookup Refer to the diagram on the right.
 
 20
-00:01:50,546 --> 00:01:55,490
-Hands-on: module8/examples/Synthesizable/
+00:04:53,858 --> 00:05:07,538
+2. When to re-run labs. Re-run a specific Module 1–7 example when you need hands-on refresh Module 8 examples confirm you know where to find detail, not replace it Refer to the diagram on the right.
 
 21
-00:01:55,840 --> 00:02:00,400
-Hands-on: module8/examples/Version/
+00:05:07,888 --> 00:05:14,440
+Version timeline printer. Review the code on screen and match it to files in the repository.
 
 22
-00:02:00,750 --> 00:02:05,238
-Hands-on: module8/examples/Learning/
+00:05:14,790 --> 00:05:18,054
+Next section: Syllabus topics.
 
 23
-00:02:05,588 --> 00:02:10,100
-Hands-on: module8/examples/Common/
+00:05:18,404 --> 00:05:24,884
+1. Version Timeline (One Table). See docs/MODULE8.md
 
 24
-00:02:10,450 --> 00:02:12,778
-Practice & assessment
+00:05:25,234 --> 00:05:28,474
+Next section: Hands-on examples.
 
 25
-00:02:13,128 --> 00:02:16,008
-From MODULE8 Learning Outcomes.
+00:05:28,824 --> 00:05:40,248
+Module 8 toolchain check. Watch the terminal output and confirm you see the expected pass message. Requires iverilog on PATH (apt install iverilog).
 
 26
-00:02:16,358 --> 00:02:20,702
-Exercises Lookup Subset Migration Course map Cheat sheet
+00:05:40,598 --> 00:05:52,022
+Demo: One-page cheat sheet (version timeline, subsets, migration, version selection). Watch the terminal output and confirm you see the expected pass message.
 
 27
-00:02:21,052 --> 00:02:33,220
-Exercises Assuming a construct is in an older standard Mixing subsets without a rule Skipping regression after migration Forgetting tool support Treating this module as a replacement for Modules 1–7
+00:05:52,372 --> 00:06:02,188
+Demo: Version timeline (standard, year, role, module). Watch the terminal output and confirm you see the expected pass message.
 
 28
-00:02:33,570 --> 00:02:55,770
-Summary & next steps Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017). Complete module8/CHECKLIST.md Review module8/EXAMPLES.md and run each lab Next: Next module in course
+00:06:02,538 --> 00:06:15,186
+Demo: Verilog-only vs SystemVerilog design subset (ports, types, comb/seq, when to use). Watch the terminal output and confirm you see the expected pass message.
+
+29
+00:06:15,536 --> 00:06:28,376
+Demo: Tool support summary (simulators, synthesis, lint, formal; Icarus, Verilator, commercial). Watch the terminal output and confirm you see the expected pass message.
+
+30
+00:06:28,726 --> 00:06:41,278
+Demo: "Which standard has X?" for key constructs (logic, always_comb, interface, etc.). Watch the terminal output and confirm you see the expected pass message.
+
+31
+00:06:41,628 --> 00:06:51,516
+Demo: Course map (Modules 1–8 with title and content summary). Watch the terminal output and confirm you see the expected pass message.
+
+32
+00:06:51,866 --> 00:07:06,722
+Demo: Migration steps (1995→2001, 1364→1800, 1800→1800) and rules of thumb. Watch the terminal output and confirm you see the expected pass message.
+
+33
+00:07:07,072 --> 00:07:21,952
+Demo: Synthesizable do/avoid (assign, always_comb/@*, single driver; avoid delays, defparam, latches). Watch the terminal output and confirm you see the expected pass message.
+
+34
+00:07:22,302 --> 00:07:34,038
+Demo: Version selection (match tools/IP, state one revision and subset, document). Watch the terminal output and confirm you see the expected pass message.
+
+35
+00:07:34,388 --> 00:07:46,052
+Demo: Learning path (1→…→6, then 7; use 8 as reference) and where to go next. Watch the terminal output and confirm you see the expected pass message.
+
+36
+00:07:46,402 --> 00:08:00,106
+Demo: Common pitfalls quick reference (construct table, subset rule, regression, tool support, Module 8 as reference). Watch the terminal output and confirm you see the expected pass message.
+
+37
+00:08:00,456 --> 00:08:03,840
+Next section: Practice & assessment.
+
+38
+00:08:04,190 --> 00:08:26,870
+By now you should be able to explain the following. ✓ Use the version timeline and construct-by-standard table to look up “which standard has X?” ✓ Use the design-subset quick reference to choose Verilog-only vs SystemVerilog design ✓ Use the migration quick reference and Module 7 checklists for migration and version selection ✓ Use the course map to find which module covers a given standard...
+
+39
+00:08:27,220 --> 00:08:32,764
+Exercises. Lookup Subset Migration Course map Cheat sheet
+
+40
+00:08:33,114 --> 00:08:46,482
+Exercises. Assuming a construct is in an older standard Mixing subsets without a rule Skipping regression after migration Forgetting tool support Treating this module as a replacement for Modules 1–7
+
+41
+00:08:46,832 --> 00:09:22,568
+In summary: Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017). Next up: Next module in course. Provide a single quick reference and course summary for Verilog and SystemVerilog across IEEE versions (1364-1995 through 1800-2017). Complete module8/CHECKLIST.md Review module8/EXAMPLES.md and run each lab Next: Next...

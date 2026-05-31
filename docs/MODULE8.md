@@ -64,6 +64,49 @@ This module is a **reference and summary** for the version-centric Verilog/Syste
 - When you want a course map (what each module covers)
 - When you finish the course and want a single reference to keep
 
+## Design Architecture
+
+### 1. Reference module layout (module8/)
+
+- No new language — consolidates Modules 1–7 into quick-reference tables
+- examples/ print version timelines, migration reminders, tool notes
+- Use after completing the course or as a lookup during real projects
+- scripts/module8.sh — runs reference printouts, not new RTL lessons
+
+### 2. Course map architecture
+
+- Module 1–3 — Verilog-only path (1995, 2001, 2005)
+- Module 4–6 — SystemVerilog design path (2005, 2009/12, 2017)
+- Module 7 — comparison and migration between standards
+- Module 8 — this reference layer on top of the version stack
+
+### 3. How reference examples execute
+
+- Most labs $display tables or cheat-sheet rows to stdout
+- No new DUT hierarchy — output is documentation you can grep
+- Pair with docs/MODULE8.md for full tables
+
+## Key files to study
+
+- docs/MODULE8.md — master reference tables
+- module8/examples/version_timeline/
+- module8/examples/migration_steps/
+- module8/examples/course_map/
+- scripts/module8.sh
+
+## Verification & Testing Methods
+
+### 1. Using Module 8 as closure
+
+- Run ./scripts/module8.sh once to print all reference slices
+- Cross-check “which standard has X?” against printed tables
+- Bookmark slides.pdf and MODULE8.md for day-to-day lookup
+
+### 2. When to re-run labs
+
+- Re-run a specific Module 1–7 example when you need hands-on refresh
+- Module 8 examples confirm you know where to find detail, not replace it
+
 ## Topics Covered
 
 ### 1. Version Timeline (One Table)
@@ -241,17 +284,17 @@ Use this table to see **when a construct was introduced** (or clarified). “Int
 
 **Runnable reference examples** (`module8/examples/`; each prints a slice of the quick reference):
 
-1. **quick_ref** — One-page cheat sheet (version timeline, subsets, migration, version selection).
-2. **version_timeline** — Version timeline (standard, year, role, module).
-3. **design_subset** — Verilog-only vs SystemVerilog design subset (ports, types, comb/seq, when to use).
-4. **tool_support** — Tool support summary (simulators, synthesis, lint, formal; Icarus, Verilator, commercial).
-5. **construct_lookup** — "Which standard has X?" for key constructs (logic, always_comb, interface, etc.).
-6. **course_map** — Course map (Modules 1–8 with title and content summary).
-7. **migration_steps** — Migration steps (1995→2001, 1364→1800, 1800→1800) and rules of thumb.
-8. **synthesizable_subset** — Synthesizable do/avoid (assign, always_comb/@*, single driver; avoid delays, defparam, latches).
-9. **version_selection** — Version selection (match tools/IP, state one revision and subset, document).
-10. **learning_path** — Learning path (1→…→6, then 7; use 8 as reference) and where to go next.
-11. **pitfalls** — Common pitfalls quick reference (construct table, subset rule, regression, tool support, Module 8 as reference).
+1. **quick_ref** (`examples/`) — One-page cheat sheet (version timeline, subsets, migration, version selection).
+2. **version_timeline** (`examples/version_timeline/`) — Version timeline (standard, year, role, module).
+3. **design_subset** (`examples/design_subset/`) — Verilog-only vs SystemVerilog design subset (ports, types, comb/seq, when to use).
+4. **tool_support** (`examples/tool_support/`) — Tool support summary (simulators, synthesis, lint, formal; Icarus, Verilator, commercial).
+5. **construct_lookup** (`examples/construct_lookup/`) — "Which standard has X?" for key constructs (logic, always_comb, interface, etc.).
+6. **course_map** (`examples/course_map/`) — Course map (Modules 1–8 with title and content summary).
+7. **migration_steps** (`examples/migration_steps/`) — Migration steps (1995→2001, 1364→1800, 1800→1800) and rules of thumb.
+8. **synthesizable_subset** (`examples/synthesizable_subset/`) — Synthesizable do/avoid (assign, always_comb/@*, single driver; avoid delays, defparam, latches).
+9. **version_selection** (`examples/version_selection/`) — Version selection (match tools/IP, state one revision and subset, document).
+10. **learning_path** (`examples/learning_path/`) — Learning path (1→…→6, then 7; use 8 as reference) and where to go next.
+11. **pitfalls** (`examples/pitfalls/`) — Common pitfalls quick reference (construct table, subset rule, regression, tool support, Module 8 as reference).
 
 No new DUT or testbench is required; use examples from Modules 1–7 for design/tests.
 

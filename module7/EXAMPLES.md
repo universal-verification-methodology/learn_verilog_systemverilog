@@ -5,12 +5,119 @@ Run commands from the **course repository root** unless noted.
 
 **Before you start:** Read `docs/MODULE7.md` → **How to Learn This Module**, then work through each lab in order.
 
-## 7. Migration 1364→1800 (`migration/`)
+## 1. Same 2:1 mux in 1364-1995, 1364-2001, 1364-2005, 1800-2005 (and optionally 1800-2017) (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- Port style, type, procedural block, one driver
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 2. Same counter in 1995, 2001, 2005, 1800-2005 (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- Sequential block, reset, parameter/localparam
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 3. Same 2:4 decoder in 1995, 2001, 2005, 1800; case vs unique case (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- Port style, always @(sel) vs @* vs always_comb, unique case
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 4. Same 8-bit adder in 1995, 2001, 2005, 1800 (continuous assign) (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- wire vs logic; assign unchanged across versions
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 5. Same parameterized shift in 1364 (parameter/localparam) vs 1800 (parameter int) (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- parameter int, localparam int; same behavior
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 6. Same master/slave connection: many ports (1364) (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- Port list size, direction, reuse; interface (1800) optional per tool
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 7. Before/after: wire/reg, always @* vs logic, always_comb, unique case (`migration/`)
 
 **Folder:** `module7/examples/migration/`
 
 **What you'll learn:**
-- Before/after: wire/reg, always @* vs logic, always_comb, unique case
 - Order of steps, testing, regression
 
 **Run:**
@@ -24,12 +131,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/migration/`.
 
-## 8. Migration 1995→2001 (`migration_1995_to_2001/`)
+## 8. Before: non-ANSI, @(a or b or sel). After: ANSI, always @* (`migration_1995_to_2001/`)
 
 **Folder:** `module7/examples/migration_1995_to_2001/`
 
 **What you'll learn:**
-- Before: non-ANSI, @(a or b or sel). After: ANSI, always @*
 - ANSI ports, implicit sensitivity
 
 **Run:**
@@ -43,12 +149,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/migration_1995_to_2001/`.
 
-## 9. Case Versions (`case_versions/`)
+## 9. Same 4:1 mux: 1364 case+default vs 1800 unique case (`case_versions/`)
 
 **Folder:** `module7/examples/case_versions/`
 
 **What you'll learn:**
-- Same 4:1 mux: 1364 case+default vs 1800 unique case
 - case semantics; unique case for tool checking
 
 **Run:**
@@ -62,12 +167,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/case_versions/`.
 
-## 10. Version Table (`version_table/`)
+## 10. Single reference: construct vs standard (1995–2017) (`version_table/`)
 
 **Folder:** `module7/examples/version_table/`
 
 **What you'll learn:**
-- Single reference: construct vs standard (1995–2017)
 - When each feature was introduced; minimum revision
 
 **Run:**
@@ -81,17 +185,12 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/version_table/`.
 
-## 11. Version Selection (`version_selection/`)
+## 11. Runnable reminder of version-selection checklist (constraints, decision, document) (`version_selection/`)
 
 **Folder:** `module7/examples/version_selection/`
 
 **What you'll learn:**
-- Runnable reminder of version-selection checklist (constraints, decision, document)
 - See MODULE7.md for full checklist
-- Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block style)
-- always @(posedge clk) vs always_ff; wire/reg vs logic
-- Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff)
-- Sequential FSM; 1800 always_ff and unique case
 
 **Run:**
 
@@ -104,12 +203,47 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/version_selection/`.
 
-## 14. Migration Checklist (`migration_checklist/`)
+## 12. Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block style) (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- always @(posedge clk) vs always_ff; wire/reg vs logic
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 13. Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff) (`side_by_side/`)
+
+**Folder:** `module7/examples/side_by_side/`
+
+**What you'll learn:**
+- Sequential FSM; 1800 always_ff and unique case
+
+**Run:**
+
+```bash
+cd module7/examples/side_by_side
+make clean && make run
+```
+
+**You should see:** Simulation completes without errors; check `$display` output or PASS messages in the log.
+
+**Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/side_by_side/`.
+
+## 14. Runnable reminder of 1364→1800 migration steps (pre, per-module, post) (`migration_checklist/`)
 
 **Folder:** `module7/examples/migration_checklist/`
 
 **What you'll learn:**
-- Runnable reminder of 1364→1800 migration steps (pre, per-module, post)
 - See MODULE7.md for full migration checklist
 
 **Run:**
@@ -123,12 +257,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/migration_checklist/`.
 
-## 15. Incremental Migration (`incremental_migration/`)
+## 15. Two steps: step1 1364 style, step2 1800 style; same mux, compare outputs (`incremental_migration/`)
 
 **Folder:** `module7/examples/incremental_migration/`
 
 **What you'll learn:**
-- Two steps: step1 1364 style, step2 1800 style; same mux, compare outputs
 - Migrate one construct at a time; test after each step
 
 **Run:**
@@ -142,12 +275,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/incremental_migration/`.
 
-## 16. Port Style Compare (`port_style_compare/`)
+## 16. Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only (`port_style_compare/`)
 
 **Folder:** `module7/examples/port_style_compare/`
 
 **What you'll learn:**
-- Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only
 - Port declaration style; no other change
 
 **Run:**
@@ -161,12 +293,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE7.md` and RTL under `module7/examples/port_style_compare/`.
 
-## 17. No defparam (`no_defparam/`)
+## 17. 1364-2005: parameter override at instantiation #(.WIDTH(n)); avoid defparam (`no_defparam/`)
 
 **Folder:** `module7/examples/no_defparam/`
 
 **What you'll learn:**
-- 1364-2005: parameter override at instantiation #(.WIDTH(n)); avoid defparam
 - defparam deprecated; use instantiation override
 
 **Run:**

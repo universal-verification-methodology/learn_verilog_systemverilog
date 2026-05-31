@@ -58,6 +58,51 @@ This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It exte
 - When writing RTL that uses SystemVerilog design features (logic, always_comb/always_ff, interfaces)
 - When comparing 1364-2005 with 1800-2005 to decide which constructs to use
 
+## Design Architecture
+
+### 1. Repository layout (module4/)
+
+- First SystemVerilog module — .sv sources and design subset focus
+- logic replaces wire/reg for single-driver RTL in most examples
+- always_comb / always_ff / always_latch — explicit procedural intent
+- interfaces and packages — connectivity and shared types
+- scripts/module4.sh — requires simulator with SV design subset
+
+### 2. SystemVerilog design layering
+
+- Packages hold typedefs, constants, functions — import in modules
+- Interfaces bundle signals; modports define direction per connection
+- always_comb infers sensitivity; always_ff targets flip-flops
+- unique/priority case — standard semantics for full case checking
+
+### 3. File and compilation units
+
+- .sv extension signals SystemVerilog to the tool
+- Package before import; interface before modport connection
+- See verification_architecture.png — TB still drives DUT via ports or interface
+
+## Key files to study
+
+- module4/examples/logic_ports/logic_ports.sv
+- module4/examples/procedural/always_comb_ff.sv
+- module4/examples/interfaces/bus_if_example.sv
+- module4/examples/packages/pkg_util.sv
+- scripts/module4.sh
+
+## Verification & Testing Methods
+
+### 1. Running SystemVerilog labs
+
+- cd module4/examples/<name> && make clean && make run
+- ./scripts/module4.sh — full module; some labs need full SV support
+- iverilog supports subset; check build.log if a feature is unsupported
+
+### 2. What to check in simulation
+
+- logic ports compile without separate wire/reg declarations
+- always_comb blocks reject clock/reset inside (tool error = correct)
+- Interface examples connect via modport, not dozens of scalar ports
+
 ## Topics Covered
 
 ### 1. IEEE 1800-2005 Context

@@ -1,103 +1,165 @@
-[Slide 1] IEEE 1364-1995 (Verilog-95) Module 1
+[Slide 1] Welcome to module 1, IEEE 1364-1995 (Verilog-95). In this module you will master the first standardized verilog language (ieee 1364-1995) and its core syntax for rtl design and simulation..
 
-[Slide 2] Learning objectives Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation.
+[Slide 2] Here is what you will learn in this module. Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation.
 
-[Slide 3] Prerequisites See module README
+[Slide 3] Before you start, make sure you have these prerequisites. See module README
 
-[Slide 4] Learning path Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation.
+[Slide 4] Learning path. Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation.
 
-[Slide 5] Overview This module establishes the foundation for the Verilog/SystemVerilog version-centric course. You'll learn the original Verilog language as defined by IEEE Std 1364-1995 (Verilog-95): modules, nets and variables, continuo
+[Slide 5] Overview. This module establishes the foundation for the Verilog/SystemVerilog version-centric course. You'll learn the original Verilog language...
 
-[Slide 6] How to learn this module
+[Slide 6] Next section: How to learn this module.
 
-[Slide 7] From docs/MODULE1.md — read guides before running demos.
+[Slide 7] Follow this learning path. Read the guides before running the labs. Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for Module 1. Study design architecture — See how DUTs, examples, and testbenches fit together under module1/. Work through labs in order — Open module1/EXAMPLES.md and run each make clean && make run from the repo root. Run the full module script —...
 
-[Slide 8] From docs/MODULE1.md — read guides before running demos.
+[Slide 8] Follow this learning path. Read the guides before running the labs. Review Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module1/CHECKLIST.md before starting the next module. From docs/MODULE1.md — read guides before running demos.
 
-[Slide 9] Syllabus topics
+[Slide 9] Next section: Design architecture.
 
-[Slide 10] From MODULE1 Topics Covered.
+[Slide 10] 1. Repository layout (module1/) (1/2). docs/MODULE1.md — syllabus, pitfalls, and exercises module1/examples/ — nine hands-on labs, each with Makefile and README module1/dut/simple_gates/ — reference AND/OR/NOT gates in 1995 style module1/tests/ — standalone testbenches (and_gate, mux2) Refer to the diagram on the right.
 
-[Slide 11] From MODULE1 Topics Covered.
+[Slide 11] 1. Repository layout (module1/) (2/2). scripts/module1.sh — runs every example and test from the repo root
 
-[Slide 12] From MODULE1 Topics Covered.
+[Slide 12] 2. RTL hierarchy and signal flow (1/2). Leaf modules (and_gate, mux2, dff) expose ports; top or testbench wires them Inputs driven by reg in initial/always; outputs observed as wire Combinational logic uses assign or always @(a or b …) with blocking = Sequential logic uses always @(posedge clk) with nonblocking <= Refer to the diagram on the right.
 
-[Slide 13] From MODULE1 Topics Covered.
+[Slide 13] 2. RTL hierarchy and signal flow (2/2). See rtl_architecture.png — testbench stimulus flows into DUT, checks via $display
 
-[Slide 14] From MODULE1 Topics Covered.
+[Slide 14] 3. Simulation toolchain (Icarus Verilog). iverilog -o top file.v … — compile Verilog-95 sources to VVP bytecode vvp top — run simulation; $display prints waveforms as text $finish — required to stop; without it the simulator runs forever Per lab: cd module1/examples/<name> && make clean && make run Refer to the diagram on the right.
 
-[Slide 15] From MODULE1 Topics Covered.
+[Slide 15] RTL block diagram (reference). Module 1: DUT hierarchy and signal flow.
 
-[Slide 16] From MODULE1 Topics Covered.
+[Slide 16] DUT example — and_gate (1995 style). Review the code on screen and match it to files in the repository. Non-ANSI port list; output y is reg because always drives it.
 
-[Slide 17] From MODULE1 Topics Covered.
+[Slide 17] Testbench — stimulus and $finish. Review the code on screen and match it to files in the repository. reg drives inputs; wire observes output; initial applies all input combos.
 
-[Slide 18] From MODULE1 Topics Covered.
+[Slide 18] Next section: Execution & simulation flow.
 
-[Slide 19] From MODULE1 Topics Covered.
+[Slide 19] How the example runs (toolchain). Match each bullet to files in the repository. Makefile: Verilator compiles RTL + SystemVerilog testbench into a C++ model sim_main.cpp: generates clk/rst_n, calls eval() until $finish Directed test (initial block or C++): drive stimulus, wait for DUT flags Self-check: compare outputs; print PASS/FAIL (see terminal demo slide) Repo path...
 
-[Slide 20] From MODULE1 Topics Covered.
+[Slide 20] Next section: Key files to study.
 
-[Slide 21] Hands-on examples
+[Slide 21] Open these in the repo. module1/examples/modules_ports/and_gate.v — 1995 ports + always @(a or b) module1/examples/continuous_assign/mux2.v — assign-based combinational mux module1/examples/sequential_dff/dff.v — clocked always with async reset module1/examples/testbenches/test_and_gate.v — minimal TB pattern module1/tests/test_mux2.v — directed test with delay-based stimulus Trace while...
 
-[Slide 22] Requires iverilog on PATH (apt install iverilog).
+[Slide 22] Next section: Verification & testing methods.
 
-[Slide 23] module1/examples/modules_ports/README.md
+[Slide 23] 1. Example execution flow. make run invokes iverilog then vvp (see each example Makefile) Full module sweep: ./scripts/module1.sh (checks iverilog first) Build artifact (top) is gitignored; make clean removes it Refer to the diagram on the right.
 
-[Slide 24] Hands-on: module1/examples/modules_ports/
+[Slide 24] 2. Testbench structure (1364-1995). test_and_gate.v — reg stimulus, wire outputs, named DUT instantiation initial block applies vectors with # delays between changes Exhaustive 2-input tests print truth table; $finish ends simulation Refer to the diagram on the right.
 
-[Slide 25] module1/examples/nets_variables/README.md
+[Slide 25] 3. What “passing” looks like. Simulation exits after $finish (no hang at time limit) Printed a/b/y rows match expected AND or mux truth table module1/CHECKLIST.md confirms concepts before Module 2 Refer to the diagram on the right.
 
-[Slide 26] Hands-on: module1/examples/nets_variables/
+[Slide 26] Build and run (Makefile). Review the code on screen and match it to files in the repository. iverilog compiles to top; vvp runs the simulation executable.
 
-[Slide 27] module1/examples/continuous_assign/README.md
+[Slide 27] Next section: Syllabus topics.
 
-[Slide 28] Hands-on: module1/examples/continuous_assign/
+[Slide 28] Next section: Protocol & design details.
 
-[Slide 29] module1/examples/continuous_assign_gates/README.md
+[Slide 29] Protocol and design detail: What 1364-1995 Includes (1). Modules and hierarchy: Module declaration, port list, instantiation Nets: wire (and wand, wor, tri; rarely used in RTL) Variables: reg for procedural assignment outputs Continuous assignment: assign for combinational logic From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 30] Hands-on: module1/examples/continuous_assign_gates/
+[Slide 30] Protocol and design detail: What 1364-1995 Includes (2). Procedural blocks: always, initial with explicit sensitivity lists Delays and timing: #, @, wait Tasks and functions: Non-ANSI style (declarations separate from port list) System tasks: $display, $monitor, $finish, $stop, $time From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 31] module1/examples/adder/README.md
+[Slide 31] Protocol and design detail: What 1364-1995 Does Not Include (1). No ANSI-style port declarations (added in 1364-2001) No always @* (added in 1364-2001) No generate (added in 1364-2001) No signed keyword, no multi-dimensional arrays (1364-2001) From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 32] Hands-on: module1/examples/adder/
+[Slide 32] Protocol and design detail: What 1364-1995 Does Not Include (2). No SystemVerilog: no logic, always_comb, always_ff, interfaces, packages From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 33] module1/examples/procedural/README.md
+[Slide 33] Protocol and design detail: Module Declaration (1995 Style). Port list: Only port names: (a, b, y). Port direction: Declared inside the module: input, output. Port type: Declared inside the module: wire or reg (default for input is wire; for output can be wire or reg). From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 34] Hands-on: module1/examples/procedural/
+[Slide 34] Protocol and design detail: Module Instantiation (1995 Style). Named port connection: .port_name(signal_name) — recommended for readability. Positional: Order must match port list. From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 35] module1/examples/sequential_dff/README.md
+[Slide 35] Protocol and design detail: wire (Net). Represents a physical connection between components. Driven by continuous assignment (assign) or by module output. Cannot be assigned inside always or initial (use reg for that). From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 36] Hands-on: module1/examples/sequential_dff/
+[Slide 36] Protocol and design detail: reg (Variable). Holds a value; can be assigned in always or initial. Does not imply a flip-flop; flip-flops come from always @(posedge clk) (or similar). Used for outputs that are driven procedurally. From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 37] module1/examples/delays_timing/README.md
+[Slide 37] Protocol and design detail: 4-State Logic (1364-1995). Both wire and reg are 4-state: 0, 1, X (unknown), Z (high-impedance). From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 38] Hands-on: module1/examples/delays_timing/
+[Slide 38] Protocol and design detail: always Block. Repeated execution; sensitivity list defines when it runs. 1364-1995: Sensitivity list is mandatory and explicit — no @*. Use blocking = for combinational, nonblocking <= for sequential (flip-flops). Example (D flip-flop): module1/examples/sequential_dff/dff.v From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 39] module1/examples/testbenches/README.md
+[Slide 39] Protocol and design detail: initial Block. Runs once at time zero. Used for testbenches: stimulus, $display, $finish. From MODULE1 Topics Covered — protocol/design depth.
 
-[Slide 40] Hands-on: module1/examples/testbenches/
+[Slide 40] Verification flow (reference). Stimulus, DUT response, and check points for this module.
 
-[Slide 41] Common pitfalls
+[Slide 41] 1. IEEE 1364-1995 Context (1/3). Modules and hierarchy: Module declaration, port list, instantiation Nets: wire (and wand, wor, tri; rarely used in RTL) Variables: reg for procedural assignment outputs Continuous assignment: assign for combinational logic Procedural blocks: always, initial with explicit sensitivity lists
 
-[Slide 42] From MODULE1 Common Pitfalls.
+[Slide 42] 1. IEEE 1364-1995 Context (2/3). Tasks and functions: Non-ANSI style (declarations separate from port list) System tasks: $display, $monitor, $finish, $stop, $time No ANSI-style port declarations (added in 1364-2001) No always @* (added in 1364-2001) No generate (added in 1364-2001)
 
-[Slide 43] From MODULE1 Common Pitfalls.
+[Slide 43] 1. IEEE 1364-1995 Context (3/3). No SystemVerilog: no logic, always_comb, always_ff, interfaces, packages
 
-[Slide 44] From MODULE1 Common Pitfalls.
+[Slide 44] 2. Modules, Ports, and Hierarchy (1364-1995). Port list: Only port names: (a, b, y). Port direction: Declared inside the module: input, output. Port type: Declared inside the module: wire or reg (default for input is wire; for output can be wire or reg). Named port connection: .port_name(signal_name) — recommended for readability. Positional: Order must match port list.
 
-[Slide 45] From MODULE1 Common Pitfalls.
+[Slide 45] 3. Nets and Variables: wire and reg (1/2). Represents a physical connection between components. Driven by continuous assignment (assign) or by module output. Cannot be assigned inside always or initial (use reg for that). Holds a value; can be assigned in always or initial. Does not imply a flip-flop; flip-flops come from always @(posedge clk) (or similar).
 
-[Slide 46] From MODULE1 Common Pitfalls.
+[Slide 46] 3. Nets and Variables: wire and reg (2/2). Both wire and reg are 4-state: 0, 1, X (unknown), Z (high-impedance).
 
-[Slide 47] Practice & assessment
+[Slide 47] 4. Continuous Assignment (assign). Right-hand side: Any expression of wire/reg and operators. Left-hand side: Must be a wire (or similar net).
 
-[Slide 48] From MODULE1 Learning Outcomes.
+[Slide 48] 5. Procedural Blocks: always and initial (1364-1995). Repeated execution; sensitivity list defines when it runs. 1364-1995: Sensitivity list is mandatory and explicit — no @*. Use blocking = for combinational, nonblocking <= for sequential (flip-flops). Example (D flip-flop): module1/examples/sequential_dff/dff.v Runs once at time zero. Used for testbenches: stimulus, $display, $finish.
 
-[Slide 49] From MODULE1 Learning Outcomes.
+[Slide 49] 6. Delays and Timing. #n: Delay by n time units (e.g. #10). @(event): Wait for event (e.g. @(posedge clk)). wait(condition): Wait until condition is true.
 
-[Slide 50] Exercises Module and Ports (1995) wire vs reg Simple Testbench Limitations Incomplete Sensitivity List
+[Slide 50] 7. Tasks and Functions (1995 Style). Function: Returns a single value; no delays (zero-time). Task: Can have delays and multiple outputs (output/inout args).
 
-[Slide 51] Exercises Port Type Mismatch Simulation Never Ends Using 2001/SystemVerilog Constructs in 1995 Confusing reg with Registers
+[Slide 51] 8. Simple Testbench (1364-1995). $display: Print once. $monitor: Print whenever a listed signal changes (optional). $finish: End simulation.
 
-[Slide 52] Summary & next steps Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Complete module1/CHECKLIST.md Review module1/EXAMPLES.md and run each lab Next: Next module in course
+[Slide 52] Next section: Hands-on examples.
+
+[Slide 53] Module 1 toolchain check. Watch the terminal output and confirm you see the expected pass message. Requires iverilog on PATH (apt install iverilog).
+
+[Slide 54] Example 1: 1995-style module declaration and port list. Named and positional instantiation Non-ANSI ports, separate direction/type declarations module1/examples/modules_ports/README.md
+
+[Slide 55] Demo: 1995-style module declaration and port list. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 56] Example 2: wire vs reg, vectors, 4-state values. When to use wire vs reg, single driver per net module1/examples/nets_variables/README.md
+
+[Slide 57] Demo: wire vs reg, vectors, 4-state values. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 58] Example 3: assign for combinational logic (2:1 mux). Left-hand side must be net; expression on right module1/examples/continuous_assign/README.md
+
+[Slide 59] Demo: assign for combinational logic (2:1 mux). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 60] Example 4: XOR, NAND, NOR with assign. Same as above; multiple gates in one example module1/examples/continuous_assign_gates/README.md
+
+[Slide 61] Demo: XOR, NAND, NOR with assign. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 62] Example 5: Half adder and full adder with assign (sum and carry). Multi-output combinational logic; wire for all outputs module1/examples/adder/README.md
+
+[Slide 63] Demo: Half adder and full adder with assign (sum and carry). Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 64] Example 6: always @(inputs) and always @(posedge clk) with explicit sensitivity. initial for testbench; 1995-style task/function No always @*; blocking vs nonblocking module1/examples/procedural/README.md
+
+[Slide 65] Demo: always @(inputs) and always @(posedge clk) with explicit sensitivity. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 66] Example 7: D flip-flop with async reset: always @(posedge clk or negedge rst_n) and <=. Edge-sensitive always; nonblocking for sequential logic module1/examples/sequential_dff/README.md
+
+[Slide 67] Demo: D flip-flop with async reset: always @(posedge clk or negedge rst_n) and <=. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 68] Example 8: #n, @(posedge clk), wait(condition); clock generation with forever. Delay-based and event-based timing in testbenches module1/examples/delays_timing/README.md
+
+[Slide 69] Demo: #n, @(posedge clk), wait(condition); clock generation with forever. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 70] Example 9: Minimal testbench with initial, #, $display, $finish. Stimulus generation, termination with $finish module1/examples/testbenches/README.md
+
+[Slide 71] Demo: Minimal testbench with initial, #, $display, $finish. Watch the terminal output and confirm you see the expected pass message.
+
+[Slide 72] Next section: Common pitfalls.
+
+[Slide 73] Incomplete Sensitivity List. Mistake: always @(sel) y = sel ? b : a; (missing a and b) Reality: In 1364-1995 you must list every input that the block reads Correct: always @(a or b or sel) y = sel ? b : a; Why: Incomplete lists cause simulation/synthesis mismatches and inferred latches
+
+[Slide 74] Port Type Mismatch. Mistake: Declaring as wire an output that is assigned in always Reality: Outputs driven in procedural blocks must be reg Correct: output y; reg y; when y is assigned in always Why: wire cannot be the target of procedural assignment
+
+[Slide 75] Simulation Never Ends. Mistake: Testbench without $finish Correct: Always call $finish after stimulus (e.g. #1000; $finish;) Why: Simulator runs until explicit termination or limit
+
+[Slide 76] Using 2001/SystemVerilog Constructs in 1995. Mistake: Writing always @* or ANSI ports and assuming 1995 Reality: always @* and ANSI ports are 1364-2001; logic/always_comb are SystemVerilog Correct: For strict 1995, use explicit sensitivity and non-ANSI ports Why: Keeps code portable to 1995-only tools and clarifies version scope
+
+[Slide 77] Confusing reg with Registers. Mistake: Thinking reg creates a flip-flop Reality: reg is a variable type; flip-flops come from always @(posedge clk) with <= Correct: Use reg for any procedural output; use clocked always for sequential logic Why: Clarifies design intent and avoids synthesis surprises
+
+[Slide 78] Next section: Practice & assessment.
+
+[Slide 79] By now you should be able to explain the following. ✓ Write modules in IEEE 1364-1995 style (non-ANSI ports, explicit sensitivity) ✓ Use wire and reg correctly for nets and procedural outputs ✓ Describe combinational logic with assign and always @(inputs) ✓ Describe sequential logic with always @(posedge clk) and nonblocking assignment ✓ Use initial, #, @, and wait for testbenches From MODULE1...
+
+[Slide 80] By now you should be able to explain the following. ✓ State what 1364-1995 does not include (ANSI, @*, generate, SystemVerilog) From MODULE1 Learning Outcomes.
+
+[Slide 81] Exercises. Module and Ports (1995) wire vs reg Simple Testbench Limitations Incomplete Sensitivity List
+
+[Slide 82] Exercises. Port Type Mismatch Simulation Never Ends Using 2001/SystemVerilog Constructs in 1995 Confusing reg with Registers
+
+[Slide 83] In summary: Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Next up: Next module in course. Master the first standardized Verilog language (IEEE 1364-1995) and its core syntax for RTL design and simulation. Complete module1/CHECKLIST.md Review module1/EXAMPLES.md and run each lab Next: Next module in course

@@ -8,29 +8,42 @@ slides:
 - type: title
   title: Module 7
   subtitle: Version Comparison and Migration
+  narration: Welcome to module 7, Version Comparison and Migration. In this module
+    you will compare verilog and systemverilog across ieee versions side-by-side,
+    plan migration between standards, and choose the right version for your project
+    and tools..
 - type: bullets
   title: Learning objectives
   bullets:
   - Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration
-    between standards, and choose the right version for your project and tools.
+    between standards, and choose the right version for...
+  narration: Here is what you will learn in this module. Compare Verilog and SystemVerilog
+    across IEEE versions side-by-side, plan migration between standards, and choose
+    the right version for...
 - type: bullets
   title: Prerequisites
   bullets:
   - See module README
+  narration: Before you start, make sure you have these prerequisites. See module
+    README
 - type: image
   title: Learning path
   image: assets/diagrams/learning_path.png
   caption: Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan
-    migration between standards, and choose the right version for your project and
-    tools.
+    migration between standards, and choose the right version for...
+  narration: Learning path. Compare Verilog and SystemVerilog across IEEE versions
+    side-by-side, plan migration between standards, and choose the right version for
+    your project and tools.
 - type: bullets
   title: Overview
   bullets:
   - This module ties together Modules 1–6 by comparing the same design across standards
-    (1364-1995 through 1800-2017), outlining migration steps between versions, and
-    providing checklists for choosing a standard and for migr
+    (1364-1995 through 1800-2017), outlining migration...
+  narration: Overview. This module ties together Modules 1–6 by comparing the same
+    design across standards (1364-1995 through 1800-2017), outlining migration...
 - type: section
   title: How to learn this module
+  narration: 'Next section: How to learn this module.'
 - type: bullets
   title: Suggested learning path (1/2)
   bullets:
@@ -45,6 +58,11 @@ slides:
   - Complete the exercises — Try each exercise in this document before reading solutions
     or peeking at reference RTL.
   notes: From docs/MODULE7.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Skim
+    this document — Goal, Overview, and Topics Covered set the IEEE scope for Module
+    7. Study design architecture — See how DUTs, examples, and testbenches fit together
+    under module7/. Work through labs in order — Open module7/EXAMPLES.md and run
+    each make clean && make run from the repo root. Run the full module script —...
 - type: bullets
   title: Suggested learning path (2/2)
   bullets:
@@ -53,15 +71,179 @@ slides:
   - Review Common Pitfalls — Can you explain each mistake and the fix?
   - Self-check — Use `module7/CHECKLIST.md` before starting the next module.
   notes: From docs/MODULE7.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Compare
+    side-by-side — Open 1364 and 1800 versions of the same design and note port style,
+    types, and procedural blocks. Review Common Pitfalls — Can you explain each mistake
+    and the fix? Self-check — Use module7/CHECKLIST.md before starting the next module.
+    From docs/MODULE7.md — read guides before running demos.
+- type: section
+  title: Design architecture
+  narration: 'Next section: Design architecture.'
+- type: two_column
+  title: 1. Repository layout (module7/) (1/2)
+  left:
+  - Side-by-side 1364 vs 1800 versions of the same designs
+  - module7/dut/ — mux2_1364.v and mux2_1800.sv for direct comparison
+  - examples/side_by_side/ — decoder, counter, FSM migration pairs
+  - examples/migration/ — step-by-step 1995 → 2017 patterns
+  right: assets/diagrams/rtl_architecture.png
+  notes: From MODULE7 Design Architecture.
+  narration: 1. Repository layout (module7/) (1/2). Side-by-side 1364 vs 1800 versions
+    of the same designs module7/dut/ — mux2_1364.v and mux2_1800.sv for direct comparison
+    examples/side_by_side/ — decoder, counter, FSM migration pairs examples/migration/
+    — step-by-step 1995 → 2017 patterns Refer to the diagram on the right.
+- type: bullets
+  title: 1. Repository layout (module7/) (2/2)
+  bullets:
+  - scripts/module7.sh — runs comparison and migration labs
+  notes: From MODULE7 Design Architecture.
+  narration: 1. Repository layout (module7/) (2/2). scripts/module7.sh — runs comparison
+    and migration labs
+- type: two_column
+  title: 2. Side-by-side comparison architecture
+  left:
+  - Same behavior, different syntax — ports, types, procedural blocks
+  - '1364: wire/reg, always @(a or b), many scalar ports'
+  - '1800: logic, always_comb/ff, optional interface for bus bundles'
+  - Testbench can instantiate both versions and compare outputs
+  right: assets/diagrams/verification_architecture.png
+  notes: From MODULE7 Design Architecture.
+  narration: '2. Side-by-side comparison architecture. Same behavior, different syntax
+    — ports, types, procedural blocks 1364: wire/reg, always @(a or b), many scalar
+    ports 1800: logic, always_comb/ff, optional interface for bus bundles Testbench
+    can instantiate both versions and compare outputs Refer to the diagram on the
+    right.'
+- type: two_column
+  title: 3. Migration workflow
+  left:
+  - Inventory features used — match to target standard checklist
+  - Migrate ports first (ANSI, logic), then procedural blocks, then connectivity
+  - Simulate after each step — do not big-bang rewrite
+  - Document project standard and tool support decision
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE7 Design Architecture.
+  narration: 3. Migration workflow. Inventory features used — match to target standard
+    checklist Migrate ports first (ANSI, logic), then procedural blocks, then connectivity
+    Simulate after each step — do not big-bang rewrite Document project standard and
+    tool support decision Refer to the diagram on the right.
+- type: image
+  title: RTL block diagram (reference)
+  image: assets/diagrams/rtl_architecture.png
+  caption: 'Module 7: DUT hierarchy and signal flow.'
+  narration: 'RTL block diagram (reference). Module 7: DUT hierarchy and signal flow.'
+- type: image
+  title: Verification / testbench diagram (reference)
+  image: assets/diagrams/verification_architecture.png
+  caption: 'Module 7: stimulus, observation, and checking.'
+  narration: 'Verification / testbench diagram (reference). Module 7: stimulus, observation,
+    and checking.'
+- type: code
+  title: 1364 mux — wire/reg and explicit sensitivity
+  language: systemverilog
+  source_file: module7/dut/mux2_1364.v
+  code: "module mux2_1995(a, b, sel, y);\n    input  a, b, sel;\n    output y;\n \
+    \   wire   a, b, sel;\n    reg    y;\n    always @(a or b or sel)\n        y =\
+    \ sel ? b : a;\nendmodule"
+  narration: 1364 mux — wire/reg and explicit sensitivity. Review the code on screen
+    and match it to files in the repository.
+- type: code
+  title: 1800 mux — logic and always_comb
+  language: systemverilog
+  source_file: module7/dut/mux2_1800.sv
+  code: "module mux2_1800 (\n    input  logic a, b, sel,\n    output logic y\n);\n\
+    \    always_comb y = sel ? b : a;\nendmodule"
+  narration: 1800 mux — logic and always_comb. Review the code on screen and match
+    it to files in the repository.
+- type: section
+  title: Execution & simulation flow
+  narration: 'Next section: Execution & simulation flow.'
+- type: bullets
+  title: How the example runs (toolchain)
+  bullets:
+  - 'Makefile: Verilator compiles RTL + SystemVerilog testbench into a C++ model'
+  - 'sim_main.cpp: generates clk/rst_n, calls eval() until $finish'
+  - 'Directed test (initial block or C++): drive stimulus, wait for DUT flags'
+  - 'Self-check: compare outputs; print PASS/FAIL (see terminal demo slide)'
+  - 'Repo path: module7/examples/<example>/ — run make run from that directory'
+  notes: From MODULE7 — execution and artifact layout.
+  narration: 'How the example runs (toolchain). Match each bullet to files in the
+    repository. Makefile: Verilator compiles RTL + SystemVerilog testbench into a
+    C++ model sim_main.cpp: generates clk/rst_n, calls eval() until $finish Directed
+    test (initial block or C++): drive stimulus, wait for DUT flags Self-check: compare
+    outputs; print PASS/FAIL (see terminal demo slide) Repo path...'
+- type: section
+  title: Key files to study
+  narration: 'Next section: Key files to study.'
+- type: bullets
+  title: Open these in the repo
+  bullets:
+  - module7/dut/mux2_1364.v and mux2_1800.sv
+  - module7/examples/side_by_side/mux2_versions/
+  - module7/examples/migration_checklist/
+  - module7/examples/incremental_migration/
+  - scripts/module7.sh
+  notes: Trace while running module7/EXAMPLES.md labs.
+  narration: Open these in the repo. module7/dut/mux2_1364.v and mux2_1800.sv module7/examples/side_by_side/mux2_versions/
+    module7/examples/migration_checklist/ module7/examples/incremental_migration/
+    scripts/module7.sh Trace while running module7/EXAMPLES.md labs.
+- type: section
+  title: Verification & testing methods
+  narration: 'Next section: Verification & testing methods.'
+- type: two_column
+  title: 1. Comparison test execution
+  left:
+  - test_mux2_all.sv — same stimulus on 1364 and 1800 mux; compare y
+  - test_counter_all.sv — reset/enable/wrap behavior must match
+  - ./scripts/module7.sh runs all migration and comparison examples
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE7 Verification & Testing Methods.
+  narration: 1. Comparison test execution. test_mux2_all.sv — same stimulus on 1364
+    and 1800 mux; compare y test_counter_all.sv — reset/enable/wrap behavior must
+    match ./scripts/module7.sh runs all migration and comparison examples Refer to
+    the diagram on the right.
+- type: two_column
+  title: 2. Migration validation
+  left:
+  - 'After each migration step: make run must pass with identical outputs'
+  - Use migration_checklist example as a template for real projects
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE7 Verification & Testing Methods.
+  narration: '2. Migration validation. After each migration step: make run must pass
+    with identical outputs Use migration_checklist example as a template for real
+    projects Refer to the diagram on the right.'
+- type: code
+  title: Migration checklist pattern
+  language: systemverilog
+  source_file: module7/examples/migration_checklist/migration_checklist.sv
+  code: "/*\n * Module 7: Migration checklist reminder (1364 -> 1800 design subset)\n\
+    \ * Prints steps; full checklist in MODULE7.md.\n */\n\nmodule top;\n    initial\
+    \ begin\n        $display(\"Module 7: Migration checklist (1364 -> 1800 design\
+    \ subset)\");\n        $display(\"  Pre: target standard, baseline sim/synth,\
+    \ list files/hierarchy\");\n        $display(\"  Per-module: ports wire/reg->logic,\
+    \ @*->always_comb, posedge clk->always_ff\");\n        $display(\"  Per-module:\
+    \ case->unique/priority case, optional interface/package, no defparam\");\n  \
+    \      $display(\"  Post: full regression, update style guide, document 1364-only\
+    \ blocks\");\n        $display(\"  See MODULE7.md for full migration checklist.\"\
+    );\n        $finish;\n    end\nendmodule"
+  narration: Migration checklist pattern. Review the code on screen and match it to
+    files in the repository.
 - type: section
   title: Syllabus topics
+  narration: 'Next section: Syllabus topics.'
+- type: section
+  title: Protocol & design details
+  narration: 'Next section: Protocol & design details.'
 - type: bullets
   title: '1. Side-by-Side Comparison: Same Design Across Versions'
   bullets:
-  - See docs/MODULE7.md
+  - 'Example: 2:1 Multiplexer'
+  - What Changes Across Versions
   notes: From MODULE7 Topics Covered.
+  narration: '1. Side-by-Side Comparison: Same Design Across Versions. Example: 2:1
+    Multiplexer What Changes Across Versions'
 - type: section
   title: Hands-on examples
+  narration: 'Next section: Hands-on examples.'
 - type: demo
   title: Module 7 toolchain check
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
@@ -69,111 +251,264 @@ slides:
   screenshot: assets/screenshots/module7_check.png
   expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+  narration: Module 7 self-check. Watch the terminal output and confirm you see the
+    expected pass message.
 - type: bullets
-  title: 'Example 7: Migration 1364→1800'
+  title: 'Example 1: Same 2:1 mux in 1364-1995, 1364-2001, 1364-2005, 1800-2005 (and
+    optionally 1800-2017)'
   bullets:
-  - 'Before/after: wire/reg, always @* vs logic, always_comb, unique case'
+  - Port style, type, procedural block, one driver
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 1: Same 2:1 mux in 1364-1995, 1364-2001, 1364-2005, 1800-2005
+    (and optionally 1800-2017). Port style, type, procedural block, one driver module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same 2:1 mux in 1364-1995, 1364-2001, 1364-2005, 1800-2005 (and optionally
+    1800-2017)'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex01_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same 2:1 mux in 1364-1995, 1364-2001, 1364-2005, 1800-2005 (and
+    optionally 1800-2017). Watch the terminal output and confirm you see the expected
+    pass message.'
+- type: bullets
+  title: 'Example 2: Same counter in 1995, 2001, 2005, 1800-2005'
+  bullets:
+  - Sequential block, reset, parameter/localparam
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 2: Same counter in 1995, 2001, 2005, 1800-2005. Sequential block,
+    reset, parameter/localparam module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same counter in 1995, 2001, 2005, 1800-2005'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex02_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same counter in 1995, 2001, 2005, 1800-2005. Watch the terminal
+    output and confirm you see the expected pass message.'
+- type: bullets
+  title: 'Example 3: Same 2:4 decoder in 1995, 2001, 2005, 1800; case vs unique case'
+  bullets:
+  - Port style, always @(sel) vs @* vs always_comb, unique case
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 3: Same 2:4 decoder in 1995, 2001, 2005, 1800; case vs unique
+    case. Port style, always @(sel) vs @* vs always_comb, unique case module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same 2:4 decoder in 1995, 2001, 2005, 1800; case vs unique case'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex03_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same 2:4 decoder in 1995, 2001, 2005, 1800; case vs unique case.
+    Watch the terminal output and confirm you see the expected pass message.'
+- type: bullets
+  title: 'Example 4: Same 8-bit adder in 1995, 2001, 2005, 1800 (continuous assign)'
+  bullets:
+  - wire vs logic; assign unchanged across versions
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 4: Same 8-bit adder in 1995, 2001, 2005, 1800 (continuous assign).
+    wire vs logic; assign unchanged across versions module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same 8-bit adder in 1995, 2001, 2005, 1800 (continuous assign)'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex04_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same 8-bit adder in 1995, 2001, 2005, 1800 (continuous assign).
+    Watch the terminal output and confirm you see the expected pass message.'
+- type: bullets
+  title: 'Example 5: Same parameterized shift in 1364 (parameter/localparam) vs 1800
+    (parameter int)'
+  bullets:
+  - parameter int, localparam int; same behavior
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 5: Same parameterized shift in 1364 (parameter/localparam) vs
+    1800 (parameter int). parameter int, localparam int; same behavior module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same parameterized shift in 1364 (parameter/localparam) vs 1800 (parameter
+    int)'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex05_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same parameterized shift in 1364 (parameter/localparam) vs 1800
+    (parameter int). Watch the terminal output and confirm you see the expected pass
+    message.'
+- type: bullets
+  title: 'Example 6: Same master/slave connection: many ports (1364)'
+  bullets:
+  - Port list size, direction, reuse; interface (1800) optional per tool
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 6: Same master/slave connection: many ports (1364). Port list
+    size, direction, reuse; interface (1800) optional per tool module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same master/slave connection: many ports (1364)'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex06_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same master/slave connection: many ports (1364). Watch the terminal
+    output and confirm you see the expected pass message.'
+- type: bullets
+  title: 'Example 7: Before/after: wire/reg, always @* vs logic, always_comb, unique
+    case'
+  bullets:
   - Order of steps, testing, regression
   notes: module7/examples/migration/README.md
+  narration: 'Example 7: Before/after: wire/reg, always @* vs logic, always_comb,
+    unique case. Order of steps, testing, regression module7/examples/migration/README.md'
 - type: demo
-  title: 'Demo: Migration 1364→1800'
+  title: 'Demo: Before/after: wire/reg, always @* vs logic, always_comb, unique case'
   command: cd module7/examples/migration && make clean && make run
   screenshot: assets/screenshots/ex07_migration.png
   notes: 'Hands-on: module7/examples/migration/'
+  narration: 'Demo: Before/after: wire/reg, always @* vs logic, always_comb, unique
+    case. Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 8: Migration 1995→2001'
+  title: 'Example 8: Before: non-ANSI, @(a or b or sel). After: ANSI, always @*'
   bullets:
-  - 'Before: non-ANSI, @(a or b or sel). After: ANSI, always @*'
   - ANSI ports, implicit sensitivity
   notes: module7/examples/migration_1995_to_2001/README.md
+  narration: 'Example 8: Before: non-ANSI, @(a or b or sel). After: ANSI, always @*.
+    ANSI ports, implicit sensitivity module7/examples/migration_1995_to_2001/README.md'
 - type: demo
-  title: 'Demo: Migration 1995→2001'
+  title: 'Demo: Before: non-ANSI, @(a or b or sel). After: ANSI, always @*'
   command: cd module7/examples/migration_1995_to_2001 && make clean && make run
   screenshot: assets/screenshots/ex08_migration_1995_to_2001.png
   notes: 'Hands-on: module7/examples/migration_1995_to_2001/'
+  narration: 'Demo: Before: non-ANSI, @(a or b or sel). After: ANSI, always @*. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 9: Case Versions'
+  title: 'Example 9: Same 4:1 mux: 1364 case+default vs 1800 unique case'
   bullets:
-  - 'Same 4:1 mux: 1364 case+default vs 1800 unique case'
   - case semantics; unique case for tool checking
   notes: module7/examples/case_versions/README.md
+  narration: 'Example 9: Same 4:1 mux: 1364 case+default vs 1800 unique case. case
+    semantics; unique case for tool checking module7/examples/case_versions/README.md'
 - type: demo
-  title: 'Demo: Case Versions'
+  title: 'Demo: Same 4:1 mux: 1364 case+default vs 1800 unique case'
   command: cd module7/examples/case_versions && make clean && make run
   screenshot: assets/screenshots/ex09_case_versions.png
   notes: 'Hands-on: module7/examples/case_versions/'
+  narration: 'Demo: Same 4:1 mux: 1364 case+default vs 1800 unique case. Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 10: Version Table'
+  title: 'Example 10: Single reference: construct vs standard (1995–2017)'
   bullets:
-  - 'Single reference: construct vs standard (1995–2017)'
   - When each feature was introduced; minimum revision
   notes: module7/examples/version_table/README.md
+  narration: 'Example 10: Single reference: construct vs standard (1995–2017). When
+    each feature was introduced; minimum revision module7/examples/version_table/README.md'
 - type: demo
-  title: 'Demo: Version Table'
+  title: 'Demo: Single reference: construct vs standard (1995–2017)'
   command: cd module7/examples/version_table && make clean && make run
   screenshot: assets/screenshots/ex10_version_table.png
   notes: 'Hands-on: module7/examples/version_table/'
+  narration: 'Demo: Single reference: construct vs standard (1995–2017). Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 11: Version Selection'
+  title: 'Example 11: Runnable reminder of version-selection checklist (constraints,
+    decision, document)'
   bullets:
-  - Runnable reminder of version-selection checklist (constraints, decision, document)
   - See MODULE7.md for full checklist
-  - Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block style)
-  - always @(posedge clk) vs always_ff; wire/reg vs logic
-  - Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff)
-  - Sequential FSM; 1800 always_ff and unique case
   notes: module7/examples/version_selection/README.md
+  narration: 'Example 11: Runnable reminder of version-selection checklist (constraints,
+    decision, document). See MODULE7.md for full checklist module7/examples/version_selection/README.md'
 - type: demo
-  title: 'Demo: Version Selection'
+  title: 'Demo: Runnable reminder of version-selection checklist (constraints, decision,
+    document)'
   command: cd module7/examples/version_selection && make clean && make run
   screenshot: assets/screenshots/ex11_version_selection.png
   notes: 'Hands-on: module7/examples/version_selection/'
+  narration: 'Demo: Runnable reminder of version-selection checklist (constraints,
+    decision, document). Watch the terminal output and confirm you see the expected
+    pass message.'
 - type: bullets
-  title: 'Example 14: Migration Checklist'
+  title: 'Example 12: Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block
+    style)'
   bullets:
-  - Runnable reminder of 1364→1800 migration steps (pre, per-module, post)
+  - always @(posedge clk) vs always_ff; wire/reg vs logic
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 12: Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block
+    style). always @(posedge clk) vs always_ff; wire/reg vs logic module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block style)'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex12_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same D flip-flop in 1995, 2001, 2005, 1800 (sequential block style).
+    Watch the terminal output and confirm you see the expected pass message.'
+- type: bullets
+  title: 'Example 13: Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff)'
+  bullets:
+  - Sequential FSM; 1800 always_ff and unique case
+  notes: module7/examples/side_by_side/README.md
+  narration: 'Example 13: Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff).
+    Sequential FSM; 1800 always_ff and unique case module7/examples/side_by_side/README.md'
+- type: demo
+  title: 'Demo: Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff)'
+  command: cd module7/examples/side_by_side && make clean && make run
+  screenshot: assets/screenshots/ex13_side_by_side.png
+  notes: 'Hands-on: module7/examples/side_by_side/'
+  narration: 'Demo: Same tiny FSM in 1364 vs 1800 (case vs unique case, always_ff).
+    Watch the terminal output and confirm you see the expected pass message.'
+- type: bullets
+  title: 'Example 14: Runnable reminder of 1364→1800 migration steps (pre, per-module,
+    post)'
+  bullets:
   - See MODULE7.md for full migration checklist
   notes: module7/examples/migration_checklist/README.md
+  narration: 'Example 14: Runnable reminder of 1364→1800 migration steps (pre, per-module,
+    post). See MODULE7.md for full migration checklist module7/examples/migration_checklist/README.md'
 - type: demo
-  title: 'Demo: Migration Checklist'
+  title: 'Demo: Runnable reminder of 1364→1800 migration steps (pre, per-module, post)'
   command: cd module7/examples/migration_checklist && make clean && make run
   screenshot: assets/screenshots/ex14_migration_checklist.png
   notes: 'Hands-on: module7/examples/migration_checklist/'
+  narration: 'Demo: Runnable reminder of 1364→1800 migration steps (pre, per-module,
+    post). Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 15: Incremental Migration'
+  title: 'Example 15: Two steps: step1 1364 style, step2 1800 style; same mux, compare
+    outputs'
   bullets:
-  - 'Two steps: step1 1364 style, step2 1800 style; same mux, compare outputs'
   - Migrate one construct at a time; test after each step
   notes: module7/examples/incremental_migration/README.md
+  narration: 'Example 15: Two steps: step1 1364 style, step2 1800 style; same mux,
+    compare outputs. Migrate one construct at a time; test after each step module7/examples/incremental_migration/README.md'
 - type: demo
-  title: 'Demo: Incremental Migration'
+  title: 'Demo: Two steps: step1 1364 style, step2 1800 style; same mux, compare outputs'
   command: cd module7/examples/incremental_migration && make clean && make run
   screenshot: assets/screenshots/ex15_incremental_migration.png
   notes: 'Hands-on: module7/examples/incremental_migration/'
+  narration: 'Demo: Two steps: step1 1364 style, step2 1800 style; same mux, compare
+    outputs. Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 16: Port Style Compare'
+  title: 'Example 16: Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only'
   bullets:
-  - 'Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only'
   - Port declaration style; no other change
   notes: module7/examples/port_style_compare/README.md
+  narration: 'Example 16: Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only.
+    Port declaration style; no other change module7/examples/port_style_compare/README.md'
 - type: demo
-  title: 'Demo: Port Style Compare'
+  title: 'Demo: Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only'
   command: cd module7/examples/port_style_compare && make clean && make run
   screenshot: assets/screenshots/ex16_port_style_compare.png
   notes: 'Hands-on: module7/examples/port_style_compare/'
+  narration: 'Demo: Same 2:1 mux: non-ANSI (1995) vs ANSI (2001) ports only. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 17: No defparam'
+  title: 'Example 17: 1364-2005: parameter override at instantiation #(.WIDTH(n));
+    avoid defparam'
   bullets:
-  - '1364-2005: parameter override at instantiation #(.WIDTH(n)); avoid defparam'
   - defparam deprecated; use instantiation override
   notes: module7/examples/no_defparam/README.md
+  narration: 'Example 17: 1364-2005: parameter override at instantiation #(.WIDTH(n));
+    avoid defparam. defparam deprecated; use instantiation override module7/examples/no_defparam/README.md'
 - type: demo
-  title: 'Demo: No defparam'
+  title: 'Demo: 1364-2005: parameter override at instantiation #(.WIDTH(n)); avoid
+    defparam'
   command: cd module7/examples/no_defparam && make clean && make run
   screenshot: assets/screenshots/ex17_no_defparam.png
   notes: 'Hands-on: module7/examples/no_defparam/'
+  narration: 'Demo: 1364-2005: parameter override at instantiation #(.WIDTH(n)); avoid
+    defparam. Watch the terminal output and confirm you see the expected pass message.'
 - type: section
   title: Common pitfalls
+  narration: 'Next section: Common pitfalls.'
 - type: bullets
   title: Migrating Everything at Once
   bullets:
@@ -183,6 +518,10 @@ slides:
     after each step.'
   - 'Why: Reduces risk and keeps a clear baseline.'
   notes: From MODULE7 Common Pitfalls.
+  narration: 'Migrating Everything at Once. Mistake: Converting a large codebase from
+    1364 to 1800 in one big change. Reality: Hard to debug; regressions are difficult
+    to isolate. Correct: Migrate incrementally (one module or one feature at a time);
+    run regression after each step. Why: Reduces risk and keeps a clear baseline.'
 - type: bullets
   title: Ignoring Tool Support
   bullets:
@@ -193,6 +532,11 @@ slides:
     align RTL with that.'
   - 'Why: Ensures the project builds and matches tool expectations.'
   notes: From MODULE7 Common Pitfalls.
+  narration: 'Ignoring Tool Support. Mistake: Choosing 1800-2017 and using constructs
+    the synthesis or simulator does not support. Reality: Compile or elaboration errors;
+    or tool-specific behavior. Correct: Check tool manuals for supported revision
+    and synthesizable subset; align RTL with that. Why: Ensures the project builds
+    and matches tool expectations.'
 - type: bullets
   title: Breaking Interfaces During Migration
   bullets:
@@ -203,6 +547,12 @@ slides:
     internal migration; change only implementation (lo'
   - 'Why: Limits scope of change and preserves compatibility with rest of design.'
   notes: From MODULE7 Common Pitfalls.
+  narration: 'Breaking Interfaces During Migration. Mistake: Changing port list or
+    interface of a block while migrating its internals, so that other modules break.
+    Reality: Large ripple of changes; integration failures. Correct: Keep external
+    interface (ports or interface modport) unchanged during internal migration; change
+    only implementation (lo Why: Limits scope of change and preserves compatibility
+    with...'
 - type: bullets
   title: Mixing Revisions in One File
   bullets:
@@ -213,6 +563,11 @@ slides:
     in the style guide.'
   - 'Why: Consistency and predictable tool behavior.'
   notes: From MODULE7 Common Pitfalls.
+  narration: 'Mixing Revisions in One File. Mistake: Using 1995 ports in one module
+    and 1800 logic in another in the same file without a clear rule. Reality: Confusing
+    for readers and tools; possible tool-dependent behavior. Correct: Use one project
+    standard per file (or per project); document the standard in the style guide.
+    Why: Consistency and predictable tool behavior.'
 - type: bullets
   title: Forgetting to Test After Migration
   bullets:
@@ -223,8 +578,14 @@ slides:
     step; compare with baseline.'
   - 'Why: Catches functional or synthesis differences early.'
   notes: From MODULE7 Common Pitfalls.
+  narration: 'Forgetting to Test After Migration. Mistake: Changing syntax (e.g. wire→logic,
+    always @*→always_comb) and not re-running simulation or synthesis. Reality: Subtle
+    bugs (e.g. latch, wrong sensitivity) can appear. Correct: Run full regression
+    (simulation and synthesis) after every migration step; compare with baseline.
+    Why: Catches functional or synthesis differences early.'
 - type: section
   title: Practice & assessment
+  narration: 'Next section: Practice & assessment.'
 - type: bullets
   title: What you should know
   bullets:
@@ -237,6 +598,11 @@ slides:
   - ✓ Use the version-selection checklist for new or existing projects
   - ✓ Describe how to extend the course when a new IEEE 1800 revision is released
   notes: From MODULE7 Learning Outcomes.
+  narration: 'By now you should be able to explain the following. ✓ Compare the same
+    design across 1364-1995, 1364-2001, 1364-2005, and 1800 (design subset) and list
+    what changes ✓ Compare connectivity style: many ports (1364) vs interface (1800)
+    ✓ Plan and execute migration from 1364 to 1800 design subset (or between 1364
+    revisions) using the migration patterns and checklist ✓ Choose a project standard...'
 - type: bullets
   title: Exercises
   bullets:
@@ -245,6 +611,8 @@ slides:
   - Migration One Block
   - Version Selection
   - Version Table
+  narration: Exercises. Side-by-Side Mux Side-by-Side Connectivity Migration One Block
+    Version Selection Version Table
 - type: bullets
   title: Exercises
   bullets:
@@ -253,11 +621,19 @@ slides:
   - Breaking Interfaces During Migration
   - Mixing Revisions in One File
   - Forgetting to Test After Migration
+  narration: Exercises. Migrating Everything at Once Ignoring Tool Support Breaking
+    Interfaces During Migration Mixing Revisions in One File Forgetting to Test After
+    Migration
 - type: bullets
   title: Summary & next steps
   bullets:
   - Compare Verilog and SystemVerilog across IEEE versions side-by-side, plan migration
-    between standards, and choose the right version for your project and tools.
+    between standards, and choose the right version for...
   - Complete module7/CHECKLIST.md
   - Review module7/EXAMPLES.md and run each lab
   - 'Next: Next module in course'
+  narration: 'In summary: Compare Verilog and SystemVerilog across IEEE versions side-by-side,
+    plan migration between standards, and choose the right version for your project
+    and tools. Next up: Next module in course. Compare Verilog and SystemVerilog across
+    IEEE versions side-by-side, plan migration between standards, and choose the right
+    version for... Complete module7/CHECKLIST.md Review...'

@@ -58,6 +58,47 @@ This module covers IEEE Std 1800-2017, the current SystemVerilog standard. In 18
 - When checking authoritative syntax or semantics for any Verilog or SystemVerilog construct
 - When comparing tool behavior against the LRM or planning migration
 
+## Design Architecture
+
+### 1. Repository layout (module6/)
+
+- IEEE 1800-2017 — current unified SystemVerilog LRM
+- Summarizes design subset plus 2017 language updates
+- module6/examples/ — version summary, migration, assertions recap
+- scripts/module6.sh — current-standard lab sweep
+
+### 2. 2017 standard in practice
+
+- Verilog is a subset of SystemVerilog in the 2017 LRM
+- logic, always_comb/ff, packages, interfaces — production RTL baseline
+- unique case, priority case — prefer over vendor attributes
+- Course maps 2017 features back to Modules 4–5 introductions
+
+### 3. Single-driver and type discipline
+
+- logic enforces one driver per net in synthesizable RTL
+- Package import :: scope — shared enums and parameters
+- See rtl_architecture.png — same DUT/TB split as earlier modules
+
+## Key files to study
+
+- module6/examples/subsets/
+- module6/examples/design_recap/
+- module6/examples/version_summary/
+- scripts/module6.sh
+
+## Verification & Testing Methods
+
+### 1. Execution flow
+
+- make run per lab; ./scripts/module6.sh for full module
+- version_summary example prints construct-by-standard table
+
+### 2. Regression before Module 7
+
+- Confirm all 2017-subset examples compile with your simulator
+- Review CHECKLIST.md — ready to compare versions in Module 7
+
 ## Topics Covered
 
 ### 1. IEEE 1800-2017 Context

@@ -1,0 +1,117 @@
+module1:
+  architecture:
+    rtl_code:
+      title: DUT example — and_gate (1995 style)
+      source_file: module1/examples/modules_ports/and_gate.v
+      start_line: 7
+      end_line: 17
+      notes: Non-ANSI port list; output y is reg because always drives it.
+    tb_code:
+      title: Testbench — stimulus and $finish
+      source_file: module1/examples/testbenches/test_and_gate.v
+      start_line: 8
+      end_line: 20
+      notes: reg drives inputs; wire observes output; initial applies all input combos.
+    method_code:
+      title: Build and run (Makefile)
+      source_file: module1/examples/modules_ports/Makefile
+      notes: iverilog compiles to top; vvp runs the simulation executable.
+module2:
+  architecture:
+    rtl_code:
+      title: ANSI ports — mux2 (2001)
+      source_file: module2/examples/ansi_ports/mux2.v
+      start_line: 1
+      end_line: 18
+    tb_code:
+      title: always @* combinational block
+      source_file: module2/examples/procedural/always_star.v
+      start_line: 1
+      end_line: 20
+    method_code:
+      title: Generate block — parameterized mux
+      source_file: module2/examples/generate/param_mux.v
+      start_line: 1
+      end_line: 25
+module3:
+  architecture:
+    rtl_code:
+      title: Parameter override at instantiation
+      source_file: module3/examples/parameters/param_override.v
+      start_line: 1
+      end_line: 22
+    method_code:
+      title: 'Avoid defparam — use #() instead'
+      source_file: module3/examples/no_defparam/no_defparam.v
+      start_line: 1
+      end_line: 20
+module4:
+  architecture:
+    rtl_code:
+      title: logic ports and always_comb
+      source_file: module4/examples/procedural/always_comb_ff.sv
+      start_line: 1
+      end_line: 25
+    tb_code:
+      title: Interface + modport connection
+      source_file: module4/examples/interfaces/bus_if_example.sv
+      start_line: 1
+      end_line: 30
+    method_code:
+      title: Package import pattern
+      source_file: module4/examples/packages/pkg_util.sv
+      start_line: 1
+      end_line: 20
+module5:
+  architecture:
+    rtl_code:
+      title: Embedded assertion example
+      source_file: module5/examples/assert_valid_encoding/assert_valid_encoding.sv
+      start_line: 1
+      end_line: 25
+    method_code:
+      title: Immediate assertion in procedural code
+      source_file: module5/examples/checkers/immediate_assert.sv
+      start_line: 1
+      end_line: 25
+module6:
+  architecture:
+    rtl_code:
+      title: logic single-driver pattern
+      source_file: module6/examples/logic_single_driver/logic_single_driver.sv
+      start_line: 1
+      end_line: 22
+    method_code:
+      title: Version summary runner
+      source_file: module6/examples/version_summary/version_summary.sv
+      start_line: 1
+      end_line: 20
+module7:
+  architecture:
+    rtl_code:
+      title: 1364 mux — wire/reg and explicit sensitivity
+      source_file: module7/dut/mux2_1364.v
+      start_line: 5
+      end_line: 12
+    tb_code:
+      title: 1800 mux — logic and always_comb
+      source_file: module7/dut/mux2_1800.sv
+      start_line: 5
+      end_line: 10
+    method_code:
+      title: Migration checklist pattern
+      source_file: module7/examples/migration_checklist/migration_checklist.sv
+      start_line: 1
+      end_line: 25
+module8:
+  architecture:
+    method_code:
+      title: Version timeline printer
+      source_file: module8/examples/version_timeline/version_timeline.sv
+      start_line: 1
+      end_line: 25
+    rtl_code:
+      title: One-page course map
+      source_file: module8/examples/course_map/course_map.sv
+      start_line: 1
+      end_line: 20

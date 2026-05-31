@@ -1,231 +1,351 @@
 1
-00:00:00,000 --> 00:00:06,552
-IEEE 1364-2001 (Verilog-2001) Module 2
+00:00:00,000 --> 00:00:23,928
+Welcome to module 2, IEEE 1364-2001 (Verilog-2001). In this module you will master the major verilog update (ieee 1364-2001) and its additions over 1364-1995: ansi ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays..
 
 2
-00:00:06,902 --> 00:00:24,086
-Learning objectives Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays.
+00:00:24,278 --> 00:00:41,126
+Here is what you will learn in this module. Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed...
 
 3
-00:00:24,436 --> 00:00:27,196
-Prerequisites See module README
+00:00:41,476 --> 00:00:47,524
+Before you start, make sure you have these prerequisites. See module README
 
 4
-00:00:27,546 --> 00:00:44,466
-Learning path Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays.
+00:00:47,874 --> 00:01:03,762
+Learning path. Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed...
 
 5
-00:00:44,816 --> 00:01:05,696
-Overview This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision of the Verilog standard. You'll learn what 2001 adds over 1995: ANSI-style port and task/function declarations, `always @*` for combinational
+00:01:04,112 --> 00:01:18,944
+Overview. This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision of the Verilog standard. You'll learn what 2001 adds over...
 
 6
-00:01:06,046 --> 00:01:08,398
-How to learn this module
+00:01:19,294 --> 00:01:22,630
+Next section: How to learn this module.
 
 7
-00:01:08,748 --> 00:01:14,028
-From docs/MODULE2.md — read guides before running demos.
+00:01:22,980 --> 00:01:53,388
+Follow this learning path. Read the guides before running the labs. Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for Module 2. Study design architecture — See how DUTs, examples, and testbenches fit together under module2/. Work through labs in order — Open module2/EXAMPLES.md and run each make clean && make run from the repo root. Run the full module script —...
 
 8
-00:01:14,378 --> 00:01:19,658
-From docs/MODULE2.md — read guides before running demos.
+00:01:53,738 --> 00:02:14,762
+Follow this learning path. Read the guides before running the labs. Review Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module2/CHECKLIST.md before starting the next module. From docs/MODULE2.md — read guides before running demos.
 
 9
-00:01:20,008 --> 00:01:22,264
-Syllabus topics
+00:02:15,112 --> 00:02:18,352
+Next section: Design architecture.
 
 10
-00:01:22,614 --> 00:01:25,398
-From MODULE2 Topics Covered.
+00:02:18,702 --> 00:02:45,894
+1. Repository layout (module2/). Builds on Module 1 — same examples + tests pattern under module2/ Examples highlight 2001 additions: ANSI ports, always @*, generate, signed module2/dut/ — reference gates and parameterized blocks scripts/module2.sh — batch run all 2001-feature labs Refer to the diagram on the right.
 
 11
-00:01:25,748 --> 00:01:28,532
-From MODULE2 Topics Covered.
+00:02:46,244 --> 00:03:09,356
+2. 2001 RTL patterns vs 1995. ANSI ports combine direction, type, and width in the port list always @* replaces manual sensitivity lists for combinational logic generate if/for creates replicated or conditional hardware signed keyword and $signed enable two's-complement arithmetic Refer to the diagram on the right.
 
 12
-00:01:28,882 --> 00:01:31,666
-From MODULE2 Topics Covered.
+00:03:09,706 --> 00:03:26,194
+3. Hierarchy with generate. param_mux and ripple_adder show parameterized instantiation gen_if demonstrates conditional generate blocks Parent passes parameters; child modules scale without copy-paste Refer to the diagram on the right.
 
 13
-00:01:32,016 --> 00:01:34,800
-From MODULE2 Topics Covered.
+00:03:26,544 --> 00:03:33,840
+RTL block diagram (reference). Module 2: DUT hierarchy and signal flow.
 
 14
-00:01:35,150 --> 00:01:37,934
-From MODULE2 Topics Covered.
+00:03:34,190 --> 00:03:42,614
+Verification / testbench diagram (reference). Module 2: stimulus, observation, and checking.
 
 15
-00:01:38,284 --> 00:01:41,068
-From MODULE2 Topics Covered.
+00:03:42,964 --> 00:03:51,172
+ANSI ports — mux2 (2001). Review the code on screen and match it to files in the repository.
 
 16
-00:01:41,418 --> 00:01:44,202
-From MODULE2 Topics Covered.
+00:03:51,522 --> 00:03:58,914
+always @* combinational block. Review the code on screen and match it to files in the repository.
 
 17
-00:01:44,552 --> 00:01:47,336
-From MODULE2 Topics Covered.
+00:03:59,264 --> 00:04:03,296
+Next section: Execution & simulation flow.
 
 18
-00:01:47,686 --> 00:01:50,470
-From MODULE2 Topics Covered.
+00:04:03,646 --> 00:04:35,734
+How the example runs (toolchain). Match each bullet to files in the repository. Makefile: Verilator + UVM_HOME compile RTL, interface, and test_*.sv UVM phases: build → connect → run_test → report (same pattern as Module 2) Sequence → driver → DUT → monitor → scoreboard (read SCOREBOARD at end) Typical command: make SIM=verilator TEST=test_* (see module2 demo slide) Loopback / hooks connect...
 
 19
-00:01:50,820 --> 00:01:53,052
-Hands-on examples
+00:04:36,084 --> 00:04:39,276
+Next section: Key files to study.
 
 20
-00:01:53,402 --> 00:01:57,722
-Requires iverilog on PATH (apt install iverilog).
+00:04:39,626 --> 00:05:13,826
+Open these in the repo. module2/examples/ansi_ports/mux2.v — ANSI port list pattern module2/examples/procedural/always_star.v — implicit sensitivity module2/examples/generate/param_mux.v — generate for loop module2/examples/signed/adder_signed.v — signed arithmetic scripts/module2.sh — full module execution Trace while running module2/EXAMPLES.md labs.
 
 21
-00:01:58,072 --> 00:02:03,544
-module2/examples/ansi_ports/README.md
+00:05:14,176 --> 00:05:18,280
+Next section: Verification & testing methods.
 
 22
-00:02:03,894 --> 00:02:09,198
-Hands-on: module2/examples/ansi_ports/
+00:05:18,630 --> 00:05:37,806
+1. Running labs and tests. Each example: cd module2/examples/<name> && make clean && make run ./scripts/module2.sh runs the full module regression Compare output with MODULE2.md expected behavior notes Refer to the diagram on the right.
 
 23
-00:02:09,548 --> 00:02:14,420
-module2/examples/procedural/README.md
+00:05:38,156 --> 00:05:57,452
+2. What to verify per feature. ANSI ports — compile without separate input/output declarations always @* — output updates when any input toggles (no latch inference) generate — instance count matches parameter; signed adder handles negatives Refer to the diagram on the right.
 
 24
-00:02:14,770 --> 00:02:19,522
-Hands-on: module2/examples/procedural/
+00:05:57,802 --> 00:06:05,386
+Generate block — parameterized mux. Review the code on screen and match it to files in the repository.
 
 25
-00:02:19,872 --> 00:02:24,648
-module2/examples/generate/README.md
+00:06:05,736 --> 00:06:09,000
+Next section: Syllabus topics.
 
 26
-00:02:24,998 --> 00:02:29,654
-Hands-on: module2/examples/generate/
+00:06:09,350 --> 00:06:13,142
+Next section: Protocol & design details.
 
 27
-00:02:30,004 --> 00:02:35,380
-module2/examples/generate_if/README.md
+00:06:13,492 --> 00:06:43,276
+Protocol and design detail: What 1364-2001 Adds Over 1995 (1). ANSI-style port declarations: Direction and type (and size) in the port list always @*: Implicit sensitivity for combinational logic (no manual list) generate: Conditional and loop-based instantiation and logic signed: Signed arithmetic and signed nets/variables From MODULE2 Topics Covered — protocol/design depth.
 
 28
-00:02:35,730 --> 00:02:40,962
-Hands-on: module2/examples/generate_if/
+00:06:43,626 --> 00:07:15,402
+Protocol and design detail: What 1364-2001 Adds Over 1995 (2). Multi-dimensional arrays: e.g. reg [7:0] mem [0:255] localparam: Named constants that cannot be overridden ANSI-style task/function: Input/output in the header Other: File I/O improvements, $signed/$unsigned, attribute syntax, etc. From MODULE2 Topics Covered — protocol/design depth.
 
 29
-00:02:41,312 --> 00:02:47,576
-module2/examples/generate_ripple_adder/README.md
+00:07:15,752 --> 00:07:37,688
+Protocol and design detail: What 1364-2001 Still Does Not Include. No SystemVerilog: no logic, always_comb/always_ff, interfaces, packages, classes No type parameters or interfaces (those are 1800) From MODULE2 Topics Covered — protocol/design depth.
 
 30
-00:02:47,926 --> 00:02:53,950
-Hands-on: module2/examples/generate_ripple_adder/
+00:07:38,038 --> 00:08:03,022
+Protocol and design detail: ANSI-C Style Ports. input wire: Default for input; can omit wire (e.g. input [7:0] a). output reg: Required when the output is driven in always/initial. output wire: When the output is driven only by assign or submodule. From MODULE2 Topics Covered — protocol/design depth.
 
 31
-00:02:54,300 --> 00:02:58,956
-module2/examples/signed/README.md
+00:08:03,372 --> 00:08:20,412
+Protocol and design detail: Comparison: 1995 vs 2001 Port Style. Same behavior; 2001 is more concise and keeps port and type in one place. From MODULE2 Topics Covered — protocol/design depth.
 
 32
-00:02:59,306 --> 00:03:03,746
-Hands-on: module2/examples/signed/
+00:08:20,762 --> 00:08:44,378
+Protocol and design detail: always @* Syntax. **@* (or @(*)**): Sensitive to every signal read in the block (RHS and conditions). Use for combinational logic only; do not use for sequential (use always @(posedge clk)). From MODULE2 Topics Covered — protocol/design depth.
 
 33
-00:03:04,096 --> 00:03:09,520
-module2/examples/signed_compare/README.md
+00:08:44,728 --> 00:09:07,552
+Protocol and design detail: When to Use @* vs Explicit List. Prefer @*: For combinational blocks; fewer errors, easier to maintain. Explicit list: When targeting strict 1995 compatibility or when a tool does not support @*. From MODULE2 Topics Covered — protocol/design depth.
 
 34
-00:03:09,870 --> 00:03:15,174
-Hands-on: module2/examples/signed_compare/
+00:09:07,902 --> 00:09:28,230
+Protocol and design detail: generate / endgenerate. genvar: Loop variable for generate loops; not a runtime variable. generate for: Replicates logic/instances; index must be constant at elaboration. From MODULE2 Topics Covered — protocol/design depth.
 
 35
-00:03:15,524 --> 00:03:20,300
-module2/examples/decoder/README.md
+00:09:28,580 --> 00:09:42,188
+Protocol and design detail: Conditional Generate. generate if / else: Choose one of several implementations at elaboration. From MODULE2 Topics Covered — protocol/design depth.
 
 36
-00:03:20,650 --> 00:03:25,282
-Hands-on: module2/examples/decoder/
+00:09:42,538 --> 00:10:02,362
+Protocol and design detail: signed Wire and reg. signed: Affects arithmetic and comparison in expressions involving that net/reg. Unsigned (default): No sign extension; values 0 to 2^N-1. From MODULE2 Topics Covered — protocol/design depth.
 
 37
-00:03:25,632 --> 00:03:30,240
-module2/examples/arrays/README.md
+00:10:02,712 --> 00:10:25,608
+Protocol and design detail: Declaration and Usage. Packed (left): [7:0] — contiguous bits, can be used as a single vector. Unpacked (right): [0:255] — array of elements; select with one index at a time in 2001. From MODULE2 Topics Covered — protocol/design depth.
 
 38
-00:03:30,590 --> 00:03:35,030
-Hands-on: module2/examples/arrays/
+00:10:25,958 --> 00:10:57,686
+Protocol and design detail: Task (2001 ANSI). automatic: Optional; gives automatic storage (re-entrant). Useful for recursive or concurrent calls. input/output in header: Cleaner than 1995 style; avoids duplicate declarations. Note: In 1364-2001 use output reg (not output logic; logic is SystemVerilog). From MODULE2 Topics Covered — protocol/design depth.
 
 39
-00:03:35,380 --> 00:03:41,476
-module2/examples/multi_dim_arrays/README.md
+00:10:58,036 --> 00:11:05,836
+Verification flow (reference). Stimulus, DUT response, and check points for this module.
 
 40
-00:03:41,826 --> 00:03:47,706
-Hands-on: module2/examples/multi_dim_arrays/
+00:11:06,186 --> 00:11:36,690
+1. IEEE 1364-2001 Context (1/2). ANSI-style port declarations: Direction and type (and size) in the port list always @*: Implicit sensitivity for combinational logic (no manual list) generate: Conditional and loop-based instantiation and logic signed: Signed arithmetic and signed nets/variables Multi-dimensional arrays: e.g. reg [7:0] mem [0:255]
 
 41
-00:03:48,056 --> 00:03:52,952
-module2/examples/parameters/README.md
+00:11:37,040 --> 00:12:05,408
+1. IEEE 1364-2001 Context (2/2). ANSI-style task/function: Input/output in the header Other: File I/O improvements, $signed/$unsigned, attribute syntax, etc. No SystemVerilog: no logic, always_comb/always_ff, interfaces, packages, classes No type parameters or interfaces (those are 1800)
 
 42
-00:03:53,302 --> 00:03:57,982
-Hands-on: module2/examples/parameters/
+00:12:05,758 --> 00:12:32,734
+2. ANSI-Style Port Declarations (2001). input wire: Default for input; can omit wire (e.g. input [7:0] a). output reg: Required when the output is driven in always/initial. output wire: When the output is driven only by assign or submodule. Same behavior; 2001 is more concise and keeps port and type in one place.
 
 43
-00:03:58,332 --> 00:04:04,044
-module2/examples/tasks_functions/README.md
+00:12:33,084 --> 00:13:06,204
+3. Implicit Sensitivity: always @* (2001). **@* (or @(*)): Sensitive to every signal read in the block (RHS and conditions). Use for combinational logic only; do not use for sequential (use always @(posedge clk)). Prefer @***: For combinational blocks; fewer errors, easier to maintain. Explicit list: When targeting strict 1995 compatibility or when a tool does not support @*.
 
 44
-00:04:04,394 --> 00:04:09,938
-Hands-on: module2/examples/tasks_functions/
+00:13:06,554 --> 00:13:30,314
+4. Generate (2001). genvar: Loop variable for generate loops; not a runtime variable. generate for: Replicates logic/instances; index must be constant at elaboration. generate if / else: Choose one of several implementations at elaboration. generate / endgenerate Conditional Generate
 
 45
-00:04:10,288 --> 00:04:15,712
-module2/examples/task_ansi/README.md
+00:13:30,664 --> 00:13:48,664
+5. Signed Types (2001). signed: Affects arithmetic and comparison in expressions involving that net/reg. Unsigned (default): No sign extension; values 0 to 2^N-1. signed Wire and reg $signed and $unsigned
 
 46
-00:04:16,062 --> 00:04:21,318
-Hands-on: module2/examples/task_ansi/
+00:13:49,014 --> 00:14:09,822
+6. Multi-Dimensional Arrays (2001). Packed (left): [7:0] — contiguous bits, can be used as a single vector. Unpacked (right): [0:255] — array of elements; select with one index at a time in 2001. Declaration and Usage
 
 47
-00:04:21,668 --> 00:04:23,804
-Common pitfalls
+00:14:10,172 --> 00:14:23,828
+7. localparam (2001). parameter: Can be overridden: #(.WIDTH(16)). localparam: Cannot be overridden; often derived from parameters or fixed.
 
 48
-00:04:24,154 --> 00:04:27,106
-From MODULE2 Common Pitfalls.
+00:14:24,178 --> 00:14:57,058
+8. ANSI-Style Tasks and Functions (2001). automatic: Optional; gives automatic storage (re-entrant). Useful for recursive or concurrent calls. input/output in header: Cleaner than 1995 style; avoids duplicate declarations. Note: In 1364-2001 use output reg (not output logic; logic is SystemVerilog). Function (2001 ANSI) Task (2001 ANSI)
 
 49
-00:04:27,456 --> 00:04:30,408
-From MODULE2 Common Pitfalls.
+00:14:57,408 --> 00:15:00,648
+Next section: Hands-on examples.
 
 50
-00:04:30,758 --> 00:04:33,710
-From MODULE2 Common Pitfalls.
+00:15:00,998 --> 00:15:12,446
+Module 2 toolchain check. Watch the terminal output and confirm you see the expected pass message. Requires iverilog on PATH (apt install iverilog).
 
 51
-00:04:34,060 --> 00:04:37,012
-From MODULE2 Common Pitfalls.
+00:15:12,796 --> 00:15:25,156
+Example 1: Module and instantiation with ANSI-style ports. Port direction and type in port list module2/examples/ansi_ports/README.md
 
 52
-00:04:37,362 --> 00:04:40,314
-From MODULE2 Common Pitfalls.
+00:15:25,506 --> 00:15:34,842
+Demo: Module and instantiation with ANSI-style ports. Watch the terminal output and confirm you see the expected pass message.
 
 53
-00:04:40,664 --> 00:04:42,992
-Practice & assessment
+00:15:35,192 --> 00:15:48,104
+Example 2: Combinational blocks with implicit sensitivity. No manual sensitivity list; tool infers from RHS module2/examples/procedural/README.md
 
 54
-00:04:43,342 --> 00:04:46,222
-From MODULE2 Learning Outcomes.
+00:15:48,454 --> 00:15:57,334
+Demo: Combinational blocks with implicit sensitivity. Watch the terminal output and confirm you see the expected pass message.
 
 55
-00:04:46,572 --> 00:04:49,452
-From MODULE2 Learning Outcomes.
+00:15:57,684 --> 00:16:09,948
+Example 3: Parameterized mux; generate-style parameterization. genvar, elaboration-time logic module2/examples/generate/README.md
 
 56
-00:04:49,802 --> 00:04:54,890
-Exercises ANSI Ports always @ Generate Signed Arrays and localparam
+00:16:10,298 --> 00:16:19,826
+Demo: Parameterized mux; generate-style parameterization. Watch the terminal output and confirm you see the expected pass message.
 
 57
-00:04:55,240 --> 00:05:04,648
-Exercises Using always @* for Sequential Logic genvar in Normal Code Overriding localparam Signed vs Unsigned Mix Generate Block Scope
+00:16:20,176 --> 00:16:34,648
+Example 4: Conditional implementation by parameter (e.g. USE_CLIP wrap vs saturate). generate if/else at elaboration module2/examples/generate_if/README.md
 
 58
-00:05:04,998 --> 00:05:31,614
-Summary & next steps Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays. Complete module2/CHECKLIST.md Review module2/EXAMPLES.md and run each lab Next: Next module in course
+00:16:34,998 --> 00:16:46,182
+Demo: Conditional implementation by parameter (e.g. USE_CLIP wrap vs saturate). Watch the terminal output and confirm you see the expected pass message.
+
+59
+00:16:46,532 --> 00:17:01,508
+Example 5: N-bit ripple-carry adder using generate for (full_adder instances). genvar loop, replicated hierarchy module2/examples/generate_ripple_adder/README.md
+
+60
+00:17:01,858 --> 00:17:12,586
+Demo: N-bit ripple-carry adder using generate for (full_adder instances). Watch the terminal output and confirm you see the expected pass message.
+
+61
+00:17:12,936 --> 00:17:25,200
+Example 6: signed reg/wire, $signed/$unsigned. Two's complement arithmetic in RTL module2/examples/signed/README.md
+
+62
+00:17:25,550 --> 00:17:35,270
+Demo: signed reg/wire, $signed/$unsigned. Watch the terminal output and confirm you see the expected pass message.
+
+63
+00:17:35,620 --> 00:17:50,236
+Example 7: $signed() in expressions; a &lt; b unsigned vs signed. Cast in expressions without changing declaration module2/examples/signed_compare/README.md
+
+64
+00:17:50,586 --> 00:18:01,434
+Demo: $signed() in expressions; a &lt; b unsigned vs signed. Watch the terminal output and confirm you see the expected pass message.
+
+65
+00:18:01,784 --> 00:18:15,416
+Example 8: 2:4 decoder with ANSI ports and always @* (case). Combinational case; one-hot output module2/examples/decoder/README.md
+
+66
+00:18:15,766 --> 00:18:26,638
+Demo: 2:4 decoder with ANSI ports and always @* (case). Watch the terminal output and confirm you see the expected pass message.
+
+67
+00:18:26,988 --> 00:18:43,572
+Example 9: Memory-style arrays (reg [7:0] mem [0:255]), indexing. Packed vs unpacked; array indexing rules in 2001 module2/examples/arrays/README.md
+
+68
+00:18:43,922 --> 00:18:56,474
+Demo: Memory-style arrays (reg [7:0] mem [0:255]), indexing. Watch the terminal output and confirm you see the expected pass message.
+
+69
+00:18:56,824 --> 00:19:12,088
+Example 10: 2x4 buffer using 1D array indexed as row*4+col. Emulating 2D with 1D array; index expression module2/examples/multi_dim_arrays/README.md
+
+70
+00:19:12,438 --> 00:19:22,254
+Demo: 2x4 buffer using 1D array indexed as row*4+col. Watch the terminal output and confirm you see the expected pass message.
+
+71
+00:19:22,604 --> 00:19:34,724
+Example 11: Parameter override, localparam for derived constants. When to use parameter vs localparam module2/examples/parameters/README.md
+
+72
+00:19:35,074 --> 00:19:44,410
+Demo: Parameter override, localparam for derived constants. Watch the terminal output and confirm you see the expected pass message.
+
+73
+00:19:44,760 --> 00:19:58,128
+Example 12: Input/output in header, automatic functions. 2001 style vs 1995 style module2/examples/tasks_functions/README.md
+
+74
+00:19:58,478 --> 00:20:07,454
+Demo: Input/output in header, automatic functions. Watch the terminal output and confirm you see the expected pass message.
+
+75
+00:20:07,804 --> 00:20:23,524
+Example 13: task automatic apply_reset(output reg rn); begin/end body. Task with output argument; testbench reset pattern module2/examples/task_ansi/README.md
+
+76
+00:20:23,874 --> 00:20:35,226
+Demo: task automatic apply_reset(output reg rn); begin/end body. Watch the terminal output and confirm you see the expected pass message.
+
+77
+00:20:35,576 --> 00:20:38,768
+Next section: Common pitfalls.
+
+78
+00:20:39,118 --> 00:21:06,838
+Using always @* for Sequential Logic. Mistake: always @* q <= d; intending a flip-flop. Reality: @* is for combinational logic; it does not create a clock edge. Correct: Use always @(posedge clk) (and <=) for sequential logic. Why: Mixing the two causes simulation/synthesis mismatches and unintended latches.
+
+79
+00:21:07,188 --> 00:21:30,948
+genvar in Normal Code. Mistake: Using genvar in an always block or initial block. Reality: genvar is only for generate loops; it does not exist at runtime. Correct: Use integer or reg for runtime loops; use genvar only inside generate for. Why: genvar is elaborated away; it is not a simulation variable.
+
+80
+00:21:31,298 --> 00:21:55,250
+Overriding localparam. Mistake: Trying to override localparam at instantiation (e.g. #(.MAX(100))). Reality: localparam cannot be overridden. Correct: Use parameter for values that must be overridden; use localparam for fixed or derived constants. Why: The standard does not allow localparam in the parameter list.
+
+81
+00:21:55,600 --> 00:22:23,848
+Signed vs Unsigned Mix. Mistake: Mixing signed and unsigned in one expression without $signed/$unsigned and expecting a particular sign behavior. Reality: Rules for sign extension and comparison depend on operands. Correct: Be explicit: use signed types or $signed/$unsigned and verify with testbenches. Why: Implicit mixing leads to wrong arithmetic and comparison results.
+
+82
+00:22:24,198 --> 00:22:48,126
+Generate Block Scope. Mistake: Referencing generate block names or genvar at runtime. Reality: Generate blocks are elaborated at compile time; names are for hierarchy. Correct: Use generate for structure; use normal variables and blocks for runtime behavior. Why: Generate is not “runtime”; it only affects what gets instantiated.
+
+83
+00:22:48,476 --> 00:22:51,860
+Next section: Practice & assessment.
+
+84
+00:22:52,210 --> 00:23:20,386
+By now you should be able to explain the following. ✓ Write modules with ANSI-style port declarations (1364-2001) ✓ Use always @* for combinational logic and avoid sensitivity-list errors ✓ Use generate (for, if/else) for parameterized and conditional RTL ✓ Use signed types and $signed/$unsigned for signed arithmetic ✓ Declare and use multi-dimensional arrays (e.g. memories) From MODULE2...
+
+85
+00:23:20,736 --> 00:23:36,288
+By now you should be able to explain the following. ✓ Write ANSI-style tasks and functions ✓ Compare 1364-1995 and 1364-2001 and list what 2001 adds From MODULE2 Learning Outcomes.
+
+86
+00:23:36,638 --> 00:23:42,902
+Exercises. ANSI Ports always @ Generate Signed Arrays and localparam
+
+87
+00:23:43,252 --> 00:23:53,836
+Exercises. Using always @* for Sequential Logic genvar in Normal Code Overriding localparam Signed vs Unsigned Mix Generate Block Scope
+
+88
+00:23:54,186 --> 00:24:32,058
+In summary: Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional arrays. Next up: Next module in course. Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed... Complete module2/CHECKLIST.md Review...

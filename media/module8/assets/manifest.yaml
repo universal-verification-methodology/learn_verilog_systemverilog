@@ -10,6 +10,32 @@ assets:
   - 4
   - 4
   license: learn_verilog_systemverilog course materials
+- id: rtl_architecture
+  type: diagram
+  file: assets/diagrams/rtl_architecture.png
+  source: assets/diagrams/rtl_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 10
+  license: learn_verilog_systemverilog course materials
+- id: verification_architecture
+  type: diagram
+  file: assets/diagrams/verification_architecture.png
+  source: assets/diagrams/verification_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 11
+  license: learn_verilog_systemverilog course materials
+- id: testing_methods
+  type: diagram
+  file: assets/diagrams/testing_methods.png
+  source: assets/diagrams/testing_methods.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 12
+  - 19
+  - 20
+  license: learn_verilog_systemverilog course materials
 - id: module8_check
   type: screenshot
   file: assets/screenshots/module8_check.png
@@ -17,83 +43,84 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 12
+  - 25
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
-- id: ex01_One-page
+- id: ex01_quick_ref
   type: screenshot
-  file: assets/screenshots/ex01_One-page.png
-  capture_command: cd module8/examples/One-page && make clean && make run
+  file: assets/screenshots/ex01_quick_ref.png
+  capture_command: cd module8/examples && make clean && make run
   cwd: .
   slides:
-  - 13
-- id: ex02_Version
+  - 26
+- id: ex02_version_timeline
   type: screenshot
-  file: assets/screenshots/ex02_Version.png
-  capture_command: cd module8/examples/Version && make clean && make run
+  file: assets/screenshots/ex02_version_timeline.png
+  capture_command: cd module8/examples/version_timeline && make clean && make run
   cwd: .
   slides:
-  - 14
-- id: ex03_Verilog-only
+  - 27
+- id: ex03_design_subset
   type: screenshot
-  file: assets/screenshots/ex03_Verilog-only.png
-  capture_command: cd module8/examples/Verilog-only && make clean && make run
+  file: assets/screenshots/ex03_design_subset.png
+  capture_command: cd module8/examples/design_subset && make clean && make run
   cwd: .
   slides:
-  - 15
-- id: ex04_Tool
+  - 28
+- id: ex04_tool_support
   type: screenshot
-  file: assets/screenshots/ex04_Tool.png
-  capture_command: cd module8/examples/Tool && make clean && make run
+  file: assets/screenshots/ex04_tool_support.png
+  capture_command: cd module8/examples/tool_support && make clean && make run
   cwd: .
   slides:
-  - 16
-- id: ex05_"Which
+  - 29
+- id: ex05_construct_lookup
   type: screenshot
-  file: assets/screenshots/ex05_"Which.png
-  capture_command: cd module8/examples/"Which && make clean && make run
+  file: assets/screenshots/ex05_construct_lookup.png
+  capture_command: cd module8/examples/construct_lookup && make clean && make run
   cwd: .
   slides:
-  - 17
-- id: ex06_Course
+  - 30
+- id: ex06_course_map
   type: screenshot
-  file: assets/screenshots/ex06_Course.png
-  capture_command: cd module8/examples/Course && make clean && make run
+  file: assets/screenshots/ex06_course_map.png
+  capture_command: cd module8/examples/course_map && make clean && make run
   cwd: .
   slides:
-  - 18
-- id: ex07_Migration
+  - 31
+- id: ex07_migration_steps
   type: screenshot
-  file: assets/screenshots/ex07_Migration.png
-  capture_command: cd module8/examples/Migration && make clean && make run
+  file: assets/screenshots/ex07_migration_steps.png
+  capture_command: cd module8/examples/migration_steps && make clean && make run
   cwd: .
   slides:
-  - 19
-- id: ex08_Synthesizable
+  - 32
+- id: ex08_synthesizable_subset
   type: screenshot
-  file: assets/screenshots/ex08_Synthesizable.png
-  capture_command: cd module8/examples/Synthesizable && make clean && make run
+  file: assets/screenshots/ex08_synthesizable_subset.png
+  capture_command: cd module8/examples/synthesizable_subset && make clean && make
+    run
   cwd: .
   slides:
-  - 20
-- id: ex09_Version
+  - 33
+- id: ex09_version_selection
   type: screenshot
-  file: assets/screenshots/ex09_Version.png
-  capture_command: cd module8/examples/Version && make clean && make run
+  file: assets/screenshots/ex09_version_selection.png
+  capture_command: cd module8/examples/version_selection && make clean && make run
   cwd: .
   slides:
-  - 21
-- id: ex10_Learning
+  - 34
+- id: ex10_learning_path
   type: screenshot
-  file: assets/screenshots/ex10_Learning.png
-  capture_command: cd module8/examples/Learning && make clean && make run
+  file: assets/screenshots/ex10_learning_path.png
+  capture_command: cd module8/examples/learning_path && make clean && make run
   cwd: .
   slides:
-  - 22
-- id: ex11_Common
+  - 35
+- id: ex11_pitfalls
   type: screenshot
-  file: assets/screenshots/ex11_Common.png
-  capture_command: cd module8/examples/Common && make clean && make run
+  file: assets/screenshots/ex11_pitfalls.png
+  capture_command: cd module8/examples/pitfalls && make clean && make run
   cwd: .
   slides:
-  - 23
+  - 36

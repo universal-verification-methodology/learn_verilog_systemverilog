@@ -10,6 +10,35 @@ assets:
   - 4
   - 4
   license: learn_verilog_systemverilog course materials
+- id: rtl_architecture
+  type: diagram
+  file: assets/diagrams/rtl_architecture.png
+  source: assets/diagrams/rtl_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 10
+  - 13
+  license: learn_verilog_systemverilog course materials
+- id: verification_architecture
+  type: diagram
+  file: assets/diagrams/verification_architecture.png
+  source: assets/diagrams/verification_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 11
+  - 14
+  license: learn_verilog_systemverilog course materials
+- id: testing_methods
+  type: diagram
+  file: assets/diagrams/testing_methods.png
+  source: assets/diagrams/testing_methods.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 12
+  - 21
+  - 22
+  - 47
+  license: learn_verilog_systemverilog course materials
 - id: module6_check
   type: screenshot
   file: assets/screenshots/module6_check.png
@@ -17,7 +46,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 22
+  - 67
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_subsets
@@ -26,60 +55,60 @@ assets:
   capture_command: cd module6/examples/subsets && make clean && make run
   cwd: .
   slides:
-  - 25
+  - 70
 - id: ex02_design_recap
   type: screenshot
   file: assets/screenshots/ex02_design_recap.png
   capture_command: cd module6/examples/design_recap && make clean && make run
   cwd: .
   slides:
-  - 27
+  - 72
 - id: ex03_assertions
   type: screenshot
   file: assets/screenshots/ex03_assertions.png
   capture_command: cd module6/examples/assertions && make clean && make run
   cwd: .
   slides:
-  - 29
+  - 74
 - id: ex04_version_summary
   type: screenshot
   file: assets/screenshots/ex04_version_summary.png
   capture_command: cd module6/examples/version_summary && make clean && make run
   cwd: .
   slides:
-  - 31
+  - 76
 - id: ex05_migration
   type: screenshot
   file: assets/screenshots/ex05_migration.png
   capture_command: cd module6/examples/migration && make clean && make run
   cwd: .
   slides:
-  - 33
+  - 78
 - id: ex06_logic_single_driver
   type: screenshot
   file: assets/screenshots/ex06_logic_single_driver.png
   capture_command: cd module6/examples/logic_single_driver && make clean && make run
   cwd: .
   slides:
-  - 35
+  - 80
 - id: ex07_priority_case
   type: screenshot
   file: assets/screenshots/ex07_priority_case.png
   capture_command: cd module6/examples/priority_case && make clean && make run
   cwd: .
   slides:
-  - 37
+  - 82
 - id: ex08_package_import
   type: screenshot
   file: assets/screenshots/ex08_package_import.png
   capture_command: cd module6/examples/package_import && make clean && make run
   cwd: .
   slides:
-  - 39
+  - 84
 - id: ex09_unique_case
   type: screenshot
   file: assets/screenshots/ex09_unique_case.png
   capture_command: cd module6/examples/unique_case && make clean && make run
   cwd: .
   slides:
-  - 41
+  - 86

@@ -1,227 +1,371 @@
 1
-00:00:00,000 --> 00:00:06,600
-IEEE 1800-2005 (SystemVerilog Design Subset) Module 4
+00:00:00,000 --> 00:00:23,376
+Welcome to module 4, IEEE 1800-2005 (SystemVerilog Design Subset). In this module you will master the first systemverilog standard (ieee 1800-2005) for rtl design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case..
 
 2
-00:00:06,950 --> 00:00:23,222
-Learning objectives Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case.
+00:00:23,726 --> 00:00:40,238
+Here is what you will learn in this module. Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and...
 
 3
-00:00:23,572 --> 00:00:26,332
-Prerequisites See module README
+00:00:40,588 --> 00:00:46,636
+Before you start, make sure you have these prerequisites. See module README
 
 4
-00:00:26,682 --> 00:00:42,738
-Learning path Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case.
+00:00:46,986 --> 00:01:02,514
+Learning path. Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and...
 
 5
-00:00:43,088 --> 00:01:04,064
-Overview This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It extends Verilog (IEEE 1364-2005) with design and verification features. Here the focus is on the **design subset** used for RTL: the `logic` typ
+00:01:02,864 --> 00:01:18,152
+Overview. This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It extends Verilog (IEEE 1364-2005) with design and...
 
 6
-00:01:04,414 --> 00:01:06,766
-How to learn this module
+00:01:18,502 --> 00:01:21,838
+Next section: How to learn this module.
 
 7
-00:01:07,116 --> 00:01:12,468
-From docs/MODULE4.md — read guides before running demos.
+00:01:22,188 --> 00:01:52,740
+Follow this learning path. Read the guides before running the labs. Skim this document — Goal, Overview, and Topics Covered set the IEEE scope for Module 4. Study design architecture — See how DUTs, examples, and testbenches fit together under module4/. Work through labs in order — Open module4/EXAMPLES.md and run each make clean && make run from the repo root. Run the full module script —...
 
 8
-00:01:12,818 --> 00:01:18,170
-From docs/MODULE4.md — read guides before running demos.
+00:01:53,090 --> 00:02:14,234
+Follow this learning path. Read the guides before running the labs. Review Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module4/CHECKLIST.md before starting the next module. From docs/MODULE4.md — read guides before running demos.
 
 9
-00:01:18,520 --> 00:01:20,776
-Syllabus topics
+00:02:14,584 --> 00:02:17,824
+Next section: Design architecture.
 
 10
-00:01:21,126 --> 00:01:23,934
-From MODULE4 Topics Covered.
+00:02:18,174 --> 00:02:44,214
+1. Repository layout (module4/) (1/2). First SystemVerilog module — .sv sources and design subset focus logic replaces wire/reg for single-driver RTL in most examples always_comb / always_ff / always_latch — explicit procedural intent interfaces and packages — connectivity and shared types Refer to the diagram on the right.
 
 11
-00:01:24,284 --> 00:01:27,092
-From MODULE4 Topics Covered.
+00:02:44,564 --> 00:02:55,532
+1. Repository layout (module4/) (2/2). scripts/module4.sh — requires simulator with SV design subset
 
 12
-00:01:27,442 --> 00:01:30,250
-From MODULE4 Topics Covered.
+00:02:55,882 --> 00:03:18,730
+2. SystemVerilog design layering. Packages hold typedefs, constants, functions — import in modules Interfaces bundle signals; modports define direction per connection always_comb infers sensitivity; always_ff targets flip-flops unique/priority case — standard semantics for full case checking Refer to the diagram on the right.
 
 13
-00:01:30,600 --> 00:01:33,408
-From MODULE4 Topics Covered.
+00:03:19,080 --> 00:03:37,776
+3. File and compilation units. .sv extension signals SystemVerilog to the tool Package before import; interface before modport connection See verification_architecture.png — TB still drives DUT via ports or interface Refer to the diagram on the right.
 
 14
-00:01:33,758 --> 00:01:36,566
-From MODULE4 Topics Covered.
+00:03:38,126 --> 00:03:45,566
+RTL block diagram (reference). Module 4: DUT hierarchy and signal flow.
 
 15
-00:01:36,916 --> 00:01:39,724
-From MODULE4 Topics Covered.
+00:03:45,916 --> 00:03:54,436
+Verification / testbench diagram (reference). Module 4: stimulus, observation, and checking.
 
 16
-00:01:40,074 --> 00:01:42,882
-From MODULE4 Topics Covered.
+00:03:54,786 --> 00:04:02,154
+logic ports and always_comb. Review the code on screen and match it to files in the repository.
 
 17
-00:01:43,232 --> 00:01:46,040
-From MODULE4 Topics Covered.
+00:04:02,504 --> 00:04:09,632
+Interface + modport connection. Review the code on screen and match it to files in the repository.
 
 18
-00:01:46,390 --> 00:01:49,198
-From MODULE4 Topics Covered.
+00:04:09,982 --> 00:04:14,014
+Next section: Execution & simulation flow.
 
 19
-00:01:49,548 --> 00:01:52,356
-From MODULE4 Topics Covered.
+00:04:14,364 --> 00:04:46,524
+How the example runs (toolchain). Match each bullet to files in the repository. Makefile: Verilator + UVM_HOME compile RTL, interface, and test_*.sv UVM phases: build → connect → run_test → report (same pattern as Module 2) Sequence → driver → DUT → monitor → scoreboard (read SCOREBOARD at end) Typical command: make SIM=verilator TEST=test_* (see module4 demo slide) Loopback / hooks connect...
 
 20
-00:01:52,706 --> 00:01:54,938
-Hands-on examples
+00:04:46,874 --> 00:04:50,066
+Next section: Key files to study.
 
 21
-00:01:55,288 --> 00:01:59,608
-Requires iverilog on PATH (apt install iverilog).
+00:04:50,416 --> 00:05:20,272
+Open these in the repo. module4/examples/logic_ports/logic_ports.sv module4/examples/procedural/always_comb_ff.sv module4/examples/interfaces/bus_if_example.sv module4/examples/packages/pkg_util.sv scripts/module4.sh Trace while running module4/EXAMPLES.md labs.
 
 22
-00:01:59,958 --> 00:02:05,358
-module4/examples/data_types/README.md
+00:05:20,622 --> 00:05:24,726
+Next section: Verification & testing methods.
 
 23
-00:02:05,708 --> 00:02:10,916
-Hands-on: module4/examples/data_types/
+00:05:25,076 --> 00:05:45,716
+1. Running SystemVerilog labs. cd module4/examples/<name> && make clean && make run ./scripts/module4.sh — full module; some labs need full SV support iverilog supports subset; check build.log if a feature is unsupported Refer to the diagram on the right.
 
 24
-00:02:11,266 --> 00:02:16,882
-module4/examples/logic_ports/README.md
+00:05:46,066 --> 00:06:05,482
+2. What to check in simulation. logic ports compile without separate wire/reg declarations always_comb blocks reject clock/reset inside (tool error = correct) Interface examples connect via modport, not dozens of scalar ports Refer to the diagram on the right.
 
 25
-00:02:17,232 --> 00:02:22,632
-Hands-on: module4/examples/logic_ports/
+00:06:05,832 --> 00:06:12,288
+Package import pattern. Review the code on screen and match it to files in the repository.
 
 26
-00:02:22,982 --> 00:02:27,950
-module4/examples/procedural/README.md
+00:06:12,638 --> 00:06:15,902
+Next section: Syllabus topics.
 
 27
-00:02:28,300 --> 00:02:33,076
-Hands-on: module4/examples/procedural/
+00:06:16,252 --> 00:06:20,044
+Next section: Protocol & design details.
 
 28
-00:02:33,426 --> 00:02:38,946
-module4/examples/always_latch/README.md
+00:06:20,394 --> 00:06:54,426
+Protocol and design detail: What 1800-2005 Adds Over 1364-2005 (Design Subset) (1). logic: Single type for single-driver nets/variables (replaces wire/reg in most RTL) 2-state types: bit, int, byte, etc. (mainly for testbenches; some RTL use) always_comb, always_ff, always_latch: Explicit procedural blocks with tool checks Interfaces and modports: Bundle signals and define direction per...
 
 29
-00:02:39,296 --> 00:02:44,648
-Hands-on: module4/examples/always_latch/
+00:06:54,776 --> 00:07:26,912
+Protocol and design detail: What 1800-2005 Adds Over 1364-2005 (Design Subset) (2). Packages and import: Shared types, constants, and functions across modules unique case, priority case: Standard semantics for case statements (no tool-specific attributes) Operators: inside, wildcard ==?, and other enhancements Verification: Classes, assertions (SVA), coverage, etc. (covered in later modules or...
 
 30
-00:02:44,998 --> 00:02:51,262
-module4/examples/one_driver_logic/README.md
+00:07:27,262 --> 00:07:51,070
+Protocol and design detail: What This Module Emphasizes. Design/RTL: logic, always_comb/always_ff, interfaces, packages, unique/priority case Not in depth: Classes, SVA, coverage, constrained random (those are verification-focused) From MODULE4 Topics Covered — protocol/design depth.
 
 31
-00:02:51,612 --> 00:02:57,636
-Hands-on: module4/examples/one_driver_logic/
+00:07:51,420 --> 00:08:22,644
+Protocol and design detail: Relation to 1364-2005. 1364-2005 (Verilog) is a subset of 1800-2005 (SystemVerilog). Valid 1364-2005 RTL is valid 1800-2005 RTL; you can migrate incrementally (e.g. wire→logic, always @*→always_comb). From MODULE4 Topics Covered — protocol/design depth.
 
 32
-00:02:57,986 --> 00:03:03,674
-module4/examples/typedef_sv/README.md
+00:08:22,994 --> 00:08:55,658
+Protocol and design detail: logic (4-State, Single Driver) (1). logic: Replaces wire and reg when there is a single driver; can be used in both continuous and procedural assignments. Rule: A logic variable must have exactly one driver (one assign, or one always block, or one port connection). 4-state: 0, 1, X, Z (same as wire/reg). Ports: input logic, output logic; no need to choose wire vs...
 
 33
-00:03:04,024 --> 00:03:09,448
-Hands-on: module4/examples/typedef_sv/
+00:08:56,008 --> 00:09:13,864
+Protocol and design detail: logic (4-State, Single Driver) (2). Internal: Use logic for single-driver signals; use wire only when needed (e.g. multiple drivers, tri-state). From MODULE4 Topics Covered — protocol/design depth.
 
 34
-00:03:09,798 --> 00:03:14,838
-module4/examples/interfaces/README.md
+00:09:14,214 --> 00:09:46,758
+Protocol and design detail: bit and 2-State Types (1800). bit: 2-state (0, 1); no X or Z. Often used in testbenches and for indices. int, byte, shortint, longint: Integer types; 2-state unless declared with a 4-state base. Use in RTL: Optional (e.g. loop indices, parameters); many RTL designs use logic and integer/reg for compatibility. From MODULE4 Topics Covered — protocol/design depth.
 
 35
-00:03:15,188 --> 00:03:20,036
-Hands-on: module4/examples/interfaces/
+00:09:47,108 --> 00:10:17,396
+Protocol and design detail: always_comb. Intent: Combinational logic; no storage; outputs are a function of inputs only. Sensitivity: Automatically inferred (like always @*); must not contain latches. Tool check: Simulator/synthesis can warn if the block implies storage or is sensitive to clock edges. Prefer over always @* when the tool supports it: clearer intent and better checking. From...
 
 36
-00:03:20,386 --> 00:03:25,330
-module4/examples/packages/README.md
+00:10:17,746 --> 00:10:45,994
+Protocol and design detail: always_ff. Intent: Sequential logic (flip-flops); use nonblocking assignment (<=) only. Sensitivity: Must list exactly one clock (and optionally async reset); no other event controls. Tool check: Can warn if blocking assignment or incomplete sensitivity is used. From MODULE4 Topics Covered — protocol/design depth.
 
 37
-00:03:25,680 --> 00:03:30,408
-Hands-on: module4/examples/packages/
+00:10:46,344 --> 00:11:19,080
+Protocol and design detail: always_latch. Intent: Explicit latch (level-sensitive storage). Use sparingly; usually latches are unintended. When: When a latch is truly intended (e.g. transparent latch); otherwise use always_comb or always_ff. Recommendation: Prefer always_comb or always_ff; use always_latch only when a latch is desired. From MODULE4 Topics Covered — protocol/design depth.
 
 38
-00:03:30,758 --> 00:03:36,470
-module4/examples/package_typedef/README.md
+00:11:19,430 --> 00:11:42,182
+Protocol and design detail: Interface Declaration. Signals: Declared once inside the interface; shared by all modules that use it. modport: Defines a view (direction) for a given role (e.g. master sees data as output, slave sees data as input). From MODULE4 Topics Covered — protocol/design depth.
 
 39
-00:03:36,820 --> 00:03:42,292
-Hands-on: module4/examples/package_typedef/
+00:11:42,532 --> 00:12:02,980
+Protocol and design detail: Using an Interface in a Module. Port: Single interface port with a modport (e.g. bus_if.master bus). Access: bus.signal_name; direction is enforced by the modport. From MODULE4 Topics Covered — protocol/design depth.
 
 40
-00:03:42,642 --> 00:03:49,050
-module4/examples/case_unique_priority/README.md
+00:12:03,330 --> 00:12:17,058
+Protocol and design detail: Top-Level Connection. One interface instance: Connects master and slave; no long port lists. From MODULE4 Topics Covered — protocol/design depth.
 
 41
-00:03:49,400 --> 00:03:55,592
-Hands-on: module4/examples/case_unique_priority/
+00:12:17,408 --> 00:12:38,120
+Protocol and design detail: Package Declaration. Contents: parameter, localparam, typedef, function, task, etc. (no always blocks). Scope: Items are in namespace pkg_util:: until imported. From MODULE4 Topics Covered — protocol/design depth.
 
 42
-00:03:55,942 --> 00:04:01,558
-module4/examples/priority_case/README.md
+00:12:38,470 --> 00:13:00,118
+Protocol and design detail: Import and Use. import pkg_util::*: Import all names from the package (can cause name clashes). import pkg_util::item: Import specific items; safer when many packages are used. From MODULE4 Topics Covered — protocol/design depth.
 
 43
-00:04:01,908 --> 00:04:07,308
-Hands-on: module4/examples/priority_case/
+00:13:00,468 --> 00:13:28,716
+Protocol and design detail: unique case. Semantics: At most one case item must match at runtime; if none or more than one matches, a runtime error can be reported. Use: When the design guarantees at most one match (e.g. one-hot encoding, mutually exclusive conditions). Synthesis: Can be implemented as parallel priority logic; no inferred priority order. From MODULE4 Topics Covered —...
 
 44
-00:04:07,658 --> 00:04:12,674
-module4/examples/migration/README.md
+00:13:29,066 --> 00:13:56,018
+Protocol and design detail: priority case. Semantics: The first matching item has priority; if no item matches, a runtime error can be reported (unless default is present). Use: When priority order is intended (e.g. interrupt mask). Synthesis: Can be implemented as a priority chain (if-then-else or similar). From MODULE4 Topics Covered — protocol/design depth.
 
 45
-00:04:13,024 --> 00:04:17,800
-Hands-on: module4/examples/migration/
+00:13:56,368 --> 00:14:04,168
+Verification flow (reference). Stimulus, DUT response, and check points for this module.
 
 46
-00:04:18,150 --> 00:04:20,286
-Common pitfalls
+00:14:04,518 --> 00:14:38,118
+1. IEEE 1800-2005 Context (1/2). logic: Single type for single-driver nets/variables (replaces wire/reg in most RTL) 2-state types: bit, int, byte, etc. (mainly for testbenches; some RTL use) always_comb, always_ff, always_latch: Explicit procedural blocks with tool checks Interfaces and modports: Bundle signals and define direction per connection Packages and import: Shared types, constants...
 
 47
-00:04:20,636 --> 00:04:23,612
-From MODULE4 Common Pitfalls.
+00:14:38,468 --> 00:15:16,148
+1. IEEE 1800-2005 Context (2/2). Operators: inside, wildcard ==?, and other enhancements Verification: Classes, assertions (SVA), coverage, etc. (covered in later modules or other courses) Design/RTL: logic, always_comb/always_ff, interfaces, packages, unique/priority case Not in depth: Classes, SVA, coverage, constrained random (those are verification-focused) 1364-2005 (Verilog) is a subset...
 
 48
-00:04:23,962 --> 00:04:26,938
-From MODULE4 Common Pitfalls.
+00:15:16,498 --> 00:15:49,522
+2. logic and 2-State Types (1800) (1/2). logic: Replaces wire and reg when there is a single driver; can be used in both continuous and procedural assignments. Rule: A logic variable must have exactly one driver (one assign, or one always block, or one port connection). 4-state: 0, 1, X, Z (same as wire/reg). Ports: input logic, output logic; no need to choose wire vs reg for single-driver...
 
 49
-00:04:27,288 --> 00:04:30,264
-From MODULE4 Common Pitfalls.
+00:15:49,872 --> 00:16:10,872
+2. logic and 2-State Types (1800) (2/2). int, byte, shortint, longint: Integer types; 2-state unless declared with a 4-state base. Use in RTL: Optional (e.g. loop indices, parameters); many RTL designs use logic and integer/reg for compatibility.
 
 50
-00:04:30,614 --> 00:04:33,590
-From MODULE4 Common Pitfalls.
+00:16:11,222 --> 00:16:43,262
+3. always_comb, always_ff, always_latch (1800) (1/2). Intent: Combinational logic; no storage; outputs are a function of inputs only. Sensitivity: Automatically inferred (like always @*); must not contain latches. Tool check: Simulator/synthesis can warn if the block implies storage or is sensitive to clock edges. Prefer over always @* when the tool supports it: clearer intent and better...
 
 51
-00:04:33,940 --> 00:04:36,916
-From MODULE4 Common Pitfalls.
+00:16:43,612 --> 00:17:18,220
+3. always_comb, always_ff, always_latch (1800) (2/2). Tool check: Can warn if blocking assignment or incomplete sensitivity is used. Intent: Explicit latch (level-sensitive storage). Use sparingly; usually latches are unintended. When: When a latch is truly intended (e.g. transparent latch); otherwise use always_comb or always_ff. Recommendation: Prefer always_comb or always_ff; use...
 
 52
-00:04:37,266 --> 00:04:39,594
-Practice & assessment
+00:17:18,570 --> 00:17:51,570
+4. Interfaces and Modports (1800). Signals: Declared once inside the interface; shared by all modules that use it. modport: Defines a view (direction) for a given role (e.g. master sees data as output, slave sees data as input). Port: Single interface port with a modport (e.g. bus_if.master bus). Access: bus.signal_name; direction is enforced by the modport. One interface instance: Connects...
 
 53
-00:04:39,944 --> 00:04:42,872
-From MODULE4 Learning Outcomes.
+00:17:51,920 --> 00:18:21,512
+5. Packages and import (1800). Contents: parameter, localparam, typedef, function, task, etc. (no always blocks). Scope: Items are in namespace pkg_util:: until imported. import pkg_util::*: Import all names from the package (can cause name clashes). import pkg_util::item: Import specific items; safer when many packages are used.
 
 54
-00:04:43,222 --> 00:04:46,150
-From MODULE4 Learning Outcomes.
+00:18:21,862 --> 00:18:51,646
+6. unique case and priority case (1800). Semantics: At most one case item must match at runtime; if none or more than one matches, a runtime error can be reported. Use: When the design guarantees at most one match (e.g. one-hot encoding, mutually exclusive conditions). Synthesis: Can be implemented as parallel priority logic; no inferred priority order. Semantics: The first matching item has...
 
 55
-00:04:46,500 --> 00:04:54,060
-Exercises logic and always_comb/always_ff Interface Package unique case Migration Summary
+00:18:51,996 --> 00:19:03,204
+7. Comparison: 1364-2005 vs 1800-2005 (Design). See docs/MODULE4.md
 
 56
-00:04:54,410 --> 00:05:04,898
-Exercises Multiple Drivers on logic Using always_comb with Latched Behavior Wrong Modport or Direction Forgetting to import Package unique case with Multiple Matches
+00:19:03,554 --> 00:19:06,794
+Next section: Hands-on examples.
 
 57
-00:05:05,248 --> 00:05:31,096
-Summary & next steps Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case. Complete module4/CHECKLIST.md Review module4/EXAMPLES.md and run each lab Next: Next module in course
+00:19:07,144 --> 00:19:18,664
+Module 4 toolchain check. Watch the terminal output and confirm you see the expected pass message. Requires iverilog on PATH (apt install iverilog).
+
+58
+00:19:19,014 --> 00:19:31,494
+Example 1: logic for ports and internal single-driver signals. Single driver for logic; 4-state module4/examples/data_types/README.md
+
+59
+00:19:31,844 --> 00:19:41,036
+Demo: logic for ports and internal single-driver signals. Watch the terminal output and confirm you see the expected pass message.
+
+60
+00:19:41,386 --> 00:19:56,146
+Example 2: All ports logic (mux, adder); no wire/reg choice. assign and always_comb can drive output logic module4/examples/logic_ports/README.md
+
+61
+00:19:56,496 --> 00:20:06,912
+Demo: All ports logic (mux, adder); no wire/reg choice. Watch the terminal output and confirm you see the expected pass message.
+
+62
+00:20:07,262 --> 00:20:22,550
+Example 3: Combinational with always_comb; sequential with always_ff. Explicit intent; tool checks; no latch in always_comb module4/examples/procedural/README.md
+
+63
+00:20:22,900 --> 00:20:33,556
+Demo: Combinational with always_comb; sequential with always_ff. Watch the terminal output and confirm you see the expected pass message.
+
+64
+00:20:33,906 --> 00:20:49,866
+Example 4: Explicit latch when intended (e.g. transparent latch). Use when latch is desired; prefer always_comb/always_ff otherwise module4/examples/always_latch/README.md
+
+65
+00:20:50,216 --> 00:20:59,720
+Demo: Explicit latch when intended (e.g. transparent latch). Watch the terminal output and confirm you see the expected pass message.
+
+66
+00:21:00,070 --> 00:21:14,470
+Example 5: Single assign to one output; single always_ff to another. logic must have exactly one driver module4/examples/one_driver_logic/README.md
+
+67
+00:21:14,820 --> 00:21:25,068
+Demo: Single assign to one output; single always_ff to another. Watch the terminal output and confirm you see the expected pass message.
+
+68
+00:21:25,418 --> 00:21:39,194
+Example 6: typedef in module (e.g. byte_t = logic [7:0]). User-defined types for clarity module4/examples/typedef_sv/README.md
+
+69
+00:21:39,544 --> 00:21:50,296
+Demo: typedef in module (e.g. byte_t = logic [7:0]). Watch the terminal output and confirm you see the expected pass message.
+
+70
+00:21:50,646 --> 00:22:03,654
+Example 7: Interface definition, modports, connection in top. One bundle per connection; direction per modport module4/examples/interfaces/README.md
+
+71
+00:22:04,004 --> 00:22:13,484
+Demo: Interface definition, modports, connection in top. Watch the terminal output and confirm you see the expected pass message.
+
+72
+00:22:13,834 --> 00:22:27,322
+Example 8: Package with types/params/functions; import in modules. Namespace; wildcard vs specific import module4/examples/packages/README.md
+
+73
+00:22:27,672 --> 00:22:37,872
+Demo: Package with types/params/functions; import in modules. Watch the terminal output and confirm you see the expected pass message.
+
+74
+00:22:38,222 --> 00:22:51,878
+Example 9: Package with typedef and min_word function; import in ALU. Shared types and helpers across modules module4/examples/package_typedef/README.md
+
+75
+00:22:52,228 --> 00:23:02,452
+Demo: Package with typedef and min_word function; import in ALU. Watch the terminal output and confirm you see the expected pass message.
+
+76
+00:23:02,802 --> 00:23:18,858
+Example 10: unique case (at most one match); priority case (first match). Standard semantics; synthesis and simulation behavior module4/examples/case_unique_priority/README.md
+
+77
+00:23:19,208 --> 00:23:29,720
+Demo: unique case (at most one match); priority case (first match). Watch the terminal output and confirm you see the expected pass message.
+
+78
+00:23:30,070 --> 00:23:43,270
+Example 11: Arbiter with priority case (first req wins). priority case for arbiter, interrupt mask module4/examples/priority_case/README.md
+
+79
+00:23:43,620 --> 00:23:52,932
+Demo: Arbiter with priority case (first req wins). Watch the terminal output and confirm you see the expected pass message.
+
+80
+00:23:53,282 --> 00:24:14,234
+Example 12: Same small design in 1364-2005 style vs 1800-2005 style. wire/reg→logic, always @*→always_comb, always @(posedge clk)→always_ff module4/examples/migration/README.md
+
+81
+00:24:14,584 --> 00:24:27,280
+Demo: Same small design in 1364-2005 style vs 1800-2005 style. Watch the terminal output and confirm you see the expected pass message.
+
+82
+00:24:27,630 --> 00:24:30,822
+Next section: Common pitfalls.
+
+83
+00:24:31,172 --> 00:24:59,612
+Multiple Drivers on logic. Mistake: Driving the same logic from two assign statements or two always blocks. Reality: logic allows only one driver; multiple drivers are illegal or undefined. Correct: Use one assign or one always per logic; for multiple drivers use wire (e.g. tri-state). Why: logic is for single-driver RTL; wire is for resolved (multi-driver) nets.
+
+84
+00:24:59,962 --> 00:25:28,234
+Using always_comb with Latched Behavior. Mistake: Incomplete branches in always_comb (e.g. no default in case) and expecting no latch. Reality: Tools may infer a latch or report a warning. Correct: Assign every output in every path, or provide default before case. Why: always_comb is intended for pure combinational logic; latches require always_latch if desired.
+
+85
+00:25:28,584 --> 00:25:54,216
+Wrong Modport or Direction. Mistake: Driving an input in a modport or reading an output that is not in the modport. Reality: Compiler or elaboration error; or wrong connectivity. Correct: Use the modport that matches the module role (master vs slave); check direction in the interface. Why: Modports enforce direction; using the wrong view breaks the contract.
+
+86
+00:25:54,566 --> 00:26:17,150
+Forgetting to import Package. Mistake: Using a package type or function without importing. Reality: Identifier not found; compile error. Correct: Add import pkg_name::*; or import pkg_name::item; before use. Why: Package names are in a separate namespace until imported.
+
+87
+00:26:17,500 --> 00:26:44,980
+unique case with Multiple Matches. Mistake: Writing unique case when two items can match (e.g. overlapping or X in select). Reality: Runtime error or undefined behavior. Correct: Use unique case only when at most one item can match; use default for catch-all; or use priority case when priority is i Why: unique case has well-defined semantics; violating them breaks verification and synthesis.
+
+88
+00:26:45,330 --> 00:26:48,714
+Next section: Practice & assessment.
+
+89
+00:26:49,064 --> 00:27:12,536
+By now you should be able to explain the following. ✓ Use logic for single-driver nets and variables in RTL ✓ Use always_comb for combinational logic and always_ff for sequential logic ✓ Define and use interfaces with modports for bundled connectivity ✓ Define packages and import them in modules ✓ Use unique case and priority case with correct semantics From MODULE4 Learning Outcomes.
+
+90
+00:27:12,886 --> 00:27:24,214
+By now you should be able to explain the following. ✓ Decide when to adopt 1800 design features vs stay with 1364 From MODULE4 Learning Outcomes.
+
+91
+00:27:24,564 --> 00:27:33,300
+Exercises. logic and always_comb/always_ff Interface Package unique case Migration Summary
+
+92
+00:27:33,650 --> 00:27:45,338
+Exercises. Multiple Drivers on logic Using always_comb with Latched Behavior Wrong Modport or Direction Forgetting to import Package unique case with Multiple Matches
+
+93
+00:27:45,688 --> 00:28:24,544
+In summary: Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and unique/priority case. Next up: Next module in course. Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff, interfaces, packages, and... Complete module4/CHECKLIST.md Review module4/EXAMPLES.md...

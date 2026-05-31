@@ -10,6 +10,34 @@ assets:
   - 4
   - 4
   license: learn_verilog_systemverilog course materials
+- id: rtl_architecture
+  type: diagram
+  file: assets/diagrams/rtl_architecture.png
+  source: assets/diagrams/rtl_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 10
+  - 14
+  license: learn_verilog_systemverilog course materials
+- id: verification_architecture
+  type: diagram
+  file: assets/diagrams/verification_architecture.png
+  source: assets/diagrams/verification_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 12
+  - 15
+  license: learn_verilog_systemverilog course materials
+- id: testing_methods
+  type: diagram
+  file: assets/diagrams/testing_methods.png
+  source: assets/diagrams/testing_methods.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 13
+  - 23
+  - 24
+  license: learn_verilog_systemverilog course materials
 - id: module7_check
   type: screenshot
   file: assets/screenshots/module7_check.png
@@ -17,16 +45,58 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 12
+  - 30
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
+- id: ex01_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex01_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 32
+- id: ex02_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex02_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 34
+- id: ex03_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex03_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 36
+- id: ex04_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex04_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 38
+- id: ex05_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex05_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 40
+- id: ex06_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex06_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 42
 - id: ex07_migration
   type: screenshot
   file: assets/screenshots/ex07_migration.png
   capture_command: cd module7/examples/migration && make clean && make run
   cwd: .
   slides:
-  - 14
+  - 44
 - id: ex08_migration_1995_to_2001
   type: screenshot
   file: assets/screenshots/ex08_migration_1995_to_2001.png
@@ -34,35 +104,49 @@ assets:
     run
   cwd: .
   slides:
-  - 16
+  - 46
 - id: ex09_case_versions
   type: screenshot
   file: assets/screenshots/ex09_case_versions.png
   capture_command: cd module7/examples/case_versions && make clean && make run
   cwd: .
   slides:
-  - 18
+  - 48
 - id: ex10_version_table
   type: screenshot
   file: assets/screenshots/ex10_version_table.png
   capture_command: cd module7/examples/version_table && make clean && make run
   cwd: .
   slides:
-  - 20
+  - 50
 - id: ex11_version_selection
   type: screenshot
   file: assets/screenshots/ex11_version_selection.png
   capture_command: cd module7/examples/version_selection && make clean && make run
   cwd: .
   slides:
-  - 22
+  - 52
+- id: ex12_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex12_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 54
+- id: ex13_side_by_side
+  type: screenshot
+  file: assets/screenshots/ex13_side_by_side.png
+  capture_command: cd module7/examples/side_by_side && make clean && make run
+  cwd: .
+  slides:
+  - 56
 - id: ex14_migration_checklist
   type: screenshot
   file: assets/screenshots/ex14_migration_checklist.png
   capture_command: cd module7/examples/migration_checklist && make clean && make run
   cwd: .
   slides:
-  - 24
+  - 58
 - id: ex15_incremental_migration
   type: screenshot
   file: assets/screenshots/ex15_incremental_migration.png
@@ -70,18 +154,18 @@ assets:
     run
   cwd: .
   slides:
-  - 26
+  - 60
 - id: ex16_port_style_compare
   type: screenshot
   file: assets/screenshots/ex16_port_style_compare.png
   capture_command: cd module7/examples/port_style_compare && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 62
 - id: ex17_no_defparam
   type: screenshot
   file: assets/screenshots/ex17_no_defparam.png
   capture_command: cd module7/examples/no_defparam && make clean && make run
   cwd: .
   slides:
-  - 30
+  - 64

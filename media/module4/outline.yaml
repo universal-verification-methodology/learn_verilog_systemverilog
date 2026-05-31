@@ -8,29 +8,42 @@ slides:
 - type: title
   title: Module 4
   subtitle: IEEE 1800-2005 (SystemVerilog Design Subset)
+  narration: 'Welcome to module 4, IEEE 1800-2005 (SystemVerilog Design Subset). In
+    this module you will master the first systemverilog standard (ieee 1800-2005)
+    for rtl design: logic types, always_comb/always_ff, interfaces, packages, and
+    unique/priority case..'
 - type: bullets
   title: Learning objectives
   bullets:
   - 'Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic
-    types, always_comb/always_ff, interfaces, packages, and unique/priority case.'
+    types, always_comb/always_ff, interfaces, packages, and...'
+  narration: 'Here is what you will learn in this module. Master the first SystemVerilog
+    standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff,
+    interfaces, packages, and...'
 - type: bullets
   title: Prerequisites
   bullets:
   - See module README
+  narration: Before you start, make sure you have these prerequisites. See module
+    README
 - type: image
   title: Learning path
   image: assets/diagrams/learning_path.png
   caption: 'Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design:
-    logic types, always_comb/always_ff, interfaces, packages, and unique/priority
-    case.'
+    logic types, always_comb/always_ff, interfaces, packages, and...'
+  narration: 'Learning path. Master the first SystemVerilog standard (IEEE 1800-2005)
+    for RTL design: logic types, always_comb/always_ff, interfaces, packages, and
+    unique/priority case.'
 - type: bullets
   title: Overview
   bullets:
-  - 'This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It extends
-    Verilog (IEEE 1364-2005) with design and verification features. Here the focus
-    is on the **design subset** used for RTL: the `logic` typ'
+  - This module covers IEEE Std 1800-2005, the first SystemVerilog standard. It extends
+    Verilog (IEEE 1364-2005) with design and...
+  narration: Overview. This module covers IEEE Std 1800-2005, the first SystemVerilog
+    standard. It extends Verilog (IEEE 1364-2005) with design and...
 - type: section
   title: How to learn this module
+  narration: 'Next section: How to learn this module.'
 - type: bullets
   title: Suggested learning path (1/2)
   bullets:
@@ -45,14 +58,400 @@ slides:
   - Complete the exercises — Try each exercise in this document before reading solutions
     or peeking at reference RTL.
   notes: From docs/MODULE4.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Skim
+    this document — Goal, Overview, and Topics Covered set the IEEE scope for Module
+    4. Study design architecture — See how DUTs, examples, and testbenches fit together
+    under module4/. Work through labs in order — Open module4/EXAMPLES.md and run
+    each make clean && make run from the repo root. Run the full module script —...
 - type: bullets
   title: Suggested learning path (2/2)
   bullets:
   - Review Common Pitfalls — Can you explain each mistake and the fix?
   - Self-check — Use `module4/CHECKLIST.md` before starting the next module.
   notes: From docs/MODULE4.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Review
+    Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module4/CHECKLIST.md
+    before starting the next module. From docs/MODULE4.md — read guides before running
+    demos.
+- type: section
+  title: Design architecture
+  narration: 'Next section: Design architecture.'
+- type: two_column
+  title: 1. Repository layout (module4/) (1/2)
+  left:
+  - First SystemVerilog module — .sv sources and design subset focus
+  - logic replaces wire/reg for single-driver RTL in most examples
+  - always_comb / always_ff / always_latch — explicit procedural intent
+  - interfaces and packages — connectivity and shared types
+  right: assets/diagrams/rtl_architecture.png
+  notes: From MODULE4 Design Architecture.
+  narration: 1. Repository layout (module4/) (1/2). First SystemVerilog module — .sv
+    sources and design subset focus logic replaces wire/reg for single-driver RTL
+    in most examples always_comb / always_ff / always_latch — explicit procedural
+    intent interfaces and packages — connectivity and shared types Refer to the diagram
+    on the right.
+- type: bullets
+  title: 1. Repository layout (module4/) (2/2)
+  bullets:
+  - scripts/module4.sh — requires simulator with SV design subset
+  notes: From MODULE4 Design Architecture.
+  narration: 1. Repository layout (module4/) (2/2). scripts/module4.sh — requires
+    simulator with SV design subset
+- type: two_column
+  title: 2. SystemVerilog design layering
+  left:
+  - Packages hold typedefs, constants, functions — import in modules
+  - Interfaces bundle signals; modports define direction per connection
+  - always_comb infers sensitivity; always_ff targets flip-flops
+  - unique/priority case — standard semantics for full case checking
+  right: assets/diagrams/verification_architecture.png
+  notes: From MODULE4 Design Architecture.
+  narration: 2. SystemVerilog design layering. Packages hold typedefs, constants,
+    functions — import in modules Interfaces bundle signals; modports define direction
+    per connection always_comb infers sensitivity; always_ff targets flip-flops unique/priority
+    case — standard semantics for full case checking Refer to the diagram on the right.
+- type: two_column
+  title: 3. File and compilation units
+  left:
+  - .sv extension signals SystemVerilog to the tool
+  - Package before import; interface before modport connection
+  - See verification_architecture.png — TB still drives DUT via ports or interface
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE4 Design Architecture.
+  narration: 3. File and compilation units. .sv extension signals SystemVerilog to
+    the tool Package before import; interface before modport connection See verification_architecture.png
+    — TB still drives DUT via ports or interface Refer to the diagram on the right.
+- type: image
+  title: RTL block diagram (reference)
+  image: assets/diagrams/rtl_architecture.png
+  caption: 'Module 4: DUT hierarchy and signal flow.'
+  narration: 'RTL block diagram (reference). Module 4: DUT hierarchy and signal flow.'
+- type: image
+  title: Verification / testbench diagram (reference)
+  image: assets/diagrams/verification_architecture.png
+  caption: 'Module 4: stimulus, observation, and checking.'
+  narration: 'Verification / testbench diagram (reference). Module 4: stimulus, observation,
+    and checking.'
+- type: code
+  title: logic ports and always_comb
+  language: systemverilog
+  source_file: module4/examples/procedural/always_comb_ff.sv
+  code: "/*\n * always_comb and always_ff - IEEE 1800-2005\n * Combinational: always_comb\
+    \ (inferred sensitivity). Sequential: always_ff (one clock).\n */\n\nmodule always_comb_ff_demo\
+    \ (\n    input  logic       clk,\n    input  logic       rst_n,\n    input  logic\
+    \       a,\n    input  logic       b,\n    input  logic       c,\n    input  logic\
+    \       d,\n    output logic       y_comb,\n    output logic       z_comb,\n \
+    \   output logic       q\n);\n    /* Combinational: always_comb; no latch */\n\
+    \    always_comb begin\n// ..."
+  narration: logic ports and always_comb. Review the code on screen and match it to
+    files in the repository.
+- type: code
+  title: Interface + modport connection
+  language: systemverilog
+  source_file: module4/examples/interfaces/bus_if_example.sv
+  code: "/*\n * Interface and modports - IEEE 1800-2005\n * One bundle; modports define\
+    \ direction per role.\n */\n\ninterface simple_bus_if;\n    logic [7:0] data;\n\
+    \    logic        valid;\n    logic        ready;\n    logic        clk;\n   \
+    \ logic        rst_n;\n\n    modport master (output data, valid, input ready,\
+    \ clk, rst_n);\n    modport slave  (input data, valid, output ready, input clk,\
+    \ rst_n);\nendinterface\n\nmodule producer (simple_bus_if.master m);\n    always_ff\
+    \ @(posedge m.clk) begin\n// ..."
+  narration: Interface + modport connection. Review the code on screen and match it
+    to files in the repository.
+- type: section
+  title: Execution & simulation flow
+  narration: 'Next section: Execution & simulation flow.'
+- type: bullets
+  title: How the example runs (toolchain)
+  bullets:
+  - 'Makefile: Verilator + UVM_HOME compile RTL, interface, and test_*.sv'
+  - 'UVM phases: build → connect → run_test → report (same pattern as Module 2)'
+  - Sequence → driver → DUT → monitor → scoreboard (read SCOREBOARD at end)
+  - 'Typical command: make SIM=verilator TEST=test_* (see module4 demo slide)'
+  - Loopback / hooks connect monitor observations to scoreboard checks
+  notes: From MODULE4 — execution and artifact layout.
+  narration: 'How the example runs (toolchain). Match each bullet to files in the
+    repository. Makefile: Verilator + UVM_HOME compile RTL, interface, and test_*.sv
+    UVM phases: build → connect → run_test → report (same pattern as Module 2) Sequence
+    → driver → DUT → monitor → scoreboard (read SCOREBOARD at end) Typical command:
+    make SIM=verilator TEST=test_* (see module4 demo slide) Loopback / hooks connect...'
+- type: section
+  title: Key files to study
+  narration: 'Next section: Key files to study.'
+- type: bullets
+  title: Open these in the repo
+  bullets:
+  - module4/examples/logic_ports/logic_ports.sv
+  - module4/examples/procedural/always_comb_ff.sv
+  - module4/examples/interfaces/bus_if_example.sv
+  - module4/examples/packages/pkg_util.sv
+  - scripts/module4.sh
+  notes: Trace while running module4/EXAMPLES.md labs.
+  narration: Open these in the repo. module4/examples/logic_ports/logic_ports.sv module4/examples/procedural/always_comb_ff.sv
+    module4/examples/interfaces/bus_if_example.sv module4/examples/packages/pkg_util.sv
+    scripts/module4.sh Trace while running module4/EXAMPLES.md labs.
+- type: section
+  title: Verification & testing methods
+  narration: 'Next section: Verification & testing methods.'
+- type: two_column
+  title: 1. Running SystemVerilog labs
+  left:
+  - cd module4/examples/<name> && make clean && make run
+  - ./scripts/module4.sh — full module; some labs need full SV support
+  - iverilog supports subset; check build.log if a feature is unsupported
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE4 Verification & Testing Methods.
+  narration: 1. Running SystemVerilog labs. cd module4/examples/<name> && make clean
+    && make run ./scripts/module4.sh — full module; some labs need full SV support
+    iverilog supports subset; check build.log if a feature is unsupported Refer to
+    the diagram on the right.
+- type: two_column
+  title: 2. What to check in simulation
+  left:
+  - logic ports compile without separate wire/reg declarations
+  - always_comb blocks reject clock/reset inside (tool error = correct)
+  - Interface examples connect via modport, not dozens of scalar ports
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE4 Verification & Testing Methods.
+  narration: 2. What to check in simulation. logic ports compile without separate
+    wire/reg declarations always_comb blocks reject clock/reset inside (tool error
+    = correct) Interface examples connect via modport, not dozens of scalar ports
+    Refer to the diagram on the right.
+- type: code
+  title: Package import pattern
+  language: systemverilog
+  source_file: module4/examples/packages/pkg_util.sv
+  code: "/*\n * Package and import - IEEE 1800-2005\n * Shared types, parameters,\
+    \ functions.\n */\n\npackage pkg_util;\n    parameter int WIDTH = 8;\n    typedef\
+    \ logic [WIDTH-1:0] word_t;\n\n    function automatic logic [7:0] parity(input\
+    \ logic [31:0] v);\n        parity = ^v;\n    endfunction\nendpackage\n\nmodule\
+    \ alu (\n    input  logic [31:0] a,\n    input  logic [31:0] b,\n    output logic\
+    \ [31:0] y,\n// ..."
+  narration: Package import pattern. Review the code on screen and match it to files
+    in the repository.
 - type: section
   title: Syllabus topics
+  narration: 'Next section: Syllabus topics.'
+- type: section
+  title: Protocol & design details
+  narration: 'Next section: Protocol & design details.'
+- type: bullets
+  title: 'Detail: What 1800-2005 Adds Over 1364-2005 (Design Subset) (1)'
+  bullets:
+  - 'logic: Single type for single-driver nets/variables (replaces wire/reg in most
+    RTL)'
+  - '2-state types: `bit`, `int`, `byte`, etc. (mainly for testbenches; some RTL use)'
+  - 'always_comb, always_ff, always_latch: Explicit procedural blocks with tool checks'
+  - 'Interfaces and modports: Bundle signals and define direction per connection'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1800-2005 Adds Over 1364-2005 (Design
+    Subset) (1). logic: Single type for single-driver nets/variables (replaces wire/reg
+    in most RTL) 2-state types: bit, int, byte, etc. (mainly for testbenches; some
+    RTL use) always_comb, always_ff, always_latch: Explicit procedural blocks with
+    tool checks Interfaces and modports: Bundle signals and define direction per...'
+- type: bullets
+  title: 'Detail: What 1800-2005 Adds Over 1364-2005 (Design Subset) (2)'
+  bullets:
+  - 'Packages and import: Shared types, constants, and functions across modules'
+  - 'unique case, priority case: Standard semantics for case statements (no tool-specific
+    attributes)'
+  - 'Operators: `inside`, wildcard `==?`, and other enhancements'
+  - 'Verification: Classes, assertions (SVA), coverage, etc. (covered in later modules
+    or other courses)'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1800-2005 Adds Over 1364-2005 (Design
+    Subset) (2). Packages and import: Shared types, constants, and functions across
+    modules unique case, priority case: Standard semantics for case statements (no
+    tool-specific attributes) Operators: inside, wildcard ==?, and other enhancements
+    Verification: Classes, assertions (SVA), coverage, etc. (covered in later modules
+    or...'
+- type: bullets
+  title: 'Detail: What This Module Emphasizes'
+  bullets:
+  - 'Design/RTL: logic, always_comb/always_ff, interfaces, packages, unique/priority
+    case'
+  - 'Not in depth: Classes, SVA, coverage, constrained random (those are verification-focused)'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What This Module Emphasizes. Design/RTL:
+    logic, always_comb/always_ff, interfaces, packages, unique/priority case Not in
+    depth: Classes, SVA, coverage, constrained random (those are verification-focused)
+    From MODULE4 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Relation to 1364-2005'
+  bullets:
+  - 1364-2005 (Verilog) is a subset of 1800-2005 (SystemVerilog).
+  - Valid 1364-2005 RTL is valid 1800-2005 RTL; you can migrate incrementally (e.g.
+    wire→logic, always @*→always_comb).
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Relation to 1364-2005. 1364-2005 (Verilog)
+    is a subset of 1800-2005 (SystemVerilog). Valid 1364-2005 RTL is valid 1800-2005
+    RTL; you can migrate incrementally (e.g. wire→logic, always @*→always_comb). From
+    MODULE4 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: logic (4-State, Single Driver) (1)'
+  bullets:
+  - 'logic: Replaces `wire` and `reg` when there is a single driver; can be used in
+    both continuous and procedural assignments.'
+  - 'Rule: A `logic` variable must have exactly one driver (one assign, or one always
+    block, or one port connection).'
+  - '4-state: 0, 1, X, Z (same as wire/reg).'
+  - 'Ports: `input logic`, `output logic`; no need to choose wire vs reg for single-driver
+    ports.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: logic (4-State, Single Driver) (1). logic:
+    Replaces wire and reg when there is a single driver; can be used in both continuous
+    and procedural assignments. Rule: A logic variable must have exactly one driver
+    (one assign, or one always block, or one port connection). 4-state: 0, 1, X, Z
+    (same as wire/reg). Ports: input logic, output logic; no need to choose wire vs...'
+- type: bullets
+  title: 'Detail: logic (4-State, Single Driver) (2)'
+  bullets:
+  - 'Internal: Use `logic` for single-driver signals; use `wire` only when needed
+    (e.g. multiple drivers, tri-state).'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: logic (4-State, Single Driver) (2). Internal:
+    Use logic for single-driver signals; use wire only when needed (e.g. multiple
+    drivers, tri-state). From MODULE4 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: bit and 2-State Types (1800)'
+  bullets:
+  - 'bit: 2-state (0, 1); no X or Z. Often used in testbenches and for indices.'
+  - 'int, byte, shortint, longint: Integer types; 2-state unless declared with a 4-state
+    base.'
+  - 'Use in RTL: Optional (e.g. loop indices, parameters); many RTL designs use `logic`
+    and `integer`/`reg` for compatibility.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: bit and 2-State Types (1800). bit: 2-state
+    (0, 1); no X or Z. Often used in testbenches and for indices. int, byte, shortint,
+    longint: Integer types; 2-state unless declared with a 4-state base. Use in RTL:
+    Optional (e.g. loop indices, parameters); many RTL designs use logic and integer/reg
+    for compatibility. From MODULE4 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: always_comb'
+  bullets:
+  - 'Intent: Combinational logic; no storage; outputs are a function of inputs only.'
+  - 'Sensitivity: Automatically inferred (like `always @*`); must not contain latches.'
+  - 'Tool check: Simulator/synthesis can warn if the block implies storage or is sensitive
+    to clock edges.'
+  - 'Prefer over `always @*` when the tool supports it: clearer intent and better
+    checking.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: always_comb. Intent: Combinational logic;
+    no storage; outputs are a function of inputs only. Sensitivity: Automatically
+    inferred (like always @*); must not contain latches. Tool check: Simulator/synthesis
+    can warn if the block implies storage or is sensitive to clock edges. Prefer over
+    always @* when the tool supports it: clearer intent and better checking. From...'
+- type: bullets
+  title: 'Detail: always_ff'
+  bullets:
+  - 'Intent: Sequential logic (flip-flops); use nonblocking assignment (`<=`) only.'
+  - 'Sensitivity: Must list exactly one clock (and optionally async reset); no other
+    event controls.'
+  - 'Tool check: Can warn if blocking assignment or incomplete sensitivity is used.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: always_ff. Intent: Sequential logic (flip-flops);
+    use nonblocking assignment (<=) only. Sensitivity: Must list exactly one clock
+    (and optionally async reset); no other event controls. Tool check: Can warn if
+    blocking assignment or incomplete sensitivity is used. From MODULE4 Topics Covered
+    — protocol/design depth.'
+- type: bullets
+  title: 'Detail: always_latch'
+  bullets:
+  - 'Intent: Explicit latch (level-sensitive storage). Use sparingly; usually latches
+    are unintended.'
+  - 'When: When a latch is truly intended (e.g. transparent latch); otherwise use
+    always_comb or always_ff.'
+  - 'Recommendation: Prefer always_comb or always_ff; use always_latch only when a
+    latch is desired.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: always_latch. Intent: Explicit latch (level-sensitive
+    storage). Use sparingly; usually latches are unintended. When: When a latch is
+    truly intended (e.g. transparent latch); otherwise use always_comb or always_ff.
+    Recommendation: Prefer always_comb or always_ff; use always_latch only when a
+    latch is desired. From MODULE4 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Interface Declaration'
+  bullets:
+  - 'Signals: Declared once inside the interface; shared by all modules that use it.'
+  - 'modport: Defines a view (direction) for a given role (e.g. master sees data as
+    output, slave sees data as input).'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Interface Declaration. Signals: Declared
+    once inside the interface; shared by all modules that use it. modport: Defines
+    a view (direction) for a given role (e.g. master sees data as output, slave sees
+    data as input). From MODULE4 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Using an Interface in a Module'
+  bullets:
+  - 'Port: Single interface port with a modport (e.g. `bus_if.master bus`).'
+  - 'Access: `bus.signal_name`; direction is enforced by the modport.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Using an Interface in a Module. Port: Single
+    interface port with a modport (e.g. bus_if.master bus). Access: bus.signal_name;
+    direction is enforced by the modport. From MODULE4 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Top-Level Connection'
+  bullets:
+  - 'One interface instance: Connects master and slave; no long port lists.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Top-Level Connection. One interface instance:
+    Connects master and slave; no long port lists. From MODULE4 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Package Declaration'
+  bullets:
+  - 'Contents: parameter, localparam, typedef, function, task, etc. (no always blocks).'
+  - 'Scope: Items are in namespace `pkg_util::` until imported.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Package Declaration. Contents: parameter,
+    localparam, typedef, function, task, etc. (no always blocks). Scope: Items are
+    in namespace pkg_util:: until imported. From MODULE4 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Import and Use'
+  bullets:
+  - 'import pkg_util::*: Import all names from the package (can cause name clashes).'
+  - 'import pkg_util::item: Import specific items; safer when many packages are used.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Import and Use. import pkg_util::*: Import
+    all names from the package (can cause name clashes). import pkg_util::item: Import
+    specific items; safer when many packages are used. From MODULE4 Topics Covered
+    — protocol/design depth.'
+- type: bullets
+  title: 'Detail: unique case'
+  bullets:
+  - 'Semantics: At most one case item must match at runtime; if none or more than
+    one matches, a runtime error can be reported.'
+  - 'Use: When the design guarantees at most one match (e.g. one-hot encoding, mutually
+    exclusive conditions).'
+  - 'Synthesis: Can be implemented as parallel priority logic; no inferred priority
+    order.'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: unique case. Semantics: At most one case
+    item must match at runtime; if none or more than one matches, a runtime error
+    can be reported. Use: When the design guarantees at most one match (e.g. one-hot
+    encoding, mutually exclusive conditions). Synthesis: Can be implemented as parallel
+    priority logic; no inferred priority order. From MODULE4 Topics Covered —...'
+- type: bullets
+  title: 'Detail: priority case'
+  bullets:
+  - 'Semantics: The first matching item has priority; if no item matches, a runtime
+    error can be reported (unless default is present).'
+  - 'Use: When priority order is intended (e.g. interrupt mask).'
+  - 'Synthesis: Can be implemented as a priority chain (if-then-else or similar).'
+  notes: From MODULE4 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: priority case. Semantics: The first matching
+    item has priority; if no item matches, a runtime error can be reported (unless
+    default is present). Use: When priority order is intended (e.g. interrupt mask).
+    Synthesis: Can be implemented as a priority chain (if-then-else or similar). From
+    MODULE4 Topics Covered — protocol/design depth.'
+- type: image
+  title: Verification flow (reference)
+  image: assets/diagrams/testing_methods.png
+  caption: Stimulus, DUT response, and check points for this module.
+  narration: Verification flow (reference). Stimulus, DUT response, and check points
+    for this module.
 - type: bullets
   title: 1. IEEE 1800-2005 Context (1/2)
   bullets:
@@ -65,6 +464,11 @@ slides:
   - 'unique case, priority case: Standard semantics for case statements (no tool-specific
     attributes)'
   notes: From MODULE4 Topics Covered.
+  narration: '1. IEEE 1800-2005 Context (1/2). logic: Single type for single-driver
+    nets/variables (replaces wire/reg in most RTL) 2-state types: bit, int, byte,
+    etc. (mainly for testbenches; some RTL use) always_comb, always_ff, always_latch:
+    Explicit procedural blocks with tool checks Interfaces and modports: Bundle signals
+    and define direction per connection Packages and import: Shared types, constants...'
 - type: bullets
   title: 1. IEEE 1800-2005 Context (2/2)
   bullets:
@@ -78,6 +482,11 @@ slides:
   - Valid 1364-2005 RTL is valid 1800-2005 RTL; you can migrate incrementally (e.g.
     wire→logic, always @*→always_comb).
   notes: From MODULE4 Topics Covered.
+  narration: '1. IEEE 1800-2005 Context (2/2). Operators: inside, wildcard ==?, and
+    other enhancements Verification: Classes, assertions (SVA), coverage, etc. (covered
+    in later modules or other courses) Design/RTL: logic, always_comb/always_ff, interfaces,
+    packages, unique/priority case Not in depth: Classes, SVA, coverage, constrained
+    random (those are verification-focused) 1364-2005 (Verilog) is a subset...'
 - type: bullets
   title: 2. logic and 2-State Types (1800) (1/2)
   bullets:
@@ -92,6 +501,11 @@ slides:
     (e.g. multiple drivers, tri-state).'
   - 'bit: 2-state (0, 1); no X or Z. Often used in testbenches and for indices.'
   notes: From MODULE4 Topics Covered.
+  narration: '2. logic and 2-State Types (1800) (1/2). logic: Replaces wire and reg
+    when there is a single driver; can be used in both continuous and procedural assignments.
+    Rule: A logic variable must have exactly one driver (one assign, or one always
+    block, or one port connection). 4-state: 0, 1, X, Z (same as wire/reg). Ports:
+    input logic, output logic; no need to choose wire vs reg for single-driver...'
 - type: bullets
   title: 2. logic and 2-State Types (1800) (2/2)
   bullets:
@@ -100,6 +514,10 @@ slides:
   - 'Use in RTL: Optional (e.g. loop indices, parameters); many RTL designs use `logic`
     and `integer`/`reg` for compatibility.'
   notes: From MODULE4 Topics Covered.
+  narration: '2. logic and 2-State Types (1800) (2/2). int, byte, shortint, longint:
+    Integer types; 2-state unless declared with a 4-state base. Use in RTL: Optional
+    (e.g. loop indices, parameters); many RTL designs use logic and integer/reg for
+    compatibility.'
 - type: bullets
   title: 3. always_comb, always_ff, always_latch (1800) (1/2)
   bullets:
@@ -113,6 +531,11 @@ slides:
   - 'Sensitivity: Must list exactly one clock (and optionally async reset); no other
     event controls.'
   notes: From MODULE4 Topics Covered.
+  narration: '3. always_comb, always_ff, always_latch (1800) (1/2). Intent: Combinational
+    logic; no storage; outputs are a function of inputs only. Sensitivity: Automatically
+    inferred (like always @*); must not contain latches. Tool check: Simulator/synthesis
+    can warn if the block implies storage or is sensitive to clock edges. Prefer over
+    always @* when the tool supports it: clearer intent and better...'
 - type: bullets
   title: 3. always_comb, always_ff, always_latch (1800) (2/2)
   bullets:
@@ -124,6 +547,11 @@ slides:
   - 'Recommendation: Prefer always_comb or always_ff; use always_latch only when a
     latch is desired.'
   notes: From MODULE4 Topics Covered.
+  narration: '3. always_comb, always_ff, always_latch (1800) (2/2). Tool check: Can
+    warn if blocking assignment or incomplete sensitivity is used. Intent: Explicit
+    latch (level-sensitive storage). Use sparingly; usually latches are unintended.
+    When: When a latch is truly intended (e.g. transparent latch); otherwise use always_comb
+    or always_ff. Recommendation: Prefer always_comb or always_ff; use...'
 - type: bullets
   title: 4. Interfaces and Modports (1800)
   bullets:
@@ -134,6 +562,11 @@ slides:
   - 'Access: `bus.signal_name`; direction is enforced by the modport.'
   - 'One interface instance: Connects master and slave; no long port lists.'
   notes: From MODULE4 Topics Covered.
+  narration: '4. Interfaces and Modports (1800). Signals: Declared once inside the
+    interface; shared by all modules that use it. modport: Defines a view (direction)
+    for a given role (e.g. master sees data as output, slave sees data as input).
+    Port: Single interface port with a modport (e.g. bus_if.master bus). Access: bus.signal_name;
+    direction is enforced by the modport. One interface instance: Connects...'
 - type: bullets
   title: 5. Packages and import (1800)
   bullets:
@@ -142,6 +575,11 @@ slides:
   - 'import pkg_util::*: Import all names from the package (can cause name clashes).'
   - 'import pkg_util::item: Import specific items; safer when many packages are used.'
   notes: From MODULE4 Topics Covered.
+  narration: '5. Packages and import (1800). Contents: parameter, localparam, typedef,
+    function, task, etc. (no always blocks). Scope: Items are in namespace pkg_util::
+    until imported. import pkg_util::*: Import all names from the package (can cause
+    name clashes). import pkg_util::item: Import specific items; safer when many packages
+    are used.'
 - type: bullets
   title: 6. unique case and priority case (1800)
   bullets:
@@ -156,13 +594,21 @@ slides:
   - 'Use: When priority order is intended (e.g. interrupt mask).'
   - 'Synthesis: Can be implemented as a priority chain (if-then-else or similar).'
   notes: From MODULE4 Topics Covered.
+  narration: '6. unique case and priority case (1800). Semantics: At most one case
+    item must match at runtime; if none or more than one matches, a runtime error
+    can be reported. Use: When the design guarantees at most one match (e.g. one-hot
+    encoding, mutually exclusive conditions). Synthesis: Can be implemented as parallel
+    priority logic; no inferred priority order. Semantics: The first matching item
+    has...'
 - type: bullets
   title: '7. Comparison: 1364-2005 vs 1800-2005 (Design)'
   bullets:
   - See docs/MODULE4.md
   notes: From MODULE4 Topics Covered.
+  narration: '7. Comparison: 1364-2005 vs 1800-2005 (Design). See docs/MODULE4.md'
 - type: section
   title: Hands-on examples
+  narration: 'Next section: Hands-on examples.'
 - type: demo
   title: Module 4 toolchain check
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
@@ -170,140 +616,179 @@ slides:
   screenshot: assets/screenshots/module4_check.png
   expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+  narration: Module 4 self-check. Watch the terminal output and confirm you see the
+    expected pass message.
 - type: bullets
-  title: 'Example 1: logic and 2-State Types'
+  title: 'Example 1: logic for ports and internal single-driver signals'
   bullets:
-  - logic for ports and internal single-driver signals
   - Single driver for logic; 4-state
   notes: module4/examples/data_types/README.md
+  narration: 'Example 1: logic for ports and internal single-driver signals. Single
+    driver for logic; 4-state module4/examples/data_types/README.md'
 - type: demo
-  title: 'Demo: logic and 2-State Types'
+  title: 'Demo: logic for ports and internal single-driver signals'
   command: cd module4/examples/data_types && make clean && make run
   screenshot: assets/screenshots/ex01_data_types.png
   notes: 'Hands-on: module4/examples/data_types/'
+  narration: 'Demo: logic for ports and internal single-driver signals. Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 2: logic Ports'
+  title: 'Example 2: All ports logic (mux, adder); no wire/reg choice'
   bullets:
-  - All ports logic (mux, adder); no wire/reg choice
   - assign and always_comb can drive output logic
   notes: module4/examples/logic_ports/README.md
+  narration: 'Example 2: All ports logic (mux, adder); no wire/reg choice. assign
+    and always_comb can drive output logic module4/examples/logic_ports/README.md'
 - type: demo
-  title: 'Demo: logic Ports'
+  title: 'Demo: All ports logic (mux, adder); no wire/reg choice'
   command: cd module4/examples/logic_ports && make clean && make run
   screenshot: assets/screenshots/ex02_logic_ports.png
   notes: 'Hands-on: module4/examples/logic_ports/'
+  narration: 'Demo: All ports logic (mux, adder); no wire/reg choice. Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 3: always_comb / always_ff'
+  title: 'Example 3: Combinational with always_comb; sequential with always_ff'
   bullets:
-  - Combinational with always_comb; sequential with always_ff
   - Explicit intent; tool checks; no latch in always_comb
   notes: module4/examples/procedural/README.md
+  narration: 'Example 3: Combinational with always_comb; sequential with always_ff.
+    Explicit intent; tool checks; no latch in always_comb module4/examples/procedural/README.md'
 - type: demo
-  title: 'Demo: always_comb / always_ff'
+  title: 'Demo: Combinational with always_comb; sequential with always_ff'
   command: cd module4/examples/procedural && make clean && make run
   screenshot: assets/screenshots/ex03_procedural.png
   notes: 'Hands-on: module4/examples/procedural/'
+  narration: 'Demo: Combinational with always_comb; sequential with always_ff. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 4: always_latch'
+  title: 'Example 4: Explicit latch when intended (e.g. transparent latch)'
   bullets:
-  - Explicit latch when intended (e.g. transparent latch)
   - Use when latch is desired; prefer always_comb/always_ff otherwise
   notes: module4/examples/always_latch/README.md
+  narration: 'Example 4: Explicit latch when intended (e.g. transparent latch). Use
+    when latch is desired; prefer always_comb/always_ff otherwise module4/examples/always_latch/README.md'
 - type: demo
-  title: 'Demo: always_latch'
+  title: 'Demo: Explicit latch when intended (e.g. transparent latch)'
   command: cd module4/examples/always_latch && make clean && make run
   screenshot: assets/screenshots/ex04_always_latch.png
   notes: 'Hands-on: module4/examples/always_latch/'
+  narration: 'Demo: Explicit latch when intended (e.g. transparent latch). Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 5: One Driver per logic'
+  title: 'Example 5: Single assign to one output; single always_ff to another'
   bullets:
-  - Single assign to one output; single always_ff to another
   - logic must have exactly one driver
   notes: module4/examples/one_driver_logic/README.md
+  narration: 'Example 5: Single assign to one output; single always_ff to another.
+    logic must have exactly one driver module4/examples/one_driver_logic/README.md'
 - type: demo
-  title: 'Demo: One Driver per logic'
+  title: 'Demo: Single assign to one output; single always_ff to another'
   command: cd module4/examples/one_driver_logic && make clean && make run
   screenshot: assets/screenshots/ex05_one_driver_logic.png
   notes: 'Hands-on: module4/examples/one_driver_logic/'
+  narration: 'Demo: Single assign to one output; single always_ff to another. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 6: typedef'
+  title: 'Example 6: typedef in module (e.g. byte_t = logic [7:0])'
   bullets:
-  - typedef in module (e.g. byte_t = logic [7:0])
   - User-defined types for clarity
   notes: module4/examples/typedef_sv/README.md
+  narration: 'Example 6: typedef in module (e.g. byte_t = logic [7:0]). User-defined
+    types for clarity module4/examples/typedef_sv/README.md'
 - type: demo
-  title: 'Demo: typedef'
+  title: 'Demo: typedef in module (e.g. byte_t = logic [7:0])'
   command: cd module4/examples/typedef_sv && make clean && make run
   screenshot: assets/screenshots/ex06_typedef_sv.png
   notes: 'Hands-on: module4/examples/typedef_sv/'
+  narration: 'Demo: typedef in module (e.g. byte_t = logic [7:0]). Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 7: Interfaces and Modports'
+  title: 'Example 7: Interface definition, modports, connection in top'
   bullets:
-  - Interface definition, modports, connection in top
   - One bundle per connection; direction per modport
   notes: module4/examples/interfaces/README.md
+  narration: 'Example 7: Interface definition, modports, connection in top. One bundle
+    per connection; direction per modport module4/examples/interfaces/README.md'
 - type: demo
-  title: 'Demo: Interfaces and Modports'
+  title: 'Demo: Interface definition, modports, connection in top'
   command: cd module4/examples/interfaces && make clean && make run
   screenshot: assets/screenshots/ex07_interfaces.png
   notes: 'Hands-on: module4/examples/interfaces/'
+  narration: 'Demo: Interface definition, modports, connection in top. Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 8: Packages and import'
+  title: 'Example 8: Package with types/params/functions; import in modules'
   bullets:
-  - Package with types/params/functions; import in modules
   - Namespace; wildcard vs specific import
   notes: module4/examples/packages/README.md
+  narration: 'Example 8: Package with types/params/functions; import in modules. Namespace;
+    wildcard vs specific import module4/examples/packages/README.md'
 - type: demo
-  title: 'Demo: Packages and import'
+  title: 'Demo: Package with types/params/functions; import in modules'
   command: cd module4/examples/packages && make clean && make run
   screenshot: assets/screenshots/ex08_packages.png
   notes: 'Hands-on: module4/examples/packages/'
+  narration: 'Demo: Package with types/params/functions; import in modules. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 9: Package with typedef and function'
+  title: 'Example 9: Package with typedef and min_word function; import in ALU'
   bullets:
-  - Package with typedef and min_word function; import in ALU
   - Shared types and helpers across modules
   notes: module4/examples/package_typedef/README.md
+  narration: 'Example 9: Package with typedef and min_word function; import in ALU.
+    Shared types and helpers across modules module4/examples/package_typedef/README.md'
 - type: demo
-  title: 'Demo: Package with typedef and function'
+  title: 'Demo: Package with typedef and min_word function; import in ALU'
   command: cd module4/examples/package_typedef && make clean && make run
   screenshot: assets/screenshots/ex09_package_typedef.png
   notes: 'Hands-on: module4/examples/package_typedef/'
+  narration: 'Demo: Package with typedef and min_word function; import in ALU. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 10: unique / priority case'
+  title: 'Example 10: unique case (at most one match); priority case (first match)'
   bullets:
-  - unique case (at most one match); priority case (first match)
   - Standard semantics; synthesis and simulation behavior
   notes: module4/examples/case_unique_priority/README.md
+  narration: 'Example 10: unique case (at most one match); priority case (first match).
+    Standard semantics; synthesis and simulation behavior module4/examples/case_unique_priority/README.md'
 - type: demo
-  title: 'Demo: unique / priority case'
+  title: 'Demo: unique case (at most one match); priority case (first match)'
   command: cd module4/examples/case_unique_priority && make clean && make run
   screenshot: assets/screenshots/ex10_case_unique_priority.png
   notes: 'Hands-on: module4/examples/case_unique_priority/'
+  narration: 'Demo: unique case (at most one match); priority case (first match).
+    Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 11: priority case only'
+  title: 'Example 11: Arbiter with priority case (first req wins)'
   bullets:
-  - Arbiter with priority case (first req wins)
   - priority case for arbiter, interrupt mask
   notes: module4/examples/priority_case/README.md
+  narration: 'Example 11: Arbiter with priority case (first req wins). priority case
+    for arbiter, interrupt mask module4/examples/priority_case/README.md'
 - type: demo
-  title: 'Demo: priority case only'
+  title: 'Demo: Arbiter with priority case (first req wins)'
   command: cd module4/examples/priority_case && make clean && make run
   screenshot: assets/screenshots/ex11_priority_case.png
   notes: 'Hands-on: module4/examples/priority_case/'
+  narration: 'Demo: Arbiter with priority case (first req wins). Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 12: Migration from 1364'
+  title: 'Example 12: Same small design in 1364-2005 style vs 1800-2005 style'
   bullets:
-  - Same small design in 1364-2005 style vs 1800-2005 style
   - wire/reg→logic, always @*→always_comb, always @(posedge clk)→always_ff
   notes: module4/examples/migration/README.md
+  narration: 'Example 12: Same small design in 1364-2005 style vs 1800-2005 style.
+    wire/reg→logic, always @*→always_comb, always @(posedge clk)→always_ff module4/examples/migration/README.md'
 - type: demo
-  title: 'Demo: Migration from 1364'
+  title: 'Demo: Same small design in 1364-2005 style vs 1800-2005 style'
   command: cd module4/examples/migration && make clean && make run
   screenshot: assets/screenshots/ex12_migration.png
   notes: 'Hands-on: module4/examples/migration/'
+  narration: 'Demo: Same small design in 1364-2005 style vs 1800-2005 style. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: section
   title: Common pitfalls
+  narration: 'Next section: Common pitfalls.'
 - type: bullets
   title: Multiple Drivers on logic
   bullets:
@@ -313,6 +798,11 @@ slides:
     (e.g. tri-state).'
   - 'Why: logic is for single-driver RTL; wire is for resolved (multi-driver) nets.'
   notes: From MODULE4 Common Pitfalls.
+  narration: 'Multiple Drivers on logic. Mistake: Driving the same logic from two
+    assign statements or two always blocks. Reality: logic allows only one driver;
+    multiple drivers are illegal or undefined. Correct: Use one assign or one always
+    per logic; for multiple drivers use wire (e.g. tri-state). Why: logic is for single-driver
+    RTL; wire is for resolved (multi-driver) nets.'
 - type: bullets
   title: Using always_comb with Latched Behavior
   bullets:
@@ -323,6 +813,11 @@ slides:
   - 'Why: always_comb is intended for pure combinational logic; latches require always_latch
     if desired.'
   notes: From MODULE4 Common Pitfalls.
+  narration: 'Using always_comb with Latched Behavior. Mistake: Incomplete branches
+    in always_comb (e.g. no default in case) and expecting no latch. Reality: Tools
+    may infer a latch or report a warning. Correct: Assign every output in every path,
+    or provide default before case. Why: always_comb is intended for pure combinational
+    logic; latches require always_latch if desired.'
 - type: bullets
   title: Wrong Modport or Direction
   bullets:
@@ -333,6 +828,11 @@ slides:
     direction in the interface.'
   - 'Why: Modports enforce direction; using the wrong view breaks the contract.'
   notes: From MODULE4 Common Pitfalls.
+  narration: 'Wrong Modport or Direction. Mistake: Driving an input in a modport or
+    reading an output that is not in the modport. Reality: Compiler or elaboration
+    error; or wrong connectivity. Correct: Use the modport that matches the module
+    role (master vs slave); check direction in the interface. Why: Modports enforce
+    direction; using the wrong view breaks the contract.'
 - type: bullets
   title: Forgetting to import Package
   bullets:
@@ -341,6 +841,10 @@ slides:
   - 'Correct: Add `import pkg_name::*;` or `import pkg_name::item;` before use.'
   - 'Why: Package names are in a separate namespace until imported.'
   notes: From MODULE4 Common Pitfalls.
+  narration: 'Forgetting to import Package. Mistake: Using a package type or function
+    without importing. Reality: Identifier not found; compile error. Correct: Add
+    import pkg_name::*; or import pkg_name::item; before use. Why: Package names are
+    in a separate namespace until imported.'
 - type: bullets
   title: unique case with Multiple Matches
   bullets:
@@ -352,8 +856,15 @@ slides:
   - 'Why: unique case has well-defined semantics; violating them breaks verification
     and synthesis.'
   notes: From MODULE4 Common Pitfalls.
+  narration: 'unique case with Multiple Matches. Mistake: Writing unique case when
+    two items can match (e.g. overlapping or X in select). Reality: Runtime error
+    or undefined behavior. Correct: Use unique case only when at most one item can
+    match; use default for catch-all; or use priority case when priority is i Why:
+    unique case has well-defined semantics; violating them breaks verification and
+    synthesis.'
 - type: section
   title: Practice & assessment
+  narration: 'Next section: Practice & assessment.'
 - type: bullets
   title: What you should know (1/2)
   bullets:
@@ -365,11 +876,18 @@ slides:
   - ✓ Compare 1364-2005 and 1800-2005 design constructs and migrate simple RTL from
     Verilog to SystemVerilog design subset
   notes: From MODULE4 Learning Outcomes.
+  narration: By now you should be able to explain the following. ✓ Use logic for single-driver
+    nets and variables in RTL ✓ Use always_comb for combinational logic and always_ff
+    for sequential logic ✓ Define and use interfaces with modports for bundled connectivity
+    ✓ Define packages and import them in modules ✓ Use unique case and priority case
+    with correct semantics From MODULE4 Learning Outcomes.
 - type: bullets
   title: What you should know (2/2)
   bullets:
   - ✓ Decide when to adopt 1800 design features vs stay with 1364
   notes: From MODULE4 Learning Outcomes.
+  narration: By now you should be able to explain the following. ✓ Decide when to
+    adopt 1800 design features vs stay with 1364 From MODULE4 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -378,6 +896,8 @@ slides:
   - Package
   - unique case
   - Migration Summary
+  narration: Exercises. logic and always_comb/always_ff Interface Package unique case
+    Migration Summary
 - type: bullets
   title: Exercises
   bullets:
@@ -386,11 +906,19 @@ slides:
   - Wrong Modport or Direction
   - Forgetting to import Package
   - unique case with Multiple Matches
+  narration: Exercises. Multiple Drivers on logic Using always_comb with Latched Behavior
+    Wrong Modport or Direction Forgetting to import Package unique case with Multiple
+    Matches
 - type: bullets
   title: Summary & next steps
   bullets:
   - 'Master the first SystemVerilog standard (IEEE 1800-2005) for RTL design: logic
-    types, always_comb/always_ff, interfaces, packages, and unique/priority case.'
+    types, always_comb/always_ff, interfaces, packages, and...'
   - Complete module4/CHECKLIST.md
   - Review module4/EXAMPLES.md and run each lab
   - 'Next: Next module in course'
+  narration: 'In summary: Master the first SystemVerilog standard (IEEE 1800-2005)
+    for RTL design: logic types, always_comb/always_ff, interfaces, packages, and
+    unique/priority case. Next up: Next module in course. Master the first SystemVerilog
+    standard (IEEE 1800-2005) for RTL design: logic types, always_comb/always_ff,
+    interfaces, packages, and... Complete module4/CHECKLIST.md Review module4/EXAMPLES.md...'

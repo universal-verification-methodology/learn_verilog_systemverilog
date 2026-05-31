@@ -1,0 +1,407 @@
+# Per-module content for slides: Design Architecture, testing flow, key files,
+# and outline_overrides architecture code slides.
+# Used by generate_learning_content.py and media/outline_overrides.yaml generation.
+
+module1:
+  design_architecture:
+    - title: Repository layout (module1/)
+      bullets:
+        - "docs/MODULE1.md — syllabus, pitfalls, and exercises"
+        - "module1/examples/ — nine hands-on labs, each with Makefile and README"
+        - "module1/dut/simple_gates/ — reference AND/OR/NOT gates in 1995 style"
+        - "module1/tests/ — standalone testbenches (and_gate, mux2)"
+        - "scripts/module1.sh — runs every example and test from the repo root"
+    - title: RTL hierarchy and signal flow
+      bullets:
+        - "Leaf modules (and_gate, mux2, dff) expose ports; top or testbench wires them"
+        - "Inputs driven by reg in initial/always; outputs observed as wire"
+        - "Combinational logic uses assign or always @(a or b …) with blocking ="
+        - "Sequential logic uses always @(posedge clk) with nonblocking <="
+        - "See rtl_architecture.png — testbench stimulus flows into DUT, checks via $display"
+    - title: Simulation toolchain (Icarus Verilog)
+      bullets:
+        - "iverilog -o top file.v … — compile Verilog-95 sources to VVP bytecode"
+        - "vvp top — run simulation; $display prints waveforms as text"
+        - "$finish — required to stop; without it the simulator runs forever"
+        - "Per lab: cd module1/examples/<name> && make clean && make run"
+  verification_testing:
+    - title: Example execution flow
+      bullets:
+        - "make run invokes iverilog then vvp (see each example Makefile)"
+        - "Full module sweep: ./scripts/module1.sh (checks iverilog first)"
+        - "Build artifact (top) is gitignored; make clean removes it"
+    - title: Testbench structure (1364-1995)
+      bullets:
+        - "test_and_gate.v — reg stimulus, wire outputs, named DUT instantiation"
+        - "initial block applies vectors with # delays between changes"
+        - "Exhaustive 2-input tests print truth table; $finish ends simulation"
+    - title: What “passing” looks like
+      bullets:
+        - "Simulation exits after $finish (no hang at time limit)"
+        - "Printed a/b/y rows match expected AND or mux truth table"
+        - "module1/CHECKLIST.md confirms concepts before Module 2"
+  key_files:
+    - "module1/examples/modules_ports/and_gate.v — 1995 ports + always @(a or b)"
+    - "module1/examples/continuous_assign/mux2.v — assign-based combinational mux"
+    - "module1/examples/sequential_dff/dff.v — clocked always with async reset"
+    - "module1/examples/testbenches/test_and_gate.v — minimal TB pattern"
+    - "module1/tests/test_mux2.v — directed test with delay-based stimulus"
+    - "scripts/module1.sh — one-command regression for all labs"
+  architecture_overrides:
+    rtl_code:
+      title: "DUT example — and_gate (1995 style)"
+      source_file: module1/examples/modules_ports/and_gate.v
+      start_line: 7
+      end_line: 17
+      notes: "Non-ANSI port list; output y is reg because always drives it."
+    tb_code:
+      title: "Testbench — stimulus and $finish"
+      source_file: module1/examples/testbenches/test_and_gate.v
+      start_line: 8
+      end_line: 20
+      notes: "reg drives inputs; wire observes output; initial applies all input combos."
+    method_code:
+      title: "Build and run (Makefile)"
+      source_file: module1/examples/modules_ports/Makefile
+      notes: "iverilog compiles to top; vvp runs the simulation executable."
+
+module2:
+  design_architecture:
+    - title: Repository layout (module2/)
+      bullets:
+        - "Builds on Module 1 — same examples + tests pattern under module2/"
+        - "Examples highlight 2001 additions: ANSI ports, always @*, generate, signed"
+        - "module2/dut/ — reference gates and parameterized blocks"
+        - "scripts/module2.sh — batch run all 2001-feature labs"
+    - title: 2001 RTL patterns vs 1995
+      bullets:
+        - "ANSI ports combine direction, type, and width in the port list"
+        - "always @* replaces manual sensitivity lists for combinational logic"
+        - "generate if/for creates replicated or conditional hardware"
+        - "signed keyword and $signed enable two's-complement arithmetic"
+    - title: Hierarchy with generate
+      bullets:
+        - "param_mux and ripple_adder show parameterized instantiation"
+        - "gen_if demonstrates conditional generate blocks"
+        - "Parent passes parameters; child modules scale without copy-paste"
+  verification_testing:
+    - title: Running labs and tests
+      bullets:
+        - "Each example: cd module2/examples/<name> && make clean && make run"
+        - "./scripts/module2.sh runs the full module regression"
+        - "Compare output with MODULE2.md expected behavior notes"
+    - title: What to verify per feature
+      bullets:
+        - "ANSI ports — compile without separate input/output declarations"
+        - "always @* — output updates when any input toggles (no latch inference)"
+        - "generate — instance count matches parameter; signed adder handles negatives"
+  key_files:
+    - "module2/examples/ansi_ports/mux2.v — ANSI port list pattern"
+    - "module2/examples/procedural/always_star.v — implicit sensitivity"
+    - "module2/examples/generate/param_mux.v — generate for loop"
+    - "module2/examples/signed/adder_signed.v — signed arithmetic"
+    - "scripts/module2.sh — full module execution"
+  architecture_overrides:
+    rtl_code:
+      title: "ANSI ports — mux2 (2001)"
+      source_file: module2/examples/ansi_ports/mux2.v
+      start_line: 1
+      end_line: 18
+    tb_code:
+      title: "always @* combinational block"
+      source_file: module2/examples/procedural/always_star.v
+      start_line: 1
+      end_line: 20
+    method_code:
+      title: "Generate block — parameterized mux"
+      source_file: module2/examples/generate/param_mux.v
+      start_line: 1
+      end_line: 25
+
+module3:
+  design_architecture:
+    - title: Repository layout (module3/)
+      bullets:
+        - "1364-2005 clarifications and deprecations over 2001"
+        - "Focus: avoid defparam, use localparam, understand 2005 vs 2001 deltas"
+        - "module3/examples/ — migration and best-practice labs"
+        - "scripts/module3.sh — run all 2005-focused examples"
+    - title: Parameter and constant flow
+      bullets:
+        - "localparam — named constants inside module, not overridable"
+        - "Parameter override at instantiation #(.WIDTH(n)) preferred over defparam"
+        - "2005 standard marks defparam as deprecated"
+    - title: Design intent unchanged from 2001
+      bullets:
+        - "Same ANSI, @*, generate, signed features as Module 2"
+        - "2005 adds LRM clarifications — behavior you already use stays valid"
+        - "Migration labs show 2001 → 2005 style tweaks only"
+  verification_testing:
+    - title: Execution and regression
+      bullets:
+        - "make run per example; ./scripts/module3.sh for full sweep"
+        - "Watch for defparam warnings when running deprecated-style labs"
+    - title: Migration checks
+      bullets:
+        - "Replace defparam with #() override at instantiation"
+        - "Confirm localparam names match across parent and child"
+  key_files:
+    - "module3/examples/no_defparam/ — replace defparam with #() override"
+    - "module3/examples/parameters/ — parameter override at instantiation"
+    - "scripts/module3.sh"
+  architecture_overrides:
+    rtl_code:
+      title: "Parameter override at instantiation"
+      source_file: module3/examples/parameters/param_override.v
+      start_line: 1
+      end_line: 22
+    method_code:
+      title: "Avoid defparam — use #() instead"
+      source_file: module3/examples/no_defparam/no_defparam.v
+      start_line: 1
+      end_line: 20
+
+module4:
+  design_architecture:
+    - title: Repository layout (module4/)
+      bullets:
+        - "First SystemVerilog module — .sv sources and design subset focus"
+        - "logic replaces wire/reg for single-driver RTL in most examples"
+        - "always_comb / always_ff / always_latch — explicit procedural intent"
+        - "interfaces and packages — connectivity and shared types"
+        - "scripts/module4.sh — requires simulator with SV design subset"
+    - title: SystemVerilog design layering
+      bullets:
+        - "Packages hold typedefs, constants, functions — import in modules"
+        - "Interfaces bundle signals; modports define direction per connection"
+        - "always_comb infers sensitivity; always_ff targets flip-flops"
+        - "unique/priority case — standard semantics for full case checking"
+    - title: File and compilation units
+      bullets:
+        - ".sv extension signals SystemVerilog to the tool"
+        - "Package before import; interface before modport connection"
+        - "See verification_architecture.png — TB still drives DUT via ports or interface"
+  verification_testing:
+    - title: Running SystemVerilog labs
+      bullets:
+        - "cd module4/examples/<name> && make clean && make run"
+        - "./scripts/module4.sh — full module; some labs need full SV support"
+        - "iverilog supports subset; check build.log if a feature is unsupported"
+    - title: What to check in simulation
+      bullets:
+        - "logic ports compile without separate wire/reg declarations"
+        - "always_comb blocks reject clock/reset inside (tool error = correct)"
+        - "Interface examples connect via modport, not dozens of scalar ports"
+  key_files:
+    - "module4/examples/logic_ports/logic_ports.sv"
+    - "module4/examples/procedural/always_comb_ff.sv"
+    - "module4/examples/interfaces/bus_if_example.sv"
+    - "module4/examples/packages/pkg_util.sv"
+    - "scripts/module4.sh"
+  architecture_overrides:
+    rtl_code:
+      title: "logic ports and always_comb"
+      source_file: module4/examples/procedural/always_comb_ff.sv
+      start_line: 1
+      end_line: 25
+    tb_code:
+      title: "Interface + modport connection"
+      source_file: module4/examples/interfaces/bus_if_example.sv
+      start_line: 1
+      end_line: 30
+    method_code:
+      title: "Package import pattern"
+      source_file: module4/examples/packages/pkg_util.sv
+      start_line: 1
+      end_line: 20
+
+module5:
+  design_architecture:
+    - title: Repository layout (module5/)
+      bullets:
+        - "IEEE 1800-2009 and 1800-2012 refinements on the 2005 base"
+        - "Assertions, checkers, and type refinements in examples"
+        - "module5/dut/ — designs used by assertion and checker labs"
+        - "scripts/module5.sh — run assertion-focused examples"
+    - title: Assertion and checker placement
+      bullets:
+        - "immediate assertions in procedural code — zero-time checks"
+        - "concurrent assertions (SVA) — temporal properties on clocks"
+        - "checker encapsulation — reusable verification modules"
+        - "Assertions sit alongside RTL; failures stop simulation with message"
+    - title: 2009/2012 vs 2005 delta
+      bullets:
+        - "Interface and type clarifications — same patterns, clearer LRM"
+        - "1800-2012 checker keyword — structured verification component"
+        - "Design RTL from Module 4 remains valid; add assertions incrementally"
+  verification_testing:
+    - title: Running assertion labs
+      bullets:
+        - "make run per example; failing assertion prints SVA message"
+        - "./scripts/module5.sh runs designs with embedded checkers"
+    - title: Closure mindset
+      bullets:
+        - "Pass = no assertion failures and expected $display output"
+        - "Use assert examples to learn what to monitor before UVM scoreboards"
+  key_files:
+    - "module5/examples/assert_valid_encoding/"
+    - "module5/examples/checkers/"
+    - "module5/examples/assert_invariant/"
+    - "scripts/module5.sh"
+  architecture_overrides:
+    rtl_code:
+      title: "Embedded assertion example"
+      source_file: module5/examples/assert_valid_encoding/assert_valid_encoding.sv
+      start_line: 1
+      end_line: 25
+    method_code:
+      title: "Immediate assertion in procedural code"
+      source_file: module5/examples/checkers/immediate_assert.sv
+      start_line: 1
+      end_line: 25
+
+module6:
+  design_architecture:
+    - title: Repository layout (module6/)
+      bullets:
+        - "IEEE 1800-2017 — current unified SystemVerilog LRM"
+        - "Summarizes design subset plus 2017 language updates"
+        - "module6/examples/ — version summary, migration, assertions recap"
+        - "scripts/module6.sh — current-standard lab sweep"
+    - title: 2017 standard in practice
+      bullets:
+        - "Verilog is a subset of SystemVerilog in the 2017 LRM"
+        - "logic, always_comb/ff, packages, interfaces — production RTL baseline"
+        - "unique case, priority case — prefer over vendor attributes"
+        - "Course maps 2017 features back to Modules 4–5 introductions"
+    - title: Single-driver and type discipline
+      bullets:
+        - "logic enforces one driver per net in synthesizable RTL"
+        - "Package import :: scope — shared enums and parameters"
+        - "See rtl_architecture.png — same DUT/TB split as earlier modules"
+  verification_testing:
+    - title: Execution flow
+      bullets:
+        - "make run per lab; ./scripts/module6.sh for full module"
+        - "version_summary example prints construct-by-standard table"
+    - title: Regression before Module 7
+      bullets:
+        - "Confirm all 2017-subset examples compile with your simulator"
+        - "Review CHECKLIST.md — ready to compare versions in Module 7"
+  key_files:
+    - "module6/examples/subsets/"
+    - "module6/examples/design_recap/"
+    - "module6/examples/version_summary/"
+    - "scripts/module6.sh"
+  architecture_overrides:
+    rtl_code:
+      title: "logic single-driver pattern"
+      source_file: module6/examples/logic_single_driver/logic_single_driver.sv
+      start_line: 1
+      end_line: 22
+    method_code:
+      title: "Version summary runner"
+      source_file: module6/examples/version_summary/version_summary.sv
+      start_line: 1
+      end_line: 20
+
+module7:
+  design_architecture:
+    - title: Repository layout (module7/)
+      bullets:
+        - "Side-by-side 1364 vs 1800 versions of the same designs"
+        - "module7/dut/ — mux2_1364.v and mux2_1800.sv for direct comparison"
+        - "examples/side_by_side/ — decoder, counter, FSM migration pairs"
+        - "examples/migration/ — step-by-step 1995 → 2017 patterns"
+        - "scripts/module7.sh — runs comparison and migration labs"
+    - title: Side-by-side comparison architecture
+      bullets:
+        - "Same behavior, different syntax — ports, types, procedural blocks"
+        - "1364: wire/reg, always @(a or b), many scalar ports"
+        - "1800: logic, always_comb/ff, optional interface for bus bundles"
+        - "Testbench can instantiate both versions and compare outputs"
+    - title: Migration workflow
+      bullets:
+        - "Inventory features used — match to target standard checklist"
+        - "Migrate ports first (ANSI, logic), then procedural blocks, then connectivity"
+        - "Simulate after each step — do not big-bang rewrite"
+        - "Document project standard and tool support decision"
+  verification_testing:
+    - title: Comparison test execution
+      bullets:
+        - "test_mux2_all.sv — same stimulus on 1364 and 1800 mux; compare y"
+        - "test_counter_all.sv — reset/enable/wrap behavior must match"
+        - "./scripts/module7.sh runs all migration and comparison examples"
+    - title: Migration validation
+      bullets:
+        - "After each migration step: make run must pass with identical outputs"
+        - "Use migration_checklist example as a template for real projects"
+  key_files:
+    - "module7/dut/mux2_1364.v and mux2_1800.sv"
+    - "module7/examples/side_by_side/mux2_versions/"
+    - "module7/examples/migration_checklist/"
+    - "module7/examples/incremental_migration/"
+    - "scripts/module7.sh"
+  architecture_overrides:
+    rtl_code:
+      title: "1364 mux — wire/reg and explicit sensitivity"
+      source_file: module7/dut/mux2_1364.v
+      start_line: 5
+      end_line: 12
+    tb_code:
+      title: "1800 mux — logic and always_comb"
+      source_file: module7/dut/mux2_1800.sv
+      start_line: 5
+      end_line: 10
+    method_code:
+      title: "Migration checklist pattern"
+      source_file: module7/examples/migration_checklist/migration_checklist.sv
+      start_line: 1
+      end_line: 25
+
+module8:
+  design_architecture:
+    - title: Reference module layout (module8/)
+      bullets:
+        - "No new language — consolidates Modules 1–7 into quick-reference tables"
+        - "examples/ print version timelines, migration reminders, tool notes"
+        - "Use after completing the course or as a lookup during real projects"
+        - "scripts/module8.sh — runs reference printouts, not new RTL lessons"
+    - title: Course map architecture
+      bullets:
+        - "Module 1–3 — Verilog-only path (1995, 2001, 2005)"
+        - "Module 4–6 — SystemVerilog design path (2005, 2009/12, 2017)"
+        - "Module 7 — comparison and migration between standards"
+        - "Module 8 — this reference layer on top of the version stack"
+    - title: How reference examples execute
+      bullets:
+        - "Most labs $display tables or cheat-sheet rows to stdout"
+        - "No new DUT hierarchy — output is documentation you can grep"
+        - "Pair with docs/MODULE8.md for full tables"
+  verification_testing:
+    - title: Using Module 8 as closure
+      bullets:
+        - "Run ./scripts/module8.sh once to print all reference slices"
+        - "Cross-check “which standard has X?” against printed tables"
+        - "Bookmark slides.pdf and MODULE8.md for day-to-day lookup"
+    - title: When to re-run labs
+      bullets:
+        - "Re-run a specific Module 1–7 example when you need hands-on refresh"
+        - "Module 8 examples confirm you know where to find detail, not replace it"
+  key_files:
+    - "docs/MODULE8.md — master reference tables"
+    - "module8/examples/version_timeline/"
+    - "module8/examples/migration_steps/"
+    - "module8/examples/course_map/"
+    - "scripts/module8.sh"
+  architecture_overrides:
+    method_code:
+      title: "Version timeline printer"
+      source_file: module8/examples/version_timeline/version_timeline.sv
+      start_line: 1
+      end_line: 25
+    rtl_code:
+      title: "One-page course map"
+      source_file: module8/examples/course_map/course_map.sv
+      start_line: 1
+      end_line: 20

@@ -58,6 +58,60 @@ This module establishes the foundation for the Verilog/SystemVerilog version-cen
 - When writing or maintaining legacy RTL that must remain 1364-1995 compliant
 - When comparing with Module 2 (1364-2001) and later modules to see what was added
 
+## Design Architecture
+
+### 1. Repository layout (module1/)
+
+- docs/MODULE1.md — syllabus, pitfalls, and exercises
+- module1/examples/ — nine hands-on labs, each with Makefile and README
+- module1/dut/simple_gates/ — reference AND/OR/NOT gates in 1995 style
+- module1/tests/ — standalone testbenches (and_gate, mux2)
+- scripts/module1.sh — runs every example and test from the repo root
+
+### 2. RTL hierarchy and signal flow
+
+- Leaf modules (and_gate, mux2, dff) expose ports; top or testbench wires them
+- Inputs driven by reg in initial/always; outputs observed as wire
+- Combinational logic uses assign or always @(a or b …) with blocking =
+- Sequential logic uses always @(posedge clk) with nonblocking <=
+- See rtl_architecture.png — testbench stimulus flows into DUT, checks via $display
+
+### 3. Simulation toolchain (Icarus Verilog)
+
+- iverilog -o top file.v … — compile Verilog-95 sources to VVP bytecode
+- vvp top — run simulation; $display prints waveforms as text
+- $finish — required to stop; without it the simulator runs forever
+- Per lab: cd module1/examples/<name> && make clean && make run
+
+## Key files to study
+
+- module1/examples/modules_ports/and_gate.v — 1995 ports + always @(a or b)
+- module1/examples/continuous_assign/mux2.v — assign-based combinational mux
+- module1/examples/sequential_dff/dff.v — clocked always with async reset
+- module1/examples/testbenches/test_and_gate.v — minimal TB pattern
+- module1/tests/test_mux2.v — directed test with delay-based stimulus
+- scripts/module1.sh — one-command regression for all labs
+
+## Verification & Testing Methods
+
+### 1. Example execution flow
+
+- make run invokes iverilog then vvp (see each example Makefile)
+- Full module sweep: ./scripts/module1.sh (checks iverilog first)
+- Build artifact (top) is gitignored; make clean removes it
+
+### 2. Testbench structure (1364-1995)
+
+- test_and_gate.v — reg stimulus, wire outputs, named DUT instantiation
+- initial block applies vectors with # delays between changes
+- Exhaustive 2-input tests print truth table; $finish ends simulation
+
+### 3. What “passing” looks like
+
+- Simulation exits after $finish (no hang at time limit)
+- Printed a/b/y rows match expected AND or mux truth table
+- module1/CHECKLIST.md confirms concepts before Module 2
+
 ## Topics Covered
 
 ### 1. IEEE 1364-1995 Context

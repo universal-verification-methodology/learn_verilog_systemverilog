@@ -58,6 +58,50 @@ This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision o
 - When writing RTL that must be 1364-2001 compliant (no SystemVerilog)
 - When comparing with Module 1 (1995) and Module 3 (2005) to see what changed
 
+## Design Architecture
+
+### 1. Repository layout (module2/)
+
+- Builds on Module 1 — same examples + tests pattern under module2/
+- Examples highlight 2001 additions: ANSI ports, always @*, generate, signed
+- module2/dut/ — reference gates and parameterized blocks
+- scripts/module2.sh — batch run all 2001-feature labs
+
+### 2. 2001 RTL patterns vs 1995
+
+- ANSI ports combine direction, type, and width in the port list
+- always @* replaces manual sensitivity lists for combinational logic
+- generate if/for creates replicated or conditional hardware
+- signed keyword and $signed enable two's-complement arithmetic
+
+### 3. Hierarchy with generate
+
+- param_mux and ripple_adder show parameterized instantiation
+- gen_if demonstrates conditional generate blocks
+- Parent passes parameters; child modules scale without copy-paste
+
+## Key files to study
+
+- module2/examples/ansi_ports/mux2.v — ANSI port list pattern
+- module2/examples/procedural/always_star.v — implicit sensitivity
+- module2/examples/generate/param_mux.v — generate for loop
+- module2/examples/signed/adder_signed.v — signed arithmetic
+- scripts/module2.sh — full module execution
+
+## Verification & Testing Methods
+
+### 1. Running labs and tests
+
+- Each example: cd module2/examples/<name> && make clean && make run
+- ./scripts/module2.sh runs the full module regression
+- Compare output with MODULE2.md expected behavior notes
+
+### 2. What to verify per feature
+
+- ANSI ports — compile without separate input/output declarations
+- always @* — output updates when any input toggles (no latch inference)
+- generate — instance count matches parameter; signed adder handles negatives
+
 ## Topics Covered
 
 ### 1. IEEE 1364-2001 Context

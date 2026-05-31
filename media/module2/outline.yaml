@@ -9,30 +9,42 @@ slides:
 - type: title
   title: Module 2
   subtitle: IEEE 1364-2001 (Verilog-2001)
+  narration: 'Welcome to module 2, IEEE 1364-2001 (Verilog-2001). In this module you
+    will master the major verilog update (ieee 1364-2001) and its additions over 1364-1995:
+    ansi ports, implicit sensitivity, generate, signed types, and multi-dimensional
+    arrays..'
 - type: bullets
   title: Learning objectives
   bullets:
   - 'Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995:
-    ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
-    arrays.'
+    ANSI ports, implicit sensitivity, generate, signed...'
+  narration: 'Here is what you will learn in this module. Master the major Verilog
+    update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports, implicit
+    sensitivity, generate, signed...'
 - type: bullets
   title: Prerequisites
   bullets:
   - See module README
+  narration: Before you start, make sure you have these prerequisites. See module
+    README
 - type: image
   title: Learning path
   image: assets/diagrams/learning_path.png
   caption: 'Master the major Verilog update (IEEE 1364-2001) and its additions over
-    1364-1995: ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
-    arrays.'
+    1364-1995: ANSI ports, implicit sensitivity, generate, signed...'
+  narration: 'Learning path. Master the major Verilog update (IEEE 1364-2001) and
+    its additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed
+    types, and multi-dimensional arrays.'
 - type: bullets
   title: Overview
   bullets:
-  - 'This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision
-    of the Verilog standard. You''ll learn what 2001 adds over 1995: ANSI-style port
-    and task/function declarations, `always @*` for combinational'
+  - This module covers IEEE Std 1364-2001 (Verilog-2001), the first major revision
+    of the Verilog standard. You'll learn what 2001 adds over...
+  narration: Overview. This module covers IEEE Std 1364-2001 (Verilog-2001), the first
+    major revision of the Verilog standard. You'll learn what 2001 adds over...
 - type: section
   title: How to learn this module
+  narration: 'Next section: How to learn this module.'
 - type: bullets
   title: Suggested learning path (1/2)
   bullets:
@@ -47,14 +59,310 @@ slides:
   - Complete the exercises — Try each exercise in this document before reading solutions
     or peeking at reference RTL.
   notes: From docs/MODULE2.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Skim
+    this document — Goal, Overview, and Topics Covered set the IEEE scope for Module
+    2. Study design architecture — See how DUTs, examples, and testbenches fit together
+    under module2/. Work through labs in order — Open module2/EXAMPLES.md and run
+    each make clean && make run from the repo root. Run the full module script —...
 - type: bullets
   title: Suggested learning path (2/2)
   bullets:
   - Review Common Pitfalls — Can you explain each mistake and the fix?
   - Self-check — Use `module2/CHECKLIST.md` before starting the next module.
   notes: From docs/MODULE2.md — read guides before running demos.
+  narration: Follow this learning path. Read the guides before running the labs. Review
+    Common Pitfalls — Can you explain each mistake and the fix? Self-check — Use module2/CHECKLIST.md
+    before starting the next module. From docs/MODULE2.md — read guides before running
+    demos.
+- type: section
+  title: Design architecture
+  narration: 'Next section: Design architecture.'
+- type: two_column
+  title: 1. Repository layout (module2/)
+  left:
+  - Builds on Module 1 — same examples + tests pattern under module2/
+  - 'Examples highlight 2001 additions: ANSI ports, always @*, generate, signed'
+  - module2/dut/ — reference gates and parameterized blocks
+  - scripts/module2.sh — batch run all 2001-feature labs
+  right: assets/diagrams/rtl_architecture.png
+  notes: From MODULE2 Design Architecture.
+  narration: '1. Repository layout (module2/). Builds on Module 1 — same examples
+    + tests pattern under module2/ Examples highlight 2001 additions: ANSI ports,
+    always @*, generate, signed module2/dut/ — reference gates and parameterized blocks
+    scripts/module2.sh — batch run all 2001-feature labs Refer to the diagram on the
+    right.'
+- type: two_column
+  title: 2. 2001 RTL patterns vs 1995
+  left:
+  - ANSI ports combine direction, type, and width in the port list
+  - always @* replaces manual sensitivity lists for combinational logic
+  - generate if/for creates replicated or conditional hardware
+  - signed keyword and $signed enable two's-complement arithmetic
+  right: assets/diagrams/verification_architecture.png
+  notes: From MODULE2 Design Architecture.
+  narration: 2. 2001 RTL patterns vs 1995. ANSI ports combine direction, type, and
+    width in the port list always @* replaces manual sensitivity lists for combinational
+    logic generate if/for creates replicated or conditional hardware signed keyword
+    and $signed enable two's-complement arithmetic Refer to the diagram on the right.
+- type: two_column
+  title: 3. Hierarchy with generate
+  left:
+  - param_mux and ripple_adder show parameterized instantiation
+  - gen_if demonstrates conditional generate blocks
+  - Parent passes parameters; child modules scale without copy-paste
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE2 Design Architecture.
+  narration: 3. Hierarchy with generate. param_mux and ripple_adder show parameterized
+    instantiation gen_if demonstrates conditional generate blocks Parent passes parameters;
+    child modules scale without copy-paste Refer to the diagram on the right.
+- type: image
+  title: RTL block diagram (reference)
+  image: assets/diagrams/rtl_architecture.png
+  caption: 'Module 2: DUT hierarchy and signal flow.'
+  narration: 'RTL block diagram (reference). Module 2: DUT hierarchy and signal flow.'
+- type: image
+  title: Verification / testbench diagram (reference)
+  image: assets/diagrams/verification_architecture.png
+  caption: 'Module 2: stimulus, observation, and checking.'
+  narration: 'Verification / testbench diagram (reference). Module 2: stimulus, observation,
+    and checking.'
+- type: code
+  title: ANSI ports — mux2 (2001)
+  language: systemverilog
+  source_file: module2/examples/ansi_ports/mux2.v
+  code: "/*\n * 2:1 multiplexer - IEEE 1364-2001 ANSI style\n *\n * Port direction\
+    \ and type in port list (no separate declarations).\n */\n\nmodule mux2_2001 (\n\
+    \    input  wire a,\n    input  wire b,\n    input  wire sel,\n    output reg\
+    \  y\n);\n    always @(a or b or sel)\n        y = sel ? b : a;\nendmodule\n\n\
+    module top;\n    reg  a, b, sel;"
+  narration: ANSI ports — mux2 (2001). Review the code on screen and match it to files
+    in the repository.
+- type: code
+  title: always @* combinational block
+  language: systemverilog
+  source_file: module2/examples/procedural/always_star.v
+  code: "/*\n * always @* - IEEE 1364-2001 implicit sensitivity\n *\n * Sensitive\
+    \ to every signal read in the block; no manual list.\n */\n\nmodule comb_demo\
+    \ (\n    input  wire a,\n    input  wire b,\n    input  wire c,\n    input  wire\
+    \ sel,\n    output reg  y_comb,\n    output reg  mux_out\n);\n    /* Implicit\
+    \ sensitivity: tool infers a, b, c and sel, a, b */\n    always @* begin\n   \
+    \     y_comb = (a & b) | c;\n    end\n// ..."
+  narration: always @* combinational block. Review the code on screen and match it
+    to files in the repository.
+- type: section
+  title: Execution & simulation flow
+  narration: 'Next section: Execution & simulation flow.'
+- type: bullets
+  title: How the example runs (toolchain)
+  bullets:
+  - 'Makefile: Verilator + UVM_HOME compile RTL, interface, and test_*.sv'
+  - 'UVM phases: build → connect → run_test → report (same pattern as Module 2)'
+  - Sequence → driver → DUT → monitor → scoreboard (read SCOREBOARD at end)
+  - 'Typical command: make SIM=verilator TEST=test_* (see module2 demo slide)'
+  - Loopback / hooks connect monitor observations to scoreboard checks
+  notes: From MODULE2 — execution and artifact layout.
+  narration: 'How the example runs (toolchain). Match each bullet to files in the
+    repository. Makefile: Verilator + UVM_HOME compile RTL, interface, and test_*.sv
+    UVM phases: build → connect → run_test → report (same pattern as Module 2) Sequence
+    → driver → DUT → monitor → scoreboard (read SCOREBOARD at end) Typical command:
+    make SIM=verilator TEST=test_* (see module2 demo slide) Loopback / hooks connect...'
+- type: section
+  title: Key files to study
+  narration: 'Next section: Key files to study.'
+- type: bullets
+  title: Open these in the repo
+  bullets:
+  - module2/examples/ansi_ports/mux2.v — ANSI port list pattern
+  - module2/examples/procedural/always_star.v — implicit sensitivity
+  - module2/examples/generate/param_mux.v — generate for loop
+  - module2/examples/signed/adder_signed.v — signed arithmetic
+  - scripts/module2.sh — full module execution
+  notes: Trace while running module2/EXAMPLES.md labs.
+  narration: Open these in the repo. module2/examples/ansi_ports/mux2.v — ANSI port
+    list pattern module2/examples/procedural/always_star.v — implicit sensitivity
+    module2/examples/generate/param_mux.v — generate for loop module2/examples/signed/adder_signed.v
+    — signed arithmetic scripts/module2.sh — full module execution Trace while running
+    module2/EXAMPLES.md labs.
+- type: section
+  title: Verification & testing methods
+  narration: 'Next section: Verification & testing methods.'
+- type: two_column
+  title: 1. Running labs and tests
+  left:
+  - 'Each example: cd module2/examples/<name> && make clean && make run'
+  - ./scripts/module2.sh runs the full module regression
+  - Compare output with MODULE2.md expected behavior notes
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE2 Verification & Testing Methods.
+  narration: '1. Running labs and tests. Each example: cd module2/examples/<name>
+    && make clean && make run ./scripts/module2.sh runs the full module regression
+    Compare output with MODULE2.md expected behavior notes Refer to the diagram on
+    the right.'
+- type: two_column
+  title: 2. What to verify per feature
+  left:
+  - ANSI ports — compile without separate input/output declarations
+  - always @* — output updates when any input toggles (no latch inference)
+  - generate — instance count matches parameter; signed adder handles negatives
+  right: assets/diagrams/testing_methods.png
+  notes: From MODULE2 Verification & Testing Methods.
+  narration: 2. What to verify per feature. ANSI ports — compile without separate
+    input/output declarations always @* — output updates when any input toggles (no
+    latch inference) generate — instance count matches parameter; signed adder handles
+    negatives Refer to the diagram on the right.
+- type: code
+  title: Generate block — parameterized mux
+  language: systemverilog
+  source_file: module2/examples/generate/param_mux.v
+  code: "/*\n * Parameterized mux with generate if - IEEE 1364-2001\n * generate for\
+    \ / generate if; elaboration-time logic.\n */\n\nmodule mux_wide #(parameter WIDTH\
+    \ = 8) (\n    input  wire [WIDTH-1:0] a,\n    input  wire [WIDTH-1:0] b,\n   \
+    \ input  wire             sel,\n    output wire [WIDTH-1:0] y\n);\n    generate\n\
+    \        if (WIDTH == 1)\n            assign y = sel ? b : a;\n        else\n\
+    \            assign y = sel ? b : a;\n    endgenerate\nendmodule\n// ..."
+  narration: Generate block — parameterized mux. Review the code on screen and match
+    it to files in the repository.
 - type: section
   title: Syllabus topics
+  narration: 'Next section: Syllabus topics.'
+- type: section
+  title: Protocol & design details
+  narration: 'Next section: Protocol & design details.'
+- type: bullets
+  title: 'Detail: What 1364-2001 Adds Over 1995 (1)'
+  bullets:
+  - 'ANSI-style port declarations: Direction and type (and size) in the port list'
+  - '**`always @*`**: Implicit sensitivity for combinational logic (no manual list)'
+  - 'generate: Conditional and loop-based instantiation and logic'
+  - 'signed: Signed arithmetic and signed nets/variables'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1364-2001 Adds Over 1995 (1). ANSI-style
+    port declarations: Direction and type (and size) in the port list always @*: Implicit
+    sensitivity for combinational logic (no manual list) generate: Conditional and
+    loop-based instantiation and logic signed: Signed arithmetic and signed nets/variables
+    From MODULE2 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: What 1364-2001 Adds Over 1995 (2)'
+  bullets:
+  - 'Multi-dimensional arrays: e.g. `reg [7:0] mem [0:255]`'
+  - 'localparam: Named constants that cannot be overridden'
+  - 'ANSI-style task/function: Input/output in the header'
+  - 'Other: File I/O improvements, `$signed`/`$unsigned`, attribute syntax, etc.'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1364-2001 Adds Over 1995 (2). Multi-dimensional
+    arrays: e.g. reg [7:0] mem [0:255] localparam: Named constants that cannot be
+    overridden ANSI-style task/function: Input/output in the header Other: File I/O
+    improvements, $signed/$unsigned, attribute syntax, etc. From MODULE2 Topics Covered
+    — protocol/design depth.'
+- type: bullets
+  title: 'Detail: What 1364-2001 Still Does Not Include'
+  bullets:
+  - 'No SystemVerilog: no `logic`, `always_comb`/`always_ff`, interfaces, packages,
+    classes'
+  - No type parameters or interfaces (those are 1800)
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: What 1364-2001 Still Does Not Include. No
+    SystemVerilog: no logic, always_comb/always_ff, interfaces, packages, classes
+    No type parameters or interfaces (those are 1800) From MODULE2 Topics Covered
+    — protocol/design depth.'
+- type: bullets
+  title: 'Detail: ANSI-C Style Ports'
+  bullets:
+  - 'input wire: Default for input; can omit `wire` (e.g. `input [7:0] a`).'
+  - 'output reg: Required when the output is driven in `always`/`initial`.'
+  - 'output wire: When the output is driven only by `assign` or submodule.'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: ANSI-C Style Ports. input wire: Default
+    for input; can omit wire (e.g. input [7:0] a). output reg: Required when the output
+    is driven in always/initial. output wire: When the output is driven only by assign
+    or submodule. From MODULE2 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Comparison: 1995 vs 2001 Port Style'
+  bullets:
+  - Same behavior; 2001 is more concise and keeps port and type in one place.
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Comparison: 1995 vs 2001 Port Style. Same
+    behavior; 2001 is more concise and keeps port and type in one place. From MODULE2
+    Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: always @* Syntax'
+  bullets:
+  - '**`@*` (or `@(*)`**): Sensitive to every signal read in the block (RHS and conditions).'
+  - Use for combinational logic only; do not use for sequential (use `always @(posedge
+    clk)`).
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: always @* Syntax. **@* (or @(*)**): Sensitive
+    to every signal read in the block (RHS and conditions). Use for combinational
+    logic only; do not use for sequential (use always @(posedge clk)). From MODULE2
+    Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: When to Use @* vs Explicit List'
+  bullets:
+  - '**Prefer `@*`**: For combinational blocks; fewer errors, easier to maintain.'
+  - 'Explicit list: When targeting strict 1995 compatibility or when a tool does not
+    support `@*`.'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: When to Use @* vs Explicit List. Prefer
+    @*: For combinational blocks; fewer errors, easier to maintain. Explicit list:
+    When targeting strict 1995 compatibility or when a tool does not support @*. From
+    MODULE2 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: generate / endgenerate'
+  bullets:
+  - 'genvar: Loop variable for generate loops; not a runtime variable.'
+  - 'generate for: Replicates logic/instances; index must be constant at elaboration.'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: generate / endgenerate. genvar: Loop variable
+    for generate loops; not a runtime variable. generate for: Replicates logic/instances;
+    index must be constant at elaboration. From MODULE2 Topics Covered — protocol/design
+    depth.'
+- type: bullets
+  title: 'Detail: Conditional Generate'
+  bullets:
+  - 'generate if / else: Choose one of several implementations at elaboration.'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Conditional Generate. generate if / else:
+    Choose one of several implementations at elaboration. From MODULE2 Topics Covered
+    — protocol/design depth.'
+- type: bullets
+  title: 'Detail: signed Wire and reg'
+  bullets:
+  - 'signed: Affects arithmetic and comparison in expressions involving that net/reg.'
+  - 'Unsigned (default): No sign extension; values 0 to 2^N-1.'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: signed Wire and reg. signed: Affects arithmetic
+    and comparison in expressions involving that net/reg. Unsigned (default): No sign
+    extension; values 0 to 2^N-1. From MODULE2 Topics Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Declaration and Usage'
+  bullets:
+  - 'Packed (left): `[7:0]` — contiguous bits, can be used as a single vector.'
+  - 'Unpacked (right): `[0:255]` — array of elements; select with one index at a time
+    in 2001.'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Declaration and Usage. Packed (left): [7:0]
+    — contiguous bits, can be used as a single vector. Unpacked (right): [0:255] —
+    array of elements; select with one index at a time in 2001. From MODULE2 Topics
+    Covered — protocol/design depth.'
+- type: bullets
+  title: 'Detail: Task (2001 ANSI)'
+  bullets:
+  - 'automatic: Optional; gives automatic storage (re-entrant). Useful for recursive
+    or concurrent calls.'
+  - 'input/output in header: Cleaner than 1995 style; avoids duplicate declarations.'
+  - 'Note: In 1364-2001 use `output reg` (not `output logic`; `logic` is SystemVerilog).'
+  notes: From MODULE2 Topics Covered — protocol/design depth.
+  narration: 'Protocol and design detail: Task (2001 ANSI). automatic: Optional; gives
+    automatic storage (re-entrant). Useful for recursive or concurrent calls. input/output
+    in header: Cleaner than 1995 style; avoids duplicate declarations. Note: In 1364-2001
+    use output reg (not output logic; logic is SystemVerilog). From MODULE2 Topics
+    Covered — protocol/design depth.'
+- type: image
+  title: Verification flow (reference)
+  image: assets/diagrams/testing_methods.png
+  caption: Stimulus, DUT response, and check points for this module.
+  narration: Verification flow (reference). Stimulus, DUT response, and check points
+    for this module.
 - type: bullets
   title: 1. IEEE 1364-2001 Context (1/2)
   bullets:
@@ -65,6 +373,11 @@ slides:
   - 'Multi-dimensional arrays: e.g. `reg [7:0] mem [0:255]`'
   - 'localparam: Named constants that cannot be overridden'
   notes: From MODULE2 Topics Covered.
+  narration: '1. IEEE 1364-2001 Context (1/2). ANSI-style port declarations: Direction
+    and type (and size) in the port list always @*: Implicit sensitivity for combinational
+    logic (no manual list) generate: Conditional and loop-based instantiation and
+    logic signed: Signed arithmetic and signed nets/variables Multi-dimensional arrays:
+    e.g. reg [7:0] mem [0:255]'
 - type: bullets
   title: 1. IEEE 1364-2001 Context (2/2)
   bullets:
@@ -74,6 +387,10 @@ slides:
     classes'
   - No type parameters or interfaces (those are 1800)
   notes: From MODULE2 Topics Covered.
+  narration: '1. IEEE 1364-2001 Context (2/2). ANSI-style task/function: Input/output
+    in the header Other: File I/O improvements, $signed/$unsigned, attribute syntax,
+    etc. No SystemVerilog: no logic, always_comb/always_ff, interfaces, packages,
+    classes No type parameters or interfaces (those are 1800)'
 - type: bullets
   title: 2. ANSI-Style Port Declarations (2001)
   bullets:
@@ -82,6 +399,10 @@ slides:
   - 'output wire: When the output is driven only by `assign` or submodule.'
   - Same behavior; 2001 is more concise and keeps port and type in one place.
   notes: From MODULE2 Topics Covered.
+  narration: '2. ANSI-Style Port Declarations (2001). input wire: Default for input;
+    can omit wire (e.g. input [7:0] a). output reg: Required when the output is driven
+    in always/initial. output wire: When the output is driven only by assign or submodule.
+    Same behavior; 2001 is more concise and keeps port and type in one place.'
 - type: bullets
   title: '3. Implicit Sensitivity: always @* (2001)'
   bullets:
@@ -92,32 +413,54 @@ slides:
   - 'Explicit list: When targeting strict 1995 compatibility or when a tool does not
     support `@*`.'
   notes: From MODULE2 Topics Covered.
+  narration: '3. Implicit Sensitivity: always @* (2001). **@* (or @(*)): Sensitive
+    to every signal read in the block (RHS and conditions). Use for combinational
+    logic only; do not use for sequential (use always @(posedge clk)). Prefer @***:
+    For combinational blocks; fewer errors, easier to maintain. Explicit list: When
+    targeting strict 1995 compatibility or when a tool does not support @*.'
 - type: bullets
   title: 4. Generate (2001)
   bullets:
   - 'genvar: Loop variable for generate loops; not a runtime variable.'
   - 'generate for: Replicates logic/instances; index must be constant at elaboration.'
   - 'generate if / else: Choose one of several implementations at elaboration.'
+  - generate / endgenerate
+  - Conditional Generate
   notes: From MODULE2 Topics Covered.
+  narration: '4. Generate (2001). genvar: Loop variable for generate loops; not a
+    runtime variable. generate for: Replicates logic/instances; index must be constant
+    at elaboration. generate if / else: Choose one of several implementations at elaboration.
+    generate / endgenerate Conditional Generate'
 - type: bullets
   title: 5. Signed Types (2001)
   bullets:
   - 'signed: Affects arithmetic and comparison in expressions involving that net/reg.'
   - 'Unsigned (default): No sign extension; values 0 to 2^N-1.'
+  - signed Wire and reg
+  - $signed and $unsigned
   notes: From MODULE2 Topics Covered.
+  narration: '5. Signed Types (2001). signed: Affects arithmetic and comparison in
+    expressions involving that net/reg. Unsigned (default): No sign extension; values
+    0 to 2^N-1. signed Wire and reg $signed and $unsigned'
 - type: bullets
   title: 6. Multi-Dimensional Arrays (2001)
   bullets:
   - 'Packed (left): `[7:0]` — contiguous bits, can be used as a single vector.'
   - 'Unpacked (right): `[0:255]` — array of elements; select with one index at a time
     in 2001.'
+  - Declaration and Usage
   notes: From MODULE2 Topics Covered.
+  narration: '6. Multi-Dimensional Arrays (2001). Packed (left): [7:0] — contiguous
+    bits, can be used as a single vector. Unpacked (right): [0:255] — array of elements;
+    select with one index at a time in 2001. Declaration and Usage'
 - type: bullets
   title: 7. localparam (2001)
   bullets:
   - 'parameter: Can be overridden: `#(.WIDTH(16))`.'
   - 'localparam: Cannot be overridden; often derived from parameters or fixed.'
   notes: From MODULE2 Topics Covered.
+  narration: '7. localparam (2001). parameter: Can be overridden: #(.WIDTH(16)). localparam:
+    Cannot be overridden; often derived from parameters or fixed.'
 - type: bullets
   title: 8. ANSI-Style Tasks and Functions (2001)
   bullets:
@@ -125,9 +468,17 @@ slides:
     or concurrent calls.'
   - 'input/output in header: Cleaner than 1995 style; avoids duplicate declarations.'
   - 'Note: In 1364-2001 use `output reg` (not `output logic`; `logic` is SystemVerilog).'
+  - Function (2001 ANSI)
+  - Task (2001 ANSI)
   notes: From MODULE2 Topics Covered.
+  narration: '8. ANSI-Style Tasks and Functions (2001). automatic: Optional; gives
+    automatic storage (re-entrant). Useful for recursive or concurrent calls. input/output
+    in header: Cleaner than 1995 style; avoids duplicate declarations. Note: In 1364-2001
+    use output reg (not output logic; logic is SystemVerilog). Function (2001 ANSI)
+    Task (2001 ANSI)'
 - type: section
   title: Hands-on examples
+  narration: 'Next section: Hands-on examples.'
 - type: demo
   title: Module 2 toolchain check
   command: 'command -v iverilog >/dev/null && echo "Toolchain ready: $(iverilog -V
@@ -135,151 +486,194 @@ slides:
   screenshot: assets/screenshots/module2_check.png
   expect_stdout_contains: Icarus Verilog
   notes: Requires iverilog on PATH (apt install iverilog).
+  narration: Module 2 self-check. Watch the terminal output and confirm you see the
+    expected pass message.
 - type: bullets
-  title: 'Example 1: ANSI Ports'
+  title: 'Example 1: Module and instantiation with ANSI-style ports'
   bullets:
-  - Module and instantiation with ANSI-style ports
   - Port direction and type in port list
   notes: module2/examples/ansi_ports/README.md
+  narration: 'Example 1: Module and instantiation with ANSI-style ports. Port direction
+    and type in port list module2/examples/ansi_ports/README.md'
 - type: demo
-  title: 'Demo: ANSI Ports'
+  title: 'Demo: Module and instantiation with ANSI-style ports'
   command: cd module2/examples/ansi_ports && make clean && make run
   screenshot: assets/screenshots/ex01_ansi_ports.png
   notes: 'Hands-on: module2/examples/ansi_ports/'
+  narration: 'Demo: Module and instantiation with ANSI-style ports. Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 2: always @*'
+  title: 'Example 2: Combinational blocks with implicit sensitivity'
   bullets:
-  - Combinational blocks with implicit sensitivity
   - No manual sensitivity list; tool infers from RHS
   notes: module2/examples/procedural/README.md
+  narration: 'Example 2: Combinational blocks with implicit sensitivity. No manual
+    sensitivity list; tool infers from RHS module2/examples/procedural/README.md'
 - type: demo
-  title: 'Demo: always @*'
+  title: 'Demo: Combinational blocks with implicit sensitivity'
   command: cd module2/examples/procedural && make clean && make run
   screenshot: assets/screenshots/ex02_procedural.png
   notes: 'Hands-on: module2/examples/procedural/'
+  narration: 'Demo: Combinational blocks with implicit sensitivity. Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 3: Generate'
+  title: 'Example 3: Parameterized mux; generate-style parameterization'
   bullets:
-  - Parameterized mux; generate-style parameterization
   - genvar, elaboration-time logic
   notes: module2/examples/generate/README.md
+  narration: 'Example 3: Parameterized mux; generate-style parameterization. genvar,
+    elaboration-time logic module2/examples/generate/README.md'
 - type: demo
-  title: 'Demo: Generate'
+  title: 'Demo: Parameterized mux; generate-style parameterization'
   command: cd module2/examples/generate && make clean && make run
   screenshot: assets/screenshots/ex03_generate.png
   notes: 'Hands-on: module2/examples/generate/'
+  narration: 'Demo: Parameterized mux; generate-style parameterization. Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 4: Generate if/else'
+  title: 'Example 4: Conditional implementation by parameter (e.g. USE_CLIP wrap vs
+    saturate)'
   bullets:
-  - Conditional implementation by parameter (e.g. USE_CLIP wrap vs saturate)
   - generate if/else at elaboration
   notes: module2/examples/generate_if/README.md
+  narration: 'Example 4: Conditional implementation by parameter (e.g. USE_CLIP wrap
+    vs saturate). generate if/else at elaboration module2/examples/generate_if/README.md'
 - type: demo
-  title: 'Demo: Generate if/else'
+  title: 'Demo: Conditional implementation by parameter (e.g. USE_CLIP wrap vs saturate)'
   command: cd module2/examples/generate_if && make clean && make run
   screenshot: assets/screenshots/ex04_generate_if.png
   notes: 'Hands-on: module2/examples/generate_if/'
+  narration: 'Demo: Conditional implementation by parameter (e.g. USE_CLIP wrap vs
+    saturate). Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 5: Generate Ripple Adder'
+  title: 'Example 5: N-bit ripple-carry adder using generate for (full_adder instances)'
   bullets:
-  - N-bit ripple-carry adder using generate for (full_adder instances)
   - genvar loop, replicated hierarchy
   notes: module2/examples/generate_ripple_adder/README.md
+  narration: 'Example 5: N-bit ripple-carry adder using generate for (full_adder instances).
+    genvar loop, replicated hierarchy module2/examples/generate_ripple_adder/README.md'
 - type: demo
-  title: 'Demo: Generate Ripple Adder'
+  title: 'Demo: N-bit ripple-carry adder using generate for (full_adder instances)'
   command: cd module2/examples/generate_ripple_adder && make clean && make run
   screenshot: assets/screenshots/ex05_generate_ripple_adder.png
   notes: 'Hands-on: module2/examples/generate_ripple_adder/'
+  narration: 'Demo: N-bit ripple-carry adder using generate for (full_adder instances).
+    Watch the terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 6: Signed'
+  title: 'Example 6: signed reg/wire, $signed/$unsigned'
   bullets:
-  - signed reg/wire, $signed/$unsigned
   - Two's complement arithmetic in RTL
   notes: module2/examples/signed/README.md
+  narration: 'Example 6: signed reg/wire, $signed/$unsigned. Two''s complement arithmetic
+    in RTL module2/examples/signed/README.md'
 - type: demo
-  title: 'Demo: Signed'
+  title: 'Demo: signed reg/wire, $signed/$unsigned'
   command: cd module2/examples/signed && make clean && make run
   screenshot: assets/screenshots/ex06_signed.png
   notes: 'Hands-on: module2/examples/signed/'
+  narration: 'Demo: signed reg/wire, $signed/$unsigned. Watch the terminal output
+    and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 7: Signed vs Unsigned Comparison'
+  title: 'Example 7: $signed() in expressions; a &lt; b unsigned vs signed'
   bullets:
-  - $signed() in expressions; a &lt; b unsigned vs signed
   - Cast in expressions without changing declaration
   notes: module2/examples/signed_compare/README.md
+  narration: 'Example 7: $signed() in expressions; a &lt; b unsigned vs signed. Cast
+    in expressions without changing declaration module2/examples/signed_compare/README.md'
 - type: demo
-  title: 'Demo: Signed vs Unsigned Comparison'
+  title: 'Demo: $signed() in expressions; a &lt; b unsigned vs signed'
   command: cd module2/examples/signed_compare && make clean && make run
   screenshot: assets/screenshots/ex07_signed_compare.png
   notes: 'Hands-on: module2/examples/signed_compare/'
+  narration: 'Demo: $signed() in expressions; a &lt; b unsigned vs signed. Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 8: Decoder'
+  title: 'Example 8: 2:4 decoder with ANSI ports and always @* (case)'
   bullets:
-  - 2:4 decoder with ANSI ports and always @* (case)
   - Combinational case; one-hot output
   notes: module2/examples/decoder/README.md
+  narration: 'Example 8: 2:4 decoder with ANSI ports and always @* (case). Combinational
+    case; one-hot output module2/examples/decoder/README.md'
 - type: demo
-  title: 'Demo: Decoder'
+  title: 'Demo: 2:4 decoder with ANSI ports and always @* (case)'
   command: cd module2/examples/decoder && make clean && make run
   screenshot: assets/screenshots/ex08_decoder.png
   notes: 'Hands-on: module2/examples/decoder/'
+  narration: 'Demo: 2:4 decoder with ANSI ports and always @* (case). Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 9: Multi-Dimensional Arrays'
+  title: 'Example 9: Memory-style arrays (reg [7:0] mem [0:255]), indexing'
   bullets:
-  - Memory-style arrays (reg [7:0] mem [0:255]), indexing
   - Packed vs unpacked; array indexing rules in 2001
   notes: module2/examples/arrays/README.md
+  narration: 'Example 9: Memory-style arrays (reg [7:0] mem [0:255]), indexing. Packed
+    vs unpacked; array indexing rules in 2001 module2/examples/arrays/README.md'
 - type: demo
-  title: 'Demo: Multi-Dimensional Arrays'
+  title: 'Demo: Memory-style arrays (reg [7:0] mem [0:255]), indexing'
   command: cd module2/examples/arrays && make clean && make run
   screenshot: assets/screenshots/ex09_arrays.png
   notes: 'Hands-on: module2/examples/arrays/'
+  narration: 'Demo: Memory-style arrays (reg [7:0] mem [0:255]), indexing. Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 10: Multi-Dim Style'
+  title: 'Example 10: 2x4 buffer using 1D array indexed as row*4+col'
   bullets:
-  - 2x4 buffer using 1D array indexed as row*4+col
   - Emulating 2D with 1D array; index expression
   notes: module2/examples/multi_dim_arrays/README.md
+  narration: 'Example 10: 2x4 buffer using 1D array indexed as row*4+col. Emulating
+    2D with 1D array; index expression module2/examples/multi_dim_arrays/README.md'
 - type: demo
-  title: 'Demo: Multi-Dim Style'
+  title: 'Demo: 2x4 buffer using 1D array indexed as row*4+col'
   command: cd module2/examples/multi_dim_arrays && make clean && make run
   screenshot: assets/screenshots/ex10_multi_dim_arrays.png
   notes: 'Hands-on: module2/examples/multi_dim_arrays/'
+  narration: 'Demo: 2x4 buffer using 1D array indexed as row*4+col. Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 11: Parameters and localparam'
+  title: 'Example 11: Parameter override, localparam for derived constants'
   bullets:
-  - Parameter override, localparam for derived constants
   - When to use parameter vs localparam
   notes: module2/examples/parameters/README.md
+  narration: 'Example 11: Parameter override, localparam for derived constants. When
+    to use parameter vs localparam module2/examples/parameters/README.md'
 - type: demo
-  title: 'Demo: Parameters and localparam'
+  title: 'Demo: Parameter override, localparam for derived constants'
   command: cd module2/examples/parameters && make clean && make run
   screenshot: assets/screenshots/ex11_parameters.png
   notes: 'Hands-on: module2/examples/parameters/'
+  narration: 'Demo: Parameter override, localparam for derived constants. Watch the
+    terminal output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 12: ANSI Task/Function'
+  title: 'Example 12: Input/output in header, automatic functions'
   bullets:
-  - Input/output in header, automatic functions
   - 2001 style vs 1995 style
   notes: module2/examples/tasks_functions/README.md
+  narration: 'Example 12: Input/output in header, automatic functions. 2001 style
+    vs 1995 style module2/examples/tasks_functions/README.md'
 - type: demo
-  title: 'Demo: ANSI Task/Function'
+  title: 'Demo: Input/output in header, automatic functions'
   command: cd module2/examples/tasks_functions && make clean && make run
   screenshot: assets/screenshots/ex12_tasks_functions.png
   notes: 'Hands-on: module2/examples/tasks_functions/'
+  narration: 'Demo: Input/output in header, automatic functions. Watch the terminal
+    output and confirm you see the expected pass message.'
 - type: bullets
-  title: 'Example 13: ANSI Task with Output'
+  title: 'Example 13: task automatic apply_reset(output reg rn); begin/end body'
   bullets:
-  - task automatic apply_reset(output reg rn); begin/end body
   - Task with output argument; testbench reset pattern
   notes: module2/examples/task_ansi/README.md
+  narration: 'Example 13: task automatic apply_reset(output reg rn); begin/end body.
+    Task with output argument; testbench reset pattern module2/examples/task_ansi/README.md'
 - type: demo
-  title: 'Demo: ANSI Task with Output'
+  title: 'Demo: task automatic apply_reset(output reg rn); begin/end body'
   command: cd module2/examples/task_ansi && make clean && make run
   screenshot: assets/screenshots/ex13_task_ansi.png
   notes: 'Hands-on: module2/examples/task_ansi/'
+  narration: 'Demo: task automatic apply_reset(output reg rn); begin/end body. Watch
+    the terminal output and confirm you see the expected pass message.'
 - type: section
   title: Common pitfalls
+  narration: 'Next section: Common pitfalls.'
 - type: bullets
   title: Using always @* for Sequential Logic
   bullets:
@@ -288,6 +682,10 @@ slides:
   - 'Correct: Use `always @(posedge clk)` (and `<=`) for sequential logic.'
   - 'Why: Mixing the two causes simulation/synthesis mismatches and unintended latches.'
   notes: From MODULE2 Common Pitfalls.
+  narration: 'Using always @* for Sequential Logic. Mistake: always @* q <= d; intending
+    a flip-flop. Reality: @* is for combinational logic; it does not create a clock
+    edge. Correct: Use always @(posedge clk) (and <=) for sequential logic. Why: Mixing
+    the two causes simulation/synthesis mismatches and unintended latches.'
 - type: bullets
   title: genvar in Normal Code
   bullets:
@@ -297,6 +695,10 @@ slides:
     for.'
   - 'Why: genvar is elaborated away; it is not a simulation variable.'
   notes: From MODULE2 Common Pitfalls.
+  narration: 'genvar in Normal Code. Mistake: Using genvar in an always block or initial
+    block. Reality: genvar is only for generate loops; it does not exist at runtime.
+    Correct: Use integer or reg for runtime loops; use genvar only inside generate
+    for. Why: genvar is elaborated away; it is not a simulation variable.'
 - type: bullets
   title: Overriding localparam
   bullets:
@@ -306,6 +708,10 @@ slides:
     fixed or derived constants.'
   - 'Why: The standard does not allow localparam in the parameter list.'
   notes: From MODULE2 Common Pitfalls.
+  narration: 'Overriding localparam. Mistake: Trying to override localparam at instantiation
+    (e.g. #(.MAX(100))). Reality: localparam cannot be overridden. Correct: Use parameter
+    for values that must be overridden; use localparam for fixed or derived constants.
+    Why: The standard does not allow localparam in the parameter list.'
 - type: bullets
   title: Signed vs Unsigned Mix
   bullets:
@@ -315,6 +721,11 @@ slides:
   - 'Correct: Be explicit: use signed types or $signed/$unsigned and verify with testbenches.'
   - 'Why: Implicit mixing leads to wrong arithmetic and comparison results.'
   notes: From MODULE2 Common Pitfalls.
+  narration: 'Signed vs Unsigned Mix. Mistake: Mixing signed and unsigned in one expression
+    without $signed/$unsigned and expecting a particular sign behavior. Reality: Rules
+    for sign extension and comparison depend on operands. Correct: Be explicit: use
+    signed types or $signed/$unsigned and verify with testbenches. Why: Implicit mixing
+    leads to wrong arithmetic and comparison results.'
 - type: bullets
   title: Generate Block Scope
   bullets:
@@ -324,8 +735,14 @@ slides:
     behavior.'
   - 'Why: Generate is not “runtime”; it only affects what gets instantiated.'
   notes: From MODULE2 Common Pitfalls.
+  narration: 'Generate Block Scope. Mistake: Referencing generate block names or genvar
+    at runtime. Reality: Generate blocks are elaborated at compile time; names are
+    for hierarchy. Correct: Use generate for structure; use normal variables and blocks
+    for runtime behavior. Why: Generate is not “runtime”; it only affects what gets
+    instantiated.'
 - type: section
   title: Practice & assessment
+  narration: 'Next section: Practice & assessment.'
 - type: bullets
   title: What you should know (1/2)
   bullets:
@@ -336,12 +753,20 @@ slides:
   - ✓ Declare and use multi-dimensional arrays (e.g. memories)
   - ✓ Use localparam for constants that must not be overridden
   notes: From MODULE2 Learning Outcomes.
+  narration: By now you should be able to explain the following. ✓ Write modules with
+    ANSI-style port declarations (1364-2001) ✓ Use always @* for combinational logic
+    and avoid sensitivity-list errors ✓ Use generate (for, if/else) for parameterized
+    and conditional RTL ✓ Use signed types and $signed/$unsigned for signed arithmetic
+    ✓ Declare and use multi-dimensional arrays (e.g. memories) From MODULE2...
 - type: bullets
   title: What you should know (2/2)
   bullets:
   - ✓ Write ANSI-style tasks and functions
   - ✓ Compare 1364-1995 and 1364-2001 and list what 2001 adds
   notes: From MODULE2 Learning Outcomes.
+  narration: By now you should be able to explain the following. ✓ Write ANSI-style
+    tasks and functions ✓ Compare 1364-1995 and 1364-2001 and list what 2001 adds
+    From MODULE2 Learning Outcomes.
 - type: bullets
   title: Exercises
   bullets:
@@ -350,6 +775,7 @@ slides:
   - Generate
   - Signed
   - Arrays and localparam
+  narration: Exercises. ANSI Ports always @ Generate Signed Arrays and localparam
 - type: bullets
   title: Exercises
   bullets:
@@ -358,12 +784,18 @@ slides:
   - Overriding localparam
   - Signed vs Unsigned Mix
   - Generate Block Scope
+  narration: Exercises. Using always @* for Sequential Logic genvar in Normal Code
+    Overriding localparam Signed vs Unsigned Mix Generate Block Scope
 - type: bullets
   title: Summary & next steps
   bullets:
   - 'Master the major Verilog update (IEEE 1364-2001) and its additions over 1364-1995:
-    ANSI ports, implicit sensitivity, generate, signed types, and multi-dimensional
-    arrays.'
+    ANSI ports, implicit sensitivity, generate, signed...'
   - Complete module2/CHECKLIST.md
   - Review module2/EXAMPLES.md and run each lab
   - 'Next: Next module in course'
+  narration: 'In summary: Master the major Verilog update (IEEE 1364-2001) and its
+    additions over 1364-1995: ANSI ports, implicit sensitivity, generate, signed types,
+    and multi-dimensional arrays. Next up: Next module in course. Master the major
+    Verilog update (IEEE 1364-2001) and its additions over 1364-1995: ANSI ports,
+    implicit sensitivity, generate, signed... Complete module2/CHECKLIST.md Review...'

@@ -58,6 +58,45 @@ This module covers IEEE Std 1364-2005 (Verilog-2005), the last standard that def
 - When checking exact semantics for edge cases (e.g. blocking vs nonblocking, race rules)
 - When comparing 1364-2005 with 1800 (Module 4+) to decide when to adopt SystemVerilog
 
+## Design Architecture
+
+### 1. Repository layout (module3/)
+
+- 1364-2005 clarifications and deprecations over 2001
+- Focus: avoid defparam, use localparam, understand 2005 vs 2001 deltas
+- module3/examples/ — migration and best-practice labs
+- scripts/module3.sh — run all 2005-focused examples
+
+### 2. Parameter and constant flow
+
+- localparam — named constants inside module, not overridable
+- Parameter override at instantiation #(.WIDTH(n)) preferred over defparam
+- 2005 standard marks defparam as deprecated
+
+### 3. Design intent unchanged from 2001
+
+- Same ANSI, @*, generate, signed features as Module 2
+- 2005 adds LRM clarifications — behavior you already use stays valid
+- Migration labs show 2001 → 2005 style tweaks only
+
+## Key files to study
+
+- module3/examples/no_defparam/ — replace defparam with #() override
+- module3/examples/parameters/ — parameter override at instantiation
+- scripts/module3.sh
+
+## Verification & Testing Methods
+
+### 1. Execution and regression
+
+- make run per example; ./scripts/module3.sh for full sweep
+- Watch for defparam warnings when running deprecated-style labs
+
+### 2. Migration checks
+
+- Replace defparam with #() override at instantiation
+- Confirm localparam names match across parent and child
+
 ## Topics Covered
 
 ### 1. IEEE 1364-2005 Context

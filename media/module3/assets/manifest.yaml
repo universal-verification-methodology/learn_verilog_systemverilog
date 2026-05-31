@@ -10,6 +10,35 @@ assets:
   - 4
   - 4
   license: learn_verilog_systemverilog course materials
+- id: rtl_architecture
+  type: diagram
+  file: assets/diagrams/rtl_architecture.png
+  source: assets/diagrams/rtl_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 10
+  - 13
+  license: learn_verilog_systemverilog course materials
+- id: verification_architecture
+  type: diagram
+  file: assets/diagrams/verification_architecture.png
+  source: assets/diagrams/verification_architecture.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 11
+  - 14
+  license: learn_verilog_systemverilog course materials
+- id: testing_methods
+  type: diagram
+  file: assets/diagrams/testing_methods.png
+  source: assets/diagrams/testing_methods.mmd
+  generator: render_diagrams.sh
+  slides:
+  - 12
+  - 21
+  - 22
+  - 40
+  license: learn_verilog_systemverilog course materials
 - id: module3_check
   type: screenshot
   file: assets/screenshots/module3_check.png
@@ -17,7 +46,7 @@ assets:
     -V 2>&1 | head -1)"'
   cwd: .
   slides:
-  - 21
+  - 52
   expect_stdout_contains: Icarus Verilog
   description: Verify iverilog is installed
 - id: ex01_parameters
@@ -26,67 +55,67 @@ assets:
   capture_command: cd module3/examples/parameters && make clean && make run
   cwd: .
   slides:
-  - 24
+  - 55
 - id: ex02_no_defparam
   type: screenshot
   file: assets/screenshots/ex02_no_defparam.png
   capture_command: cd module3/examples/no_defparam && make clean && make run
   cwd: .
   slides:
-  - 26
+  - 57
 - id: ex03_synthesizable
   type: screenshot
   file: assets/screenshots/ex03_synthesizable.png
   capture_command: cd module3/examples/synthesizable && make clean && make run
   cwd: .
   slides:
-  - 28
+  - 59
 - id: ex04_one_driver
   type: screenshot
   file: assets/screenshots/ex04_one_driver.png
   capture_command: cd module3/examples/one_driver && make clean && make run
   cwd: .
   slides:
-  - 30
+  - 61
 - id: ex05_procedural
   type: screenshot
   file: assets/screenshots/ex05_procedural.png
   capture_command: cd module3/examples/procedural && make clean && make run
   cwd: .
   slides:
-  - 32
+  - 63
 - id: ex06_pipeline
   type: screenshot
   file: assets/screenshots/ex06_pipeline.png
   capture_command: cd module3/examples/pipeline && make clean && make run
   cwd: .
   slides:
-  - 34
+  - 65
 - id: ex07_case_styles
   type: screenshot
   file: assets/screenshots/ex07_case_styles.png
   capture_command: cd module3/examples/case_styles && make clean && make run
   cwd: .
   slides:
-  - 36
+  - 67
 - id: ex08_avoid_latch
   type: screenshot
   file: assets/screenshots/ex08_avoid_latch.png
   capture_command: cd module3/examples/avoid_latch && make clean && make run
   cwd: .
   slides:
-  - 38
+  - 69
 - id: ex09_function_synth
   type: screenshot
   file: assets/screenshots/ex09_function_synth.png
   capture_command: cd module3/examples/function_synth && make clean && make run
   cwd: .
   slides:
-  - 40
+  - 71
 - id: ex10_summary
   type: screenshot
   file: assets/screenshots/ex10_summary.png
   capture_command: cd module3/examples/summary && make clean && make run
   cwd: .
   slides:
-  - 42
+  - 73

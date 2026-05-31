@@ -5,12 +5,11 @@ Run commands from the **course repository root** unless noted.
 
 **Before you start:** Read `docs/MODULE4.md` → **How to Learn This Module**, then work through each lab in order.
 
-## 1. logic and 2-State Types (`data_types/`)
+## 1. logic for ports and internal single-driver signals (`data_types/`)
 
 **Folder:** `module4/examples/data_types/`
 
 **What you'll learn:**
-- logic for ports and internal single-driver signals
 - Single driver for logic; 4-state
 
 **Run:**
@@ -24,12 +23,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/data_types/`.
 
-## 2. logic Ports (`logic_ports/`)
+## 2. All ports logic (mux, adder); no wire/reg choice (`logic_ports/`)
 
 **Folder:** `module4/examples/logic_ports/`
 
 **What you'll learn:**
-- All ports logic (mux, adder); no wire/reg choice
 - assign and always_comb can drive output logic
 
 **Run:**
@@ -43,12 +41,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/logic_ports/`.
 
-## 3. always_comb / always_ff (`procedural/`)
+## 3. Combinational with always_comb; sequential with always_ff (`procedural/`)
 
 **Folder:** `module4/examples/procedural/`
 
 **What you'll learn:**
-- Combinational with always_comb; sequential with always_ff
 - Explicit intent; tool checks; no latch in always_comb
 
 **Run:**
@@ -62,12 +59,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/procedural/`.
 
-## 4. always_latch (`always_latch/`)
+## 4. Explicit latch when intended (e.g. transparent latch) (`always_latch/`)
 
 **Folder:** `module4/examples/always_latch/`
 
 **What you'll learn:**
-- Explicit latch when intended (e.g. transparent latch)
 - Use when latch is desired; prefer always_comb/always_ff otherwise
 
 **Run:**
@@ -81,12 +77,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/always_latch/`.
 
-## 5. One Driver per logic (`one_driver_logic/`)
+## 5. Single assign to one output; single always_ff to another (`one_driver_logic/`)
 
 **Folder:** `module4/examples/one_driver_logic/`
 
 **What you'll learn:**
-- Single assign to one output; single always_ff to another
 - logic must have exactly one driver
 
 **Run:**
@@ -100,12 +95,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/one_driver_logic/`.
 
-## 6. typedef (`typedef_sv/`)
+## 6. typedef in module (e.g. byte_t = logic [7:0]) (`typedef_sv/`)
 
 **Folder:** `module4/examples/typedef_sv/`
 
 **What you'll learn:**
-- typedef in module (e.g. byte_t = logic [7:0])
 - User-defined types for clarity
 
 **Run:**
@@ -119,12 +113,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/typedef_sv/`.
 
-## 7. Interfaces and Modports (`interfaces/`)
+## 7. Interface definition, modports, connection in top (`interfaces/`)
 
 **Folder:** `module4/examples/interfaces/`
 
 **What you'll learn:**
-- Interface definition, modports, connection in top
 - One bundle per connection; direction per modport
 
 **Run:**
@@ -138,12 +131,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/interfaces/`.
 
-## 8. Packages and import (`packages/`)
+## 8. Package with types/params/functions; import in modules (`packages/`)
 
 **Folder:** `module4/examples/packages/`
 
 **What you'll learn:**
-- Package with types/params/functions; import in modules
 - Namespace; wildcard vs specific import
 
 **Run:**
@@ -157,12 +149,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/packages/`.
 
-## 9. Package with typedef and function (`package_typedef/`)
+## 9. Package with typedef and min_word function; import in ALU (`package_typedef/`)
 
 **Folder:** `module4/examples/package_typedef/`
 
 **What you'll learn:**
-- Package with typedef and min_word function; import in ALU
 - Shared types and helpers across modules
 
 **Run:**
@@ -176,12 +167,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/package_typedef/`.
 
-## 10. unique / priority case (`case_unique_priority/`)
+## 10. unique case (at most one match); priority case (first match) (`case_unique_priority/`)
 
 **Folder:** `module4/examples/case_unique_priority/`
 
 **What you'll learn:**
-- unique case (at most one match); priority case (first match)
 - Standard semantics; synthesis and simulation behavior
 
 **Run:**
@@ -195,12 +185,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/case_unique_priority/`.
 
-## 11. priority case only (`priority_case/`)
+## 11. Arbiter with priority case (first req wins) (`priority_case/`)
 
 **Folder:** `module4/examples/priority_case/`
 
 **What you'll learn:**
-- Arbiter with priority case (first req wins)
 - priority case for arbiter, interrupt mask
 
 **Run:**
@@ -214,12 +203,11 @@ make clean && make run
 
 **Go deeper:** Full context in `docs/MODULE4.md` and RTL under `module4/examples/priority_case/`.
 
-## 12. Migration from 1364 (`migration/`)
+## 12. Same small design in 1364-2005 style vs 1800-2005 style (`migration/`)
 
 **Folder:** `module4/examples/migration/`
 
 **What you'll learn:**
-- Same small design in 1364-2005 style vs 1800-2005 style
 - wire/reg→logic, always @*→always_comb, always @(posedge clk)→always_ff
 
 **Run:**

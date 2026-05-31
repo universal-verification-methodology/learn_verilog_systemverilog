@@ -8,11 +8,11 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x55e6ded93550 .scope package, "$unit" "$unit" 2 1;
+S_0x55aa0674d550 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x55e6ded6d490 .scope module, "top" "top" 3 6;
+S_0x55aa06727490 .scope module, "top" "top" 3 6;
  .timescale 0 0;
-    .scope S_0x55e6ded6d490;
+    .scope S_0x55aa06727490;
 T_0 ;
     %vpi_call/w 3 8 "$display", "=== Module 8: Course map (Modules 1-8) ===" {0 0 0};
     %vpi_call/w 3 9 "$display", "  1 | IEEE 1364-1995    | Verilog-95: wire/reg, assign, always/initial, explicit sensitivity" {0 0 0};

@@ -58,6 +58,47 @@ This module covers IEEE Std 1800-2009 and IEEE Std 1800-2012, the first two majo
 - When a project or tool specifies 1800-2009 or 1800-2012 compliance
 - When comparing 1800-2005 with later revisions for migration or tool support
 
+## Design Architecture
+
+### 1. Repository layout (module5/)
+
+- IEEE 1800-2009 and 1800-2012 refinements on the 2005 base
+- Assertions, checkers, and type refinements in examples
+- module5/dut/ — designs used by assertion and checker labs
+- scripts/module5.sh — run assertion-focused examples
+
+### 2. Assertion and checker placement
+
+- immediate assertions in procedural code — zero-time checks
+- concurrent assertions (SVA) — temporal properties on clocks
+- checker encapsulation — reusable verification modules
+- Assertions sit alongside RTL; failures stop simulation with message
+
+### 3. 2009/2012 vs 2005 delta
+
+- Interface and type clarifications — same patterns, clearer LRM
+- 1800-2012 checker keyword — structured verification component
+- Design RTL from Module 4 remains valid; add assertions incrementally
+
+## Key files to study
+
+- module5/examples/assert_valid_encoding/
+- module5/examples/checkers/
+- module5/examples/assert_invariant/
+- scripts/module5.sh
+
+## Verification & Testing Methods
+
+### 1. Running assertion labs
+
+- make run per example; failing assertion prints SVA message
+- ./scripts/module5.sh runs designs with embedded checkers
+
+### 2. Closure mindset
+
+- Pass = no assertion failures and expected $display output
+- Use assert examples to learn what to monitor before UVM scoreboards
+
 ## Topics Covered
 
 ### 1. IEEE 1800-2009 and 1800-2012 Context
